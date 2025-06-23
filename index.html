@@ -126,7 +126,7 @@
 <p>对于分类问题而言，经常使用的是交叉熵损失函数（logistic）和hinge损失函数。</p>
 <p>$\Omega(\theta)$是惩罚项，希望模型尽量简单。在使得$\theta$尽量小的过程中，某些特征的权重会变为0，这样就可以实现特征选择。同时也可以减少模型的复杂性。</p>
 <p><strong>学习类似于统计中的参数估计</strong></p>
-<p><img src="/images/%7B65C91395-95B8-4EF2-8AF6-3F86705FD81B%7D.png" alt="{65C91395-95B8-4EF2-8AF6-3F86705FD81B}.png"></p>
+<p><img src="D:/personal_blog/source/images/%7B65C91395-95B8-4EF2-8AF6-3F86705FD81B%7D.png" alt="{65C91395-95B8-4EF2-8AF6-3F86705FD81B}.png"></p>
 <p>梯度下降的方法。</p>
 <p>具体例子：线性回归</p>
 <p>$$<br>O(D;\theta) &#x3D; \sum_{i&#x3D;1}^{N} (y_i - \theta^T x_i)^2 + \lambda \theta^T \theta &#x3D; (Y - X\theta)^T (Y - X\theta) + \lambda \theta^T \theta<br>$$<br>上述公式是关于$\theta$的二次函数，可以通过求导得到最优解。[[matrixcookbook.pdf]]<br>$$<br>\frac{\partial O(D;\theta)}{\partial \theta} &#x3D; -2 X^T (Y - X\theta) + 2 \lambda \theta &#x3D; 0<br>$$<br>$$<br>\hat{\theta} &#x3D; (X^T X + \lambda I)^{-1} X^T Y<br>$$<br>但是上述算法的复杂性为$O(n^3)$，不适用于大数据集。在软件工程中，通常使用梯度下降法。</p>
@@ -143,7 +143,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-1/" data-id="cmc996qgw0000ykva474eehte" data-title="Deep Learning Lecture-1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-1/" data-id="cmc999bzh0000hkvah6im3lr5" data-title="Deep Learning Lecture-1" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -265,7 +265,104 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-2/" data-id="cmc996qgy0001ykvac4u72dms" data-title="Deep Learning Lecture-2" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-2/" data-id="cmc999bzk0001hkva2fmb8vbj" data-title="Deep Learning Lecture-2" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Deep Learning Lecture-4" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/06/21/Deep%20Learning%20Lecture-4/" class="article-date">
+  <time class="dt-published" datetime="2025-06-20T16:00:00.000Z" itemprop="datePublished">2025-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/06/21/Deep%20Learning%20Lecture-4/">Deep Learning Lecture-4</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h2><p><strong>Objective Function</strong><br>$$<br>\arg \min \mathcal{O(D,\theta)}&#x3D;  \sum_{i&#x3D;1}^{N} L(y_i, f(x_i,\theta)) + \Omega(\theta)<br>$$<br>上述目标可以可视化为以$\theta$为横坐标、$\mathcal{O}$为纵坐标的函数图像，我们的目标是找到函数图像的最低点。这是一个<strong>非凸优化</strong>问题，是初值敏感的。“地形图”是否简单是网络训练是否容易的关键。</p>
+<h3 id="First-Order-Optimization"><a href="#First-Order-Optimization" class="headerlink" title="First-Order Optimization"></a>First-Order Optimization</h3><p>可以将$J(\theta)$展开为泰勒级数：<br>$$<br>J(\theta) &#x3D; J(\theta_0) + \nabla J(\theta_0)^T(\theta - \theta_0) + \frac{1}{2}(\theta - \theta_0)^T H(\theta - \theta_0)<br>$$<br>沿着梯度的方向进行更新：<br>$$<br>J(\theta - \eta g) &#x3D; J(\theta ) -  \eta g^Tg \leq J(\theta)<br>$$</p>
+<p><strong>梯度下降算法的问题在于</strong>：</p>
+<ul>
+<li>容易在鞍点处停滞</li>
+<li>对于较为简单的凸优化问题，学习率的选择不好都会有发散的问题，训练对于学习率是很敏感的</li>
+</ul>
+<p>对于学习率下降的算法，主流使用的是<em>Step Strategy</em>，即损失函数不下降了就减少学习率。</p>
+<h4 id="Warm-Restarts"><a href="#Warm-Restarts" class="headerlink" title="Warm Restarts"></a>Warm Restarts</h4><p>使用的策略为：<em>Cosine Annealing</em>:<br>$$<br>\eta_t &#x3D; \eta_{min}^i + \frac{1}{2}(\eta_{max}^i - \eta_{min}^i)(1 + \cos(\frac{T_{cur}}{T_{i}}\pi))<br>$$</p>
+<p>其中$T_{cur}$为当前的迭代次数，$T_{i}$为当前的周期数，$\eta_{min}^i$和$\eta_{max}^i$分别为第$i$个周期的最小和最大学习率。<br>学习率的衰减不能是线性的，是先快后慢的。</p>
+<h4 id="Convergence-Rate"><a href="#Convergence-Rate" class="headerlink" title="Convergence Rate"></a>Convergence Rate</h4><ul>
+<li>We assume that $J(\theta)$ is convex, differentiable and Lipchitz by constant $L$. And domain of $\theta$ is bounded by radius $R$. With gradient descent update:<br>$$<br>\theta^{t+1}&#x3D;\theta^t-\eta \nabla J\left(\theta^t\right)<br>$$</li>
+</ul>
+<p>$$<br>\begin{aligned}<br>&amp;J\left(\theta^t\right)-J\left(\theta^*\right)  &amp; \text { (Gap btw minimum value } \left.J\left(\theta^*\right)\right) \\<br>\leq &amp; \nabla J\left(\theta^t\right)\left(\theta^t-\theta^*\right) &amp; \text { (Convexity) } \\<br>&#x3D; &amp; \frac{1}{\eta}\left(\theta^t-\theta^{t+1}\right)^{\mathrm{T}}\left(\theta^t-\theta^*\right)  &amp; \text { (Definition of GD) } \\<br>&#x3D;&amp; \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^*\right\|^2+\left\|\theta^{t+1}-\theta^t\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right) &amp; \text { (Properties of Norm) } \\<br>&#x3D; &amp; \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^*\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right)+\frac{\eta}{2}\left\|\nabla J\left(\theta^t\right)\right\|^2 &amp; \text { (Definition of GD) } \\<br>\leq &amp;\frac{1}{2 \eta}\left(\left\|\theta^t-\theta^*\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right)+\frac{\eta}{2} L^2 &amp;  \text { (Lipchitz Property) }<br>\end{aligned}<br>$$</p>
+<ul>
+<li>From previous computation, we get the following inequality for every step $t$ :</li>
+</ul>
+<p>$$<br>J\left(\theta^t\right)-J\left(\theta^*\right) \leq \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^*\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right)+\frac{\eta}{2} L^2<br>$$</p>
+<ul>
+<li>Recall $\max _{\theta, \theta^{\prime}}\left(\left\|\theta-\theta^{\prime}\right\|\right) \leq R$. Assume we update parameters for $T$ steps. We add all equations for all $t \in\{0,1, \ldots, T-1\}$ :</li>
+</ul>
+<p>$$<br>\begin{aligned}<br>&amp; \sum_t\left(J\left(\theta^t\right)-J\left(\theta^*\right)\right) \leq \frac{1}{2 \eta}\left(\left\|\theta^0-\theta_*^*\right\|^2-\left\|\theta^T-\theta^*\right\|^2\right)+\frac{\eta L^2 T}{2} \\<br>&amp; \frac{1}{T} \sum_t J\left(\theta^t\right)-J\left(\theta^*\right) \leq \frac{1}{2 \eta T}\left(R^2+0\right)+\frac{\eta L^2}{2} \\<br>&amp; \frac{1}{T} \sum_t J\left(\theta^t\right)-J\left(\theta^*\right) \leq \frac{R^2}{2 \eta T}+\frac{\eta L^2}{2}<br>\end{aligned}<br>$$</p>
+<ul>
+<li>let $\eta &#x3D; \frac{R}{L\sqrt{T}}$:<br>$$<br>\frac{1}{T} \sum_t J\left(\theta^t\right)-J\left(\theta^*\right) \leq \frac{L}{R} \sqrt{T}<br>$$</li>
+</ul>
+<h3 id="Second-Order-Optimization"><a href="#Second-Order-Optimization" class="headerlink" title="Second-Order Optimization"></a>Second-Order Optimization</h3><p>不仅要关注一次的梯度信息，还要关注二次的信息。二阶优化算法的核心是Hessian矩阵，可以分辨是不是鞍点。<br>函数的展开为：<br>$$<br>J(\theta) &#x3D; J(\theta_0) + \nabla J(\theta_0)^T(\theta - \theta_0) + \frac{1}{2}(\theta - \theta_0)^T H(\theta - \theta_0)<br>$$<br>能感知到“地形图”中的曲率。<br>对于海森矩阵可以进行特征值分解：<br>$$<br>H &#x3D; Q \Lambda Q^T \quad \text{and} \quad H^{-1} &#x3D; Q \Lambda^{-1} Q^T<br>$$<br>特征值中较大和较小的特征值如果相差较大，称为病态矩阵；如果从最大到最小的变化较为平缓，则较为光滑。<br>如果特征值全为正值，那么就是凸函数；如果有正有负，那么就是鞍点。<br>事实上，使用的梯度方法为局部的方法，下降是相对较慢的。</p>
+<h4 id="Newton-s-Method"><a href="#Newton-s-Method" class="headerlink" title="Newton&#39;s Method"></a>Newton&#39;s Method</h4><p>牛顿法的计算方法为：<br>$$<br>\hat{J}(\theta) &#x3D; J(\theta_0) + \nabla J(\theta_0)^T(\theta - \theta_0) + \frac{1}{2}(\theta - \theta_0)^T H(\theta - \theta_0)<br>$$<br>求导得到：<br>$$<br>\nabla_{\theta} \hat{J}(\theta) &#x3D; \nabla_{\theta} J(\theta_0) + H(\theta - \theta_0) &#x3D; 0<br>$$<br>求解得到：<br>$$<br>\theta^{t+1} &#x3D; \theta^{t} - H^{-1} \nabla_{theta} J(\theta^{t})<br>$$<br>牛顿法的优点在于收敛速度快，但是缺点在于计算复杂度高，需要计算海森矩阵的逆矩阵。计算复杂度为$O(d^3)$，其中$d$为参数的个数。<strong>在深度学习时代基本上不再使用</strong>。</p>
+<h4 id="Quasi-Newton-Method"><a href="#Quasi-Newton-Method" class="headerlink" title="Quasi-Newton Method"></a>Quasi-Newton Method</h4><p>对于海森矩阵的逆矩阵，我们可以使用拟牛顿法进行近似：<br>$$<br>H_{t+1}^{-1} &#x3D; H_t^{-1} + \frac{y_t y_t^T}{y_t^T s_t} - \frac{H_t^{-1}s_t s_t^T H_t^{-1}}{s_t^T H_t^{-1}s_t}<br>$$<br>其中$y_t &#x3D; \nabla J(\theta_{t+1}) - \nabla J(\theta_t)$，$s_t &#x3D; \theta_{t+1} - \theta_t$。<br><strong>在矩阵计算的时候要将较小的矩阵先乘，这样可以计算复杂度</strong></p>
+<h2 id="Optimization-in-Deep-Learning"><a href="#Optimization-in-Deep-Learning" class="headerlink" title="Optimization in Deep Learning"></a>Optimization in Deep Learning</h2><p>[[Deep Learning Lecture-2#Optimization in Practice]]</p>
+<p>是非凸优化问题，优化的目的在于找到一个较好的局部极值。比较好的局部极值是比较低的、比较平缓的局部极值，对于比较陡峭的局部极值泛化能力比较差（对测试数据的微小变化敏感）。</p>
+<p>好的局部极值有一些特性：</p>
+<ul>
+<li>值比较低</li>
+<li>是”盆地“，这样有利于模型的泛化</li>
+</ul>
+<h3 id="mini-batch"><a href="#mini-batch" class="headerlink" title="mini-batch"></a>mini-batch</h3><p><strong>mini-batch SGD</strong>：在每一轮遍历<em>epoch</em>后，对数据进行随机的打乱<em>Shuffle</em>，然后分成若干个batch，对每一个batch进行参数的更新。这样可以减少计算的时间，同时可以减少过拟合的问题。</p>
+<ul>
+<li>mini-batch的大小对于训练的影响，一般而言较大的mini-batch会有更好的收敛性，但是计算复杂度更高。</li>
+<li>由于不一样的小样本选择会引入一定的随机性，这样是有利于跳出局部极值的。</li>
+<li>由于mini-batch的选择是有随机性的，不同的batch的难度不一样，所以这时候出现Loss的规律性的震荡是很正常的。</li>
+<li>矩阵最大奇异值与最小奇异值的比值称为矩阵的条件数，条件数越大，矩阵越病态。对于病态矩阵，SGD的收敛速度会变慢。</li>
+</ul>
+<h3 id="Learning-Rate-Decay"><a href="#Learning-Rate-Decay" class="headerlink" title="Learning Rate Decay"></a>Learning Rate Decay</h3><p>初始学习率较大，随着迭代次数的增加，学习率逐渐减小。有相对应的衰减策略。<br><em>Exponential decay</em>:<br>$$<br>\eta_t &#x3D; \eta_0 \cdot e^{-\alpha t}<br>$$<br><em>Inverse decay</em>:<br>$$<br>\eta_t &#x3D; \frac{\eta_0}{1+\alpha t}<br>$$</p>
+<h3 id="SGD-Stochastic-Gradient-Descent"><a href="#SGD-Stochastic-Gradient-Descent" class="headerlink" title="SGD Stochastic Gradient Descent"></a>SGD Stochastic Gradient Descent</h3><h4 id="SGD-with-Momentum"><a href="#SGD-with-Momentum" class="headerlink" title="SGD with Momentum"></a>SGD with Momentum</h4><p><strong>SGD with Momentum</strong>:</p>
+<p>对于下面的更新公式：</p>
+<p>$$<br>\theta_{ij} &#x3D; \theta_{ij} - \eta \Delta<br>$$<br>在高维中，地形是相对而言较为崎岖的，这里的学习率一般是比较小的，否则容易发散。在接近于局部极值的时候。较大的学习率学习的是较为粗糙的特征，较小的学习率学习的是较为细致的特征。</p>
+<p>$$<br>\Delta &#x3D; \beta \Delta - \eta \frac{\partial J(\theta)}{\partial \theta_{ij}}<br>$$<br>$\beta$是动量参数，可以理解为之前的梯度的累积。</p>
+<p><strong>Nesterov Momentum:</strong><br>$$<br>\begin{aligned}<br>&amp;\tilde{\theta}^{t} &#x3D; \theta^{t} - \beta \Delta^{t-1} \\<br>&amp;\Delta^{t} &#x3D; \beta \Delta^{t-1} + (1-\beta)\nabla J^t (\tilde{\theta}^t)\\<br>&amp;\theta^{t+1} &#x3D; \theta^t - \eta \Delta^t\\<br>\end{aligned}<br>$$<br>在深度学习的实现中使用的一般是这种。走动量的方向可以减少震荡，同时可以加速收敛。当到达了比较好的局部极值时候又会在这个值的附近抖动。<br>超参数：$\beta$，一般而言$\beta$取0.9是比较好的，越大的值越容易进行震荡。<br>学习率0.01、0.003、0.001一般按照指数变化。</p>
+<p>是在每次更新完$\theta$之后（进行试探之后才进行计算）才进行梯度的计算，可以避免一些<em>overshoot</em>。核心的思想为多获取一些二次的信息。</p>
+<h3 id="Weight-Decay"><a href="#Weight-Decay" class="headerlink" title="Weight Decay"></a><em>Weight Decay</em></h3><p>加入正则项，对于参数的更新进行限制，控制假设空间的大小，可以防止过拟合。但是在深度学习中并不够。</p>
+<p><em>L1 regularization</em><br>$$<br>\Omega(\theta) &#x3D; \lambda \sum_{l&#x3D;1}^{L} \sum_{i&#x3D;1}^{n_l} \sum_{j&#x3D;1}^{n_{l+1}} |\theta_{ij}^{(l)}|<br>$$<br><em>L2 regularization</em><br>$$<br>\Omega(\theta) &#x3D; \lambda \sum_{l&#x3D;1}^{L} \sum_{i&#x3D;1}^{n_l} \sum_{j&#x3D;1}^{n_{l+1}} (\theta_{ij}^{(l)})^2<br>$$</p>
+<h3 id="Adaptive-Learning-Rate"><a href="#Adaptive-Learning-Rate" class="headerlink" title="Adaptive Learning Rate"></a>Adaptive Learning Rate</h3><p>直观理解为在不同的“地形”上需要使用的学习率（步长）是不一样的。对于不同的参数使用不同的学习率。<strong>Adagrad</strong>算法的核心思想为：<br>$$<br>\begin{aligned}<br>&amp;r^t &#x3D; r^{t-1} + \nabla J^t(\theta^t) \odot \nabla J^t(\theta^t)\\<br>&amp;h^t &#x3D; \frac{1}{\sqrt{r^t} + \delta} \\<br>&amp;\Delta^t &#x3D; h^t \odot \nabla J^t(\theta^t)\\<br>&amp;\theta^{t+1} &#x3D; \theta^t - \eta \Delta^t<br>\end{aligned}<br>$$<br><em>上述公式中的第二行为逐元素操作</em><br>其中$\odot$为对应元素相乘，$\delta$为一个很小的数，防止分母为0。这样可以保证在不同的地形上使用不同的学习率。<strong>本质上为探索&quot;地形图&quot;</strong>。但是Adagrad的问题在于随着迭代次数的增加，分母会变得越来越大，导致学习率会变得越来越小，最终会导致学习率为0，这样就不再更新了。</p>
+<p><strong>RMSprop</strong>算法的核心思想为：对Adagrad的分母进行指数滑动平均：<br>$$<br>\begin{aligned}<br>&amp;r^t &#x3D; \rho r^{t-1} + (1-\rho)\nabla J^t(\theta^t) \odot \nabla J^t(\theta^t)\\<br>&amp;h^t &#x3D; \frac{1}{\sqrt{r^t} + \delta} \\<br>&amp;\Delta^t &#x3D; h^t \odot \nabla J^t(\theta^t)\\<br>&amp;\theta^{t+1} &#x3D; \theta^t - \eta \Delta^t<br>\end{aligned}<br>$$</p>
+<p><strong>Adam</strong>算法的核心思想为：结合了SGD with Momentum和RMSprop：<br>$$<br>\begin{aligned}<br>&amp; r^t &#x3D; \rho r^{t-1} + (1-\rho)\nabla J^t(\theta^t) \odot \nabla J^t(\theta^t)\\<br>&amp; h^t &#x3D; \frac{1}{\sqrt{r^t} + \delta} \\<br>&amp; s^t &#x3D; \varepsilon s^{t-1} + (1-\epsilon)\nabla J^t(\theta^t)\\<br>&amp; \Delta^t &#x3D; h^t \odot s^t \\<br>&amp; \theta^{t+1} &#x3D; \theta^t - \eta \Delta^t<br>\end{aligned}<br>$$<br>实际使用的参数为$\rho&#x3D;0.9$，$\varepsilon &#x3D; 0.9$，$\rho &#x3D; 0.999$<br>对于学习率的下降，还是要使用对应的算法，对于实际使用的算法，还需要对$r$、$s$进行无偏修正。</p>
+<p>Nadam算法为Adam算法的变种，对于SGD with Momentum的更新进行了修正。</p>
+<p>调参一般而言是，对于一个模型找到对于其最好的优化器。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-4/" data-id="cmc999bzm0003hkvagmus5rew" data-title="Deep Learning Lecture-4" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -452,104 +549,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-3/" data-id="cmc996qgz0003ykva5qq3h623" data-title="Deep Learning Lecture-3" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Deep Learning Lecture-4" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/06/21/Deep%20Learning%20Lecture-4/" class="article-date">
-  <time class="dt-published" datetime="2025-06-20T16:00:00.000Z" itemprop="datePublished">2025-06-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/06/21/Deep%20Learning%20Lecture-4/">Deep Learning Lecture-4</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h2><p><strong>Objective Function</strong><br>$$<br>\arg \min \mathcal{O(D,\theta)}&#x3D;  \sum_{i&#x3D;1}^{N} L(y_i, f(x_i,\theta)) + \Omega(\theta)<br>$$<br>上述目标可以可视化为以$\theta$为横坐标、$\mathcal{O}$为纵坐标的函数图像，我们的目标是找到函数图像的最低点。这是一个<strong>非凸优化</strong>问题，是初值敏感的。“地形图”是否简单是网络训练是否容易的关键。</p>
-<h3 id="First-Order-Optimization"><a href="#First-Order-Optimization" class="headerlink" title="First-Order Optimization"></a>First-Order Optimization</h3><p>可以将$J(\theta)$展开为泰勒级数：<br>$$<br>J(\theta) &#x3D; J(\theta_0) + \nabla J(\theta_0)^T(\theta - \theta_0) + \frac{1}{2}(\theta - \theta_0)^T H(\theta - \theta_0)<br>$$<br>沿着梯度的方向进行更新：<br>$$<br>J(\theta - \eta g) &#x3D; J(\theta ) -  \eta g^Tg \leq J(\theta)<br>$$</p>
-<p><strong>梯度下降算法的问题在于</strong>：</p>
-<ul>
-<li>容易在鞍点处停滞</li>
-<li>对于较为简单的凸优化问题，学习率的选择不好都会有发散的问题，训练对于学习率是很敏感的</li>
-</ul>
-<p>对于学习率下降的算法，主流使用的是<em>Step Strategy</em>，即损失函数不下降了就减少学习率。</p>
-<h4 id="Warm-Restarts"><a href="#Warm-Restarts" class="headerlink" title="Warm Restarts"></a>Warm Restarts</h4><p>使用的策略为：<em>Cosine Annealing</em>:<br>$$<br>\eta_t &#x3D; \eta_{min}^i + \frac{1}{2}(\eta_{max}^i - \eta_{min}^i)(1 + \cos(\frac{T_{cur}}{T_{i}}\pi))<br>$$</p>
-<p>其中$T_{cur}$为当前的迭代次数，$T_{i}$为当前的周期数，$\eta_{min}^i$和$\eta_{max}^i$分别为第$i$个周期的最小和最大学习率。<br>学习率的衰减不能是线性的，是先快后慢的。</p>
-<h4 id="Convergence-Rate"><a href="#Convergence-Rate" class="headerlink" title="Convergence Rate"></a>Convergence Rate</h4><ul>
-<li>We assume that $J(\theta)$ is convex, differentiable and Lipchitz by constant $L$. And domain of $\theta$ is bounded by radius $R$. With gradient descent update:<br>$$<br>\theta^{t+1}&#x3D;\theta^t-\eta \nabla J\left(\theta^t\right)<br>$$</li>
-</ul>
-<p>$$<br>\begin{aligned}<br>&amp;J\left(\theta^t\right)-J\left(\theta^*\right)  &amp; \text { (Gap btw minimum value } \left.J\left(\theta^*\right)\right) \\<br>\leq &amp; \nabla J\left(\theta^t\right)\left(\theta^t-\theta^*\right) &amp; \text { (Convexity) } \\<br>&#x3D; &amp; \frac{1}{\eta}\left(\theta^t-\theta^{t+1}\right)^{\mathrm{T}}\left(\theta^t-\theta^*\right)  &amp; \text { (Definition of GD) } \\<br>&#x3D;&amp; \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^*\right\|^2+\left\|\theta^{t+1}-\theta^t\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right) &amp; \text { (Properties of Norm) } \\<br>&#x3D; &amp; \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^*\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right)+\frac{\eta}{2}\left\|\nabla J\left(\theta^t\right)\right\|^2 &amp; \text { (Definition of GD) } \\<br>\leq &amp;\frac{1}{2 \eta}\left(\left\|\theta^t-\theta^*\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right)+\frac{\eta}{2} L^2 &amp;  \text { (Lipchitz Property) }<br>\end{aligned}<br>$$</p>
-<ul>
-<li>From previous computation, we get the following inequality for every step $t$ :</li>
-</ul>
-<p>$$<br>J\left(\theta^t\right)-J\left(\theta^*\right) \leq \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^*\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right)+\frac{\eta}{2} L^2<br>$$</p>
-<ul>
-<li>Recall $\max _{\theta, \theta^{\prime}}\left(\left\|\theta-\theta^{\prime}\right\|\right) \leq R$. Assume we update parameters for $T$ steps. We add all equations for all $t \in\{0,1, \ldots, T-1\}$ :</li>
-</ul>
-<p>$$<br>\begin{aligned}<br>&amp; \sum_t\left(J\left(\theta^t\right)-J\left(\theta^*\right)\right) \leq \frac{1}{2 \eta}\left(\left\|\theta^0-\theta_*^*\right\|^2-\left\|\theta^T-\theta^*\right\|^2\right)+\frac{\eta L^2 T}{2} \\<br>&amp; \frac{1}{T} \sum_t J\left(\theta^t\right)-J\left(\theta^*\right) \leq \frac{1}{2 \eta T}\left(R^2+0\right)+\frac{\eta L^2}{2} \\<br>&amp; \frac{1}{T} \sum_t J\left(\theta^t\right)-J\left(\theta^*\right) \leq \frac{R^2}{2 \eta T}+\frac{\eta L^2}{2}<br>\end{aligned}<br>$$</p>
-<ul>
-<li>let $\eta &#x3D; \frac{R}{L\sqrt{T}}$:<br>$$<br>\frac{1}{T} \sum_t J\left(\theta^t\right)-J\left(\theta^*\right) \leq \frac{L}{R} \sqrt{T}<br>$$</li>
-</ul>
-<h3 id="Second-Order-Optimization"><a href="#Second-Order-Optimization" class="headerlink" title="Second-Order Optimization"></a>Second-Order Optimization</h3><p>不仅要关注一次的梯度信息，还要关注二次的信息。二阶优化算法的核心是Hessian矩阵，可以分辨是不是鞍点。<br>函数的展开为：<br>$$<br>J(\theta) &#x3D; J(\theta_0) + \nabla J(\theta_0)^T(\theta - \theta_0) + \frac{1}{2}(\theta - \theta_0)^T H(\theta - \theta_0)<br>$$<br>能感知到“地形图”中的曲率。<br>对于海森矩阵可以进行特征值分解：<br>$$<br>H &#x3D; Q \Lambda Q^T \quad \text{and} \quad H^{-1} &#x3D; Q \Lambda^{-1} Q^T<br>$$<br>特征值中较大和较小的特征值如果相差较大，称为病态矩阵；如果从最大到最小的变化较为平缓，则较为光滑。<br>如果特征值全为正值，那么就是凸函数；如果有正有负，那么就是鞍点。<br>事实上，使用的梯度方法为局部的方法，下降是相对较慢的。</p>
-<h4 id="Newton-s-Method"><a href="#Newton-s-Method" class="headerlink" title="Newton&#39;s Method"></a>Newton&#39;s Method</h4><p>牛顿法的计算方法为：<br>$$<br>\hat{J}(\theta) &#x3D; J(\theta_0) + \nabla J(\theta_0)^T(\theta - \theta_0) + \frac{1}{2}(\theta - \theta_0)^T H(\theta - \theta_0)<br>$$<br>求导得到：<br>$$<br>\nabla_{\theta} \hat{J}(\theta) &#x3D; \nabla_{\theta} J(\theta_0) + H(\theta - \theta_0) &#x3D; 0<br>$$<br>求解得到：<br>$$<br>\theta^{t+1} &#x3D; \theta^{t} - H^{-1} \nabla_{theta} J(\theta^{t})<br>$$<br>牛顿法的优点在于收敛速度快，但是缺点在于计算复杂度高，需要计算海森矩阵的逆矩阵。计算复杂度为$O(d^3)$，其中$d$为参数的个数。<strong>在深度学习时代基本上不再使用</strong>。</p>
-<h4 id="Quasi-Newton-Method"><a href="#Quasi-Newton-Method" class="headerlink" title="Quasi-Newton Method"></a>Quasi-Newton Method</h4><p>对于海森矩阵的逆矩阵，我们可以使用拟牛顿法进行近似：<br>$$<br>H_{t+1}^{-1} &#x3D; H_t^{-1} + \frac{y_t y_t^T}{y_t^T s_t} - \frac{H_t^{-1}s_t s_t^T H_t^{-1}}{s_t^T H_t^{-1}s_t}<br>$$<br>其中$y_t &#x3D; \nabla J(\theta_{t+1}) - \nabla J(\theta_t)$，$s_t &#x3D; \theta_{t+1} - \theta_t$。<br><strong>在矩阵计算的时候要将较小的矩阵先乘，这样可以计算复杂度</strong></p>
-<h2 id="Optimization-in-Deep-Learning"><a href="#Optimization-in-Deep-Learning" class="headerlink" title="Optimization in Deep Learning"></a>Optimization in Deep Learning</h2><p>[[Deep Learning Lecture-2#Optimization in Practice]]</p>
-<p>是非凸优化问题，优化的目的在于找到一个较好的局部极值。比较好的局部极值是比较低的、比较平缓的局部极值，对于比较陡峭的局部极值泛化能力比较差（对测试数据的微小变化敏感）。</p>
-<p>好的局部极值有一些特性：</p>
-<ul>
-<li>值比较低</li>
-<li>是”盆地“，这样有利于模型的泛化</li>
-</ul>
-<h3 id="mini-batch"><a href="#mini-batch" class="headerlink" title="mini-batch"></a>mini-batch</h3><p><strong>mini-batch SGD</strong>：在每一轮遍历<em>epoch</em>后，对数据进行随机的打乱<em>Shuffle</em>，然后分成若干个batch，对每一个batch进行参数的更新。这样可以减少计算的时间，同时可以减少过拟合的问题。</p>
-<ul>
-<li>mini-batch的大小对于训练的影响，一般而言较大的mini-batch会有更好的收敛性，但是计算复杂度更高。</li>
-<li>由于不一样的小样本选择会引入一定的随机性，这样是有利于跳出局部极值的。</li>
-<li>由于mini-batch的选择是有随机性的，不同的batch的难度不一样，所以这时候出现Loss的规律性的震荡是很正常的。</li>
-<li>矩阵最大奇异值与最小奇异值的比值称为矩阵的条件数，条件数越大，矩阵越病态。对于病态矩阵，SGD的收敛速度会变慢。</li>
-</ul>
-<h3 id="Learning-Rate-Decay"><a href="#Learning-Rate-Decay" class="headerlink" title="Learning Rate Decay"></a>Learning Rate Decay</h3><p>初始学习率较大，随着迭代次数的增加，学习率逐渐减小。有相对应的衰减策略。<br><em>Exponential decay</em>:<br>$$<br>\eta_t &#x3D; \eta_0 \cdot e^{-\alpha t}<br>$$<br><em>Inverse decay</em>:<br>$$<br>\eta_t &#x3D; \frac{\eta_0}{1+\alpha t}<br>$$</p>
-<h3 id="SGD-Stochastic-Gradient-Descent"><a href="#SGD-Stochastic-Gradient-Descent" class="headerlink" title="SGD Stochastic Gradient Descent"></a>SGD Stochastic Gradient Descent</h3><h4 id="SGD-with-Momentum"><a href="#SGD-with-Momentum" class="headerlink" title="SGD with Momentum"></a>SGD with Momentum</h4><p><strong>SGD with Momentum</strong>:</p>
-<p>对于下面的更新公式：</p>
-<p>$$<br>\theta_{ij} &#x3D; \theta_{ij} - \eta \Delta<br>$$<br>在高维中，地形是相对而言较为崎岖的，这里的学习率一般是比较小的，否则容易发散。在接近于局部极值的时候。较大的学习率学习的是较为粗糙的特征，较小的学习率学习的是较为细致的特征。</p>
-<p>$$<br>\Delta &#x3D; \beta \Delta - \eta \frac{\partial J(\theta)}{\partial \theta_{ij}}<br>$$<br>$\beta$是动量参数，可以理解为之前的梯度的累积。</p>
-<p><strong>Nesterov Momentum:</strong><br>$$<br>\begin{aligned}<br>&amp;\tilde{\theta}^{t} &#x3D; \theta^{t} - \beta \Delta^{t-1} \\<br>&amp;\Delta^{t} &#x3D; \beta \Delta^{t-1} + (1-\beta)\nabla J^t (\tilde{\theta}^t)\\<br>&amp;\theta^{t+1} &#x3D; \theta^t - \eta \Delta^t\\<br>\end{aligned}<br>$$<br>在深度学习的实现中使用的一般是这种。走动量的方向可以减少震荡，同时可以加速收敛。当到达了比较好的局部极值时候又会在这个值的附近抖动。<br>超参数：$\beta$，一般而言$\beta$取0.9是比较好的，越大的值越容易进行震荡。<br>学习率0.01、0.003、0.001一般按照指数变化。</p>
-<p>是在每次更新完$\theta$之后（进行试探之后才进行计算）才进行梯度的计算，可以避免一些<em>overshoot</em>。核心的思想为多获取一些二次的信息。</p>
-<h3 id="Weight-Decay"><a href="#Weight-Decay" class="headerlink" title="Weight Decay"></a><em>Weight Decay</em></h3><p>加入正则项，对于参数的更新进行限制，控制假设空间的大小，可以防止过拟合。但是在深度学习中并不够。</p>
-<p><em>L1 regularization</em><br>$$<br>\Omega(\theta) &#x3D; \lambda \sum_{l&#x3D;1}^{L} \sum_{i&#x3D;1}^{n_l} \sum_{j&#x3D;1}^{n_{l+1}} |\theta_{ij}^{(l)}|<br>$$<br><em>L2 regularization</em><br>$$<br>\Omega(\theta) &#x3D; \lambda \sum_{l&#x3D;1}^{L} \sum_{i&#x3D;1}^{n_l} \sum_{j&#x3D;1}^{n_{l+1}} (\theta_{ij}^{(l)})^2<br>$$</p>
-<h3 id="Adaptive-Learning-Rate"><a href="#Adaptive-Learning-Rate" class="headerlink" title="Adaptive Learning Rate"></a>Adaptive Learning Rate</h3><p>直观理解为在不同的“地形”上需要使用的学习率（步长）是不一样的。对于不同的参数使用不同的学习率。<strong>Adagrad</strong>算法的核心思想为：<br>$$<br>\begin{aligned}<br>&amp;r^t &#x3D; r^{t-1} + \nabla J^t(\theta^t) \odot \nabla J^t(\theta^t)\\<br>&amp;h^t &#x3D; \frac{1}{\sqrt{r^t} + \delta} \\<br>&amp;\Delta^t &#x3D; h^t \odot \nabla J^t(\theta^t)\\<br>&amp;\theta^{t+1} &#x3D; \theta^t - \eta \Delta^t<br>\end{aligned}<br>$$<br><em>上述公式中的第二行为逐元素操作</em><br>其中$\odot$为对应元素相乘，$\delta$为一个很小的数，防止分母为0。这样可以保证在不同的地形上使用不同的学习率。<strong>本质上为探索&quot;地形图&quot;</strong>。但是Adagrad的问题在于随着迭代次数的增加，分母会变得越来越大，导致学习率会变得越来越小，最终会导致学习率为0，这样就不再更新了。</p>
-<p><strong>RMSprop</strong>算法的核心思想为：对Adagrad的分母进行指数滑动平均：<br>$$<br>\begin{aligned}<br>&amp;r^t &#x3D; \rho r^{t-1} + (1-\rho)\nabla J^t(\theta^t) \odot \nabla J^t(\theta^t)\\<br>&amp;h^t &#x3D; \frac{1}{\sqrt{r^t} + \delta} \\<br>&amp;\Delta^t &#x3D; h^t \odot \nabla J^t(\theta^t)\\<br>&amp;\theta^{t+1} &#x3D; \theta^t - \eta \Delta^t<br>\end{aligned}<br>$$</p>
-<p><strong>Adam</strong>算法的核心思想为：结合了SGD with Momentum和RMSprop：<br>$$<br>\begin{aligned}<br>&amp; r^t &#x3D; \rho r^{t-1} + (1-\rho)\nabla J^t(\theta^t) \odot \nabla J^t(\theta^t)\\<br>&amp; h^t &#x3D; \frac{1}{\sqrt{r^t} + \delta} \\<br>&amp; s^t &#x3D; \varepsilon s^{t-1} + (1-\epsilon)\nabla J^t(\theta^t)\\<br>&amp; \Delta^t &#x3D; h^t \odot s^t \\<br>&amp; \theta^{t+1} &#x3D; \theta^t - \eta \Delta^t<br>\end{aligned}<br>$$<br>实际使用的参数为$\rho&#x3D;0.9$，$\varepsilon &#x3D; 0.9$，$\rho &#x3D; 0.999$<br>对于学习率的下降，还是要使用对应的算法，对于实际使用的算法，还需要对$r$、$s$进行无偏修正。</p>
-<p>Nadam算法为Adam算法的变种，对于SGD with Momentum的更新进行了修正。</p>
-<p>调参一般而言是，对于一个模型找到对于其最好的优化器。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-4/" data-id="cmc996qh00004ykva7uqp8jo3" data-title="Deep Learning Lecture-4" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-3/" data-id="cmc999bzm0004hkva4nk64l9d" data-title="Deep Learning Lecture-3" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -716,7 +716,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-5/" data-id="cmc996qh00005ykva2adg6ue2" data-title="Deep Learning Lecture-5" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-5/" data-id="cmc999bzn0005hkvad2g88jdh" data-title="Deep Learning Lecture-5" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -930,7 +930,95 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-6/" data-id="cmc996qh10008ykva2dodegeg" data-title="Deep Learning Lecture-6" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-6/" data-id="cmc999bzn0008hkva3nlvgcsf" data-title="Deep Learning Lecture-6" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Deep Learning Lecture-8" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/06/21/Deep%20Learning%20Lecture-8/" class="article-date">
+  <time class="dt-published" datetime="2025-06-20T16:00:00.000Z" itemprop="datePublished">2025-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/06/21/Deep%20Learning%20Lecture-8/">Deep Learning Lecture-8</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Transfer-Learning"><a href="#Transfer-Learning" class="headerlink" title="Transfer Learning"></a>Transfer Learning</h2><p>模型在较大规模中的数据集中得到成功，在较小的数据集中进进行学习。<strong>利用先验知识</strong>是实现强人工智能的一个前提条件。</p>
+<h2 id="Pre-Training"><a href="#Pre-Training" class="headerlink" title="Pre-Training"></a>Pre-Training</h2><p>预训练的结果是一个模型，然后在小数据集上进行微调。预训练提供的是一个先验知识，然后再进行微调。这已经是深度学习中的共识，在小数据集中做微调是一个非常好的方法。</p>
+<h3 id="Supervised-Pre-Training"><a href="#Supervised-Pre-Training" class="headerlink" title="Supervised Pre-Training"></a>Supervised Pre-Training</h3><ul>
+<li><p>BiT: Big Transfer</p>
+<ul>
+<li>在大规模数据集上做预训练非常重要</li>
+</ul>
+</li>
+<li><p>DAT: Domain Adaptative Transfer</p>
+<ul>
+<li>在预训练的数据集上进行筛选对于模型的表现会更好</li>
+</ul>
+</li>
+<li><p>迁移性受到数据间距离的影响</p>
+</li>
+<li><p>在微调的过程中需要对很多层进行调整</p>
+</li>
+<li><p>下游的任务和预训练的任务之间的距离越近，迁移的效果越好</p>
+</li>
+</ul>
+<p>假设空间的解释：</p>
+<ul>
+<li>预训练的模型能在较小的较好的假设空间上寻找</li>
+</ul>
+<h4 id="Multi-Task-Architecture"><a href="#Multi-Task-Architecture" class="headerlink" title="Multi-Task Architecture"></a>Multi-Task Architecture</h4><ul>
+<li>Hard Parameter Sharing<ul>
+<li>直接共享参数</li>
+<li>共享的参数是所有任务都需要的</li>
+</ul>
+</li>
+<li>Soft Parameter Sharing<ul>
+<li>每个任务使用一个模型</li>
+</ul>
+</li>
+<li>TASKONOMY<ul>
+<li>首先进行训练，之后构建任务的关系图，在训练的过程中找一些更相近的任务进行共享</li>
+</ul>
+</li>
+</ul>
+<p>多任务学习的损失函数：<br>$$<br>\min_{\theta} \sum_{i&#x3D;1}^{T} w_i \mathcal{L}_i(\theta)<br>$$<br>其中 $w_i$ 是每个任务的权重</p>
+<ul>
+<li>GradNorm：使得每个任务的梯度相同</li>
+<li>Task uncertainty：每个任务的损失函数的权重是不同的</li>
+<li>Pareto optimal solution：</li>
+<li>Optimize for the worst task</li>
+<li>Regularization：</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-8/" data-id="cmc999bzo000ahkvaha35didq" data-title="Deep Learning Lecture-8" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1146,95 +1234,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-7/" data-id="cmc996qh1000aykvabni54l4r" data-title="Deep Learning Lecture-7" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Deep Learning Lecture-8" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/06/21/Deep%20Learning%20Lecture-8/" class="article-date">
-  <time class="dt-published" datetime="2025-06-20T16:00:00.000Z" itemprop="datePublished">2025-06-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/06/21/Deep%20Learning%20Lecture-8/">Deep Learning Lecture-8</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="Transfer-Learning"><a href="#Transfer-Learning" class="headerlink" title="Transfer Learning"></a>Transfer Learning</h2><p>模型在较大规模中的数据集中得到成功，在较小的数据集中进进行学习。<strong>利用先验知识</strong>是实现强人工智能的一个前提条件。</p>
-<h2 id="Pre-Training"><a href="#Pre-Training" class="headerlink" title="Pre-Training"></a>Pre-Training</h2><p>预训练的结果是一个模型，然后在小数据集上进行微调。预训练提供的是一个先验知识，然后再进行微调。这已经是深度学习中的共识，在小数据集中做微调是一个非常好的方法。</p>
-<h3 id="Supervised-Pre-Training"><a href="#Supervised-Pre-Training" class="headerlink" title="Supervised Pre-Training"></a>Supervised Pre-Training</h3><ul>
-<li><p>BiT: Big Transfer</p>
-<ul>
-<li>在大规模数据集上做预训练非常重要</li>
-</ul>
-</li>
-<li><p>DAT: Domain Adaptative Transfer</p>
-<ul>
-<li>在预训练的数据集上进行筛选对于模型的表现会更好</li>
-</ul>
-</li>
-<li><p>迁移性受到数据间距离的影响</p>
-</li>
-<li><p>在微调的过程中需要对很多层进行调整</p>
-</li>
-<li><p>下游的任务和预训练的任务之间的距离越近，迁移的效果越好</p>
-</li>
-</ul>
-<p>假设空间的解释：</p>
-<ul>
-<li>预训练的模型能在较小的较好的假设空间上寻找</li>
-</ul>
-<h4 id="Multi-Task-Architecture"><a href="#Multi-Task-Architecture" class="headerlink" title="Multi-Task Architecture"></a>Multi-Task Architecture</h4><ul>
-<li>Hard Parameter Sharing<ul>
-<li>直接共享参数</li>
-<li>共享的参数是所有任务都需要的</li>
-</ul>
-</li>
-<li>Soft Parameter Sharing<ul>
-<li>每个任务使用一个模型</li>
-</ul>
-</li>
-<li>TASKONOMY<ul>
-<li>首先进行训练，之后构建任务的关系图，在训练的过程中找一些更相近的任务进行共享</li>
-</ul>
-</li>
-</ul>
-<p>多任务学习的损失函数：<br>$$<br>\min_{\theta} \sum_{i&#x3D;1}^{T} w_i \mathcal{L}_i(\theta)<br>$$<br>其中 $w_i$ 是每个任务的权重</p>
-<ul>
-<li>GradNorm：使得每个任务的梯度相同</li>
-<li>Task uncertainty：每个任务的损失函数的权重是不同的</li>
-<li>Pareto optimal solution：</li>
-<li>Optimize for the worst task</li>
-<li>Regularization：</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-8/" data-id="cmc996qh3000hykvagu66g1vs" data-title="Deep Learning Lecture-8" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-7/" data-id="cmc999bzp000dhkvac592gqc6" data-title="Deep Learning Lecture-7" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1301,11 +1301,11 @@
           </li>
         
           <li>
-            <a href="/2025/06/21/Deep%20Learning%20Lecture-3/">Deep Learning Lecture-3</a>
+            <a href="/2025/06/21/Deep%20Learning%20Lecture-4/">Deep Learning Lecture-4</a>
           </li>
         
           <li>
-            <a href="/2025/06/21/Deep%20Learning%20Lecture-4/">Deep Learning Lecture-4</a>
+            <a href="/2025/06/21/Deep%20Learning%20Lecture-3/">Deep Learning Lecture-3</a>
           </li>
         
           <li>
