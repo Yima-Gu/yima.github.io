@@ -14,7 +14,7 @@
 <meta property="og:description" content="OptimizationObjective Function$$\arg \min \mathcal{O(D,\theta)}&#x3D;  \sum_{i&#x3D;1}^{N} L(y_i, f(x_i,\theta)) + \Omega(\theta)$$上述目标可以可视化为以$\theta$为横坐标、$\mathcal{O}$为纵坐标的函数图像，我们的目标是找到函数图像的最低点。这是一个">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-23T12:21:17.897Z">
+<meta property="article:modified_time" content="2025-06-23T12:28:38.384Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="DeepLearning">
 <meta name="twitter:card" content="summary">
@@ -132,19 +132,19 @@
 <h4 id="Convergence-Rate"><a href="#Convergence-Rate" class="headerlink" title="Convergence Rate"></a>Convergence Rate</h4><ul>
 <li>We assume that $J(\theta)$ is convex, differentiable and Lipchitz by constant $L$. And domain of $\theta$ is bounded by radius $R$. With gradient descent update:<br>$$<br>\theta^{t+1}&#x3D;\theta^t-\eta \nabla J\left(\theta^t\right)<br>$$</li>
 </ul>
-<p>$$<br>\begin{aligned}<br>&amp;J\left(\theta^t\right)-J\left(\theta^<em>\right)  &amp; \text { (Gap btw minimum value } \left.J\left(\theta^</em>\right)\right) \\</p>
+<p>$$<br>\begin{aligned}<br>&amp;J\left(\theta^t\right)-J\left(\theta^*\right)  &amp; \text { (Gap btw minimum value } \left.J\left(\theta^*\right)\right) \\</p>
 <p>\leq &amp; \nabla J\left(\theta^t\right)\left(\theta^t-\theta^*\right) &amp; \text { (Convexity) } \\</p>
 <p>&#x3D; &amp; \frac{1}{\eta}\left(\theta^t-\theta^{t+1}\right)^{\mathrm{T}}\left(\theta^t-\theta^*\right)  &amp; \text { (Definition of GD) } \\</p>
-<p>&#x3D;&amp; \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^<em>\right\|^2+\left\|\theta^{t+1}-\theta^t\right\|^2-\left\|\theta^{t+1}-\theta^</em>\right\|^2\right) &amp; \text { (Properties of Norm) } \\<br>&#x3D; &amp; \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^<em>\right\|^2-\left\|\theta^{t+1}-\theta^</em>\right\|^2\right)+\frac{\eta}{2}\left\|\nabla J\left(\theta^t\right)\right\|^2 &amp; \text { (Definition of GD) } \\</p>
-<p>\leq &amp;\frac{1}{2 \eta}\left(\left\|\theta^t-\theta^<em>\right\|^2-\left\|\theta^{t+1}-\theta^</em>\right\|^2\right)+\frac{\eta}{2} L^2 &amp;  \text { (Lipchitz Property) }<br>\end{aligned}<br>$$</p>
+<p>&#x3D;&amp; \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^*\right\|^2+\left\|\theta^{t+1}-\theta^t\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right) &amp; \text { (Properties of Norm) } \\<br>&#x3D; &amp; \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^*\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right)+\frac{\eta}{2}\left\|\nabla J\left(\theta^t\right)\right\|^2 &amp; \text { (Definition of GD) } \\</p>
+<p>\leq &amp;\frac{1}{2 \eta}\left(\left\|\theta^t-\theta^*\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right)+\frac{\eta}{2} L^2 &amp;  \text { (Lipchitz Property) }<br>\end{aligned}<br>$$</p>
 <ul>
 <li>From previous computation, we get the following inequality for every step $t$ :</li>
 </ul>
-<p>$$<br>J\left(\theta^t\right)-J\left(\theta^<em>\right) \leq \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^</em>\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right)+\frac{\eta}{2} L^2<br>$$</p>
+<p>$$<br>J\left(\theta^t\right)-J\left(\theta^*\right) \leq \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^*\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right)+\frac{\eta}{2} L^2<br>$$</p>
 <ul>
 <li>Recall $\max _{\theta, \theta^{\prime}}\left(\left\|\theta-\theta^{\prime}\right\|\right) \leq R$. Assume we update parameters for $T$ steps. We add all equations for all $t \in\{0,1, \ldots, T-1\}$ :</li>
 </ul>
-<p>$$<br>\begin{aligned}<br>&amp; \sum_t\left(J\left(\theta^t\right)-J\left(\theta^<em>\right)\right) \leq \frac{1}{2 \eta}\left(\left\|\theta^0-\theta_</em>^<em>\right\|^2-\left\|\theta^T-\theta^</em>\right\|^2\right)+\frac{\eta L^2 T}{2} \\<br>&amp; \frac{1}{T} \sum_t J\left(\theta^t\right)-J\left(\theta^<em>\right) \leq \frac{1}{2 \eta T}\left(R^2+0\right)+\frac{\eta L^2}{2} \\<br>&amp; \frac{1}{T} \sum_t J\left(\theta^t\right)-J\left(\theta^</em>\right) \leq \frac{R^2}{2 \eta T}+\frac{\eta L^2}{2}<br>\end{aligned}<br>$$</p>
+<p>$$<br>\begin{aligned}<br>&amp; \sum_t\left(J\left(\theta^t\right)-J\left(\theta^*\right)\right) \leq \frac{1}{2 \eta}\left(\left\|\theta^0-\theta_*^*\right\|^2-\left\|\theta^T-\theta^*\right\|^2\right)+\frac{\eta L^2 T}{2} \\<br>&amp; \frac{1}{T} \sum_t J\left(\theta^t\right)-J\left(\theta^*\right) \leq \frac{1}{2 \eta T}\left(R^2+0\right)+\frac{\eta L^2}{2} \\<br>&amp; \frac{1}{T} \sum_t J\left(\theta^t\right)-J\left(\theta^*\right) \leq \frac{R^2}{2 \eta T}+\frac{\eta L^2}{2}<br>\end{aligned}<br>$$</p>
 <ul>
 <li>let $\eta &#x3D; \frac{R}{L\sqrt{T}}$:<br>$$<br>\frac{1}{T} \sum_t J\left(\theta^t\right)-J\left(\theta^*\right) \leq \frac{L}{R} \sqrt{T}<br>$$</li>
 </ul>
@@ -183,7 +183,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-4/" data-id="cmc92fnp50004zcva2qmr2nu3" data-title="Deep Learning Lecture-4" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-4/" data-id="cmc92p3l80007isva19pafc38" data-title="Deep Learning Lecture-4" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       

@@ -14,7 +14,7 @@
 <meta property="og:description" content="Convolutional Neural Networks卷积网络最早是用来处理图像的问题。目前较为成功的研究是物体识别问题，对于物体之间的关系推断依然是计算机视觉的前沿领域。 在生物的研究中，存在感受野receptive field的概念，这是指神经元对于输入的局部区域的敏感程度。在卷积网络中，我们也引入了这个概念。相邻的神经元处理的是相邻的图像区域，这样的设计使得网络能够捕捉到图像的空间结构">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-23T12:21:17.877Z">
+<meta property="article:modified_time" content="2025-06-23T12:28:38.367Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="DeepLearning">
 <meta name="twitter:card" content="summary">
@@ -126,7 +126,7 @@
 <p>从左到右，逐步提取的是从较低到较高的层次特征。在不同的任务中使用不同的特征。在识别人物中，应该使用较高层次的特征。</p>
 <h5 id="Local-Connectivity"><a href="#Local-Connectivity" class="headerlink" title="Local Connectivity"></a>Local Connectivity</h5><p>每一层的神经元只连接到上一层的局部区域。具体的连接方式为：每一个神经元只关注上一层对应区域的部分神经元。</p>
 <h5 id="Parameter-Sharing"><a href="#Parameter-Sharing" class="headerlink" title="Parameter Sharing"></a>Parameter Sharing</h5><p>一个神经元对应的某组参数代表的是某种特征，我们认为提取的特征的在不同的位置是一样的。是一种<strong>平移不变性</strong>。</p>
-<h4 id="Convolution"><a href="#Convolution" class="headerlink" title="Convolution"></a>Convolution</h4><p>$f$是输入的图像，$g$是卷积核，卷积操作定义为：<br><em>Continuous function</em> :<br>$$<br>(f<em>g)(t) &#x3D; \int_{-\infty}^{\infty} f(\tau)g(t-\tau)d\tau<br>$$<br><em>Discrete function</em> :<br>$$<br>(f</em>g)[n] &#x3D; \sum_{m&#x3D;-\infty}^{\infty} f[m]g[n-m]<br>$$<br>上述操作的目的为对于输入函数</p>
+<h4 id="Convolution"><a href="#Convolution" class="headerlink" title="Convolution"></a>Convolution</h4><p>$f$是输入的图像，$g$是卷积核，卷积操作定义为：<br><em>Continuous function</em> :<br>$$<br>(f*g)(t) &#x3D; \int_{-\infty}^{\infty} f(\tau)g(t-\tau)d\tau<br>$$<br><em>Discrete function</em> :<br>$$<br>(f*g)[n] &#x3D; \sum_{m&#x3D;-\infty}^{\infty} f[m]g[n-m]<br>$$<br>上述操作的目的为对于输入函数</p>
 <h5 id="Cross-Correlation"><a href="#Cross-Correlation" class="headerlink" title="Cross Correlation"></a>Cross Correlation</h5><p>互相关用来分析两个信号的相似性，定义为：<br><em>Continous function</em> :<br>$$<br>(f\star g)(t) &#x3D; \int_{-\infty}^{\infty} \overline {f(\tau)}g(t+\tau)d\tau<br>$$<br><em>Discrete function</em> :<br>$$<br>(f\star g)[n] &#x3D; \sum_{m&#x3D;-\infty}^{\infty} \overline {f[m]}g[n+m]<br>$$<br>对于卷积和互相关的关系为：<br>$$<br>[f(t) \star g(t)] (t) &#x3D; <a href="t">\overline{f(-t)} * g(t)</a><br>$$<br>事实上，在卷积网络中使用的是互相关操作。</p>
 <h5 id="Notation"><a href="#Notation" class="headerlink" title="Notation"></a>Notation</h5><ul>
 <li>输入的图片一般为三层，分别为RGB。这个<em>Volume</em>是一个张量<em>Tensor</em>。</li>
@@ -135,7 +135,7 @@
 </ul>
 <p><em>在实际操作的过程中，并不要将卷积核在图片上“滑动”（这是一个串行算法），可以为每一个为每一个局域来分配一个神经元，这样的操作是并行的，可以加速计算。</em></p>
 <p>得到的是一个Feature Map，这个Feature Map是一个新的张量，使用6个卷积核得到的图片的特征图的大小为$28 \times 28 \times 6$。<em>如何计算的？参数量是多少？</em><br>使用的卷积核数量是一个超参数，可以调整。</p>
-<p>对于一个$w<em>h</em>c$的输入，使用$k<em>k</em>c<em>d$个卷积核，得到的输出的特征图的大小为$(w-k+1)</em>(h-k+1)<em>d$，参数量为$(k</em>k*c+1)*d$。但是CNN在实践过程中的显存占用是较大的，因为需要存储特征图。</p>
+<p>对于一个$w*h*c$的输入，使用$k*k*c*d$个卷积核，得到的输出的特征图的大小为$(w-k+1)*(h-k+1)*d$，参数量为$(k*k*c+1)*d$。但是CNN在实践过程中的显存占用是较大的，因为需要存储特征图。</p>
 <p>![[{7202EECA-CD25-4EE1-A5C9-02F0263C968C}.png]]</p>
 <h4 id="Dilated-Stride-Convolution"><a href="#Dilated-Stride-Convolution" class="headerlink" title="Dilated&amp; Stride Convolution"></a>Dilated&amp; Stride Convolution</h4><p>在卷积操作中，我们可以使用不同的步长来进行卷积操作，这样的操作会改变输出的大小。在Dilated Convolution中，我们可以使用不同的扩张率来进行卷积操作。扩张率为1的时候<em>1-dilated</em>是正常的卷积操作，扩张率为2的时候，卷积核的间隔为2 <em>2-dilated</em>。这样的操作可以<strong>增加卷积核的感受野</strong>，但是减少了输出的大小。</p>
 <p><em>Stride</em>是卷积核的步长，可以让输出的特征图迅速变小。<br>可能出现不匹配的情况，这样可以进行<em>Padding</em>是在边缘填充0，这样的操作可以保持输出的大小。</p>
@@ -270,7 +270,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-3/" data-id="cmc92fnp50003zcvadzvcagd1" data-title="Deep Learning Lecture-3" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-3/" data-id="cmc92p3l70006isva7vkqbnwg" data-title="Deep Learning Lecture-3" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       

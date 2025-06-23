@@ -139,12 +139,12 @@
 <p>$$<br>O(D;\theta) &#x3D; -\sum_{i&#x3D;1}^{n} \log P(y_i|x_i;\theta) + \lambda ||\theta||_{1}<br>$$<br>上述式子其实是对数似然函数，最大化对数似然函数等价于最小化交叉熵损失函数。</p>
 <h4 id="Aproximation-and-Estimation"><a href="#Aproximation-and-Estimation" class="headerlink" title="Aproximation and Estimation"></a>Aproximation and Estimation</h4><p>假设空间只能表现一个有限的函数集合，有时候真值函数不一定在假设空间中。这时候假设空间中最好的函数与真值函数之间的差距称为<strong>近似误差</strong><em>Approximation Error</em>。学习得到的函数与空间中最好的函数的误差为<strong>估计误差</strong> <em>Estimation Error</em>。</p>
 <h3 id="Model-Selection"><a href="#Model-Selection" class="headerlink" title="Model Selection"></a>Model Selection</h3><p><em>All models are wrong but some are useful.</em></p>
-<p>CASH: Combined Algorithm Selection and Hyperparameter optimization<br>目标是：选择最好的模型和超参数<br>$$<br>A^<em>_{\lambda^</em>} &#x3D; \arg \min_{A \in \mathcal{A}} \min_{\lambda \in \Lambda^{(i)}} \mathcal{L}(A_{\lambda}^{(i)},D_{train},D_{valid})<br>$$</p>
+<p>CASH: Combined Algorithm Selection and Hyperparameter optimization<br>目标是：选择最好的模型和超参数<br>$$<br>A^*_{\lambda^*} &#x3D; \arg \min_{A \in \mathcal{A}} \min_{\lambda \in \Lambda^{(i)}} \mathcal{L}(A_{\lambda}^{(i)},D_{train},D_{valid})<br>$$</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-1/" data-id="cmc92fnp10000zcvagg9r9ros" data-title="Deep Learning Lecture-1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-1/" data-id="cmc92p3l20000isvad1n6cvxa" data-title="Deep Learning Lecture-1" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -266,7 +266,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-2/" data-id="cmc92fnp30001zcva0lt97v6c" data-title="Deep Learning Lecture-2" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-2/" data-id="cmc92p3l40001isva0ri7eg5i" data-title="Deep Learning Lecture-2" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -310,7 +310,7 @@
 <p>从左到右，逐步提取的是从较低到较高的层次特征。在不同的任务中使用不同的特征。在识别人物中，应该使用较高层次的特征。</p>
 <h5 id="Local-Connectivity"><a href="#Local-Connectivity" class="headerlink" title="Local Connectivity"></a>Local Connectivity</h5><p>每一层的神经元只连接到上一层的局部区域。具体的连接方式为：每一个神经元只关注上一层对应区域的部分神经元。</p>
 <h5 id="Parameter-Sharing"><a href="#Parameter-Sharing" class="headerlink" title="Parameter Sharing"></a>Parameter Sharing</h5><p>一个神经元对应的某组参数代表的是某种特征，我们认为提取的特征的在不同的位置是一样的。是一种<strong>平移不变性</strong>。</p>
-<h4 id="Convolution"><a href="#Convolution" class="headerlink" title="Convolution"></a>Convolution</h4><p>$f$是输入的图像，$g$是卷积核，卷积操作定义为：<br><em>Continuous function</em> :<br>$$<br>(f<em>g)(t) &#x3D; \int_{-\infty}^{\infty} f(\tau)g(t-\tau)d\tau<br>$$<br><em>Discrete function</em> :<br>$$<br>(f</em>g)[n] &#x3D; \sum_{m&#x3D;-\infty}^{\infty} f[m]g[n-m]<br>$$<br>上述操作的目的为对于输入函数</p>
+<h4 id="Convolution"><a href="#Convolution" class="headerlink" title="Convolution"></a>Convolution</h4><p>$f$是输入的图像，$g$是卷积核，卷积操作定义为：<br><em>Continuous function</em> :<br>$$<br>(f*g)(t) &#x3D; \int_{-\infty}^{\infty} f(\tau)g(t-\tau)d\tau<br>$$<br><em>Discrete function</em> :<br>$$<br>(f*g)[n] &#x3D; \sum_{m&#x3D;-\infty}^{\infty} f[m]g[n-m]<br>$$<br>上述操作的目的为对于输入函数</p>
 <h5 id="Cross-Correlation"><a href="#Cross-Correlation" class="headerlink" title="Cross Correlation"></a>Cross Correlation</h5><p>互相关用来分析两个信号的相似性，定义为：<br><em>Continous function</em> :<br>$$<br>(f\star g)(t) &#x3D; \int_{-\infty}^{\infty} \overline {f(\tau)}g(t+\tau)d\tau<br>$$<br><em>Discrete function</em> :<br>$$<br>(f\star g)[n] &#x3D; \sum_{m&#x3D;-\infty}^{\infty} \overline {f[m]}g[n+m]<br>$$<br>对于卷积和互相关的关系为：<br>$$<br>[f(t) \star g(t)] (t) &#x3D; <a href="t">\overline{f(-t)} * g(t)</a><br>$$<br>事实上，在卷积网络中使用的是互相关操作。</p>
 <h5 id="Notation"><a href="#Notation" class="headerlink" title="Notation"></a>Notation</h5><ul>
 <li>输入的图片一般为三层，分别为RGB。这个<em>Volume</em>是一个张量<em>Tensor</em>。</li>
@@ -319,7 +319,7 @@
 </ul>
 <p><em>在实际操作的过程中，并不要将卷积核在图片上“滑动”（这是一个串行算法），可以为每一个为每一个局域来分配一个神经元，这样的操作是并行的，可以加速计算。</em></p>
 <p>得到的是一个Feature Map，这个Feature Map是一个新的张量，使用6个卷积核得到的图片的特征图的大小为$28 \times 28 \times 6$。<em>如何计算的？参数量是多少？</em><br>使用的卷积核数量是一个超参数，可以调整。</p>
-<p>对于一个$w<em>h</em>c$的输入，使用$k<em>k</em>c<em>d$个卷积核，得到的输出的特征图的大小为$(w-k+1)</em>(h-k+1)<em>d$，参数量为$(k</em>k*c+1)*d$。但是CNN在实践过程中的显存占用是较大的，因为需要存储特征图。</p>
+<p>对于一个$w*h*c$的输入，使用$k*k*c*d$个卷积核，得到的输出的特征图的大小为$(w-k+1)*(h-k+1)*d$，参数量为$(k*k*c+1)*d$。但是CNN在实践过程中的显存占用是较大的，因为需要存储特征图。</p>
 <p>![[{7202EECA-CD25-4EE1-A5C9-02F0263C968C}.png]]</p>
 <h4 id="Dilated-Stride-Convolution"><a href="#Dilated-Stride-Convolution" class="headerlink" title="Dilated&amp; Stride Convolution"></a>Dilated&amp; Stride Convolution</h4><p>在卷积操作中，我们可以使用不同的步长来进行卷积操作，这样的操作会改变输出的大小。在Dilated Convolution中，我们可以使用不同的扩张率来进行卷积操作。扩张率为1的时候<em>1-dilated</em>是正常的卷积操作，扩张率为2的时候，卷积核的间隔为2 <em>2-dilated</em>。这样的操作可以<strong>增加卷积核的感受野</strong>，但是减少了输出的大小。</p>
 <p><em>Stride</em>是卷积核的步长，可以让输出的特征图迅速变小。<br>可能出现不匹配的情况，这样可以进行<em>Padding</em>是在边缘填充0，这样的操作可以保持输出的大小。</p>
@@ -454,7 +454,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-3/" data-id="cmc92fnp50003zcvadzvcagd1" data-title="Deep Learning Lecture-3" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-3/" data-id="cmc92p3l70006isva7vkqbnwg" data-title="Deep Learning Lecture-3" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -504,19 +504,19 @@
 <h4 id="Convergence-Rate"><a href="#Convergence-Rate" class="headerlink" title="Convergence Rate"></a>Convergence Rate</h4><ul>
 <li>We assume that $J(\theta)$ is convex, differentiable and Lipchitz by constant $L$. And domain of $\theta$ is bounded by radius $R$. With gradient descent update:<br>$$<br>\theta^{t+1}&#x3D;\theta^t-\eta \nabla J\left(\theta^t\right)<br>$$</li>
 </ul>
-<p>$$<br>\begin{aligned}<br>&amp;J\left(\theta^t\right)-J\left(\theta^<em>\right)  &amp; \text { (Gap btw minimum value } \left.J\left(\theta^</em>\right)\right) \\</p>
+<p>$$<br>\begin{aligned}<br>&amp;J\left(\theta^t\right)-J\left(\theta^*\right)  &amp; \text { (Gap btw minimum value } \left.J\left(\theta^*\right)\right) \\</p>
 <p>\leq &amp; \nabla J\left(\theta^t\right)\left(\theta^t-\theta^*\right) &amp; \text { (Convexity) } \\</p>
 <p>&#x3D; &amp; \frac{1}{\eta}\left(\theta^t-\theta^{t+1}\right)^{\mathrm{T}}\left(\theta^t-\theta^*\right)  &amp; \text { (Definition of GD) } \\</p>
-<p>&#x3D;&amp; \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^<em>\right\|^2+\left\|\theta^{t+1}-\theta^t\right\|^2-\left\|\theta^{t+1}-\theta^</em>\right\|^2\right) &amp; \text { (Properties of Norm) } \\<br>&#x3D; &amp; \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^<em>\right\|^2-\left\|\theta^{t+1}-\theta^</em>\right\|^2\right)+\frac{\eta}{2}\left\|\nabla J\left(\theta^t\right)\right\|^2 &amp; \text { (Definition of GD) } \\</p>
-<p>\leq &amp;\frac{1}{2 \eta}\left(\left\|\theta^t-\theta^<em>\right\|^2-\left\|\theta^{t+1}-\theta^</em>\right\|^2\right)+\frac{\eta}{2} L^2 &amp;  \text { (Lipchitz Property) }<br>\end{aligned}<br>$$</p>
+<p>&#x3D;&amp; \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^*\right\|^2+\left\|\theta^{t+1}-\theta^t\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right) &amp; \text { (Properties of Norm) } \\<br>&#x3D; &amp; \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^*\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right)+\frac{\eta}{2}\left\|\nabla J\left(\theta^t\right)\right\|^2 &amp; \text { (Definition of GD) } \\</p>
+<p>\leq &amp;\frac{1}{2 \eta}\left(\left\|\theta^t-\theta^*\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right)+\frac{\eta}{2} L^2 &amp;  \text { (Lipchitz Property) }<br>\end{aligned}<br>$$</p>
 <ul>
 <li>From previous computation, we get the following inequality for every step $t$ :</li>
 </ul>
-<p>$$<br>J\left(\theta^t\right)-J\left(\theta^<em>\right) \leq \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^</em>\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right)+\frac{\eta}{2} L^2<br>$$</p>
+<p>$$<br>J\left(\theta^t\right)-J\left(\theta^*\right) \leq \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^*\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right)+\frac{\eta}{2} L^2<br>$$</p>
 <ul>
 <li>Recall $\max _{\theta, \theta^{\prime}}\left(\left\|\theta-\theta^{\prime}\right\|\right) \leq R$. Assume we update parameters for $T$ steps. We add all equations for all $t \in\{0,1, \ldots, T-1\}$ :</li>
 </ul>
-<p>$$<br>\begin{aligned}<br>&amp; \sum_t\left(J\left(\theta^t\right)-J\left(\theta^<em>\right)\right) \leq \frac{1}{2 \eta}\left(\left\|\theta^0-\theta_</em>^<em>\right\|^2-\left\|\theta^T-\theta^</em>\right\|^2\right)+\frac{\eta L^2 T}{2} \\<br>&amp; \frac{1}{T} \sum_t J\left(\theta^t\right)-J\left(\theta^<em>\right) \leq \frac{1}{2 \eta T}\left(R^2+0\right)+\frac{\eta L^2}{2} \\<br>&amp; \frac{1}{T} \sum_t J\left(\theta^t\right)-J\left(\theta^</em>\right) \leq \frac{R^2}{2 \eta T}+\frac{\eta L^2}{2}<br>\end{aligned}<br>$$</p>
+<p>$$<br>\begin{aligned}<br>&amp; \sum_t\left(J\left(\theta^t\right)-J\left(\theta^*\right)\right) \leq \frac{1}{2 \eta}\left(\left\|\theta^0-\theta_*^*\right\|^2-\left\|\theta^T-\theta^*\right\|^2\right)+\frac{\eta L^2 T}{2} \\<br>&amp; \frac{1}{T} \sum_t J\left(\theta^t\right)-J\left(\theta^*\right) \leq \frac{1}{2 \eta T}\left(R^2+0\right)+\frac{\eta L^2}{2} \\<br>&amp; \frac{1}{T} \sum_t J\left(\theta^t\right)-J\left(\theta^*\right) \leq \frac{R^2}{2 \eta T}+\frac{\eta L^2}{2}<br>\end{aligned}<br>$$</p>
 <ul>
 <li>let $\eta &#x3D; \frac{R}{L\sqrt{T}}$:<br>$$<br>\frac{1}{T} \sum_t J\left(\theta^t\right)-J\left(\theta^*\right) \leq \frac{L}{R} \sqrt{T}<br>$$</li>
 </ul>
@@ -555,7 +555,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-4/" data-id="cmc92fnp50004zcva2qmr2nu3" data-title="Deep Learning Lecture-4" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-4/" data-id="cmc92p3l80007isva19pafc38" data-title="Deep Learning Lecture-4" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -722,7 +722,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-5/" data-id="cmc92fnp60005zcva0qir9va9" data-title="Deep Learning Lecture-5" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-5/" data-id="cmc92p3l80009isva9kv227h7" data-title="Deep Learning Lecture-5" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -937,7 +937,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-6/" data-id="cmc92fnp70008zcvahod0hojb" data-title="Deep Learning Lecture-6" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-6/" data-id="cmc92p3l9000bisvah0l90p0l" data-title="Deep Learning Lecture-6" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1153,7 +1153,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-7/" data-id="cmc92fnp7000azcvaeacghqqm" data-title="Deep Learning Lecture-7" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-7/" data-id="cmc92p3l9000disvab7z4hown" data-title="Deep Learning Lecture-7" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1241,7 +1241,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-8/" data-id="cmc92fnp8000dzcvaajvcd7in" data-title="Deep Learning Lecture-8" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-8/" data-id="cmc92p3l9000fisva9l0o9dgq" data-title="Deep Learning Lecture-8" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
