@@ -14,7 +14,7 @@
 <meta property="og:description" content="OptimizationObjective Function$$\arg \min \mathcal{O(D,\theta)}&#x3D;  \sum_{i&#x3D;1}^{N} L(y_i, f(x_i,\theta)) + \Omega(\theta)$$上述目标可以可视化为以$\theta$为横坐标、$\mathcal{O}$为纵坐标的函数图像，我们的目标是找到函数图像的最低点。这是一个">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-23T13:59:55.194Z">
+<meta property="article:modified_time" content="2025-06-23T14:17:05.156Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="DeepLearning">
 <meta name="twitter:card" content="summary">
@@ -131,11 +131,7 @@
 <h4 id="Convergence-Rate"><a href="#Convergence-Rate" class="headerlink" title="Convergence Rate"></a>Convergence Rate</h4><ul>
 <li>We assume that $J(\theta)$ is convex, differentiable and Lipchitz by constant $L$. And domain of $\theta$ is bounded by radius $R$. With gradient descent update:<br>$$<br>\theta^{t+1}&#x3D;\theta^t-\eta \nabla J\left(\theta^t\right)<br>$$</li>
 </ul>
-<p>$$<br>\begin{aligned}<br>&amp;J\left(\theta^t\right)-J\left(\theta^*\right)  &amp; \text { (Gap btw minimum value } \left.J\left(\theta^*\right)\right) \\</p>
-<p>\leq &amp; \nabla J\left(\theta^t\right)\left(\theta^t-\theta^*\right) &amp; \text { (Convexity) } \\</p>
-<p>&#x3D; &amp; \frac{1}{\eta}\left(\theta^t-\theta^{t+1}\right)^{\mathrm{T}}\left(\theta^t-\theta^*\right)  &amp; \text { (Definition of GD) } \\</p>
-<p>&#x3D;&amp; \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^*\right\|^2+\left\|\theta^{t+1}-\theta^t\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right) &amp; \text { (Properties of Norm) } \\<br>&#x3D; &amp; \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^*\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right)+\frac{\eta}{2}\left\|\nabla J\left(\theta^t\right)\right\|^2 &amp; \text { (Definition of GD) } \\</p>
-<p>\leq &amp;\frac{1}{2 \eta}\left(\left\|\theta^t-\theta^*\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right)+\frac{\eta}{2} L^2 &amp;  \text { (Lipchitz Property) }<br>\end{aligned}<br>$$</p>
+<p>$$<br>\begin{aligned}<br>&amp;J\left(\theta^t\right)-J\left(\theta^*\right)  &amp; \text { (Gap btw minimum value } \left.J\left(\theta^*\right)\right) \\<br>\leq &amp; \nabla J\left(\theta^t\right)\left(\theta^t-\theta^*\right) &amp; \text { (Convexity) } \\<br>&#x3D; &amp; \frac{1}{\eta}\left(\theta^t-\theta^{t+1}\right)^{\mathrm{T}}\left(\theta^t-\theta^*\right)  &amp; \text { (Definition of GD) } \\<br>&#x3D;&amp; \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^*\right\|^2+\left\|\theta^{t+1}-\theta^t\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right) &amp; \text { (Properties of Norm) } \\<br>&#x3D; &amp; \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^*\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right)+\frac{\eta}{2}\left\|\nabla J\left(\theta^t\right)\right\|^2 &amp; \text { (Definition of GD) } \\<br>\leq &amp;\frac{1}{2 \eta}\left(\left\|\theta^t-\theta^*\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right)+\frac{\eta}{2} L^2 &amp;  \text { (Lipchitz Property) }<br>\end{aligned}<br>$$</p>
 <ul>
 <li>From previous computation, we get the following inequality for every step $t$ :</li>
 </ul>
@@ -182,7 +178,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-4/" data-id="cmc96d4it0001vsva6d9gffwg" data-title="Deep Learning Lecture-4" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-4/" data-id="cmc96kk0v000104va0uwlb23n" data-title="Deep Learning Lecture-4" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -194,19 +190,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2025/06/21/Deep%20Learning%20Lecture-2/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2025/06/21/Deep%20Learning%20Lecture-1/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          Deep Learning Lecture-2
+          Deep Learning Lecture-1
         
       </div>
     </a>
   
   
-    <a href="/2025/06/21/Deep%20Learning%20Lecture-5/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2025/06/21/Deep%20Learning%20Lecture-2/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Deep Learning Lecture-5</div>
+      <div class="article-nav-title">Deep Learning Lecture-2</div>
     </a>
   
 </nav>
@@ -258,7 +254,7 @@
       <ul>
         
           <li>
-            <a href="/2025/06/21/Deep%20Learning%20Lecture-2/">Deep Learning Lecture-2</a>
+            <a href="/2025/06/21/Deep%20Learning%20Lecture-1/">Deep Learning Lecture-1</a>
           </li>
         
           <li>
@@ -266,15 +262,15 @@
           </li>
         
           <li>
+            <a href="/2025/06/21/Deep%20Learning%20Lecture-2/">Deep Learning Lecture-2</a>
+          </li>
+        
+          <li>
+            <a href="/2025/06/21/Deep%20Learning%20Lecture-3/">Deep Learning Lecture-3</a>
+          </li>
+        
+          <li>
             <a href="/2025/06/21/Deep%20Learning%20Lecture-5/">Deep Learning Lecture-5</a>
-          </li>
-        
-          <li>
-            <a href="/2025/06/21/Deep%20Learning%20Lecture-6/">Deep Learning Lecture-6</a>
-          </li>
-        
-          <li>
-            <a href="/2025/06/21/Deep%20Learning%20Lecture-1/">Deep Learning Lecture-1</a>
           </li>
         
       </ul>
