@@ -14,7 +14,7 @@
 <meta property="og:description" content="OptimizationObjective Function$$\arg \min \mathcal{O(D,\theta)}&#x3D;  \sum_{i&#x3D;1}^{N} L(y_i, f(x_i,\theta)) + \Omega(\theta)$$上述目标可以可视化为以$\theta$为横坐标、$\mathcal{O}$为纵坐标的函数图像，我们的目标是找到函数图像的最低点。这是一个">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-23T13:49:37.161Z">
+<meta property="article:modified_time" content="2025-06-23T13:59:55.194Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="DeepLearning">
 <meta name="twitter:card" content="summary">
@@ -131,10 +131,10 @@
 <h4 id="Convergence-Rate"><a href="#Convergence-Rate" class="headerlink" title="Convergence Rate"></a>Convergence Rate</h4><ul>
 <li>We assume that $J(\theta)$ is convex, differentiable and Lipchitz by constant $L$. And domain of $\theta$ is bounded by radius $R$. With gradient descent update:<br>$$<br>\theta^{t+1}&#x3D;\theta^t-\eta \nabla J\left(\theta^t\right)<br>$$</li>
 </ul>
-<p>$$<br>\begin{aligned}<br>&amp;J\left(\theta^t\right)-J\left(\theta^*\right)  &amp; \text { (Gap btw minimum value } \left.J\left(\theta^*\right)\right) __DOUBLE_BACKSLASH__</p>
-<p>\leq &amp; \nabla J\left(\theta^t\right)\left(\theta^t-\theta^*\right) &amp; \text { (Convexity) } __DOUBLE_BACKSLASH__</p>
-<p>&#x3D; &amp; \frac{1}{\eta}\left(\theta^t-\theta^{t+1}\right)^{\mathrm{T}}\left(\theta^t-\theta^*\right)  &amp; \text { (Definition of GD) } __DOUBLE_BACKSLASH__</p>
-<p>&#x3D;&amp; \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^*\right\|^2+\left\|\theta^{t+1}-\theta^t\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right) &amp; \text { (Properties of Norm) } __DOUBLE_BACKSLASH__<br>&#x3D; &amp; \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^*\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right)+\frac{\eta}{2}\left\|\nabla J\left(\theta^t\right)\right\|^2 &amp; \text { (Definition of GD) } __DOUBLE_BACKSLASH__</p>
+<p>$$<br>\begin{aligned}<br>&amp;J\left(\theta^t\right)-J\left(\theta^*\right)  &amp; \text { (Gap btw minimum value } \left.J\left(\theta^*\right)\right) \\</p>
+<p>\leq &amp; \nabla J\left(\theta^t\right)\left(\theta^t-\theta^*\right) &amp; \text { (Convexity) } \\</p>
+<p>&#x3D; &amp; \frac{1}{\eta}\left(\theta^t-\theta^{t+1}\right)^{\mathrm{T}}\left(\theta^t-\theta^*\right)  &amp; \text { (Definition of GD) } \\</p>
+<p>&#x3D;&amp; \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^*\right\|^2+\left\|\theta^{t+1}-\theta^t\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right) &amp; \text { (Properties of Norm) } \\<br>&#x3D; &amp; \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^*\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right)+\frac{\eta}{2}\left\|\nabla J\left(\theta^t\right)\right\|^2 &amp; \text { (Definition of GD) } \\</p>
 <p>\leq &amp;\frac{1}{2 \eta}\left(\left\|\theta^t-\theta^*\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right)+\frac{\eta}{2} L^2 &amp;  \text { (Lipchitz Property) }<br>\end{aligned}<br>$$</p>
 <ul>
 <li>From previous computation, we get the following inequality for every step $t$ :</li>
@@ -143,7 +143,7 @@
 <ul>
 <li>Recall $\max _{\theta, \theta^{\prime}}\left(\left\|\theta-\theta^{\prime}\right\|\right) \leq R$. Assume we update parameters for $T$ steps. We add all equations for all $t \in\{0,1, \ldots, T-1\}$ :</li>
 </ul>
-<p>$$<br>\begin{aligned}<br>&amp; \sum_t\left(J\left(\theta^t\right)-J\left(\theta^*\right)\right) \leq \frac{1}{2 \eta}\left(\left\|\theta^0-\theta_*^*\right\|^2-\left\|\theta^T-\theta^*\right\|^2\right)+\frac{\eta L^2 T}{2} __DOUBLE_BACKSLASH__<br>&amp; \frac{1}{T} \sum_t J\left(\theta^t\right)-J\left(\theta^*\right) \leq \frac{1}{2 \eta T}\left(R^2+0\right)+\frac{\eta L^2}{2} __DOUBLE_BACKSLASH__<br>&amp; \frac{1}{T} \sum_t J\left(\theta^t\right)-J\left(\theta^*\right) \leq \frac{R^2}{2 \eta T}+\frac{\eta L^2}{2}<br>\end{aligned}<br>$$</p>
+<p>$$<br>\begin{aligned}<br>&amp; \sum_t\left(J\left(\theta^t\right)-J\left(\theta^*\right)\right) \leq \frac{1}{2 \eta}\left(\left\|\theta^0-\theta_*^*\right\|^2-\left\|\theta^T-\theta^*\right\|^2\right)+\frac{\eta L^2 T}{2} \\<br>&amp; \frac{1}{T} \sum_t J\left(\theta^t\right)-J\left(\theta^*\right) \leq \frac{1}{2 \eta T}\left(R^2+0\right)+\frac{\eta L^2}{2} \\<br>&amp; \frac{1}{T} \sum_t J\left(\theta^t\right)-J\left(\theta^*\right) \leq \frac{R^2}{2 \eta T}+\frac{\eta L^2}{2}<br>\end{aligned}<br>$$</p>
 <ul>
 <li>let $\eta &#x3D; \frac{R}{L\sqrt{T}}$:<br>$$<br>\frac{1}{T} \sum_t J\left(\theta^t\right)-J\left(\theta^*\right) \leq \frac{L}{R} \sqrt{T}<br>$$</li>
 </ul>
@@ -169,20 +169,20 @@
 <p>对于下面的更新公式：</p>
 <p>$$<br>\theta_{ij} &#x3D; \theta_{ij} - \eta \Delta<br>$$<br>在高维中，地形是相对而言较为崎岖的，这里的学习率一般是比较小的，否则容易发散。在接近于局部极值的时候。较大的学习率学习的是较为粗糙的特征，较小的学习率学习的是较为细致的特征。</p>
 <p>$$<br>\Delta &#x3D; \beta \Delta - \eta \frac{\partial J(\theta)}{\partial \theta_{ij}}<br>$$<br>$\beta$是动量参数，可以理解为之前的梯度的累积。</p>
-<p><strong>Nesterov Momentum:</strong><br>$$<br>\begin{aligned}<br>&amp;\tilde{\theta}^{t} &#x3D; \theta^{t} - \beta \Delta^{t-1} __DOUBLE_BACKSLASH__<br>&amp;\Delta^{t} &#x3D; \beta \Delta^{t-1} + (1-\beta)\nabla J^t (\tilde{\theta}^t)__DOUBLE_BACKSLASH__<br>&amp;\theta^{t+1} &#x3D; \theta^t - \eta \Delta^t__DOUBLE_BACKSLASH__<br>\end{aligned}<br>$$<br>在深度学习的实现中使用的一般是这种。走动量的方向可以减少震荡，同时可以加速收敛。当到达了比较好的局部极值时候又会在这个值的附近抖动。<br>超参数：$\beta$，一般而言$\beta$取0.9是比较好的，越大的值越容易进行震荡。<br>学习率0.01、0.003、0.001一般按照指数变化。</p>
+<p><strong>Nesterov Momentum:</strong><br>$$<br>\begin{aligned}<br>&amp;\tilde{\theta}^{t} &#x3D; \theta^{t} - \beta \Delta^{t-1} \\<br>&amp;\Delta^{t} &#x3D; \beta \Delta^{t-1} + (1-\beta)\nabla J^t (\tilde{\theta}^t)\\<br>&amp;\theta^{t+1} &#x3D; \theta^t - \eta \Delta^t\\<br>\end{aligned}<br>$$<br>在深度学习的实现中使用的一般是这种。走动量的方向可以减少震荡，同时可以加速收敛。当到达了比较好的局部极值时候又会在这个值的附近抖动。<br>超参数：$\beta$，一般而言$\beta$取0.9是比较好的，越大的值越容易进行震荡。<br>学习率0.01、0.003、0.001一般按照指数变化。</p>
 <p>是在每次更新完$\theta$之后（进行试探之后才进行计算）才进行梯度的计算，可以避免一些<em>overshoot</em>。核心的思想为多获取一些二次的信息。</p>
 <h3 id="Weight-Decay"><a href="#Weight-Decay" class="headerlink" title="Weight Decay"></a><em>Weight Decay</em></h3><p>加入正则项，对于参数的更新进行限制，控制假设空间的大小，可以防止过拟合。但是在深度学习中并不够。</p>
 <p><em>L1 regularization</em><br>$$<br>\Omega(\theta) &#x3D; \lambda \sum_{l&#x3D;1}^{L} \sum_{i&#x3D;1}^{n_l} \sum_{j&#x3D;1}^{n_{l+1}} |\theta_{ij}^{(l)}|<br>$$<br><em>L2 regularization</em><br>$$<br>\Omega(\theta) &#x3D; \lambda \sum_{l&#x3D;1}^{L} \sum_{i&#x3D;1}^{n_l} \sum_{j&#x3D;1}^{n_{l+1}} (\theta_{ij}^{(l)})^2<br>$$</p>
-<h3 id="Adaptive-Learning-Rate"><a href="#Adaptive-Learning-Rate" class="headerlink" title="Adaptive Learning Rate"></a>Adaptive Learning Rate</h3><p>直观理解为在不同的“地形”上需要使用的学习率（步长）是不一样的。对于不同的参数使用不同的学习率。<strong>Adagrad</strong>算法的核心思想为：<br>$$<br>\begin{aligned}<br>&amp;r^t &#x3D; r^{t-1} + \nabla J^t(\theta^t) \odot \nabla J^t(\theta^t)__DOUBLE_BACKSLASH__<br>&amp;h^t &#x3D; \frac{1}{\sqrt{r^t} + \delta} __DOUBLE_BACKSLASH__<br>&amp;\Delta^t &#x3D; h^t \odot \nabla J^t(\theta^t)__DOUBLE_BACKSLASH__<br>&amp;\theta^{t+1} &#x3D; \theta^t - \eta \Delta^t<br>\end{aligned}<br>$$<br><em>上述公式中的第二行为逐元素操作</em><br>其中$\odot$为对应元素相乘，$\delta$为一个很小的数，防止分母为0。这样可以保证在不同的地形上使用不同的学习率。<strong>本质上为探索&quot;地形图&quot;</strong>。但是Adagrad的问题在于随着迭代次数的增加，分母会变得越来越大，导致学习率会变得越来越小，最终会导致学习率为0，这样就不再更新了。</p>
-<p><strong>RMSprop</strong>算法的核心思想为：对Adagrad的分母进行指数滑动平均：<br>$$<br>\begin{aligned}<br>&amp;r^t &#x3D; \rho r^{t-1} + (1-\rho)\nabla J^t(\theta^t) \odot \nabla J^t(\theta^t)__DOUBLE_BACKSLASH__<br>&amp;h^t &#x3D; \frac{1}{\sqrt{r^t} + \delta} __DOUBLE_BACKSLASH__<br>&amp;\Delta^t &#x3D; h^t \odot \nabla J^t(\theta^t)__DOUBLE_BACKSLASH__<br>&amp;\theta^{t+1} &#x3D; \theta^t - \eta \Delta^t<br>\end{aligned}<br>$$</p>
-<p><strong>Adam</strong>算法的核心思想为：结合了SGD with Momentum和RMSprop：<br>$$<br>\begin{aligned}<br>&amp; r^t &#x3D; \rho r^{t-1} + (1-\rho)\nabla J^t(\theta^t) \odot \nabla J^t(\theta^t)__DOUBLE_BACKSLASH__<br>&amp; h^t &#x3D; \frac{1}{\sqrt{r^t} + \delta} __DOUBLE_BACKSLASH__<br>&amp; s^t &#x3D; \varepsilon s^{t-1} + (1-\epsilon)\nabla J^t(\theta^t)__DOUBLE_BACKSLASH__<br>&amp; \Delta^t &#x3D; h^t \odot s^t __DOUBLE_BACKSLASH__<br>&amp; \theta^{t+1} &#x3D; \theta^t - \eta \Delta^t<br>\end{aligned}<br>$$<br>实际使用的参数为$\rho&#x3D;0.9$，$\varepsilon &#x3D; 0.9$，$\rho &#x3D; 0.999$<br>对于学习率的下降，还是要使用对应的算法，对于实际使用的算法，还需要对$r$、$s$进行无偏修正。</p>
+<h3 id="Adaptive-Learning-Rate"><a href="#Adaptive-Learning-Rate" class="headerlink" title="Adaptive Learning Rate"></a>Adaptive Learning Rate</h3><p>直观理解为在不同的“地形”上需要使用的学习率（步长）是不一样的。对于不同的参数使用不同的学习率。<strong>Adagrad</strong>算法的核心思想为：<br>$$<br>\begin{aligned}<br>&amp;r^t &#x3D; r^{t-1} + \nabla J^t(\theta^t) \odot \nabla J^t(\theta^t)\\<br>&amp;h^t &#x3D; \frac{1}{\sqrt{r^t} + \delta} \\<br>&amp;\Delta^t &#x3D; h^t \odot \nabla J^t(\theta^t)\\<br>&amp;\theta^{t+1} &#x3D; \theta^t - \eta \Delta^t<br>\end{aligned}<br>$$<br><em>上述公式中的第二行为逐元素操作</em><br>其中$\odot$为对应元素相乘，$\delta$为一个很小的数，防止分母为0。这样可以保证在不同的地形上使用不同的学习率。<strong>本质上为探索&quot;地形图&quot;</strong>。但是Adagrad的问题在于随着迭代次数的增加，分母会变得越来越大，导致学习率会变得越来越小，最终会导致学习率为0，这样就不再更新了。</p>
+<p><strong>RMSprop</strong>算法的核心思想为：对Adagrad的分母进行指数滑动平均：<br>$$<br>\begin{aligned}<br>&amp;r^t &#x3D; \rho r^{t-1} + (1-\rho)\nabla J^t(\theta^t) \odot \nabla J^t(\theta^t)\\<br>&amp;h^t &#x3D; \frac{1}{\sqrt{r^t} + \delta} \\<br>&amp;\Delta^t &#x3D; h^t \odot \nabla J^t(\theta^t)\\<br>&amp;\theta^{t+1} &#x3D; \theta^t - \eta \Delta^t<br>\end{aligned}<br>$$</p>
+<p><strong>Adam</strong>算法的核心思想为：结合了SGD with Momentum和RMSprop：<br>$$<br>\begin{aligned}<br>&amp; r^t &#x3D; \rho r^{t-1} + (1-\rho)\nabla J^t(\theta^t) \odot \nabla J^t(\theta^t)\\<br>&amp; h^t &#x3D; \frac{1}{\sqrt{r^t} + \delta} \\<br>&amp; s^t &#x3D; \varepsilon s^{t-1} + (1-\epsilon)\nabla J^t(\theta^t)\\<br>&amp; \Delta^t &#x3D; h^t \odot s^t \\<br>&amp; \theta^{t+1} &#x3D; \theta^t - \eta \Delta^t<br>\end{aligned}<br>$$<br>实际使用的参数为$\rho&#x3D;0.9$，$\varepsilon &#x3D; 0.9$，$\rho &#x3D; 0.999$<br>对于学习率的下降，还是要使用对应的算法，对于实际使用的算法，还需要对$r$、$s$进行无偏修正。</p>
 <p>Nadam算法为Adam算法的变种，对于SGD with Momentum的更新进行了修正。</p>
 <p>调参一般而言是，对于一个模型找到对于其最好的优化器。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-4/" data-id="cmc95lx0x0005rovagzdkhb19" data-title="Deep Learning Lecture-4" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-4/" data-id="cmc95yidh0008xova7hdq8imw" data-title="Deep Learning Lecture-4" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -204,9 +204,9 @@
     </a>
   
   
-    <a href="/2025/06/21/Deep%20Learning%20Lecture-5/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2025/06/21/Deep%20Learning%20Lecture-7/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Deep Learning Lecture-5</div>
+      <div class="article-nav-title">Deep Learning Lecture-7</div>
     </a>
   
 </nav>
@@ -270,11 +270,11 @@
           </li>
         
           <li>
-            <a href="/2025/06/21/Deep%20Learning%20Lecture-6/">Deep Learning Lecture-6</a>
+            <a href="/2025/06/21/Deep%20Learning%20Lecture-5/">Deep Learning Lecture-5</a>
           </li>
         
           <li>
-            <a href="/2025/06/21/Deep%20Learning%20Lecture-4/">Deep Learning Lecture-4</a>
+            <a href="/2025/06/21/Deep%20Learning%20Lecture-6/">Deep Learning Lecture-6</a>
           </li>
         
       </ul>

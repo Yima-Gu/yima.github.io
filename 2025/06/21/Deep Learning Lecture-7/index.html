@@ -14,7 +14,7 @@
 <meta property="og:description" content="Generative Model数据分布是生成模型的核心。生成模型的目标是学习数据的分布，然后生成新的数据。目标是学习数据的分布，然后生成新的数据。对生成模型的评价是通过生成的数据的质量来评价的，生成的数据越接近真实数据，生成模型的质量越好。$$\theta^* &#x3D; \arg\max_{\theta} \mathbb{E}_{x \sim p_{data}} \log p_{model">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-23T13:49:37.181Z">
+<meta property="article:modified_time" content="2025-06-23T13:59:55.205Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="DeepLearning">
 <meta name="twitter:card" content="summary">
@@ -180,7 +180,7 @@
 </ul>
 <h5 id="Wasserstein-Distance"><a href="#Wasserstein-Distance" class="headerlink" title="Wasserstein Distance"></a>Wasserstein Distance</h5><p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%B2%83%E7%91%9F%E6%96%AF%E5%9D%A6%E5%BA%A6%E9%87%8F">沃瑟斯坦度量 - 维基百科，自由的百科全书</a></p>
 <p>有可能统计距离是不是一个好的距离度量。Wasserstein距离是一个好的距离度量，用推土机距离来度量两个分布的距离。</p>
-<p>$$ c(x,y) \mapsto [0, \infty), $$<br>表示从点$x$运输质量到点$y$的代价。一个从$\mu$到$\nu$的运输方案可以用函数$\gamma(x,y)$来描述，该函数表明从$x$移动到$y$的质量。一个运输方案$\gamma(x,y)$必须满足以下性质：<br>$$<br>\begin{aligned}<br>\int \gamma(x,y) \, \mathrm{d}y &#x3D; \mu(x), __DOUBLE_BACKSLASH__<br>\int \gamma(x,y) \, \mathrm{d}x &#x3D; \nu(y),<br>\end{aligned}<br>$$</p>
+<p>$$ c(x,y) \mapsto [0, \infty), $$<br>表示从点$x$运输质量到点$y$的代价。一个从$\mu$到$\nu$的运输方案可以用函数$\gamma(x,y)$来描述，该函数表明从$x$移动到$y$的质量。一个运输方案$\gamma(x,y)$必须满足以下性质：<br>$$<br>\begin{aligned}<br>\int \gamma(x,y) \, \mathrm{d}y &#x3D; \mu(x), \\<br>\int \gamma(x,y) \, \mathrm{d}x &#x3D; \nu(y),<br>\end{aligned}<br>$$</p>
 <p>前者表示从某一点$x$移到其他所有点的土堆总质量必须等于最初该点$x$上的土堆质量，后者则表示从所有点移到某一点$y$的土堆总质量必须等于最终该点$y$上的土堆质量。<br>$$<br>\iint c(x,y) \gamma(x,y) \, \mathrm{d}x \, \mathrm{d}y &#x3D; \int c(x,y) \, \mathrm{d}\gamma(x,y).<br>$$</p>
 <p>方案$\gamma$并不是唯一的，所有可能的运输方案中代价最低的方案即为最优运输方案。最优运输方案的代价为：</p>
 <p>$$<br>C &#x3D; \inf_{\gamma \in \Gamma(\mu,\nu)} \int c(x,y) \, \mathrm{d}\gamma(x,y).<br>$$</p>
@@ -252,7 +252,7 @@
 <h3 id="Diffusion-Probabilistic-Models"><a href="#Diffusion-Probabilistic-Models" class="headerlink" title="Diffusion Probabilistic Models"></a>Diffusion Probabilistic Models</h3><h4 id="Denoising-Diffusion-Probabilistic-Models"><a href="#Denoising-Diffusion-Probabilistic-Models" class="headerlink" title="Denoising Diffusion Probabilistic Models"></a>Denoising Diffusion Probabilistic Models</h4><p>Diffusion模型是通过对数据进行逐步添加噪声来训练模型的。通过对数据进行逐步添加噪声，然后再通过一个网络来进行去噪声的操作。这样可以生成新的数据。</p>
 <p>Markovian Process: 逐步添加噪声的过程，通常是一个高斯分布的过程。<br>$$<br>q(x_t | x_{t-1}) &#x3D; \mathcal{N}(x_t; \sqrt{1-\beta_t}  x_{t-1}, \beta_t I)<br>$$<br>联合分布：<br>$$<br>q(x_{1:T} | x_0) &#x3D; \prod_{t&#x3D;1}^{T} q(x_t | x_{t-1})<br>$$</p>
 <p>重参数化表达：<br>$$<br>x_t &#x3D; \sqrt{1-\beta_t} x_{t-1} + \sqrt{\beta_t} \epsilon \quad \epsilon \sim \mathcal{N}(0, I)<br>$$</p>
-<h5 id="Diffusion-Kernel"><a href="#Diffusion-Kernel" class="headerlink" title="Diffusion Kernel"></a>Diffusion Kernel</h5><p>$$<br>\begin{aligned}<br>x_t &amp; &#x3D; \sqrt{1-\beta_t} x_{t-1} + \sqrt{\beta_t} \epsilon __DOUBLE_BACKSLASH__<br>&amp;&#x3D; \sqrt{\alpha_t} x_{t-1} + \sqrt{1-\alpha_t} \epsilon __DOUBLE_BACKSLASH__<br>&amp;&#x3D; \sqrt{\alpha_t \alpha_{t-1}} x_{t-2} + \sqrt{1-\alpha_t} \epsilon + \sqrt{\alpha_t} \sqrt{1-\alpha_{t-1}} \epsilon&#39; __DOUBLE_BACKSLASH__<br>&amp; &#x3D; \sqrt{\alpha_t \alpha_{t-1}} x_{t-2} + \sqrt{1 -  \alpha_t \alpha_{t-1}} \epsilon __DOUBLE_BACKSLASH__<br>&amp; \dots __DOUBLE_BACKSLASH__<br>&amp; &#x3D; \sqrt{\overline{\alpha_t}} x_0 + \sqrt{1 - \overline{\alpha_t}} \epsilon<br>\end{aligned}<br>$$</p>
+<h5 id="Diffusion-Kernel"><a href="#Diffusion-Kernel" class="headerlink" title="Diffusion Kernel"></a>Diffusion Kernel</h5><p>$$<br>\begin{aligned}<br>x_t &amp; &#x3D; \sqrt{1-\beta_t} x_{t-1} + \sqrt{\beta_t} \epsilon \\<br>&amp;&#x3D; \sqrt{\alpha_t} x_{t-1} + \sqrt{1-\alpha_t} \epsilon \\<br>&amp;&#x3D; \sqrt{\alpha_t \alpha_{t-1}} x_{t-2} + \sqrt{1-\alpha_t} \epsilon + \sqrt{\alpha_t} \sqrt{1-\alpha_{t-1}} \epsilon&#39; \\<br>&amp; &#x3D; \sqrt{\alpha_t \alpha_{t-1}} x_{t-2} + \sqrt{1 -  \alpha_t \alpha_{t-1}} \epsilon \\<br>&amp; \dots \\<br>&amp; &#x3D; \sqrt{\overline{\alpha_t}} x_0 + \sqrt{1 - \overline{\alpha_t}} \epsilon<br>\end{aligned}<br>$$</p>
 <ul>
 <li>其中 $\overline{\alpha_t} &#x3D; \prod_{s&#x3D;1}^{t} \alpha_s$</li>
 </ul>
@@ -297,7 +297,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-7/" data-id="cmc95lx0z000frovad6zzf4bh" data-title="Deep Learning Lecture-7" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-7/" data-id="cmc95yidi000axova1irvga45" data-title="Deep Learning Lecture-7" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -309,15 +309,20 @@
     
 <nav id="article-nav">
   
-    <a href="/2025/06/21/Deep%20Learning%20Lecture-5/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2025/06/21/Deep%20Learning%20Lecture-4/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          Deep Learning Lecture-5
+          Deep Learning Lecture-4
         
       </div>
     </a>
   
+  
+    <a href="/2025/06/21/Deep%20Learning%20Lecture-8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Deep Learning Lecture-8</div>
+    </a>
   
 </nav>
 
@@ -380,11 +385,11 @@
           </li>
         
           <li>
-            <a href="/2025/06/21/Deep%20Learning%20Lecture-6/">Deep Learning Lecture-6</a>
+            <a href="/2025/06/21/Deep%20Learning%20Lecture-5/">Deep Learning Lecture-5</a>
           </li>
         
           <li>
-            <a href="/2025/06/21/Deep%20Learning%20Lecture-4/">Deep Learning Lecture-4</a>
+            <a href="/2025/06/21/Deep%20Learning%20Lecture-6/">Deep Learning Lecture-6</a>
           </li>
         
       </ul>
