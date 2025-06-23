@@ -14,7 +14,7 @@
 <meta property="og:description" content="Recurrent NetworkSequence Model序列建模任务是指对一个序列的输入进行建模，比如文本、音频、视频等。序列模型的输入和输出都是序列，比如机器翻译、语音识别、视频分类等任务。重要的是捕捉序列中的上下文。 Basic PrincipleLocal DependencyLocal Dependency：对于一个序列中的每一个元素，它的预测是依赖于它的前面的元素的。这种依赖关系">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-22T09:29:26.225Z">
+<meta property="article:modified_time" content="2025-06-23T11:32:40.298Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="DeepLearning">
 <meta name="twitter:card" content="summary">
@@ -146,7 +146,7 @@
 <h5 id="Sequence-to-Sequence"><a href="#Sequence-to-Sequence" class="headerlink" title="Sequence to Sequence"></a>Sequence to Sequence</h5><p>输入和输出都是序列，输入和输出的长度不一定相同。比如机器翻译、语音识别等任务。这个任务可以分为两个部分：编码器和解码器。编码器将输入序列编码到一个向量中，解码器将这个向量解码到输出序列中。</p>
 <p>![[Pasted image 20250321110238.png]]</p>
 <p><em>为什么上述序列中的参数$W_1$和$W_2$是不一样的？</em></p>
-<p>首先将输入变量${x_t}$编码到状态变量${h_t}$中，然后再将状态变量${h_t}$解码到输出变量${y_t}$中。编码器是没有loss function的，因为输入和输出是异构的。解码器接受的输入是编码器的输出，解码器的输出是一个概率分布。解码器的loss function是交叉熵损失函数。</p>
+<p>首先将输入变量$\{x_t\}$编码到状态变量$\{h_t\}$中，然后再将状态变量$\{h_t\}$解码到输出变量$\{y_t\}$中。编码器是没有loss function的，因为输入和输出是异构的。解码器接受的输入是编码器的输出，解码器的输出是一个概率分布。解码器的loss function是交叉熵损失函数。</p>
 <p><strong>机器翻译任务中的挑战</strong>：</p>
 <ul>
 <li>输入和输出是异构的</li>
@@ -164,7 +164,7 @@
 <h3 id="Backpropagation-Through-Time"><a href="#Backpropagation-Through-Time" class="headerlink" title="Backpropagation Through Time"></a>Backpropagation Through Time</h3><p>![[Pasted image 20250321133148.png]]</p>
 <p>$$<br>\frac{\partial L}{\partial U}  &#x3D; \sum_{t&#x3D;0}^T \frac{\partial L_{t}}{\partial U} &#x3D; \sum_{t&#x3D;0}^{T} \sum_{s&#x3D;0}^t \frac{\partial L_{t}}{\partial y_t} \frac{\partial y_t}{\partial h_t}  \frac{\partial h_t}{\partial h_s}\frac{\partial h_s}{\partial U}<br>$$<br>前一个求和的意义是对于损失函数的各个部分求和，后面的求和式是对于$h_t$的前面的每一个可能的链求和。<br>其中：<br>$$<br>\frac{\partial h_t}{\partial h_s} &#x3D; \prod_{i&#x3D;s+1}^t \frac{\partial h_i}{\partial h_{i-1}}<br>$$<br>这个式子是一个矩阵乘法，是一个矩阵的连乘。这个矩阵是一个雅可比矩阵。</p>
 <p>![[Pasted image 20250321135457.png]]</p>
-<p>用<em>Cauchy-Schwarz</em>不等式可以证明：<br>$$<br>| \frac{\partial h_t}{\partial h_{t-1}} | \leq | W^T | |diag (f&#39;(h_{t-1}))| \leq \sigma_{max} \gamma<br>$$<br>这里$\sigma_{max}$是矩阵$W$的最大奇异值，$\gamma$是激活函数的导数的最大值。<br>于是：<br>$$<br>| \frac{\partial h_t}{\partial h_{s}} | &#x3D;  \prod_{i&#x3D;s+1}^t | \frac{\partial h_i}{\partial h_{i-1}} | \leq (\sigma_{max} \gamma)^{t-s}<br>$$<br>这个式子说明了梯度消失的问题，梯度消失是指梯度在时间上的指数级衰减。或者梯度爆炸的问题，梯度爆炸是指梯度在时间上的指数级增长。</p>
+<p>用<em>Cauchy-Schwarz</em>不等式可以证明：<br>$$<br>\| \frac{\partial h_t}{\partial h_{t-1}} \| \leq \| W^T \| \|diag (f&#39;(h_{t-1}))\| \leq \sigma_{max} \gamma<br>$$<br>这里$\sigma_{max}$是矩阵$W$的最大奇异值，$\gamma$是激活函数的导数的最大值。<br>于是：<br>$$<br>\| \frac{\partial h_t}{\partial h_{s}} \| &#x3D;  \prod_{i&#x3D;s+1}^t \| \frac{\partial h_i}{\partial h_{i-1}} \| \leq (\sigma_{max} \gamma)^{t-s}<br>$$<br>这个式子说明了梯度消失的问题，梯度消失是指梯度在时间上的指数级衰减。或者梯度爆炸的问题，梯度爆炸是指梯度在时间上的指数级增长。</p>
 <h4 id="Truncated-BPTT"><a href="#Truncated-BPTT" class="headerlink" title="Truncated BPTT"></a>Truncated BPTT</h4><p>![[Pasted image 20250321140454.png]]</p>
 <p>这个方法是将时间上的梯度截断，这样可以减少梯度消失和梯度爆炸的问题。但是这样的方法会导致梯度的估计不准确，因为梯度的估计是基于一个截断的时间窗口的。</p>
 <h4 id="Long-Short-Term-Memory"><a href="#Long-Short-Term-Memory" class="headerlink" title="Long Short-Term Memory"></a>Long Short-Term Memory</h4><blockquote>
@@ -183,8 +183,8 @@
 <h4 id="Layer-Normalization"><a href="#Layer-Normalization" class="headerlink" title="Layer Normalization"></a>Layer Normalization</h4><p>![[Pasted image 20250322202759.png]]</p>
 <p>在CNN中，对于每一个通道的值进行归一化。在这样的每一个通道中计算均值和方差。还是要加入一个平移变量和伸缩变量。</p>
 <p>在RNN中，主要的原因是门控结构是相对于每一个序列而言的，所以应该引入一种新的归一化方法<em>Layer Normalization</em>，应该在每一条样本（一个序列）在每一个时刻经过之后的值在$C$个通道上进行归一化操作。<br>最后得到的结果是：将所有的向量放在以原点为球心的单位球面上。</p>
-<h4 id="Weight-Normalization"><a href="#Weight-Normalization" class="headerlink" title="Weight Normalization"></a>Weight Normalization</h4><p>对于每层的参数$\mathbf{w}$进行重参数化：<br>$$<br>\mathbf{w} &#x3D; \frac{g}{|v|}v<br>$$<br>![[Pasted image 20250322204925.png]]</p>
-<p>对右边的式子$\frac{v}{|v|}$进行优化是更为容易的，重参数化的意思是，在训练和测试的时候使用不同的参数表达形式，这样是更加容易优化的。</p>
+<h4 id="Weight-Normalization"><a href="#Weight-Normalization" class="headerlink" title="Weight Normalization"></a>Weight Normalization</h4><p>对于每层的参数$\mathbf{w}$进行重参数化：<br>$$<br>\mathbf{w} &#x3D; \frac{g}{\|v\|}v<br>$$<br>![[Pasted image 20250322204925.png]]</p>
+<p>对右边的式子$\frac{v}{\|v\|}$进行优化是更为容易的，重参数化的意思是，在训练和测试的时候使用不同的参数表达形式，这样是更加容易优化的。</p>
 <h4 id="Training-Inference-Shift"><a href="#Training-Inference-Shift" class="headerlink" title="Training-Inference Shift"></a>Training-Inference Shift</h4><p>滚动预测：在训练的时候，使用真实的标签进行预测；在测试的时候，使用的是推理得到的值进行预测。这是一个自回归任务。</p>
 <h5 id="Curriculum-Learning"><a href="#Curriculum-Learning" class="headerlink" title="Curriculum Learning"></a>Curriculum Learning</h5><p>在训练的时候，可以先训练一些简单的任务，然后再训练一些复杂的任务。这样可以更好的训练模型。<br>在实际中，可以对所有的样本计算loss，先计算loss较小的样本，然后再计算loss较大的样本。这就是<strong>自步学习</strong>。<br>这里涉及到选择不同的样本顺序的问题。</p>
 <p><em>Scheduled Sampling</em>：在学习刚开始的时候，更多地使用真实的标签进行预测；随着学习的进行，更多地使用模型预测的值进行预测。<strong>是RNN中很重要的技术</strong>。</p>
@@ -220,7 +220,7 @@
 <li>Attention引入relevance的思想，能大大减小参数量</li>
 </ul>
 <h4 id="Hierarchical-Attention"><a href="#Hierarchical-Attention" class="headerlink" title="Hierarchical Attention"></a>Hierarchical Attention</h4><p>先建模词注意力然后再建模句子注意力。</p>
-<h4 id="Global-Attention"><a href="#Global-Attention" class="headerlink" title="Global Attention"></a>Global Attention</h4><p>$$<br>\text{score} &#x3D; \begin{cases}<br>h_t^T \overline{h_s} \<br>h_t^T W_a \overline{h_s} \<br>v_a^T \tanh(W_a[h_t;\overline{h_s}])<br>\end{cases}<br>$$<br>发现上面三种计算方式的效率是差不多的。</p>
+<h4 id="Global-Attention"><a href="#Global-Attention" class="headerlink" title="Global Attention"></a>Global Attention</h4><p>$$<br>\text{score} &#x3D; \begin{cases}<br>h_t^T \overline{h_s} \\<br>h_t^T W_a \overline{h_s} \\<br>v_a^T \tanh(W_a[h_t;\overline{h_s}])<br>\end{cases}<br>$$<br>发现上面三种计算方式的效率是差不多的。</p>
 <p>![[Pasted image 20250323090740.png]]</p>
 <h3 id="Memory"><a href="#Memory" class="headerlink" title="Memory"></a>Memory</h3><h4 id="Human-Memory"><a href="#Human-Memory" class="headerlink" title="Human Memory"></a>Human Memory</h4><ul>
 <li>Sensory Memory<ul>
@@ -244,7 +244,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-5/" data-id="cmc8xsqki0009novaafrceczb" data-title="Deep Learning Lecture-5" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-5/" data-id="cmc90ph0y0004p0va80bfbt96" data-title="Deep Learning Lecture-5" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -256,19 +256,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2025/06/21/Deep%20Learning%20Lecture-3/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2025/06/21/Deep%20Learning%20Lecture-4/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          Deep Learning Lecture-3
+          Deep Learning Lecture-4
         
       </div>
     </a>
   
   
-    <a href="/2025/06/21/Deep%20Learning%20Lecture-4/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2025/06/21/Deep%20Learning%20Lecture-6/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Deep Learning Lecture-4</div>
+      <div class="article-nav-title">Deep Learning Lecture-6</div>
     </a>
   
 </nav>
@@ -320,15 +320,15 @@
       <ul>
         
           <li>
+            <a href="/2025/06/21/Deep%20Learning%20Lecture-3/">Deep Learning Lecture-3</a>
+          </li>
+        
+          <li>
             <a href="/2025/06/21/Deep%20Learning%20Lecture-2/">Deep Learning Lecture-2</a>
           </li>
         
           <li>
-            <a href="/2025/06/21/Deep%20Learning%20Lecture-1/">Deep Learning Lecture-1</a>
-          </li>
-        
-          <li>
-            <a href="/2025/06/21/Deep%20Learning%20Lecture-3/">Deep Learning Lecture-3</a>
+            <a href="/2025/06/21/Deep%20Learning%20Lecture-4/">Deep Learning Lecture-4</a>
           </li>
         
           <li>
@@ -336,7 +336,7 @@
           </li>
         
           <li>
-            <a href="/2025/06/21/Deep%20Learning%20Lecture-4/">Deep Learning Lecture-4</a>
+            <a href="/2025/06/21/Deep%20Learning%20Lecture-6/">Deep Learning Lecture-6</a>
           </li>
         
       </ul>

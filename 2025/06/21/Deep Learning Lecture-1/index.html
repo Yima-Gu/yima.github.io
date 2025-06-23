@@ -14,7 +14,7 @@
 <meta property="og:description" content="人工智能：模拟人类的智能机器学习：不显式编程来实现深度学习：使用神经网络 对于深度学习总是能找到一些amazing的例子，同时也有一些失败的例子。 深度学习是在数据中获取高度抽象的特征，主要使用神经网络。在深度学习中实现的功能类似于坐标系变换。对于同一个问题进行变换可以进行不同的处理。在机器学习过程中的规则系统仍然是很重要的。 深度学习的表示为计算图 Framework在学习算法中一定要指定函数">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-22T09:29:15.223Z">
+<meta property="article:modified_time" content="2025-06-23T11:32:40.283Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="DeepLearning">
 <meta name="twitter:card" content="summary">
@@ -130,7 +130,7 @@
 <p>具体例子：线性回归</p>
 <p>$$<br>O(D;\theta) &#x3D; \sum_{i&#x3D;1}^{N} (y_i - \theta^T x_i)^2 + \lambda \theta^T \theta &#x3D; (Y - X\theta)^T (Y - X\theta) + \lambda \theta^T \theta<br>$$<br>上述公式是关于$\theta$的二次函数，可以通过求导得到最优解。[[matrixcookbook.pdf]]<br>$$<br>\frac{\partial O(D;\theta)}{\partial \theta} &#x3D; -2 X^T (Y - X\theta) + 2 \lambda \theta &#x3D; 0<br>$$<br>$$<br>\hat{\theta} &#x3D; (X^T X + \lambda I)^{-1} X^T Y<br>$$<br>但是上述算法的复杂性为$O(n^3)$，不适用于大数据集。在软件工程中，通常使用梯度下降法。</p>
 <p><strong>Logistic Regression</strong></p>
-<p>$$<br>O(D;\theta) &#x3D; \sum_{i&#x3D;1}^{n} \log(1 + \exp(-y_i \theta^T x_i)) + \lambda ||\theta||<em>{1} &#x3D; F(D;\theta) + \lambda ||\theta||</em>{1}<br>$$<br>这里使用的是近端梯度下降法 <em>proximal gradient descent</em>。其中的1-范数是各个分量的绝对值之和。<a target="_blank" rel="noopener" href="https://www.zhihu.com/tardis/zm/art/82622940?source_id=1005">机器学习 | 近端梯度下降法 (proximal gradient descent)</a><br>在一些不可导的情况下如hinge损失函数，可以使用次梯度。</p>
+<p>$$<br>O(D;\theta) &#x3D; \sum_{i&#x3D;1}^{n} \log(1 + \exp(-y_i \theta^T x_i)) + \lambda ||\theta||_{1} &#x3D; F(D;\theta) + \lambda ||\theta||_{1}<br>$$<br>这里使用的是近端梯度下降法 <em>proximal gradient descent</em>。其中的1-范数是各个分量的绝对值之和。<a target="_blank" rel="noopener" href="https://www.zhihu.com/tardis/zm/art/82622940?source_id=1005">机器学习 | 近端梯度下降法 (proximal gradient descent)</a><br>在一些不可导的情况下如hinge损失函数，可以使用次梯度。</p>
 <p><strong>Softmax Regression</strong></p>
 <p>实现多分类问题，计算每个类别的概率即可，对于某个样本进行多次打分，取最高分对应的类别。</p>
 <p>Softmax Function:<br>[[Deep Learning Lecture-2#^b5bcbb]]<br>$$<br>P(y|x,\theta) &#x3D; \frac{\exp(\theta_y^T x)}{\sum_{r&#x3D;1}^{C} \exp(\theta_{r}^T x)}<br>$$<br>线性模型，用超平面对样本进行打分，然后使用softmax函数进行归一化。</p>
@@ -142,7 +142,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-1/" data-id="cmc8xsqkd0001nova6uojafm5" data-title="Deep Learning Lecture-1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-1/" data-id="cmc90ph10000ap0va4cj73fi7" data-title="Deep Learning Lecture-1" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -154,19 +154,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2025/06/21/Deep%20Learning%20Lecture-2/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2025/06/21/Deep%20Learning%20Lecture-7/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          Deep Learning Lecture-2
+          Deep Learning Lecture-7
         
       </div>
     </a>
   
   
-    <a href="/2025/06/21/Deep%20Learning%20Lecture-3/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2025/06/21/Deep%20Learning%20Lecture-8/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Deep Learning Lecture-3</div>
+      <div class="article-nav-title">Deep Learning Lecture-8</div>
     </a>
   
 </nav>
@@ -218,15 +218,15 @@
       <ul>
         
           <li>
+            <a href="/2025/06/21/Deep%20Learning%20Lecture-3/">Deep Learning Lecture-3</a>
+          </li>
+        
+          <li>
             <a href="/2025/06/21/Deep%20Learning%20Lecture-2/">Deep Learning Lecture-2</a>
           </li>
         
           <li>
-            <a href="/2025/06/21/Deep%20Learning%20Lecture-1/">Deep Learning Lecture-1</a>
-          </li>
-        
-          <li>
-            <a href="/2025/06/21/Deep%20Learning%20Lecture-3/">Deep Learning Lecture-3</a>
+            <a href="/2025/06/21/Deep%20Learning%20Lecture-4/">Deep Learning Lecture-4</a>
           </li>
         
           <li>
@@ -234,7 +234,7 @@
           </li>
         
           <li>
-            <a href="/2025/06/21/Deep%20Learning%20Lecture-4/">Deep Learning Lecture-4</a>
+            <a href="/2025/06/21/Deep%20Learning%20Lecture-6/">Deep Learning Lecture-6</a>
           </li>
         
       </ul>
