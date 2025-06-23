@@ -14,7 +14,7 @@
 <meta property="og:description" content="TransformersTransformers: Attention is All You Need[[Deep Learning Lecture-5#Attention]] 再次理解Attention的概念：类似于”查字典“的操作，对于Query $q$, Key $k$和Value $v$，计算相关性，也就是重要性，对于输出序列中的第$i$个输出有价值的信息：$$w_{ij} &#x3D;">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-23T13:59:55.203Z">
+<meta property="article:modified_time" content="2025-06-23T14:11:02.194Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="DeepLearning">
 <meta name="twitter:card" content="summary">
@@ -132,8 +132,7 @@
 <p><em>Scaled Dot-Product</em> :<br>$$<br>a(q,k) &#x3D; \frac{q^T k}{\sqrt{d_k}}<br>$$<br>使得变换前后的方差是一样的，这样可以使得梯度更加稳定，否则可能进入激活函数的饱和区。<br>$$<br>Attention(Q,K,V) &#x3D; \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V<br>$$<br>上面的式子将得到的$n \times n$的矩阵进行softmax操作，在归一化的过程中，<strong>是某一个query在所有的key上的注意力分配一定是$\mathbf{1}$</strong>。后面是对于Value的加权求和。<strong>在上面的公式中，$Q$、$K$和$V$中的向量都是行向量，进行softmax操作时也是在同一行上操作</strong>。</p>
 <p>![[Pasted image 20250323141917.png]]</p>
 <p>对于同一组输入，经过不同的线性变换得到的不同的Query、Key和Value，在样本数量为$m$的情况下，可以进行计算：</p>
-<p>$$<br>\begin{aligned}<br>&amp;W^Q \in \mathbb{R}^{d_k \times d_{\text{input}}}, \\<br>&amp;W^K \in \mathbb{R}^{d_k \times d_{\text{input}}}, \\<br>&amp;W^V \in \mathbb{R}^{d_v \times d_{\text{input}}} \\<br>&amp;Q &#x3D; X W^Q \in \mathbb{R}^{m \times d_k}, \\<br>&amp;K &#x3D; X W^K \in \mathbb{R}^{m \times d_k}, \\<br>&amp;V &#x3D; X W^V \in \mathbb{R}^{m \times d_v}. \\<br>&amp;QK^T \in \mathbb{R}^{m \times m}, \\<br>&amp;\text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right) \in \mathbb{R}^{m \times m}, \\<br>&amp;\text{Attention}(Q, K, V) &#x3D; \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V \in \mathbb{R}^{m \times d_v}.</p>
-<p>\end{aligned}<br>$$</p>
+<p>$$<br>\begin{aligned}<br>&amp;W^Q \in \mathbb{R}^{d_k \times d_{\text{input}}}, \\<br>&amp;W^K \in \mathbb{R}^{d_k \times d_{\text{input}}}, \\<br>&amp;W^V \in \mathbb{R}^{d_v \times d_{\text{input}}} \\<br>&amp;Q &#x3D; X W^Q \in \mathbb{R}^{m \times d_k}, \\<br>&amp;K &#x3D; X W^K \in \mathbb{R}^{m \times d_k}, \\<br>&amp;V &#x3D; X W^V \in \mathbb{R}^{m \times d_v}. \\<br>&amp;QK^T \in \mathbb{R}^{m \times m}, \\<br>&amp;\text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right) \in \mathbb{R}^{m \times m}, \\<br>&amp;\text{Attention}(Q, K, V) &#x3D; \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V \in \mathbb{R}^{m \times d_v}.<br>\end{aligned}<br>$$</p>
 <p> <strong>维度总结表</strong></p>
 <table>
 <thead>
@@ -296,7 +295,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-6/" data-id="cmc95yidg0005xova3g4vcsvi" data-title="Deep Learning Lecture-6" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-6/" data-id="cmc96d4iv0004vsva8pwo1pbd" data-title="Deep Learning Lecture-6" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -318,9 +317,9 @@
     </a>
   
   
-    <a href="/2025/06/21/Deep%20Learning%20Lecture-4/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2025/06/21/Deep%20Learning%20Lecture-1/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Deep Learning Lecture-4</div>
+      <div class="article-nav-title">Deep Learning Lecture-1</div>
     </a>
   
 </nav>
@@ -372,15 +371,11 @@
       <ul>
         
           <li>
-            <a href="/2025/06/21/Deep%20Learning%20Lecture-1/">Deep Learning Lecture-1</a>
-          </li>
-        
-          <li>
-            <a href="/2025/06/21/Deep%20Learning%20Lecture-3/">Deep Learning Lecture-3</a>
-          </li>
-        
-          <li>
             <a href="/2025/06/21/Deep%20Learning%20Lecture-2/">Deep Learning Lecture-2</a>
+          </li>
+        
+          <li>
+            <a href="/2025/06/21/Deep%20Learning%20Lecture-4/">Deep Learning Lecture-4</a>
           </li>
         
           <li>
@@ -389,6 +384,10 @@
         
           <li>
             <a href="/2025/06/21/Deep%20Learning%20Lecture-6/">Deep Learning Lecture-6</a>
+          </li>
+        
+          <li>
+            <a href="/2025/06/21/Deep%20Learning%20Lecture-1/">Deep Learning Lecture-1</a>
           </li>
         
       </ul>
