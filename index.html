@@ -116,15 +116,15 @@
       
         <hr>
 <h3 id="Brain-and-Neuron"><a href="#Brain-and-Neuron" class="headerlink" title="Brain and Neuron"></a>Brain and Neuron</h3><p>感知机<em>Perceptron</em>是神经元的一个相当简单的数学模型，包括：输入、权重、激活函数、输出。其实是在空间超平面上嵌入了一个非线性函数。<br>$$<br>\hat{y} &#x3D; g(\sum_{i&#x3D;1}^{n}  x_i \theta_i +\theta_0)<br>$$<br>感知机在神经网络中也叫单元<em>unit</em>，是神经网络的基本组成单元。但是这样的单元会比人的神经元简单很多。</p>
-<h4 id="PLA"><a href="#PLA" class="headerlink" title="PLA"></a>PLA</h4><p>在上述的激活函数中，最先使用的是符号函数，这个函数是不光滑的。可以使用下面的算法来进行训练：<br>![[{5ABA24F6-F5A5-48C8-AE9F-1E8524E35979}.png]]<br>在理论推导中，可以计算PLA的<strong>收敛率</strong>：（在线性可分的情况下）<br>$\gamma$是最优间隔<em>the best-case margin</em>，计算的是训练样本与超平面的距离之间的最小值。<br>$$<br>\exists v \in \mathbb{R}^d \quad \text{s.t.}\,\gamma \leq \frac{y_i(v\cdot x_i)}{||v||}<br>$$<br>$R$是数据集的半径，即样本数据向量模的最大值，$d$是数据集的维度。那么PLA的收敛率为： 最多经过$\frac{R^2}{\gamma^2}$次迭代就可以收敛。</p>
+<h4 id="PLA"><a href="#PLA" class="headerlink" title="PLA"></a>PLA</h4><p>在上述的激活函数中，最先使用的是符号函数，这个函数是不光滑的。可以使用下面的算法来进行训练：<br><img src="D:/software/Git/images/%7B5ABA24F6-F5A5-48C8-AE9F-1E8524E35979%7D.png" alt="{5ABA24F6-F5A5-48C8-AE9F-1E8524E35979}.png"><br>在理论推导中，可以计算PLA的<strong>收敛率</strong>：（在线性可分的情况下）<br>$\gamma$是最优间隔<em>the best-case margin</em>，计算的是训练样本与超平面的距离之间的最小值。<br>$$<br>\exists v \in \mathbb{R}^d \quad \text{s.t.}\,\gamma \leq \frac{y_i(v\cdot x_i)}{||v||}<br>$$<br>$R$是数据集的半径，即样本数据向量模的最大值，$d$是数据集的维度。那么PLA的收敛率为： 最多经过$\frac{R^2}{\gamma^2}$次迭代就可以收敛。</p>
 <ul>
 <li>$\gamma$越大，收敛越快</li>
 <li>$R$越大，收敛越慢</li>
 </ul>
 <h5 id="Expresiveness-of-Perceptron"><a href="#Expresiveness-of-Perceptron" class="headerlink" title="Expresiveness of Perceptron"></a>Expresiveness of Perceptron</h5><p>感知机是一个线性分类器，只能解决线性可分的问题。如果数据不是线性可分的，那么感知机就无法解决（例如异或问题，但其实异或不是基本的布尔运算，可以用与或非表达）。</p>
 <h4 id="Multi-layer-Perceptron"><a href="#Multi-layer-Perceptron" class="headerlink" title="Multi-layer Perceptron"></a>Multi-layer Perceptron</h4><p>多层感知机<em>Multi-layer Perceptron</em>是感知机的扩展，可以解决非线性问题。多层感知机的结构是：输入层、隐藏层、输出层（输入层并不算一层）。<br><em>感知机之间的链接方式相比人脑而言也是较为简单的。</em><br>在表达时，可以发现是<strong>稀疏的</strong>，也就是每一层并不是与前面的所有的感知机相连。多层感知机的表达能力较强，这时需要增加感知机的层数。</p>
-<h5 id="Comention"><a href="#Comention" class="headerlink" title="Comention"></a>Comention</h5><p>![[{9A215F21-185B-4C55-B872-413D388E5321}.png]]</p>
-<p>![[{E178BAD1-DE9C-44E5-A665-D550AE3A9558}.png]]</p>
+<h5 id="Comention"><a href="#Comention" class="headerlink" title="Comention"></a>Comention</h5><p><img src="D:/software/Git/images/%7B9A215F21-185B-4C55-B872-413D388E5321%7D.png" alt="{9A215F21-185B-4C55-B872-413D388E5321}.png"></p>
+<p><img src="D:/software/Git/images/%7BE178BAD1-DE9C-44E5-A665-D550AE3A9558%7D.png" alt="{E178BAD1-DE9C-44E5-A665-D550AE3A9558}.png"></p>
 <ul>
 <li>用上标表示层数，用下标表示感知机的编号</li>
 <li>$\theta_{ij}^{(l)}$表示第$l$层的第$i$个感知机的第$j$个输入的权重</li>
@@ -188,19 +188,19 @@
 <li>Hessian matrix</li>
 </ul>
 <p>$$<br>\left(\nabla_{y_j} \hat{\mathcal{L}}\right)^T \frac{\partial \hat{\mathcal{L}}}{\partial y_j \partial y_j}\left(\nabla_{y_j} \hat{\mathcal{L}}\right) \leq \frac{\gamma^2}{\sigma_j^2}\left(\left(\nabla_{y_j} \mathcal{L}\right)^T \frac{\partial \mathcal{L}}{\partial y_j \partial y_j}\left(\nabla_{y_j} \mathcal{L}\right)-\frac{\gamma}{m \sigma^2}\left(\nabla_{y_j} \mathcal{L}, \hat{y}_j\right)\left\|\nabla_{y_j} \hat{\mathcal{L}}\right\|^2\right)<br>$$</p>
-<h5 id="Group-Normalization"><a href="#Group-Normalization" class="headerlink" title="Group Normalization"></a>Group Normalization</h5><p>![[{139D48AB-F664-4CE8-AC05-97B772908A85}.png]]<br>在<em>Group Normalization</em>中，对于每一个通道的特征图进行归一化处理，这样可以减少计算的复杂度。是轻量化CNN的方法。在一定数据量较大的情况下可以达到和<em>Batch Normalization</em>差不多的结果。</p>
+<h5 id="Group-Normalization"><a href="#Group-Normalization" class="headerlink" title="Group Normalization"></a>Group Normalization</h5><p><img src="D:/software/Git/images/%7B139D48AB-F664-4CE8-AC05-97B772908A85%7D.png" alt="{139D48AB-F664-4CE8-AC05-97B772908A85}.png"><br>在<em>Group Normalization</em>中，对于每一个通道的特征图进行归一化处理，这样可以减少计算的复杂度。是轻量化CNN的方法。在一定数据量较大的情况下可以达到和<em>Batch Normalization</em>差不多的结果。</p>
 <h3 id="Generalization-and-Capacity"><a href="#Generalization-and-Capacity" class="headerlink" title="Generalization and Capacity"></a>Generalization and Capacity</h3><ul>
 <li>网络结构不同网络效果不同，如相同的层数下，全连接网络的参数量大但是和卷积网络的效果差不多。</li>
 <li>相同的网络结构，参数量不同，参数量多的网络效果更好。</li>
 </ul>
-<h4 id="Theorem-Arbitrarily-large-neural-networks-can-approximate-any-function"><a href="#Theorem-Arbitrarily-large-neural-networks-can-approximate-any-function" class="headerlink" title="Theorem (Arbitrarily large neural networks can approximate any function)"></a>Theorem (Arbitrarily large neural networks can approximate any function)</h4><p>理论可以表述为：对于任意的连续函数，存在一个足够大的神经网络可以近似这个函数。<br>![[{79D51D58-D7B7-485E-9A0F-5F615FE27545}.png]]<br>上面表示两层神经网络可以逼近任意的连续函数，要求这个函数$\sigma$不是多项式函数。</p>
-<p>![[{862689B6-2775-4822-8FAC-B0450B360BA0}.png]]<br>上面的定理表示神经网络的宽度也很重要，可以通过增加神经元的数量来逼近函数。</p>
+<h4 id="Theorem-Arbitrarily-large-neural-networks-can-approximate-any-function"><a href="#Theorem-Arbitrarily-large-neural-networks-can-approximate-any-function" class="headerlink" title="Theorem (Arbitrarily large neural networks can approximate any function)"></a>Theorem (Arbitrarily large neural networks can approximate any function)</h4><p>理论可以表述为：对于任意的连续函数，存在一个足够大的神经网络可以近似这个函数。<br><img src="D:/software/Git/images/%7B79D51D58-D7B7-485E-9A0F-5F615FE27545%7D.png" alt="{79D51D58-D7B7-485E-9A0F-5F615FE27545}.png"><br>上面表示两层神经网络可以逼近任意的连续函数，要求这个函数$\sigma$不是多项式函数。</p>
+<p><img src="D:/software/Git/images/%7B862689B6-2775-4822-8FAC-B0450B360BA0%7D.png" alt="{862689B6-2775-4822-8FAC-B0450B360BA0}.png"><br>上面的定理表示神经网络的宽度也很重要，可以通过增加神经元的数量来逼近函数。</p>
 <p> 在空间折叠的问题中，表明<strong>深度比宽度更加重要</strong>。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-2/" data-id="cmc96uymx0000msva30fo9r1l" data-title="Deep Learning Lecture-2" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-2/" data-id="cmc97i9r80000d4va29xbae30" data-title="Deep Learning Lecture-2" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -248,7 +248,7 @@
 <p>对于分类问题而言，经常使用的是交叉熵损失函数（logistic）和hinge损失函数。</p>
 <p>$\Omega(\theta)$是惩罚项，希望模型尽量简单。在使得$\theta$尽量小的过程中，某些特征的权重会变为0，这样就可以实现特征选择。同时也可以减少模型的复杂性。</p>
 <p><strong>学习类似于统计中的参数估计</strong></p>
-<p>![[{65C91395-95B8-4EF2-8AF6-3F86705FD81B}.png]]</p>
+<p><img src="D:/software/Git/images/%7B65C91395-95B8-4EF2-8AF6-3F86705FD81B%7D.png" alt="{65C91395-95B8-4EF2-8AF6-3F86705FD81B}.png"></p>
 <p>梯度下降的方法。</p>
 <p>具体例子：线性回归</p>
 <p>$$<br>O(D;\theta) &#x3D; \sum_{i&#x3D;1}^{N} (y_i - \theta^T x_i)^2 + \lambda \theta^T \theta &#x3D; (Y - X\theta)^T (Y - X\theta) + \lambda \theta^T \theta<br>$$<br>上述公式是关于$\theta$的二次函数，可以通过求导得到最优解。[[matrixcookbook.pdf]]<br>$$<br>\frac{\partial O(D;\theta)}{\partial \theta} &#x3D; -2 X^T (Y - X\theta) + 2 \lambda \theta &#x3D; 0<br>$$<br>$$<br>\hat{\theta} &#x3D; (X^T X + \lambda I)^{-1} X^T Y<br>$$<br>但是上述算法的复杂性为$O(n^3)$，不适用于大数据集。在软件工程中，通常使用梯度下降法。</p>
@@ -265,7 +265,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-1/" data-id="cmc96uymz0001msvad2nngrbw" data-title="Deep Learning Lecture-1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-1/" data-id="cmc97i9ra0001d4vacmke2gm3" data-title="Deep Learning Lecture-1" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -305,7 +305,7 @@
 <h2 id="Convolutional-Neural-Networks"><a href="#Convolutional-Neural-Networks" class="headerlink" title="Convolutional Neural Networks"></a>Convolutional Neural Networks</h2><p>卷积网络最早是用来处理图像的问题。目前较为成功的研究是物体识别问题，对于物体之间的关系推断依然是计算机视觉的前沿领域。</p>
 <p>在生物的研究中，存在<strong>感受野</strong><em>receptive field</em>的概念，这是指神经元对于输入的局部区域的敏感程度。在卷积网络中，我们也引入了这个概念。相邻的神经元处理的是相邻的图像区域，这样的设计使得网络能够捕捉到图像的空间结构。在模拟人类的视觉系统中，重要的是<strong>提取不同程度的特征</strong>，这就是卷积网络的核心思想。</p>
 <p>在MLP中，由于对于原图像像素进行展开，会损失部分的空间信息。在处理视角、光照的变化时，MLP的效果会变差。</p>
-<p>![[{71895E3A-0EFA-438D-8E6C-EDBD4A337F5A}.png]]</p>
+<p><img src="D:/software/Git/images/%7B71895E3A-0EFA-438D-8E6C-EDBD4A337F5A%7D.png" alt="{71895E3A-0EFA-438D-8E6C-EDBD4A337F5A}.png"></p>
 <p>从左到右，逐步提取的是从较低到较高的层次特征。在不同的任务中使用不同的特征。在识别人物中，应该使用较高层次的特征。</p>
 <h5 id="Local-Connectivity"><a href="#Local-Connectivity" class="headerlink" title="Local Connectivity"></a>Local Connectivity</h5><p>每一层的神经元只连接到上一层的局部区域。具体的连接方式为：每一个神经元只关注上一层对应区域的部分神经元。</p>
 <h5 id="Parameter-Sharing"><a href="#Parameter-Sharing" class="headerlink" title="Parameter Sharing"></a>Parameter Sharing</h5><p>一个神经元对应的某组参数代表的是某种特征，我们认为提取的特征的在不同的位置是一样的。是一种<strong>平移不变性</strong>。</p>
@@ -314,24 +314,24 @@
 <h5 id="Notation"><a href="#Notation" class="headerlink" title="Notation"></a>Notation</h5><ul>
 <li>输入的图片一般为三层，分别为RGB。这个<em>Volume</em>是一个张量<em>Tensor</em>。</li>
 <li>卷积核的大小为$5 \times 5 \times 3$（举例），即3个通道，每个通道大小为$5 \times 5$。然后在整个图片上进行平移，计算卷积操作。（类似于卷积的定义）</li>
-<li>卷积的计算操作为：卷积核在图片上平移，计算对应位置的乘积和。<br>![[{7AC9125F-FA2D-42F9-B0CF-085ABFFB668F}.png]]<br>上面的公式是在移动到某个位置$(w,h)$的时候，计算对应位置的乘积和。然后将结果存储在一个新的矩阵中。</li>
+<li>卷积的计算操作为：卷积核在图片上平移，计算对应位置的乘积和。<br><img src="D:/software/Git/images/%7B7AC9125F-FA2D-42F9-B0CF-085ABFFB668F%7D.png" alt="{7AC9125F-FA2D-42F9-B0CF-085ABFFB668F}.png"><br>上面的公式是在移动到某个位置$(w,h)$的时候，计算对应位置的乘积和。然后将结果存储在一个新的矩阵中。</li>
 </ul>
 <p><em>在实际操作的过程中，并不要将卷积核在图片上“滑动”（这是一个串行算法），可以为每一个为每一个局域来分配一个神经元，这样的操作是并行的，可以加速计算。</em></p>
 <p>得到的是一个Feature Map，这个Feature Map是一个新的张量，使用6个卷积核得到的图片的特征图的大小为$28 \times 28 \times 6$。<em>如何计算的？参数量是多少？</em><br>使用的卷积核数量是一个超参数，可以调整。</p>
 <p>对于一个$w*h*c$的输入，使用$k*k*c*d$个卷积核，得到的输出的特征图的大小为$(w-k+1)*(h-k+1)*d$，参数量为$(k*k*c+1)*d$。但是CNN在实践过程中的显存占用是较大的，因为需要存储特征图。</p>
-<p>![[{7202EECA-CD25-4EE1-A5C9-02F0263C968C}.png]]</p>
+<p><img src="D:/software/Git/images/%7B7202EECA-CD25-4EE1-A5C9-02F0263C968C%7D.png" alt="{7202EECA-CD25-4EE1-A5C9-02F0263C968C}.png"></p>
 <h4 id="Dilated-Stride-Convolution"><a href="#Dilated-Stride-Convolution" class="headerlink" title="Dilated&amp; Stride Convolution"></a>Dilated&amp; Stride Convolution</h4><p>在卷积操作中，我们可以使用不同的步长来进行卷积操作，这样的操作会改变输出的大小。在Dilated Convolution中，我们可以使用不同的扩张率来进行卷积操作。扩张率为1的时候<em>1-dilated</em>是正常的卷积操作，扩张率为2的时候，卷积核的间隔为2 <em>2-dilated</em>。这样的操作可以<strong>增加卷积核的感受野</strong>，但是减少了输出的大小。</p>
 <p><em>Stride</em>是卷积核的步长，可以让输出的特征图迅速变小。<br>可能出现不匹配的情况，这样可以进行<em>Padding</em>是在边缘填充0，这样的操作可以保持输出的大小。</p>
 <h5 id="Activation-Functions"><a href="#Activation-Functions" class="headerlink" title="Activation Functions"></a>Activation Functions</h5><p>在卷积网络中，激活函数可以使用ReLU函数，这样的操作可以避免梯度消失的问题。有时候使用的是Leaky ReLU函数，这样的操作在某些模型中可以减少神经元死亡的问题。<br>$$<br>LeakyReLU(x) &#x3D; \begin{cases} x &amp; x&gt;0 \\ 0.01x &amp; x \leq 0 \end{cases}<br>$$</p>
-<p>![[{CFAAFBDA-A81C-4931-9C2C-CBD64F40E29C}.png]]</p>
+<p><img src="D:/software/Git/images/%7BCFAAFBDA-A81C-4931-9C2C-CBD64F40E29C%7D.png" alt="{CFAAFBDA-A81C-4931-9C2C-CBD64F40E29C}.png"></p>
 <h5 id="Pooling"><a href="#Pooling" class="headerlink" title="Pooling"></a>Pooling</h5><p>池化操作一般是用来减少空间尺寸，这样的操作可以减少参数量，减少过拟合的问题。</p>
 <ul>
 <li>Max Pooling：取局部区域的最大值</li>
-<li>Average Pooling：取局部区域的平均值<br>![[{01688551-C69C-4B62-8660-637A51409678}.png]]</li>
+<li>Average Pooling：取局部区域的平均值<br><img src="D:/software/Git/images/%7B01688551-C69C-4B62-8660-637A51409678%7D.png" alt="{01688551-C69C-4B62-8660-637A51409678}.png"></li>
 </ul>
 <p><strong>Spatial Pyramid Pooling</strong>：对于不同的通道进行池化操作，这样的操作可以增加特征的多样性。这是用来减少多尺度问题的。<br>在现实生活中，多尺度是一个基本的特征，例如在大气系统、气候系统中，有较大的气流和较小部分的湍流。</p>
 <h3 id="Back-Propagation"><a href="#Back-Propagation" class="headerlink" title="Back Propagation"></a>Back Propagation</h3><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Ilg3gGewQ5U">Backpropagation, step-by-step | DL3</a></p>
-<p>![[{1197B7EA-3F5B-40C9-8ADF-861B8AACBDC2}.png]]</p>
+<p><img src="D:/software/Git/images/%7B1197B7EA-3F5B-40C9-8ADF-861B8AACBDC2%7D.png" alt="{1197B7EA-3F5B-40C9-8ADF-861B8AACBDC2}.png"></p>
 <p>在卷积网络的前向传播中每一层的计算公式如下：<br>$$<br>z_d^{(l+1)} &#x3D; a^{(l)}\star \theta^{(l)}_d + b^{(l)}_d<br>$$</p>
 <p>在一个具体的例子中，可以计算一个$3 \times 3 \times 1$的图像在经过一个$2\times 2 \times 1$的卷积核得到的$2 \times 2 \times 1$的特征图的计算过程。</p>
 <ul>
@@ -352,7 +352,7 @@
 <p>常用的方法有：裁剪、旋转、翻转、缩放、平移、仿射变换、弹性变换、颜色变换等。<br>CNN识别主要使的是纹理的识别方法，希望将人类的对于形状识别的能力融入到CNN中。可以使用的数据集为<em>Augmentation by Stylization</em>，希望获得模型对于纹理的不变性。<br>CNN对上下文是敏感的，对于经常出现在一起的事物，CNN可以很好地进行识别，但是对于不常见的事物，CNN的效果会变差。一种极端的方式是将不经常出现的东西组合在一起。目前的深度网络一定程度上利用了<em>spurious correlation</em>，从而进行bench mark在数据集上过拟和。</p>
 <h4 id="Architecture-Revolution"><a href="#Architecture-Revolution" class="headerlink" title="Architecture Revolution"></a>Architecture Revolution</h4><h5 id="MAGA-Making-convolutional-networks-shift-invariant-again"><a href="#MAGA-Making-convolutional-networks-shift-invariant-again" class="headerlink" title="MAGA Making convolutional networks shift-invariant again"></a>MAGA Making convolutional networks shift-invariant again</h5><p>在CNN中，在平移过程中，网络很难获得平移不变性。在采用模糊之后的<em>pooling</em>可以获得一定程度上的平移不变性。</p>
 <h5 id="Capsule-Network"><a href="#Capsule-Network" class="headerlink" title="Capsule Network"></a>Capsule Network</h5><p>CNN的缺点还有：不能保持物体之间的相对关系。在分类任务中，一般情况下强调的是不变性，而在一些细粒度识别任务中，强调的是等变性。在Capsule Network中，引入了胶囊的概念，这样的操作可以保持物体之间的相对关系。</p>
-<h2 id="CNN-Architectures"><a href="#CNN-Architectures" class="headerlink" title="CNN Architectures"></a>CNN Architectures</h2><h3 id="AlexNet"><a href="#AlexNet" class="headerlink" title="AlexNet"></a>AlexNet</h3><p>![[{382F2347-B42F-46CB-83DB-F25DDE49A91E}.png]]</p>
+<h2 id="CNN-Architectures"><a href="#CNN-Architectures" class="headerlink" title="CNN Architectures"></a>CNN Architectures</h2><h3 id="AlexNet"><a href="#AlexNet" class="headerlink" title="AlexNet"></a>AlexNet</h3><p><img src="D:/software/Git/images/%7B382F2347-B42F-46CB-83DB-F25DDE49A91E%7D.png" alt="{382F2347-B42F-46CB-83DB-F25DDE49A91E}.png"></p>
 <ul>
 <li>一般会在输入层使用较大的卷积核，然后在后面的层使用较小的卷积核</li>
 <li>通道数随着网络逐渐增加然后减少</li>
@@ -376,14 +376,14 @@
 <li>全局池化可直接将特征图转换为通道维度的向量（如$1\times 1 \times1024$ $\rightarrow$  1024维向量），再接一个分类层，大幅减少参数。</li>
 </ul>
 </blockquote>
-<h4 id="GoogLeNet"><a href="#GoogLeNet" class="headerlink" title="GoogLeNet"></a>GoogLeNet</h4><p>![[{43BF44F4-D211-4165-AE84-257E702582A0}.png]]<br>这是一个较为深的网络，删去了全连接层，参数量是较小的。</p>
+<h4 id="GoogLeNet"><a href="#GoogLeNet" class="headerlink" title="GoogLeNet"></a>GoogLeNet</h4><p><img src="D:/software/Git/images/%7B43BF44F4-D211-4165-AE84-257E702582A0%7D.png" alt="{43BF44F4-D211-4165-AE84-257E702582A0}.png"><br>这是一个较为深的网络，删去了全连接层，参数量是较小的。</p>
 <ul>
 <li>引入Multi-passway，使用多路的卷积核来提取特征。采用了特征增广<em>Feature Augmentation</em>的方法。</li>
 <li>在特征图通道数目不一样的情况下，使用padding的方法。</li>
 </ul>
-<p>![[{6F8AFF72-4C3D-4FAD-8FC9-90F7FED6E8B2}.png]]</p>
-<p>![[{39D210C3-7C1B-4913-AC78-12E71A8FD13B}.png]]</p>
-<p>![[{E3B121C1-5782-4762-A983-042799DA4ED9}.png]]</p>
+<p><img src="D:/software/Git/images/%7B6F8AFF72-4C3D-4FAD-8FC9-90F7FED6E8B2%7D.png" alt="{6F8AFF72-4C3D-4FAD-8FC9-90F7FED6E8B2}.png"></p>
+<p><img src="D:/software/Git/images/%7B39D210C3-7C1B-4913-AC78-12E71A8FD13B%7D.png" alt="{39D210C3-7C1B-4913-AC78-12E71A8FD13B}.png"></p>
+<p><img src="D:/software/Git/images/%7BE3B121C1-5782-4762-A983-042799DA4ED9%7D.png" alt="{E3B121C1-5782-4762-A983-042799DA4ED9}.png"></p>
 <p>使用计算量越来越小的卷积核，使用计算量越来越小的卷积核，使用越来越多的层数，使用越来越多的通道数。</p>
 <h4 id="Highway-Network"><a href="#Highway-Network" class="headerlink" title="Highway Network"></a>Highway Network</h4><p>在平坦的网络通路中，可能有信息通路瓶颈问题。在Highway Network中，引入了门控机制，这样的操作可以使得信息的流动更加顺畅。<br>$$<br>y&#x3D; H(x,W_H)T(x,W_T) + x(1-T(x,W_T))<br>$$<br>其中$H(x,W_H)$是一个MLP，$T(x,W_T)$是一个门控函数，这样的操作可以使得信息的流动更加顺畅。</p>
 <ul>
@@ -407,16 +407,16 @@
 <li><strong>ResNet</strong>：使用恒等跳跃连接<em>Identity Skip Connection</em>，公式为 $y&#x3D;H(x)+x$，无门控机制。</li>
 <li><strong>Highway Network</strong>：通过门控动态调节跳跃连接的权重，更灵活地控制信息流。</li>
 </ul>
-<h4 id="ResNet"><a href="#ResNet" class="headerlink" title="ResNet"></a>ResNet</h4><p>![[{6767A6D4-59B6-4B62-9FE9-427D009BB837}.png]]</p>
+<h4 id="ResNet"><a href="#ResNet" class="headerlink" title="ResNet"></a>ResNet</h4><p><img src="D:/software/Git/images/%7B6767A6D4-59B6-4B62-9FE9-427D009BB837%7D.png" alt="{6767A6D4-59B6-4B62-9FE9-427D009BB837}.png"></p>
 <ul>
 <li>56层的模型比20层的模型效果更差，既然如此，先将20层的模型训练好，然后再增加36层的<em>identity</em>网络，之后再训练整个网络。发现这样的操作的效果反而更差。得出的结论是56层的网络更加难以训练，网络的拟和能力不足。<strong>平坦的网络很难拟和</strong></li>
 <li>残差是更加容易拟和的。</li>
 <li>继续将这些残差网络堆叠在一起，可以得到一个更深的网络。</li>
 <li>卷积、池化是算子<em>operator</em>，残差是一个块<em>block</em>，网络是一个层<em>layer</em></li>
 </ul>
-<p>![[{8F67BE27-E8CA-4921-99B2-C57FFFAE5E7B}.png]]</p>
-<p>![[{681C5361-F2ED-427F-86C2-48C9EC68AADF}.png]]</p>
-<p>![[{5DE8620F-D5FB-4E82-96D7-0E03CCCCAF82}.png]]<br>对于网络会有多个维度进行评价：</p>
+<p><img src="D:/software/Git/images/%7B8F67BE27-E8CA-4921-99B2-C57FFFAE5E7B%7D.png" alt="{8F67BE27-E8CA-4921-99B2-C57FFFAE5E7B}.png"></p>
+<p><img src="D:/software/Git/images/%7B681C5361-F2ED-427F-86C2-48C9EC68AADF%7D.png" alt="{681C5361-F2ED-427F-86C2-48C9EC68AADF}.png"></p>
+<p><img src="D:/software/Git/images/%7B5DE8620F-D5FB-4E82-96D7-0E03CCCCAF82%7D.png" alt="{5DE8620F-D5FB-4E82-96D7-0E03CCCCAF82}.png"><br>对于网络会有多个维度进行评价：</p>
 <ul>
 <li>准确率top-1、top-5准确率</li>
 <li>VGG网络参数量很大，但是由于是平坦的网络，所以有一定的计算整齐度。在网络有较多的分叉时，计算整齐度会变差。较为整齐的网络计算是较快的。</li>
@@ -437,9 +437,9 @@
 <li>令通道数等于分组数目<em>channelwise</em> or <em>depthwise</em></li>
 </ul>
 <p>上述两个算子是轻量化网络的基础。</p>
-<p>![[Pasted image 20250316132626.png]]</p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250316132626.png" alt="Pasted image 20250316132626.png"></p>
 <p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2201.03545">[2201.03545] A ConvNet for the 2020s</a></p>
-<p>![[Pasted image 20250316134751.png]]</p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250316134751.png" alt="Pasted image 20250316134751.png"></p>
 <p>宏观设计：<strong>减少空间尺寸的衰减有利于学习不同的特征</strong>。</p>
 <h2 id="Advanced-Modules"><a href="#Advanced-Modules" class="headerlink" title="Advanced Modules"></a>Advanced Modules</h2><h3 id="3D-Modeling"><a href="#3D-Modeling" class="headerlink" title="3D Modeling"></a>3D Modeling</h3><p>普通的二维卷积网络在处理视频时，会丢失时间信息。在3D卷积网络中，引入了时间维度，这样的操作可以保留时间信息。</p>
 <p>直接使用3D卷积可以进行直接的对应。</p>
@@ -452,221 +452,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-3/" data-id="cmc96uyn10003msva11k7ekzp" data-title="Deep Learning Lecture-3" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Deep Learning Lecture-6" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/06/21/Deep%20Learning%20Lecture-6/" class="article-date">
-  <time class="dt-published" datetime="2025-06-20T16:00:00.000Z" itemprop="datePublished">2025-06-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/06/21/Deep%20Learning%20Lecture-6/">Deep Learning Lecture-6</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="Transformers"><a href="#Transformers" class="headerlink" title="Transformers"></a>Transformers</h2><h3 id="Transformers-Attention-is-All-You-Need"><a href="#Transformers-Attention-is-All-You-Need" class="headerlink" title="Transformers: Attention is All You Need"></a>Transformers: Attention is All You Need</h3><p>[[Deep Learning Lecture-5#Attention]]</p>
-<p>再次理解Attention的概念：类似于”查字典“的操作，对于Query $q$, Key $k$和Value $v$，计算相关性，也就是重要性，对于输出序列中的第$i$个输出有价值的信息：<br>$$<br>w_{ij} &#x3D; a(q_i, k_j)<br>$$<br>其中$a$是一个函数，可以是内积、<em>Additive Attention</em>等。对于输出序列中的第$i$个输出，计算当前的输出的$q_i$，计算与输入序列中的$k_j$的相关性，然后对于$v_j$进行加权求和（这是一种寻址操作），得到的$c_i$是查字典所得到的信息：<br>$$<br>c_i &#x3D; \sum_{j&#x3D;1}^T w_{ij}v_j<br>$$<br><strong>希望找到一种更好的计算方法</strong>。</p>
-<p>在[[Deep Learning Lecture-5#RNN with Attention]]中问题在于：</p>
-<ul>
-<li>太复杂的模型</li>
-<li>某种意义上使用的Attention已经足够使用，不再需要循环网络</li>
-<li>循环网络的计算是串行的，不能有效加速</li>
-</ul>
-<h4 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self-Attention"></a>Self-Attention</h4><p>计算的是同一条序列中的不同位置之间的相关性，也就是自注意力。对于输入序列中的第$i$个位置，计算与其他位置的相关性，然后对于所有的位置进行加权求和：<br>规定Query $Q &#x3D; [q_1 \dots q_n]$，Key $K &#x3D; [k_1 \dots k_n]$，Value $V &#x3D; [v_1 \dots v_k]$，则：</p>
-<p>![[Pasted image 20250323133751.png]]</p>
-<h4 id="Scaled-Dot-Product-Attention"><a href="#Scaled-Dot-Product-Attention" class="headerlink" title="Scaled Dot-Product Attention"></a>Scaled Dot-Product Attention</h4><p>我们认为使用一个网络来计算相关性太复杂了，当两个向量是相同维度的时候可以直接计算内积。在这里，在计算先引入参数，使得其维度是一样的，从而可以计算内积：</p>
-<p><em>Scaled Dot-Product</em> :<br>$$<br>a(q,k) &#x3D; \frac{q^T k}{\sqrt{d_k}}<br>$$<br>使得变换前后的方差是一样的，这样可以使得梯度更加稳定，否则可能进入激活函数的饱和区。<br>$$<br>Attention(Q,K,V) &#x3D; \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V<br>$$<br>上面的式子将得到的$n \times n$的矩阵进行softmax操作，在归一化的过程中，<strong>是某一个query在所有的key上的注意力分配一定是$\mathbf{1}$</strong>。后面是对于Value的加权求和。<strong>在上面的公式中，$Q$、$K$和$V$中的向量都是行向量，进行softmax操作时也是在同一行上操作</strong>。</p>
-<p>![[Pasted image 20250323141917.png]]</p>
-<p>对于同一组输入，经过不同的线性变换得到的不同的Query、Key和Value，在样本数量为$m$的情况下，可以进行计算：</p>
-<p>$$<br>\begin{aligned}<br>&amp;W^Q \in \mathbb{R}^{d_k \times d_{\text{input}}}, \\<br>&amp;W^K \in \mathbb{R}^{d_k \times d_{\text{input}}}, \\<br>&amp;W^V \in \mathbb{R}^{d_v \times d_{\text{input}}} \\<br>&amp;Q &#x3D; X W^Q \in \mathbb{R}^{m \times d_k}, \\<br>&amp;K &#x3D; X W^K \in \mathbb{R}^{m \times d_k}, \\<br>&amp;V &#x3D; X W^V \in \mathbb{R}^{m \times d_v}. \\<br>&amp;QK^T \in \mathbb{R}^{m \times m}, \\<br>&amp;\text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right) \in \mathbb{R}^{m \times m}, \\<br>&amp;\text{Attention}(Q, K, V) &#x3D; \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V \in \mathbb{R}^{m \times d_v}.<br>\end{aligned}<br>$$</p>
-<p> <strong>维度总结表</strong></p>
-<table>
-<thead>
-<tr>
-<th>矩阵&#x2F;操作</th>
-<th>维度</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>输入矩阵 $X$</td>
-<td>$m \times d_{\text{input}}$</td>
-<td>包含 $m$ 个样本，每个样本维度为 $d_{\text{input}}$</td>
-</tr>
-<tr>
-<td>查询矩阵 $Q$</td>
-<td>$m \times d_k$</td>
-<td>每个样本的查询向量维度为 $d_k$</td>
-</tr>
-<tr>
-<td>键矩阵 $K$</td>
-<td>$m \times d_k$</td>
-<td>每个样本的键向量维度为 $d_k$</td>
-</tr>
-<tr>
-<td>值矩阵 $V$</td>
-<td>$m \times d_v$</td>
-<td>每个样本的值向量维度为 $d_v$</td>
-</tr>
-<tr>
-<td>注意力得分矩阵 $QK^T$</td>
-<td>$m \times m$</td>
-<td>样本间的注意力强度矩阵</td>
-</tr>
-<tr>
-<td>最终输出 $\text{Attention}(Q,K,V)$</td>
-<td>$m \times d_v$</td>
-<td>聚合所有样本的加权值信息，输出维度为 $d_v$</td>
-</tr>
-</tbody></table>
-<h4 id="Multi-Head-Attention"><a href="#Multi-Head-Attention" class="headerlink" title="Multi-Head Attention"></a>Multi-Head Attention</h4><p>注意到上面的注意力的表达能力是相当有限的，在language model同一个词和其他不同的词之间可能有很多种不同的关系，仅仅用一种简单的关系来表示是不够的。所以我们引入多头注意力，希望能在不同的侧面上进行表达。<br>$$<br>\text{MultiHead}(Q,K,V) &#x3D; \text{Concat}(\text{head}_1, \dots, \text{head}_h)W^O<br>$$<br>其中：<br>$$<br>\text{head}_i &#x3D; \text{Attention}(QW_i^Q, KW_i^K, VW_i^V)<br>$$<br>其中$W_i^Q, W_i^K, W_i^V$是不同的线性变换，$W^O$是最后的线性变换，最后进行的维度的规约操作。<br>与CNN相比，CNN的不同的通道之间与上一层的每一个通道之间都是有连接的；但是在这里，不同的头之间是没有连接的，这样可以使得不同的头可以关注不同的信息。</p>
-<p>不同的头之间是可以并行计算的，这样可以加速计算；但是缺点是内存占用会很大。</p>
-<h4 id="Position-wise-Feed-Forward-Networks"><a href="#Position-wise-Feed-Forward-Networks" class="headerlink" title="Position-wise Feed-Forward Networks"></a>Position-wise Feed-Forward Networks</h4><p>![[Pasted image 20250323145847.png]]<br>在标准 Transformer Block 中，注意力层之后会接一个前馈神经网络（FFN），其结构如下：</p>
-<ol>
-<li><p>输入张量形状：<br>$$<br>X \in \mathbb{R}^{B \times L \times H \times D}<br>$$</p>
-<ul>
-<li>$B$：Batch size  </li>
-<li>$L$：序列长度  </li>
-<li>$H$：Attention 头数  </li>
-<li>$D$：每个头的维度</li>
-</ul>
-</li>
-<li><p>将多头输出合并：<br>$$<br>X&#39; &#x3D; \mathrm{reshape}(X,\, (B,\,L,\,H\cdot D)) \in \mathbb{R}^{B \times L \times (H\!D)}<br>$$</p>
-</li>
-<li><p>两层“卷积”全连接结构<br>这里所谓“卷积”，实际上等价于在最后一维上对每个位置独立地做 1×1 卷积（与 RNN 中在不同时间步共享参数的思想一致），并在卷积核后加入非线性 ReLU。<br>$$<br>\begin{aligned}<br>Z_1 &amp;&#x3D; \mathrm{ReLU}\bigl(X&#39; W_1 + b_1\bigr),\quad W_1\in\mathbb{R}^{(H\!D)\times d_{ff}},\; b_1\in\mathbb{R}^{d_{ff}}\\<br>Z_2 &amp;&#x3D; Z_1 W_2 + b_2,\quad W_2\in\mathbb{R}^{d_{ff}\times(H\!D)},\; b_2\in\mathbb{R}^{(H\!D)}<br>\end{aligned}<br>$$</p>
-<ul>
-<li>第一层升维到中间维度 $d_{ff}$（例如 $2048$）  </li>
-<li>第二层降维回原始维度 $H\!D$（例如 $512$）</li>
-</ul>
-</li>
-<li><p>加残差 &amp; LayerNorm<br>$$<br>Y &#x3D; \mathrm{LayerNorm}\bigl(X&#39; + Z_2\bigr)\in\mathbb{R}^{B\times L\times(H\!D)}<br>$$</p>
-</li>
-<li><p>（可选）reshape 回多头排列：<br>$$<br>Y&#39; &#x3D; \mathrm{reshape}(Y,\, (B,\,L,\,H,\,D))<br>$$</p>
-</li>
-</ol>
-<ul>
-<li><strong>线性限制</strong>：除去 Attention 中的 SoftMax，若只堆线性层，模型表达能力较弱；引入 ReLU 后能够拟合更复杂的非线性函数。  </li>
-<li><strong>稀疏权重</strong>：Attention 的 SoftMax 本质上生成了一组“稀疏”权重，负责学习不同位置间的依赖；FFN 则负责在每个位置上“干净”地抽取该词的内部特征，避免无谓的跨词干扰。  </li>
-<li><strong>卷积视角</strong>：将 FFN 看作<strong>对最后一维的 1×1 卷积</strong>，等同于对每个位置独立但在所有位置共享参数，这与 RNN 在时间步上共享权重的假设一致。  </li>
-<li><strong>增强表达</strong>：Attention 解决了上下文依赖，FFN 则补强了单位置特征提取，两者协同提升了 Transformer 的整体表达能力。</li>
-</ul>
-<hr>
-<blockquote>
-<p><strong>注意</strong>：以上操作对每个批次（$B$）中每个序列位置（$L$）都独立执行，参数在所有位置间共享。</p>
-</blockquote>
-<h4 id="Residual-Connection"><a href="#Residual-Connection" class="headerlink" title="Residual Connection"></a>Residual Connection</h4><p>在上面的操作中，这些操作都是有排列不变性。<br>残差是一个标准的操作，这样可以让网络更好地记录位置编码。</p>
-<h4 id="Layer-Normalization"><a href="#Layer-Normalization" class="headerlink" title="Layer Normalization"></a>Layer Normalization</h4><p>目的是使得每一层经过Attention和Feed-Forward之后的输出的分布是一样的，这样可以使得梯度更加稳定。<br>[[Deep Learning Lecture-5#Layer Normalization]]</p>
-<p>![[Pasted image 20250323151056.png]]</p>
-<h4 id="Value-Embedding"><a href="#Value-Embedding" class="headerlink" title="Value Embedding"></a>Value Embedding</h4><ul>
-<li><p><strong>目的</strong>：将原始输入特征（如温度、流量、股价等数值）从低维（通常是 1 或几个通道）映射到高维向量空间，使模型能在更大维度下学习更丰富的特征表示。</p>
-</li>
-<li><p><strong>做法</strong>：通过一个线性层或 1×1 卷积（<code>TokenEmbedding</code>）把每个时间步的原始向量映成长度为 <code>d_model</code> 的向量。</p>
-</li>
-<li><p><strong>实现方式</strong>：通过一个线性映射或 $1 \times 1$ 卷积完，对于有$c_{in}$个特征维度的输入，使用卷积核的大小是$[d_{model},c_{in},1]$</p>
-</li>
-<li><p><strong>输入维度</strong>：$(\text{batch_size}, \text{seq_len}, c_{in})$</p>
-</li>
-<li><p><strong>输出维度</strong>：$(\text{batch_size}, \text{seq_len}, d_{model})$</p>
-</li>
-</ul>
-<h4 id="Positional-Encoding-Position-Embedding"><a href="#Positional-Encoding-Position-Embedding" class="headerlink" title="Positional Encoding &#x2F;Position Embedding"></a>Positional Encoding &#x2F;Position Embedding</h4><p>位置信息是顺序信息的一种泛化的形式。如果采用独热编码，这是一种类别信息而不是一个顺序信息，不同的是不可以比的。所以引入<em>position embedding</em>，这是一个矩阵，效果类似于一个查找表。查找操作在这里就是一个矩阵乘上一个独热编码的操作，这是因为GPU在矩阵乘法操作上是非常高效的。<br>但是独热编码会带来下面的问题</p>
-<ul>
-<li><strong>高维稀疏性</strong>：  独热编码的维度等于序列最大长度（如512），导致向量稀疏且计算效率低下（尤其对长序列）。</li>
-<li><strong>无法泛化到未见长度</strong>：  若训练时序列最大长度为512，模型无法处理更长的序列</li>
-</ul>
-<p><strong>引入归纳偏好</strong>：</p>
-<ul>
-<li>每个位置的编码应该是独一无二的且是确定的</li>
-<li>认为两个位置的距离应该是一致的</li>
-<li>应该生成一个有界的值，位置数随着序列长度的增加而增加</li>
-</ul>
-<p>Google的实现是使用的正弦和余弦函数的组合：<br>$$<br>e_i(2j) &#x3D; \sin\left(\frac{i}{10000^{2j&#x2F;d_{\text{model}}}}\right)<br>$$<br>$$<br>e_i(2j+1) &#x3D; \cos\left(\frac{i}{10000^{2j&#x2F;d_{\text{model}}}}\right)<br>$$<br>上述公式中的$i$指的句子中的第$i$个位置，$j$指的是位置编码的维度，$d_{\text{model}}$是位置编码的维度。这样的编码是满足上面的归纳偏好的。</p>
-<h4 id="Temporal-Embedding"><a href="#Temporal-Embedding" class="headerlink" title="Temporal Embedding"></a>Temporal Embedding</h4><ul>
-<li><strong>目的</strong>：针对时间序列中特有的“时间属性”——小时、星期几、月份、季节等——进行编码，让模型学到周期性（如日周期、周周期、年周期）和节假日效应等信息。</li>
-<li><strong>做法</strong>：通常把每个时间属性（hour-of-day, day-of-week, month 等）也映射到 <code>d_model</code> 维度，然后把这些属性向量加起来或拼接后再降维。<code>TemporalEmbedding</code> 类会根据 <code>embed_type</code>（如 <code>&#39;fixed&#39;</code> 或 <code>&#39;learned&#39;</code>）和 <code>freq</code>（如 <code>&#39;h&#39;</code>、<code>&#39;d&#39;</code>）来决定具体细节。</li>
-</ul>
-<h4 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h4><p>编码器中使用的是多头注意力、逐位置前馈网络和位置编码。在这个编码器中是一个直筒式的网络，好处是调参较为简单。</p>
-<p>缺点：</p>
-<ul>
-<li>二次复杂度</li>
-<li>参数量过大</li>
-<li>很多的头是冗余的</li>
-</ul>
-<p>训练阶段要使用多个头，发现有些头的权重较低，可以在推理阶段去掉这些头。</p>
-<h4 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h4><h5 id="Autoregressive"><a href="#Autoregressive" class="headerlink" title="Autoregressive"></a>Autoregressive</h5><p>![[Pasted image 20250323161530.png]]</p>
-<p>预测阶段一定要使用滚动预测，这是一个自回归的状态，但是这是一个串行的操作，会比较慢。但是在训练阶段这样是不能接受的，我希望训练的不同阶段可以并行计算，但是这里要求在一开始输入所有的序列，所以这里需要<strong>遮挡</strong>。<br>在算Attention的时候，对于当前的位置，只能看到之前的位置，不能看到之后的位置。</p>
-<p>![[Pasted image 20250323163151.png]]</p>
-<p>在编码器上是不能用的，因为防止解码器在训练时利用未来的目标序列信息（即“作弊”），确保模型逐步生成的能力与推理阶段一致。训练过程中仍然需要真实标签作为目标输出，但掩码限制了模型在生成当前词时对未来的访问。</p>
-<h4 id="Encoder-Decoder-Attention"><a href="#Encoder-Decoder-Attention" class="headerlink" title="Encoder-Decoder Attention"></a>Encoder-Decoder Attention</h4><p>计算的是解码器的输出和编码器的输出之间的相关性，这里的Query是解码器的输出，Key和Value是编码器的输出。</p>
-<p>![[Pasted image 20250323185530.png]]</p>
-<p>![[Pasted image 20250323185720.png]]</p>
-<p>注意这里是将编码器的输出输入到解码器中的每一层的Encoder-Decoder Attention中。这里是神经网络中的<strong>特征重用</strong>思想，并且解码器中的网络是直筒式的，所以这些特征是可以重用的。</p>
-<h4 id="RNN-vs-Transformer"><a href="#RNN-vs-Transformer" class="headerlink" title="RNN vs. Transformer"></a>RNN vs. Transformer</h4><ul>
-<li>RNN是串行的，Transformer是并行的</li>
-<li>对于有严格偏序关系的序列，RNN可能更适合</li>
-<li>对于长序列，Transformer更适合</li>
-<li>对于较小的数据量，Transformers参数量较大，表现可能不如RNN</li>
-</ul>
-<p>![[Pasted image 20250323190623.png]]</p>
-<p>![[Pasted image 20250323190856.png]]</p>
-<h3 id="X-formers-Variance-with-Improvements"><a href="#X-formers-Variance-with-Improvements" class="headerlink" title="X-formers Variance with Improvements"></a>X-formers Variance with Improvements</h3><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2106.04554">[2106.04554] A Survey of Transformers</a></p>
-<p>![[Pasted image 20250323191632.png]]</p>
-<p>![[Pasted image 20250323191637.png]]</p>
-<h4 id="Lineariezd-Attention"><a href="#Lineariezd-Attention" class="headerlink" title="Lineariezd Attention"></a>Lineariezd Attention</h4><h4 id="Flow-Attention"><a href="#Flow-Attention" class="headerlink" title="Flow Attention"></a>Flow Attention</h4><h3 id="GPT-Generative-Pre-trained-Transformer"><a href="#GPT-Generative-Pre-trained-Transformer" class="headerlink" title="GPT: Generative Pre-trained Transformer"></a>GPT: Generative Pre-trained Transformer</h3><h4 id="Transfer-Learning"><a href="#Transfer-Learning" class="headerlink" title="Transfer Learning"></a>Transfer Learning</h4><p>先将一个模型预训练好，然后在特定的任务上进行微调。一般而言，预训练的过程是无监督的，优点是可以使用大规模数据。</p>
-<h4 id="Pre-Training"><a href="#Pre-Training" class="headerlink" title="Pre-Training"></a>Pre-Training</h4><p>![[Pasted image 20250324190821.png]]</p>
-<ul>
-<li>直接使用的是Transformers中的block，但是这里使用12层</li>
-<li>只使用decoder没有encoder，因为这不是一个机器翻译的任务</li>
-<li>在计算损失函数的过程中，使用的似然函数是最大似然估计，在实际中使用一个参数化的网络来近似需要的概率。</li>
-</ul>
-<h4 id="Supervised-Fine-Tuning"><a href="#Supervised-Fine-Tuning" class="headerlink" title="Supervised Fine-Tuning"></a>Supervised Fine-Tuning</h4><p>对于不同的任务，需要更换模型的输出头，并且还要使用新的损失函数。关注上下文建模。<br>![[Pasted image 20250324193704.png]]</p>
-<p>最后是使用无监督训练的损失函数和有监督训练的损失函数的加权和，这是一个<strong>多任务学习</strong>。当微调的数据比较少的时候，可以使用无监督训练的损失函数的权重较大。</p>
-<p>对于不同的下游任务，要进行任务适配<em>Task Specific Adaptation</em>。对于不同的下游任务，可以使用不同的头。<br>![[Pasted image 20250324194137.png]]</p>
-<h4 id="GPT-2-GPT-3"><a href="#GPT-2-GPT-3" class="headerlink" title="GPT-2 &amp; GPT-3"></a>GPT-2 &amp; GPT-3</h4><p>Zero-shot learning：在没有看到训练数据的情况下，直接在测试集上进行预测。通过在预训练阶段使用大规模的数据，可以使得模型具有更好的泛化能力，这样可以提高在一些常见问题上的表现。</p>
-<h3 id="BERT-Bidirectional-Encoder-Representations-from-Transformers"><a href="#BERT-Bidirectional-Encoder-Representations-from-Transformers" class="headerlink" title="BERT: Bidirectional Encoder Representations from Transformers"></a>BERT: Bidirectional Encoder Representations from Transformers</h3><p>与GPT不同的是，BERT是双向的，可以看到上下文的信息。<br>![[Pasted image 20250324195035.png]]</p>
-<p>BERT在encoder阶段就使用了mask，这样可以使得模型在训练的时候不会看到未来的信息。在训练的过程中随机地mask掉一些词，然后预测这些词。如果遮挡的词太少，那么模型得到的训练不够， 如果遮挡的词太多，那么得到的上下文就很少。<br>在训练的过程中就使用了102种语言。<br>特征工程：使用了更多的特征，引入了更多的embedding<br>是多个任务的联合训练，这样可以使得模型更加通用。</p>
-<h4 id="RoBERTa-A-Robustly-Optimized-BERT-Pretraining-Approach"><a href="#RoBERTa-A-Robustly-Optimized-BERT-Pretraining-Approach" class="headerlink" title="RoBERTa: A Robustly Optimized BERT Pretraining Approach"></a>RoBERTa: A Robustly Optimized BERT Pretraining Approach</h4><p>经过充分的调参和更长的训练时间，使得模型的表现更好。<br>证明了BERT中的下句预测是没有用的，因为在RoBERTa中去掉了这个任务。<br>mask的pattern可以动态调整</p>
-<h4 id="ALBERT-A-Lite-BERT-for-Self-supervised-Learning-of-Language-Representations"><a href="#ALBERT-A-Lite-BERT-for-Self-supervised-Learning-of-Language-Representations" class="headerlink" title="ALBERT: A Lite BERT for Self-supervised Learning of Language Representations"></a>ALBERT: A Lite BERT for Self-supervised Learning of Language Representations</h4><p>低秩分解，减少参数量<br>![[Pasted image 20250324203227.png]]</p>
-<p>跨层参数共享：可以让模型更加稳定</p>
-<h4 id="T5-Text-to-Text-Transfer-Transformer"><a href="#T5-Text-to-Text-Transfer-Transformer" class="headerlink" title="T5: Text-to-Text Transfer Transformer"></a>T5: Text-to-Text Transfer Transformer</h4><p>迁移是泛化的高级形式：可以将多种文本任务统一为文本到文本的形式，这样可以使得模型更加通用。</p>
-<p>架构层面的创新：<br>![[Pasted image 20250324203639.png]]</p>
-<p>这里使用的是prefix-LM，这样可以使得模型更加通用。</p>
-<h3 id="Vision-Transformer"><a href="#Vision-Transformer" class="headerlink" title="Vision Transformer"></a>Vision Transformer</h3><h4 id="ViT"><a href="#ViT" class="headerlink" title="ViT"></a>ViT</h4><p>将一个图像变成一个patch<br>增加一个Position Embedding，于是得到各个patch的特征的加权平均。<br> 主要的贡献是将图像转换为序列，从而可以使用transformers来进行建模。在这个之前，普遍的观点是transformers只能用于文本数据，而CNN用于图像数据。</p>
-<h4 id="Swim-Transformer"><a href="#Swim-Transformer" class="headerlink" title="Swim Transformer"></a>Swim Transformer</h4><p>将CNN中的一些归纳偏好引入，可以使用局部的注意力，但是在一定程度上能捕捉全局的信息，通过Shifted Window Mechanism来实现。<br>层次化特征：<br>![[Pasted image 20250324205304.png]]</p>
-<p>密集预测任务对于层次化特征需求更高，于是这个模型的表现是更好地。</p>
-<h4 id="DETR"><a href="#DETR" class="headerlink" title="DETR"></a>DETR</h4><p>![[Pasted image 20250324205845.png]]</p>
-<p>![[Pasted image 20250324205921.png]]</p>
-<h3 id="Fundation-Models"><a href="#Fundation-Models" class="headerlink" title="Fundation Models"></a>Fundation Models</h3><p> $$<br> e^{\alpha+ \beta i } &#x3D; e^{\alpha} e^{\beta i} &#x3D; e^{\alpha}(\cos \beta + i \sin \beta)<br> $$</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-6/" data-id="cmc96uyn10004msva3swzhofn" data-title="Deep Learning Lecture-6" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-3/" data-id="cmc97i9rc0003d4vaaqhx5ye8" data-title="Deep Learning Lecture-3" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -763,7 +549,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-4/" data-id="cmc96uyn10005msvabb681foa" data-title="Deep Learning Lecture-4" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-4/" data-id="cmc97i9rc0004d4va8mvl54s1" data-title="Deep Learning Lecture-4" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -809,12 +595,12 @@
 <h4 id="Language-Model"><a href="#Language-Model" class="headerlink" title="Language Model"></a>Language Model</h4><p>语言中的建模任务为：给定一个句子的前面的单词，预测下一个单词。这个任务被称为语言模型。语言模型的目标是最大化句子的概率。语言模型的输入是一个句子，输出是一个概率分布，表示下一个单词的概率。</p>
 <p><strong>向量化表达</strong>：可以使用one-hot向量表示单词，也可以使用词向量表示单词。每个词的表达大概需要1000维度。如果使用MLP，要将每个词的向量拼接起来，然后输入到MLP中。这样的模型不适合处理长序列，参数是非常可怕的。在MLP中丢失了一部分的信息（由于MLP的输入维度是可交换的），丢失了前后序关系。</p>
 <h4 id="A-Better-MLP"><a href="#A-Better-MLP" class="headerlink" title="A Better MLP"></a>A Better MLP</h4><p><strong>n-gram</strong>：使用n-gram模型，可以考虑前n个单词的信息。</p>
-<p>![[Pasted image 20250320225821.png]]<br>输出的概率分布是一个softmax层，输入是一个向量，这个向量是前n个单词的向量拼接起来的。然后在得到的概率分布上进行采样。<strong>滚动预测</strong>，使用第一个次的预测结果作为第二次的输入，会有<strong>误差累计</strong>的问题。<br>但是上述模型会有一个问题：参数量太大；对于每一个词的预测需要有一个MLP，这样的模型不适合处理长序列。</p>
-<h3 id="RNN"><a href="#RNN" class="headerlink" title="RNN"></a>RNN</h3><p>![[Pasted image 20250321083321.png]]</p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250320225821.png" alt="Pasted image 20250320225821.png"><br>输出的概率分布是一个softmax层，输入是一个向量，这个向量是前n个单词的向量拼接起来的。然后在得到的概率分布上进行采样。<strong>滚动预测</strong>，使用第一个次的预测结果作为第二次的输入，会有<strong>误差累计</strong>的问题。<br>但是上述模型会有一个问题：参数量太大；对于每一个词的预测需要有一个MLP，这样的模型不适合处理长序列。</p>
+<h3 id="RNN"><a href="#RNN" class="headerlink" title="RNN"></a>RNN</h3><p><img src="D:/software/Git/images/Pasted%20image%2020250321083321.png" alt="Pasted image 20250321083321.png"></p>
 <p>循环神经网络中最重要的内容是中间的隐藏层，构建学习到的时间程度上的特征。在每个时刻输入的都是向量，称为<em>token embedding</em>。<br>上述模型在纵向方向上，从$x_t$到$y_t$就是一个前馈网络<em>feedforward network</em>（包括MLP和CNN）。在横向方向上，从$s_{t-1}$到$s_t$就是一个循环网络<em>recurrent network</em>。</p>
 <h4 id="Recurrent-Layer"><a href="#Recurrent-Layer" class="headerlink" title="Recurrent Layer"></a>Recurrent Layer</h4><p>$h_t$用来编码$t$时刻之前的所有信息。对于这样的层，接受的输入是$x_t$和$h_{t-1}$，输出是$h_t$。$h_t$的计算公式如下：<br>$$<br>h_t &#x3D; f_W(h_{t-1},x_t)<br>$$<br>$$<br>h_t &#x3D; \tanh (Wh_{t-1} + Ux_t)<br>$$<br>长期以来使用的是双曲正切作为激活函数，但是使用ReLu可能有更好的梯度性质。<br>$$<br>y_t &#x3D; Vh_t<br>$$<br>可以认为$h_t$包含了之前的所有信息，所以使用$h_t$来预测$y_t$。<strong>通过引入状态变量来使得递推公式在形式上是二阶依赖。</strong></p>
-<h4 id="Bidirectional-Deep-RNN"><a href="#Bidirectional-Deep-RNN" class="headerlink" title="Bidirectional&amp;Deep RNN"></a>Bidirectional&amp;Deep RNN</h4><p>![[Pasted image 20250321091923.png]]</p>
-<p>![[Pasted image 20250321091936.png]]</p>
+<h4 id="Bidirectional-Deep-RNN"><a href="#Bidirectional-Deep-RNN" class="headerlink" title="Bidirectional&amp;Deep RNN"></a>Bidirectional&amp;Deep RNN</h4><p><img src="D:/software/Git/images/Pasted%20image%2020250321091923.png" alt="Pasted image 20250321091923.png"></p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250321091936.png" alt="Pasted image 20250321091936.png"></p>
 <p>这里纵向方向上的前馈网络中的训练难点在前面的MLP与CNN中是一样的，梯度消失和梯度爆炸。<br>上面的图中的$y_{t,c}$是真是标签的独热编码，$C$是此表中的元素个数。</p>
 <p>在横向方向上，梯度消失是很严重的。因为$h_t$包含了$h_{t-1}$的信息，所以梯度会在时间上指数级的衰减。解决这个问题的方法是<strong>LSTM</strong>和<strong>GRU</strong>。</p>
 <h4 id="RNN-for-LM"><a href="#RNN-for-LM" class="headerlink" title="RNN for LM"></a>RNN for LM</h4><ul>
@@ -824,13 +610,13 @@
 <li>但是在实际上，很难建模时间上的长时间依赖。对于较早的信息，后面的权重会很小。</li>
 </ul>
 <p><strong>一个模型是否有效，在于<em>assumptions</em>与实际情况是否匹配。</strong></p>
-<h4 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h4><p>![[Pasted image 20250321102900.png]]</p>
+<h4 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h4><p><img src="D:/software/Git/images/Pasted%20image%2020250321102900.png" alt="Pasted image 20250321102900.png"></p>
 <h5 id="Many-to-One"><a href="#Many-to-One" class="headerlink" title="Many to One"></a>Many to One</h5><p>主要实现的是情感识别、文本分类等任务。在最后一个时间步的输出是最终的输出。最后一个时刻的状态不一定包含有重要的信息（比如上下文中的情感词）。</p>
 <h5 id="One-to-Many"><a href="#One-to-Many" class="headerlink" title="One to Many"></a>One to Many</h5><p>可能的输入有，比如输入一个图像的特征向量再输入到这个网络中。对于这个输入，应该是输入每个状态还是输入所有的状态。并没有解决每一个词对应图中的哪一个区域的问题。</p>
 <h5 id="Many-to-Many"><a href="#Many-to-Many" class="headerlink" title="Many to Many"></a>Many to Many</h5><p>有两种情况，输入是每个时刻的语音的因素，输出的是对应的symbol，是输入输出平行<em>parallel</em>的，但是输入和输出是异构的。</p>
 <p>LM输入和输出是基本上平行的，但是滞后一个时刻，是自回归<em>autoregressive</em>的。</p>
 <h5 id="Sequence-to-Sequence"><a href="#Sequence-to-Sequence" class="headerlink" title="Sequence to Sequence"></a>Sequence to Sequence</h5><p>输入和输出都是序列，输入和输出的长度不一定相同。比如机器翻译、语音识别等任务。这个任务可以分为两个部分：编码器和解码器。编码器将输入序列编码到一个向量中，解码器将这个向量解码到输出序列中。</p>
-<p>![[Pasted image 20250321110238.png]]</p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250321110238.png" alt="Pasted image 20250321110238.png"></p>
 <p><em>为什么上述序列中的参数$W_1$和$W_2$是不一样的？</em></p>
 <p>首先将输入变量$\{x_t\}$编码到状态变量$\{h_t\}$中，然后再将状态变量$\{h_t\}$解码到输出变量$\{y_t\}$中。编码器是没有loss function的，因为输入和输出是异构的。解码器接受的输入是编码器的输出，解码器的输出是一个概率分布。解码器的loss function是交叉熵损失函数。</p>
 <p><strong>机器翻译任务中的挑战</strong>：</p>
@@ -838,20 +624,20 @@
 <li>输入和输出是异构的</li>
 <li>长序列的处理</li>
 </ul>
-<p>![[Pasted image 20250321130443.png]]</p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250321130443.png" alt="Pasted image 20250321130443.png"></p>
 <p><strong>如何从概率中采样</strong>：</p>
 <ul>
 <li>选择概率最大的</li>
 <li>概率较大的有更大的概率被选择</li>
 <li>Beam Search贪心方法进行搜索</li>
 </ul>
-<p>![[Pasted image 20250321130842.png]]</p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250321130842.png" alt="Pasted image 20250321130842.png"></p>
 <p>可以选择概率较大的k个词，然后以这个词为条件计算下一个词的条件概率，类似于构建一个真k叉树，这样的方法是一种贪心的方法。考虑这棵树上所有的路径，选择最大的路径（本质上是一种搜索技术）。</p>
-<h3 id="Backpropagation-Through-Time"><a href="#Backpropagation-Through-Time" class="headerlink" title="Backpropagation Through Time"></a>Backpropagation Through Time</h3><p>![[Pasted image 20250321133148.png]]</p>
+<h3 id="Backpropagation-Through-Time"><a href="#Backpropagation-Through-Time" class="headerlink" title="Backpropagation Through Time"></a>Backpropagation Through Time</h3><p><img src="D:/software/Git/images/Pasted%20image%2020250321133148.png" alt="Pasted image 20250321133148.png"></p>
 <p>$$<br>\frac{\partial L}{\partial U}  &#x3D; \sum_{t&#x3D;0}^T \frac{\partial L_{t}}{\partial U} &#x3D; \sum_{t&#x3D;0}^{T} \sum_{s&#x3D;0}^t \frac{\partial L_{t}}{\partial y_t} \frac{\partial y_t}{\partial h_t}  \frac{\partial h_t}{\partial h_s}\frac{\partial h_s}{\partial U}<br>$$<br>前一个求和的意义是对于损失函数的各个部分求和，后面的求和式是对于$h_t$的前面的每一个可能的链求和。<br>其中：<br>$$<br>\frac{\partial h_t}{\partial h_s} &#x3D; \prod_{i&#x3D;s+1}^t \frac{\partial h_i}{\partial h_{i-1}}<br>$$<br>这个式子是一个矩阵乘法，是一个矩阵的连乘。这个矩阵是一个雅可比矩阵。</p>
-<p>![[Pasted image 20250321135457.png]]</p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250321135457.png" alt="Pasted image 20250321135457.png"></p>
 <p>用<em>Cauchy-Schwarz</em>不等式可以证明：<br>$$<br>\| \frac{\partial h_t}{\partial h_{t-1}} \| \leq \| W^T \| \|diag (f&#39;(h_{t-1}))\| \leq \sigma_{max} \gamma<br>$$<br>这里$\sigma_{max}$是矩阵$W$的最大奇异值，$\gamma$是激活函数的导数的最大值。<br>于是：<br>$$<br>\| \frac{\partial h_t}{\partial h_{s}} \| &#x3D;  \prod_{i&#x3D;s+1}^t \| \frac{\partial h_i}{\partial h_{i-1}} \| \leq (\sigma_{max} \gamma)^{t-s}<br>$$<br>这个式子说明了梯度消失的问题，梯度消失是指梯度在时间上的指数级衰减。或者梯度爆炸的问题，梯度爆炸是指梯度在时间上的指数级增长。</p>
-<h4 id="Truncated-BPTT"><a href="#Truncated-BPTT" class="headerlink" title="Truncated BPTT"></a>Truncated BPTT</h4><p>![[Pasted image 20250321140454.png]]</p>
+<h4 id="Truncated-BPTT"><a href="#Truncated-BPTT" class="headerlink" title="Truncated BPTT"></a>Truncated BPTT</h4><p><img src="D:/software/Git/images/Pasted%20image%2020250321140454.png" alt="Pasted image 20250321140454.png"></p>
 <p>这个方法是将时间上的梯度截断，这样可以减少梯度消失和梯度爆炸的问题。但是这样的方法会导致梯度的估计不准确，因为梯度的估计是基于一个截断的时间窗口的。</p>
 <h4 id="Long-Short-Term-Memory"><a href="#Long-Short-Term-Memory" class="headerlink" title="Long Short-Term Memory"></a>Long Short-Term Memory</h4><blockquote>
 <p>为什么这样就能实现所谓的LSTM</p>
@@ -859,17 +645,17 @@
 <ul>
 <li>遗忘，将过去“没用”的信息遗忘</li>
 <li>更新，将新的信息更新到状态变量中</li>
-<li>输出，输出门控制一部分信息用来进行预测<br>![[Pasted image 20250321141243.png]]<br>$t$时刻的状态变量$h_t$储存的是$t$时刻的信息，$c_t$是$t$时刻的记忆变量，$h_{t-1}$和$x_t$是$t$时刻的输入，$f_t$是遗忘门，$i_t$是输入门，$o_t$是输出门，$g_t$是更新门。</li>
+<li>输出，输出门控制一部分信息用来进行预测<br><img src="D:/software/Git/images/Pasted%20image%2020250321141243.png" alt="Pasted image 20250321141243.png"><br>$t$时刻的状态变量$h_t$储存的是$t$时刻的信息，$c_t$是$t$时刻的记忆变量，$h_{t-1}$和$x_t$是$t$时刻的输入，$f_t$是遗忘门，$i_t$是输入门，$o_t$是输出门，$g_t$是更新门。</li>
 </ul>
-<p>![[Pasted image 20250321141234.png]]<br>上述网络构造了一个信息流高速路径，使得梯度能够进行快速的传播。</p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250321141234.png" alt="Pasted image 20250321141234.png"><br>上述网络构造了一个信息流高速路径，使得梯度能够进行快速的传播。</p>
 <p>遗忘门和残差网络的思想是类似的，都是将过去的信息和现在的信息进行融合。这样的网络可以更好的处理长序列的问题。[[Deep Learning Lecture-3#ResNet]]</p>
 <h4 id="Gradient-Clipping"><a href="#Gradient-Clipping" class="headerlink" title="Gradient Clipping"></a>Gradient Clipping</h4><p>梯度的大小是由模长决定的，如果梯度的模长过大，可以将梯度的模长进行截断。这样可以避免梯度爆炸的问题。</p>
 <h4 id="Variational-Dropout"><a href="#Variational-Dropout" class="headerlink" title="Variational Dropout"></a>Variational Dropout</h4><p>在深度网络中，如果是过拟和的，也就是对于一个含有多个参数的网络。也就是说如果输入的参数小于参数的个数，那么相对应的线性方程组是欠定的。</p>
 <p>在RNN中对应的纵向方向上是多层感知机，所以可以采用标准的Dropout方法。但是在横向方向上是一个循环网络，Dropout方法不适用。因为Dropout方法会破坏时间上的连续性，违背了参数共享的原则。<br>采用<strong>步调一致</strong>的方法进行操作，这样可以保持时间上的连续性。这样的方法是<strong>Variational Dropout</strong>。</p>
-<h4 id="Layer-Normalization"><a href="#Layer-Normalization" class="headerlink" title="Layer Normalization"></a>Layer Normalization</h4><p>![[Pasted image 20250322202759.png]]</p>
+<h4 id="Layer-Normalization"><a href="#Layer-Normalization" class="headerlink" title="Layer Normalization"></a>Layer Normalization</h4><p><img src="D:/software/Git/images/Pasted%20image%2020250322202759.png" alt="Pasted image 20250322202759.png"></p>
 <p>在CNN中，对于每一个通道的值进行归一化。在这样的每一个通道中计算均值和方差。还是要加入一个平移变量和伸缩变量。</p>
 <p>在RNN中，主要的原因是门控结构是相对于每一个序列而言的，所以应该引入一种新的归一化方法<em>Layer Normalization</em>，应该在每一条样本（一个序列）在每一个时刻经过之后的值在$C$个通道上进行归一化操作。<br>最后得到的结果是：将所有的向量放在以原点为球心的单位球面上。</p>
-<h4 id="Weight-Normalization"><a href="#Weight-Normalization" class="headerlink" title="Weight Normalization"></a>Weight Normalization</h4><p>对于每层的参数$\mathbf{w}$进行重参数化：<br>$$<br>\mathbf{w} &#x3D; \frac{g}{\|v\|}v<br>$$<br>![[Pasted image 20250322204925.png]]</p>
+<h4 id="Weight-Normalization"><a href="#Weight-Normalization" class="headerlink" title="Weight Normalization"></a>Weight Normalization</h4><p>对于每层的参数$\mathbf{w}$进行重参数化：<br>$$<br>\mathbf{w} &#x3D; \frac{g}{\|v\|}v<br>$$<br><img src="D:/software/Git/images/Pasted%20image%2020250322204925.png" alt="Pasted image 20250322204925.png"></p>
 <p>对右边的式子$\frac{v}{\|v\|}$进行优化是更为容易的，重参数化的意思是，在训练和测试的时候使用不同的参数表达形式，这样是更加容易优化的。</p>
 <h4 id="Training-Inference-Shift"><a href="#Training-Inference-Shift" class="headerlink" title="Training-Inference Shift"></a>Training-Inference Shift</h4><p>滚动预测：在训练的时候，使用真实的标签进行预测；在测试的时候，使用的是推理得到的值进行预测。这是一个自回归任务。</p>
 <h5 id="Curriculum-Learning"><a href="#Curriculum-Learning" class="headerlink" title="Curriculum Learning"></a>Curriculum Learning</h5><p>在训练的时候，可以先训练一些简单的任务，然后再训练一些复杂的任务。这样可以更好的训练模型。<br>在实际中，可以对所有的样本计算loss，先计算loss较小的样本，然后再计算loss较大的样本。这就是<strong>自步学习</strong>。<br>这里涉及到选择不同的样本顺序的问题。</p>
@@ -887,14 +673,14 @@
 <p>存在时间<em>temporal Attention</em>和空间<em>Spatial Attention</em>上的注意力。一般而言指的是时间上的注意力。</p>
 <h4 id="Auto-Regessive"><a href="#Auto-Regessive" class="headerlink" title="Auto-Regessive"></a>Auto-Regessive</h4><p>[[#Sequence to Sequence]]</p>
 <p>最重要的问题是编码器和解码器之间的信息沟通太少了，存在有信息瓶颈。并且在翻译任务中，输入和输出的顺序并不是一致的，大部分的语言的语序是不一样的。<br><strong>希望看到后面的信息</strong>，这和RNN的设计目的是相违背的。<strong>全连接的思想</strong>又回来了，获得全局信息的方法有很多，不只是有MLP的方法。有一种基本思想是<em><strong>Relevance</strong></em>，也就是和当前任务相关的信息。这个思想是在Attention中得到了体现。</p>
-<h4 id="Attention"><a href="#Attention" class="headerlink" title="Attention"></a>Attention</h4><p>![[Pasted image 20250322222251.png]]</p>
+<h4 id="Attention"><a href="#Attention" class="headerlink" title="Attention"></a>Attention</h4><p><img src="D:/software/Git/images/Pasted%20image%2020250322222251.png" alt="Pasted image 20250322222251.png"></p>
 <p>计算两个东西的相似度有：计算内积、输入<em>relation network</em>。这样的模型在互联网中有很多的应用，比如推荐系统、搜索引擎等。</p>
-<p>![[Pasted image 20250323084415.png]]</p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250323084415.png" alt="Pasted image 20250323084415.png"></p>
 <p>注意力的分配是符合概率分布的，所以可以使用上面计算得到的相关性$e_{ij}$使用softmax函数进行归一化。这样得到的分布就是注意力的分布：<br>$$<br>\alpha_{ij} &#x3D; \frac{\exp(e_{ij})}{\sum_{k&#x3D;1}^{T_x} \exp(e_{ik})}<br>$$<br>上述计算式表达的含义是，在状态$i$的时刻分配在$j$上的注意力（对于$j$的求和为1）。继续计算$c_i$：<br>$$<br>c_i &#x3D; \sum_{j&#x3D;1}^{T_x} \alpha_{ij} x_j<br>$$<br>这里$c_i$是对于状态$i$的时刻的注意力向量，是对于$x$的加权和。<br>$$<br>s_i &#x3D; f(s_{i-1},y_{i-1},c_i)<br>$$<br>这里$s_i$是状态变量，$y_{i-1}$是前一个时刻的输出，$c_i$是当前时刻的注意力向量。这里的函数$f$是一个GRU or LSTM。这个模型是一个<strong>Seq2Seq</strong>模型。</p>
 <blockquote>
 <p>这里的$c_i$和$s_i$的区别是什么，为什么和LSTM有关</p>
 </blockquote>
-<p>![[Pasted image 20250323084332.png]]<br>![[Pasted image 20250323084535.png]]</p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250323084332.png" alt="Pasted image 20250323084332.png"><br><img src="D:/software/Git/images/Pasted%20image%2020250323084535.png" alt="Pasted image 20250323084535.png"></p>
 <p>在机器翻译的过程中，使用source的上下文信息比直接使用词典来翻译更好。这样的模型可以更好的处理长序列的问题。只要是序列都会使用<strong>滑动窗口</strong>，一般设置为50~100之间。对于较短的情况，可以使用psdding的方法；对于较长的情况会使用截断的方法。希望找一个与序列的长度线性关系的模型。</p>
 <h4 id="Attention-vs-MLP"><a href="#Attention-vs-MLP" class="headerlink" title="Attention vs. MLP"></a>Attention vs. MLP</h4><p>相同点：</p>
 <ul>
@@ -907,7 +693,7 @@
 </ul>
 <h4 id="Hierarchical-Attention"><a href="#Hierarchical-Attention" class="headerlink" title="Hierarchical Attention"></a>Hierarchical Attention</h4><p>先建模词注意力然后再建模句子注意力。</p>
 <h4 id="Global-Attention"><a href="#Global-Attention" class="headerlink" title="Global Attention"></a>Global Attention</h4><p>$$<br>\text{score} &#x3D; \begin{cases}<br>h_t^T \overline{h_s} \\<br>h_t^T W_a \overline{h_s} \\<br>v_a^T \tanh(W_a[h_t;\overline{h_s}])<br>\end{cases}<br>$$<br>发现上面三种计算方式的效率是差不多的。</p>
-<p>![[Pasted image 20250323090740.png]]</p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250323090740.png" alt="Pasted image 20250323090740.png"></p>
 <h3 id="Memory"><a href="#Memory" class="headerlink" title="Memory"></a>Memory</h3><h4 id="Human-Memory"><a href="#Human-Memory" class="headerlink" title="Human Memory"></a>Human Memory</h4><ul>
 <li>Sensory Memory<ul>
 <li>计算机视觉与机器感知</li>
@@ -923,14 +709,228 @@
 </li>
 </ul>
 <p>在自然语言中，比较困难的任务是进行对话，这时候需要进行长期记忆。在对话中，需要对话的上下文进行理解。</p>
-<h4 id="Neural-Turing-Machine"><a href="#Neural-Turing-Machine" class="headerlink" title="Neural Turing Machine"></a>Neural Turing Machine</h4><p>![[Pasted image 20250323092327.png]]</p>
+<h4 id="Neural-Turing-Machine"><a href="#Neural-Turing-Machine" class="headerlink" title="Neural Turing Machine"></a>Neural Turing Machine</h4><p><img src="D:/software/Git/images/Pasted%20image%2020250323092327.png" alt="Pasted image 20250323092327.png"></p>
 <p>在这个模型中，最重要的是对内存1进行寻址的操作，这个操作是一个注意力的操作。<br>对于读的操作，是按照注意力的大小对地址里面的内容进行加权平均。<br>对于写的操作，类似于LSTM中的Forget Gate，先进行擦除之后才进行写入。</p>
 <p>对于Internal Memory，最大的问题是可能会遗忘，对于External Memory，是一个外部的存储器，这样的存储是比较稳定的。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-5/" data-id="cmc96uyn20008msvahso580dh" data-title="Deep Learning Lecture-5" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-5/" data-id="cmc97i9rd0005d4vaeq1c3n62" data-title="Deep Learning Lecture-5" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Deep Learning Lecture-6" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/06/21/Deep%20Learning%20Lecture-6/" class="article-date">
+  <time class="dt-published" datetime="2025-06-20T16:00:00.000Z" itemprop="datePublished">2025-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/06/21/Deep%20Learning%20Lecture-6/">Deep Learning Lecture-6</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Transformers"><a href="#Transformers" class="headerlink" title="Transformers"></a>Transformers</h2><h3 id="Transformers-Attention-is-All-You-Need"><a href="#Transformers-Attention-is-All-You-Need" class="headerlink" title="Transformers: Attention is All You Need"></a>Transformers: Attention is All You Need</h3><p>[[Deep Learning Lecture-5#Attention]]</p>
+<p>再次理解Attention的概念：类似于”查字典“的操作，对于Query $q$, Key $k$和Value $v$，计算相关性，也就是重要性，对于输出序列中的第$i$个输出有价值的信息：<br>$$<br>w_{ij} &#x3D; a(q_i, k_j)<br>$$<br>其中$a$是一个函数，可以是内积、<em>Additive Attention</em>等。对于输出序列中的第$i$个输出，计算当前的输出的$q_i$，计算与输入序列中的$k_j$的相关性，然后对于$v_j$进行加权求和（这是一种寻址操作），得到的$c_i$是查字典所得到的信息：<br>$$<br>c_i &#x3D; \sum_{j&#x3D;1}^T w_{ij}v_j<br>$$<br><strong>希望找到一种更好的计算方法</strong>。</p>
+<p>在[[Deep Learning Lecture-5#RNN with Attention]]中问题在于：</p>
+<ul>
+<li>太复杂的模型</li>
+<li>某种意义上使用的Attention已经足够使用，不再需要循环网络</li>
+<li>循环网络的计算是串行的，不能有效加速</li>
+</ul>
+<h4 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self-Attention"></a>Self-Attention</h4><p>计算的是同一条序列中的不同位置之间的相关性，也就是自注意力。对于输入序列中的第$i$个位置，计算与其他位置的相关性，然后对于所有的位置进行加权求和：<br>规定Query $Q &#x3D; [q_1 \dots q_n]$，Key $K &#x3D; [k_1 \dots k_n]$，Value $V &#x3D; [v_1 \dots v_k]$，则：</p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250323133751.png" alt="Pasted image 20250323133751.png"></p>
+<h4 id="Scaled-Dot-Product-Attention"><a href="#Scaled-Dot-Product-Attention" class="headerlink" title="Scaled Dot-Product Attention"></a>Scaled Dot-Product Attention</h4><p>我们认为使用一个网络来计算相关性太复杂了，当两个向量是相同维度的时候可以直接计算内积。在这里，在计算先引入参数，使得其维度是一样的，从而可以计算内积：</p>
+<p><em>Scaled Dot-Product</em> :<br>$$<br>a(q,k) &#x3D; \frac{q^T k}{\sqrt{d_k}}<br>$$<br>使得变换前后的方差是一样的，这样可以使得梯度更加稳定，否则可能进入激活函数的饱和区。<br>$$<br>Attention(Q,K,V) &#x3D; \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V<br>$$<br>上面的式子将得到的$n \times n$的矩阵进行softmax操作，在归一化的过程中，<strong>是某一个query在所有的key上的注意力分配一定是$\mathbf{1}$</strong>。后面是对于Value的加权求和。<strong>在上面的公式中，$Q$、$K$和$V$中的向量都是行向量，进行softmax操作时也是在同一行上操作</strong>。</p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250323141917.png" alt="Pasted image 20250323141917.png"></p>
+<p>对于同一组输入，经过不同的线性变换得到的不同的Query、Key和Value，在样本数量为$m$的情况下，可以进行计算：</p>
+<p>$$<br>\begin{aligned}<br>&amp;W^Q \in \mathbb{R}^{d_k \times d_{\text{input}}}, \\<br>&amp;W^K \in \mathbb{R}^{d_k \times d_{\text{input}}}, \\<br>&amp;W^V \in \mathbb{R}^{d_v \times d_{\text{input}}} \\<br>&amp;Q &#x3D; X W^Q \in \mathbb{R}^{m \times d_k}, \\<br>&amp;K &#x3D; X W^K \in \mathbb{R}^{m \times d_k}, \\<br>&amp;V &#x3D; X W^V \in \mathbb{R}^{m \times d_v}. \\<br>&amp;QK^T \in \mathbb{R}^{m \times m}, \\<br>&amp;\text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right) \in \mathbb{R}^{m \times m}, \\<br>&amp;\text{Attention}(Q, K, V) &#x3D; \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V \in \mathbb{R}^{m \times d_v}.<br>\end{aligned}<br>$$</p>
+<p> <strong>维度总结表</strong></p>
+<table>
+<thead>
+<tr>
+<th>矩阵&#x2F;操作</th>
+<th>维度</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>输入矩阵 $X$</td>
+<td>$m \times d_{\text{input}}$</td>
+<td>包含 $m$ 个样本，每个样本维度为 $d_{\text{input}}$</td>
+</tr>
+<tr>
+<td>查询矩阵 $Q$</td>
+<td>$m \times d_k$</td>
+<td>每个样本的查询向量维度为 $d_k$</td>
+</tr>
+<tr>
+<td>键矩阵 $K$</td>
+<td>$m \times d_k$</td>
+<td>每个样本的键向量维度为 $d_k$</td>
+</tr>
+<tr>
+<td>值矩阵 $V$</td>
+<td>$m \times d_v$</td>
+<td>每个样本的值向量维度为 $d_v$</td>
+</tr>
+<tr>
+<td>注意力得分矩阵 $QK^T$</td>
+<td>$m \times m$</td>
+<td>样本间的注意力强度矩阵</td>
+</tr>
+<tr>
+<td>最终输出 $\text{Attention}(Q,K,V)$</td>
+<td>$m \times d_v$</td>
+<td>聚合所有样本的加权值信息，输出维度为 $d_v$</td>
+</tr>
+</tbody></table>
+<h4 id="Multi-Head-Attention"><a href="#Multi-Head-Attention" class="headerlink" title="Multi-Head Attention"></a>Multi-Head Attention</h4><p>注意到上面的注意力的表达能力是相当有限的，在language model同一个词和其他不同的词之间可能有很多种不同的关系，仅仅用一种简单的关系来表示是不够的。所以我们引入多头注意力，希望能在不同的侧面上进行表达。<br>$$<br>\text{MultiHead}(Q,K,V) &#x3D; \text{Concat}(\text{head}_1, \dots, \text{head}_h)W^O<br>$$<br>其中：<br>$$<br>\text{head}_i &#x3D; \text{Attention}(QW_i^Q, KW_i^K, VW_i^V)<br>$$<br>其中$W_i^Q, W_i^K, W_i^V$是不同的线性变换，$W^O$是最后的线性变换，最后进行的维度的规约操作。<br>与CNN相比，CNN的不同的通道之间与上一层的每一个通道之间都是有连接的；但是在这里，不同的头之间是没有连接的，这样可以使得不同的头可以关注不同的信息。</p>
+<p>不同的头之间是可以并行计算的，这样可以加速计算；但是缺点是内存占用会很大。</p>
+<h4 id="Position-wise-Feed-Forward-Networks"><a href="#Position-wise-Feed-Forward-Networks" class="headerlink" title="Position-wise Feed-Forward Networks"></a>Position-wise Feed-Forward Networks</h4><p><img src="D:/software/Git/images/Pasted%20image%2020250323145847.png" alt="Pasted image 20250323145847.png"><br>在标准 Transformer Block 中，注意力层之后会接一个前馈神经网络（FFN），其结构如下：</p>
+<ol>
+<li><p>输入张量形状：<br>$$<br>X \in \mathbb{R}^{B \times L \times H \times D}<br>$$</p>
+<ul>
+<li>$B$：Batch size  </li>
+<li>$L$：序列长度  </li>
+<li>$H$：Attention 头数  </li>
+<li>$D$：每个头的维度</li>
+</ul>
+</li>
+<li><p>将多头输出合并：<br>$$<br>X&#39; &#x3D; \mathrm{reshape}(X,\, (B,\,L,\,H\cdot D)) \in \mathbb{R}^{B \times L \times (H\!D)}<br>$$</p>
+</li>
+<li><p>两层“卷积”全连接结构<br>这里所谓“卷积”，实际上等价于在最后一维上对每个位置独立地做 1×1 卷积（与 RNN 中在不同时间步共享参数的思想一致），并在卷积核后加入非线性 ReLU。<br>$$<br>\begin{aligned}<br>Z_1 &amp;&#x3D; \mathrm{ReLU}\bigl(X&#39; W_1 + b_1\bigr),\quad W_1\in\mathbb{R}^{(H\!D)\times d_{ff}},\; b_1\in\mathbb{R}^{d_{ff}}\\<br>Z_2 &amp;&#x3D; Z_1 W_2 + b_2,\quad W_2\in\mathbb{R}^{d_{ff}\times(H\!D)},\; b_2\in\mathbb{R}^{(H\!D)}<br>\end{aligned}<br>$$</p>
+<ul>
+<li>第一层升维到中间维度 $d_{ff}$（例如 $2048$）  </li>
+<li>第二层降维回原始维度 $H\!D$（例如 $512$）</li>
+</ul>
+</li>
+<li><p>加残差 &amp; LayerNorm<br>$$<br>Y &#x3D; \mathrm{LayerNorm}\bigl(X&#39; + Z_2\bigr)\in\mathbb{R}^{B\times L\times(H\!D)}<br>$$</p>
+</li>
+<li><p>（可选）reshape 回多头排列：<br>$$<br>Y&#39; &#x3D; \mathrm{reshape}(Y,\, (B,\,L,\,H,\,D))<br>$$</p>
+</li>
+</ol>
+<ul>
+<li><strong>线性限制</strong>：除去 Attention 中的 SoftMax，若只堆线性层，模型表达能力较弱；引入 ReLU 后能够拟合更复杂的非线性函数。  </li>
+<li><strong>稀疏权重</strong>：Attention 的 SoftMax 本质上生成了一组“稀疏”权重，负责学习不同位置间的依赖；FFN 则负责在每个位置上“干净”地抽取该词的内部特征，避免无谓的跨词干扰。  </li>
+<li><strong>卷积视角</strong>：将 FFN 看作<strong>对最后一维的 1×1 卷积</strong>，等同于对每个位置独立但在所有位置共享参数，这与 RNN 在时间步上共享权重的假设一致。  </li>
+<li><strong>增强表达</strong>：Attention 解决了上下文依赖，FFN 则补强了单位置特征提取，两者协同提升了 Transformer 的整体表达能力。</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>注意</strong>：以上操作对每个批次（$B$）中每个序列位置（$L$）都独立执行，参数在所有位置间共享。</p>
+</blockquote>
+<h4 id="Residual-Connection"><a href="#Residual-Connection" class="headerlink" title="Residual Connection"></a>Residual Connection</h4><p>在上面的操作中，这些操作都是有排列不变性。<br>残差是一个标准的操作，这样可以让网络更好地记录位置编码。</p>
+<h4 id="Layer-Normalization"><a href="#Layer-Normalization" class="headerlink" title="Layer Normalization"></a>Layer Normalization</h4><p>目的是使得每一层经过Attention和Feed-Forward之后的输出的分布是一样的，这样可以使得梯度更加稳定。<br>[[Deep Learning Lecture-5#Layer Normalization]]</p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250323151056.png" alt="Pasted image 20250323151056.png"></p>
+<h4 id="Value-Embedding"><a href="#Value-Embedding" class="headerlink" title="Value Embedding"></a>Value Embedding</h4><ul>
+<li><p><strong>目的</strong>：将原始输入特征（如温度、流量、股价等数值）从低维（通常是 1 或几个通道）映射到高维向量空间，使模型能在更大维度下学习更丰富的特征表示。</p>
+</li>
+<li><p><strong>做法</strong>：通过一个线性层或 1×1 卷积（<code>TokenEmbedding</code>）把每个时间步的原始向量映成长度为 <code>d_model</code> 的向量。</p>
+</li>
+<li><p><strong>实现方式</strong>：通过一个线性映射或 $1 \times 1$ 卷积完，对于有$c_{in}$个特征维度的输入，使用卷积核的大小是$[d_{model},c_{in},1]$</p>
+</li>
+<li><p><strong>输入维度</strong>：$(\text{batch_size}, \text{seq_len}, c_{in})$</p>
+</li>
+<li><p><strong>输出维度</strong>：$(\text{batch_size}, \text{seq_len}, d_{model})$</p>
+</li>
+</ul>
+<h4 id="Positional-Encoding-Position-Embedding"><a href="#Positional-Encoding-Position-Embedding" class="headerlink" title="Positional Encoding &#x2F;Position Embedding"></a>Positional Encoding &#x2F;Position Embedding</h4><p>位置信息是顺序信息的一种泛化的形式。如果采用独热编码，这是一种类别信息而不是一个顺序信息，不同的是不可以比的。所以引入<em>position embedding</em>，这是一个矩阵，效果类似于一个查找表。查找操作在这里就是一个矩阵乘上一个独热编码的操作，这是因为GPU在矩阵乘法操作上是非常高效的。<br>但是独热编码会带来下面的问题</p>
+<ul>
+<li><strong>高维稀疏性</strong>：  独热编码的维度等于序列最大长度（如512），导致向量稀疏且计算效率低下（尤其对长序列）。</li>
+<li><strong>无法泛化到未见长度</strong>：  若训练时序列最大长度为512，模型无法处理更长的序列</li>
+</ul>
+<p><strong>引入归纳偏好</strong>：</p>
+<ul>
+<li>每个位置的编码应该是独一无二的且是确定的</li>
+<li>认为两个位置的距离应该是一致的</li>
+<li>应该生成一个有界的值，位置数随着序列长度的增加而增加</li>
+</ul>
+<p>Google的实现是使用的正弦和余弦函数的组合：<br>$$<br>e_i(2j) &#x3D; \sin\left(\frac{i}{10000^{2j&#x2F;d_{\text{model}}}}\right)<br>$$<br>$$<br>e_i(2j+1) &#x3D; \cos\left(\frac{i}{10000^{2j&#x2F;d_{\text{model}}}}\right)<br>$$<br>上述公式中的$i$指的句子中的第$i$个位置，$j$指的是位置编码的维度，$d_{\text{model}}$是位置编码的维度。这样的编码是满足上面的归纳偏好的。</p>
+<h4 id="Temporal-Embedding"><a href="#Temporal-Embedding" class="headerlink" title="Temporal Embedding"></a>Temporal Embedding</h4><ul>
+<li><strong>目的</strong>：针对时间序列中特有的“时间属性”——小时、星期几、月份、季节等——进行编码，让模型学到周期性（如日周期、周周期、年周期）和节假日效应等信息。</li>
+<li><strong>做法</strong>：通常把每个时间属性（hour-of-day, day-of-week, month 等）也映射到 <code>d_model</code> 维度，然后把这些属性向量加起来或拼接后再降维。<code>TemporalEmbedding</code> 类会根据 <code>embed_type</code>（如 <code>&#39;fixed&#39;</code> 或 <code>&#39;learned&#39;</code>）和 <code>freq</code>（如 <code>&#39;h&#39;</code>、<code>&#39;d&#39;</code>）来决定具体细节。</li>
+</ul>
+<h4 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h4><p>编码器中使用的是多头注意力、逐位置前馈网络和位置编码。在这个编码器中是一个直筒式的网络，好处是调参较为简单。</p>
+<p>缺点：</p>
+<ul>
+<li>二次复杂度</li>
+<li>参数量过大</li>
+<li>很多的头是冗余的</li>
+</ul>
+<p>训练阶段要使用多个头，发现有些头的权重较低，可以在推理阶段去掉这些头。</p>
+<h4 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h4><h5 id="Autoregressive"><a href="#Autoregressive" class="headerlink" title="Autoregressive"></a>Autoregressive</h5><p><img src="D:/software/Git/images/Pasted%20image%2020250323161530.png" alt="Pasted image 20250323161530.png"></p>
+<p>预测阶段一定要使用滚动预测，这是一个自回归的状态，但是这是一个串行的操作，会比较慢。但是在训练阶段这样是不能接受的，我希望训练的不同阶段可以并行计算，但是这里要求在一开始输入所有的序列，所以这里需要<strong>遮挡</strong>。<br>在算Attention的时候，对于当前的位置，只能看到之前的位置，不能看到之后的位置。</p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250323163151.png" alt="Pasted image 20250323163151.png"></p>
+<p>在编码器上是不能用的，因为防止解码器在训练时利用未来的目标序列信息（即“作弊”），确保模型逐步生成的能力与推理阶段一致。训练过程中仍然需要真实标签作为目标输出，但掩码限制了模型在生成当前词时对未来的访问。</p>
+<h4 id="Encoder-Decoder-Attention"><a href="#Encoder-Decoder-Attention" class="headerlink" title="Encoder-Decoder Attention"></a>Encoder-Decoder Attention</h4><p>计算的是解码器的输出和编码器的输出之间的相关性，这里的Query是解码器的输出，Key和Value是编码器的输出。</p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250323185530.png" alt="Pasted image 20250323185530.png"></p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250323185720.png" alt="Pasted image 20250323185720.png"></p>
+<p>注意这里是将编码器的输出输入到解码器中的每一层的Encoder-Decoder Attention中。这里是神经网络中的<strong>特征重用</strong>思想，并且解码器中的网络是直筒式的，所以这些特征是可以重用的。</p>
+<h4 id="RNN-vs-Transformer"><a href="#RNN-vs-Transformer" class="headerlink" title="RNN vs. Transformer"></a>RNN vs. Transformer</h4><ul>
+<li>RNN是串行的，Transformer是并行的</li>
+<li>对于有严格偏序关系的序列，RNN可能更适合</li>
+<li>对于长序列，Transformer更适合</li>
+<li>对于较小的数据量，Transformers参数量较大，表现可能不如RNN</li>
+</ul>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250323190623.png" alt="Pasted image 20250323190623.png"></p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250323190856.png" alt="Pasted image 20250323190856.png"></p>
+<h3 id="X-formers-Variance-with-Improvements"><a href="#X-formers-Variance-with-Improvements" class="headerlink" title="X-formers Variance with Improvements"></a>X-formers Variance with Improvements</h3><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2106.04554">[2106.04554] A Survey of Transformers</a></p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250323191632.png" alt="Pasted image 20250323191632.png"></p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250323191637.png" alt="Pasted image 20250323191637.png"></p>
+<h4 id="Lineariezd-Attention"><a href="#Lineariezd-Attention" class="headerlink" title="Lineariezd Attention"></a>Lineariezd Attention</h4><h4 id="Flow-Attention"><a href="#Flow-Attention" class="headerlink" title="Flow Attention"></a>Flow Attention</h4><h3 id="GPT-Generative-Pre-trained-Transformer"><a href="#GPT-Generative-Pre-trained-Transformer" class="headerlink" title="GPT: Generative Pre-trained Transformer"></a>GPT: Generative Pre-trained Transformer</h3><h4 id="Transfer-Learning"><a href="#Transfer-Learning" class="headerlink" title="Transfer Learning"></a>Transfer Learning</h4><p>先将一个模型预训练好，然后在特定的任务上进行微调。一般而言，预训练的过程是无监督的，优点是可以使用大规模数据。</p>
+<h4 id="Pre-Training"><a href="#Pre-Training" class="headerlink" title="Pre-Training"></a>Pre-Training</h4><p><img src="D:/software/Git/images/Pasted%20image%2020250324190821.png" alt="Pasted image 20250324190821.png"></p>
+<ul>
+<li>直接使用的是Transformers中的block，但是这里使用12层</li>
+<li>只使用decoder没有encoder，因为这不是一个机器翻译的任务</li>
+<li>在计算损失函数的过程中，使用的似然函数是最大似然估计，在实际中使用一个参数化的网络来近似需要的概率。</li>
+</ul>
+<h4 id="Supervised-Fine-Tuning"><a href="#Supervised-Fine-Tuning" class="headerlink" title="Supervised Fine-Tuning"></a>Supervised Fine-Tuning</h4><p>对于不同的任务，需要更换模型的输出头，并且还要使用新的损失函数。关注上下文建模。<br><img src="D:/software/Git/images/Pasted%20image%2020250324193704.png" alt="Pasted image 20250324193704.png"></p>
+<p>最后是使用无监督训练的损失函数和有监督训练的损失函数的加权和，这是一个<strong>多任务学习</strong>。当微调的数据比较少的时候，可以使用无监督训练的损失函数的权重较大。</p>
+<p>对于不同的下游任务，要进行任务适配<em>Task Specific Adaptation</em>。对于不同的下游任务，可以使用不同的头。<br><img src="D:/software/Git/images/Pasted%20image%2020250324194137.png" alt="Pasted image 20250324194137.png"></p>
+<h4 id="GPT-2-GPT-3"><a href="#GPT-2-GPT-3" class="headerlink" title="GPT-2 &amp; GPT-3"></a>GPT-2 &amp; GPT-3</h4><p>Zero-shot learning：在没有看到训练数据的情况下，直接在测试集上进行预测。通过在预训练阶段使用大规模的数据，可以使得模型具有更好的泛化能力，这样可以提高在一些常见问题上的表现。</p>
+<h3 id="BERT-Bidirectional-Encoder-Representations-from-Transformers"><a href="#BERT-Bidirectional-Encoder-Representations-from-Transformers" class="headerlink" title="BERT: Bidirectional Encoder Representations from Transformers"></a>BERT: Bidirectional Encoder Representations from Transformers</h3><p>与GPT不同的是，BERT是双向的，可以看到上下文的信息。<br><img src="D:/software/Git/images/Pasted%20image%2020250324195035.png" alt="Pasted image 20250324195035.png"></p>
+<p>BERT在encoder阶段就使用了mask，这样可以使得模型在训练的时候不会看到未来的信息。在训练的过程中随机地mask掉一些词，然后预测这些词。如果遮挡的词太少，那么模型得到的训练不够， 如果遮挡的词太多，那么得到的上下文就很少。<br>在训练的过程中就使用了102种语言。<br>特征工程：使用了更多的特征，引入了更多的embedding<br>是多个任务的联合训练，这样可以使得模型更加通用。</p>
+<h4 id="RoBERTa-A-Robustly-Optimized-BERT-Pretraining-Approach"><a href="#RoBERTa-A-Robustly-Optimized-BERT-Pretraining-Approach" class="headerlink" title="RoBERTa: A Robustly Optimized BERT Pretraining Approach"></a>RoBERTa: A Robustly Optimized BERT Pretraining Approach</h4><p>经过充分的调参和更长的训练时间，使得模型的表现更好。<br>证明了BERT中的下句预测是没有用的，因为在RoBERTa中去掉了这个任务。<br>mask的pattern可以动态调整</p>
+<h4 id="ALBERT-A-Lite-BERT-for-Self-supervised-Learning-of-Language-Representations"><a href="#ALBERT-A-Lite-BERT-for-Self-supervised-Learning-of-Language-Representations" class="headerlink" title="ALBERT: A Lite BERT for Self-supervised Learning of Language Representations"></a>ALBERT: A Lite BERT for Self-supervised Learning of Language Representations</h4><p>低秩分解，减少参数量<br><img src="D:/software/Git/images/Pasted%20image%2020250324203227.png" alt="Pasted image 20250324203227.png"></p>
+<p>跨层参数共享：可以让模型更加稳定</p>
+<h4 id="T5-Text-to-Text-Transfer-Transformer"><a href="#T5-Text-to-Text-Transfer-Transformer" class="headerlink" title="T5: Text-to-Text Transfer Transformer"></a>T5: Text-to-Text Transfer Transformer</h4><p>迁移是泛化的高级形式：可以将多种文本任务统一为文本到文本的形式，这样可以使得模型更加通用。</p>
+<p>架构层面的创新：<br><img src="D:/software/Git/images/Pasted%20image%2020250324203639.png" alt="Pasted image 20250324203639.png"></p>
+<p>这里使用的是prefix-LM，这样可以使得模型更加通用。</p>
+<h3 id="Vision-Transformer"><a href="#Vision-Transformer" class="headerlink" title="Vision Transformer"></a>Vision Transformer</h3><h4 id="ViT"><a href="#ViT" class="headerlink" title="ViT"></a>ViT</h4><p>将一个图像变成一个patch<br>增加一个Position Embedding，于是得到各个patch的特征的加权平均。<br> 主要的贡献是将图像转换为序列，从而可以使用transformers来进行建模。在这个之前，普遍的观点是transformers只能用于文本数据，而CNN用于图像数据。</p>
+<h4 id="Swim-Transformer"><a href="#Swim-Transformer" class="headerlink" title="Swim Transformer"></a>Swim Transformer</h4><p>将CNN中的一些归纳偏好引入，可以使用局部的注意力，但是在一定程度上能捕捉全局的信息，通过Shifted Window Mechanism来实现。<br>层次化特征：<br><img src="D:/software/Git/images/Pasted%20image%2020250324205304.png" alt="Pasted image 20250324205304.png"></p>
+<p>密集预测任务对于层次化特征需求更高，于是这个模型的表现是更好地。</p>
+<h4 id="DETR"><a href="#DETR" class="headerlink" title="DETR"></a>DETR</h4><p><img src="D:/software/Git/images/Pasted%20image%2020250324205845.png" alt="Pasted image 20250324205845.png"></p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250324205921.png" alt="Pasted image 20250324205921.png"></p>
+<h3 id="Fundation-Models"><a href="#Fundation-Models" class="headerlink" title="Fundation Models"></a>Fundation Models</h3><p> $$<br> e^{\alpha+ \beta i } &#x3D; e^{\alpha} e^{\beta i} &#x3D; e^{\alpha}(\cos \beta + i \sin \beta)<br> $$</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-6/" data-id="cmc97i9re0008d4vag7ad0jie" data-title="Deep Learning Lecture-6" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1018,7 +1018,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-8/" data-id="cmc96uyn3000amsva1jeod5hd" data-title="Deep Learning Lecture-8" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-8/" data-id="cmc97i9rg000fd4vabyhvhwo9" data-title="Deep Learning Lecture-8" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1055,8 +1055,8 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="Generative-Model"><a href="#Generative-Model" class="headerlink" title="Generative Model"></a>Generative Model</h2><p>数据分布是生成模型的核心。生成模型的目标是学习数据的分布，然后生成新的数据。目标是<strong>学习数据的分布</strong>，然后生成新的数据。<br>对生成模型的评价是通过生成的数据的质量来评价的，生成的数据越接近真实数据，生成模型的质量越好。<br>$$<br>\theta^* &#x3D; \arg\max_{\theta} \mathbb{E}_{x \sim p_{data}} \log p_{model}(x|\theta)<br>$$<br>![[Pasted image 20250330094251.png]]</p>
-<p>![[Pasted image 20250330094404.png]]</p>
+<h2 id="Generative-Model"><a href="#Generative-Model" class="headerlink" title="Generative Model"></a>Generative Model</h2><p>数据分布是生成模型的核心。生成模型的目标是学习数据的分布，然后生成新的数据。目标是<strong>学习数据的分布</strong>，然后生成新的数据。<br>对生成模型的评价是通过生成的数据的质量来评价的，生成的数据越接近真实数据，生成模型的质量越好。<br>$$<br>\theta^* &#x3D; \arg\max_{\theta} \mathbb{E}_{x \sim p_{data}} \log p_{model}(x|\theta)<br>$$<br><img src="D:/software/Git/images/Pasted%20image%2020250330094251.png" alt="Pasted image 20250330094251.png"></p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250330094404.png" alt="Pasted image 20250330094404.png"></p>
 <h3 id="GAN-Generative-Adversarial-Network"><a href="#GAN-Generative-Adversarial-Network" class="headerlink" title="GAN: Generative Adversarial Network"></a>GAN: Generative Adversarial Network</h3><p>对抗机器学习的思想是通过两个网络之间的对抗来学习。生成器和判别器之间的对抗是GAN的核心思想。<br>使用的博弈问题的思想，使用的是最小化最大的思想。</p>
 <p>GAN的思想为：生成器和判别器之间的对抗，生成器生成数据，判别器判断数据的真实性。</p>
 <p>目标函数为：<br>$$<br>\min_G \max_D V(D,G) &#x3D; \mathbb{E}_{x \sim p_{data}(x)}[\log D(x)] + \mathbb{E}_{z \sim p_z(z)}[\log(1-D(G(z)))]<br>$$</p>
@@ -1073,15 +1073,15 @@
 <li>网络的非线性能力允许从简单分布（如高斯分布）逼近复杂分布（如图像像素分布）。</li>
 </ul>
 <p>但是GAN的<strong>训练过程是非常困难</strong>的，梯度性质是不好的，因为在比较好的样本中，由于梯度性质的问题会进行较大的更新。</p>
-<p>![[Pasted image 20250330100434.png]]</p>
-<p><strong>训练GAN的技巧</strong><br>![[Pasted image 20250330100506.png]]</p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250330100434.png" alt="Pasted image 20250330100434.png"></p>
+<p><strong>训练GAN的技巧</strong><br><img src="D:/software/Git/images/Pasted%20image%2020250330100506.png" alt="Pasted image 20250330100506.png"></p>
 <h4 id="DCGAN-Deep-Convolutional-Generative-Adversarial-Networks"><a href="#DCGAN-Deep-Convolutional-Generative-Adversarial-Networks" class="headerlink" title="DCGAN: Deep Convolutional Generative Adversarial Networks"></a>DCGAN: Deep Convolutional Generative Adversarial Networks</h4><p>对于生成器和判别器，使用卷积神经网络来进行训练。对于判别器，使用的是较为标准的CNN网络，对于生成器，使用的是转置卷积，先将特征图进行padding，然后进行卷积操作，这样可以获得一个较大的特征图。</p>
 <ul>
 <li><strong>生成器</strong>：使用转置卷积（反卷积）逐步上采样，生成高分辨率图像。</li>
 <li><strong>判别器</strong>：使用标准CNN逐步下采样。</li>
 <li><strong>关键技巧</strong>：批量归一化、Leaky ReLU、全卷积结构。</li>
 </ul>
-<p>![[Pasted image 20250330102359.png]]</p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250330102359.png" alt="Pasted image 20250330102359.png"></p>
 <p>证明了泛化定理：在有限的训练样本之下，可以通过训练得到一个泛化的模型。</p>
 <h4 id="Inception-Score"><a href="#Inception-Score" class="headerlink" title="Inception Score"></a>Inception Score</h4><p>IS 用于衡量生成模型的性能，重点关注两点：  </p>
 <ul>
@@ -1121,11 +1121,11 @@
 <p>前者表示从某一点$x$移到其他所有点的土堆总质量必须等于最初该点$x$上的土堆质量，后者则表示从所有点移到某一点$y$的土堆总质量必须等于最终该点$y$上的土堆质量。<br>$$<br>\iint c(x,y) \gamma(x,y) \, \mathrm{d}x \, \mathrm{d}y &#x3D; \int c(x,y) \, \mathrm{d}\gamma(x,y).<br>$$</p>
 <p>方案$\gamma$并不是唯一的，所有可能的运输方案中代价最低的方案即为最优运输方案。最优运输方案的代价为：</p>
 <p>$$<br>C &#x3D; \inf_{\gamma \in \Gamma(\mu,\nu)} \int c(x,y) \, \mathrm{d}\gamma(x,y).<br>$$</p>
-<h5 id="Wasserstein-GAN"><a href="#Wasserstein-GAN" class="headerlink" title="Wasserstein GAN"></a>Wasserstein GAN</h5><p>![[Pasted image 20250330141642.png]]</p>
-<p>![[Pasted image 20250330142308.png]]</p>
+<h5 id="Wasserstein-GAN"><a href="#Wasserstein-GAN" class="headerlink" title="Wasserstein GAN"></a>Wasserstein GAN</h5><p><img src="D:/software/Git/images/Pasted%20image%2020250330141642.png" alt="Pasted image 20250330141642.png"></p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250330142308.png" alt="Pasted image 20250330142308.png"></p>
 <p>对于模式坍塌进一步的理解，如果空间上有一个较大的利普希茨系数，那么说明发生了模式坍塌。</p>
-<p>![[Pasted image 20250330144259.png]]</p>
-<h5 id="Spectral-Normalization"><a href="#Spectral-Normalization" class="headerlink" title="Spectral Normalization"></a>Spectral Normalization</h5><p>![[Pasted image 20250330144556.png]]</p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250330144259.png" alt="Pasted image 20250330144259.png"></p>
+<h5 id="Spectral-Normalization"><a href="#Spectral-Normalization" class="headerlink" title="Spectral Normalization"></a>Spectral Normalization</h5><p><img src="D:/software/Git/images/Pasted%20image%2020250330144556.png" alt="Pasted image 20250330144556.png"></p>
 <table>
 <thead>
 <tr>
@@ -1152,7 +1152,7 @@
 </tbody></table>
 <h4 id="Conditional-GAN"><a href="#Conditional-GAN" class="headerlink" title="Conditional GAN"></a>Conditional GAN</h4><p>给定一个类来进行生成数据，这样可以生成不同类别的数据，这样可以生成更加多样的数据。并且可以在一定程度上避免模式坍塌。<br>除了接受高斯噪声还接受一个标签&#x2F;图像等等作为输入。</p>
 <h4 id="ACGAN-Auxiliary-Classifier-GAN"><a href="#ACGAN-Auxiliary-Classifier-GAN" class="headerlink" title="ACGAN: Auxiliary Classifier GAN"></a>ACGAN: Auxiliary Classifier GAN</h4><p>是多任务学习的一种方法，除了生成数据，还可以进行分类。在生成数据的过程中还生成标签，所以可以一定程度上避免模式坍塌。</p>
-<h4 id="Cycle-GAN"><a href="#Cycle-GAN" class="headerlink" title="Cycle GAN"></a>Cycle GAN</h4><p>![[Pasted image 20250330153629.png]]</p>
+<h4 id="Cycle-GAN"><a href="#Cycle-GAN" class="headerlink" title="Cycle GAN"></a>Cycle GAN</h4><p><img src="D:/software/Git/images/Pasted%20image%2020250330153629.png" alt="Pasted image 20250330153629.png"></p>
 <p>无配对数据下的图像转换（如马→斑马），通过循环一致性损失$Cyc$保证生成的图像在两个方向上的转换是一致的。</p>
 <h3 id="Self-Attention-GAN"><a href="#Self-Attention-GAN" class="headerlink" title="Self-Attention GAN"></a>Self-Attention GAN</h3><p>将<em>Self-Attention</em>机制应用到GAN中，这样可以使得生成的数据更加真实。</p>
 <h4 id="Adaptive-Instance-Normalization"><a href="#Adaptive-Instance-Normalization" class="headerlink" title="Adaptive Instance Normalization"></a>Adaptive Instance Normalization</h4><p>$$<br>AdaIN(u ,v) &#x3D; \sigma(v) \left(\frac{u - \mu(u)}{\sigma(u)}\right) + \mu(v)<br>$$<br>本质上为重新着色的操作，将一个图像的风格转移到另一个图像上。</p>
@@ -1176,15 +1176,15 @@
 <p>在VAE中，我们引入一个潜在变量 $z$，假设数据 $x$ 是由某个先验分布 $p_\theta(z)$ 生成，然后通过条件分布 $p_\theta(x|z)$ 生成可观测数据 $x$。<br>$$<br>p_\theta (x) &#x3D; \int p_\theta(x|z) p_\theta(z) \, \mathrm{d}z<br>$$<br>$z$的分布是一个高斯分布，对于$z$采样得到的实例，通过一个网络生成$x$。困难在于上面的反常积分，这是一个高维积分，不可行。可以使用<em>蒙特卡洛</em>。</p>
 <p>对于后验分布：<br>$$<br>p_\theta(z|x) &#x3D; \frac{p_\theta(x|z) p_\theta(z)}{p_\theta(x)}<br>$$<br>在积分中是经常使用的，但是计算是NP-hard的，因此引入<strong>变分推断</strong>，通过优化下界（ELBO）间接逼近。直接求后验往往是不可行的。因此，我们用<strong>变分推断</strong>的方式，去学习一个近似后验分布$q_{\phi}(z∣x)$，并用它来逼近真正的后验分布$p_{\theta}(z∣x)$，从而得到一个变分下界。</p>
 <p>变分的意思为变量的替换，在概率中为分布率的替换。<br>对于这个问题，可以使用一个神经网络来实现，对于这种显式的分布，需要假设分布率，可以指定为高斯分布，用网络来学习均值和协方差，作为<em>Encoder Network</em>。<br>对于条件分布$p_\theta(x|z)$，也可以假定为高斯分布，这样可以计算均值和协方差，作为<em>Decoder Network</em>。</p>
-<p>![[Pasted image 20250330161028.png]]</p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250330161028.png" alt="Pasted image 20250330161028.png"></p>
 <p>但是VAE是<em>Intractable</em>的，这个问题是NP-hard的。对于上面的条件概率，是比较困难的。所以采用一个近似的方法来进行求解。比如假设服从一个高斯分布，之后计算这个分布的均值和协方差矩阵。</p>
 <h4 id="ELBO-Evidence-Lower-Bound"><a href="#ELBO-Evidence-Lower-Bound" class="headerlink" title="ELBO: Evidence Lower Bound"></a>ELBO: Evidence Lower Bound</h4><p>训练的目的是使得$\log p_\theta (x_i)$尽可能大，但是很难计算，这里引入“参考系”，也就是引入一个近似的分布$q_\phi(z|x_i)$。</p>
-<p>![[Pasted image 20250330164549.png]]</p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250330164549.png" alt="Pasted image 20250330164549.png"></p>
 <p>这里是将最大化似然的过程简化为最大化ELBO的过程。<br>$$<br>\log p_\theta (x_i) &#x3D; \mathbb{E}_{q_\phi(z|x_i)} \left[ \log p_\theta(x_i|z) \right] - KL (q_\phi(z|x_i) || p_\theta(z))<br>$$</p>
-<h4 id="Reparameterization-Trick"><a href="#Reparameterization-Trick" class="headerlink" title="Reparameterization Trick"></a>Reparameterization Trick</h4><p>![[Pasted image 20250403144444.png]]</p>
+<h4 id="Reparameterization-Trick"><a href="#Reparameterization-Trick" class="headerlink" title="Reparameterization Trick"></a>Reparameterization Trick</h4><p><img src="D:/software/Git/images/Pasted%20image%2020250403144444.png" alt="Pasted image 20250403144444.png"></p>
 <p>在VAE的训练过程中，通常需要从潜在变量的分布中采样。直接从分布中采样可能导致梯度无法传播到编码器网络，因此引入了重参数化技巧。<br>这是的采样变量是$\epsilon$，这样的话采样的过程就在计算图的旁路上，这样就可以进行梯度的传播。</p>
 <h4 id="VAE-Inference"><a href="#VAE-Inference" class="headerlink" title="VAE Inference"></a>VAE Inference</h4><p>在训练的时候是从$x$中采样得到的，然后由后验分布$q_\phi(z|x)$来进行采样。而在推理过程中，是从潜在变量$z$中采样得到的，然后由条件分布$p_\theta(x|z)$来进行进行推理。<br>上述过程的合理性在于目标函数ELBO中的第二项：$KL (q_\phi(z|x_i) || p_\theta(z))$在训练中被最小化了。</p>
-<p>![[Pasted image 20250403152841.png]]</p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250403152841.png" alt="Pasted image 20250403152841.png"></p>
 <h4 id="VQ-VAE"><a href="#VQ-VAE" class="headerlink" title="VQ-VAE"></a>VQ-VAE</h4><p>VQ-VAE是对VAE的一个改进，使用了向量量化的方法来进行训练。通过对潜在变量进行离散化来进行训练，这样可以避免模式坍塌的问题。</p>
 <h3 id="Diffusion-Probabilistic-Models"><a href="#Diffusion-Probabilistic-Models" class="headerlink" title="Diffusion Probabilistic Models"></a>Diffusion Probabilistic Models</h3><h4 id="Denoising-Diffusion-Probabilistic-Models"><a href="#Denoising-Diffusion-Probabilistic-Models" class="headerlink" title="Denoising Diffusion Probabilistic Models"></a>Denoising Diffusion Probabilistic Models</h4><p>Diffusion模型是通过对数据进行逐步添加噪声来训练模型的。通过对数据进行逐步添加噪声，然后再通过一个网络来进行去噪声的操作。这样可以生成新的数据。</p>
 <p>Markovian Process: 逐步添加噪声的过程，通常是一个高斯分布的过程。<br>$$<br>q(x_t | x_{t-1}) &#x3D; \mathcal{N}(x_t; \sqrt{1-\beta_t}  x_{t-1}, \beta_t I)<br>$$<br>联合分布：<br>$$<br>q(x_{1:T} | x_0) &#x3D; \prod_{t&#x3D;1}^{T} q(x_t | x_{t-1})<br>$$</p>
@@ -1199,11 +1199,11 @@
 </ul>
 <p>采用一个变分方法来实现：<br>$$<br>p_{\theta}(x_{t-1}|x_t) &#x3D; \mathcal{N} \left(x_{t-1}; \mu_{\theta}(x_t, t), \sigma_t^2 \mathbf{I} \right)<br>$$<br>$$<br>p_\theta(x_{0:T}) &#x3D; p_\theta (x_T)\prod_{t&#x3D;1}^{T} p_\theta(x_{t-1}|x_t)<br>$$</p>
 <p>上述过程可以使用一个网络来实现对于均值和方差的输出。</p>
-<p>![[Pasted image 20250403164408.png]]</p>
-<p>![[Pasted image 20250403165731.png]]</p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250403164408.png" alt="Pasted image 20250403164408.png"></p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250403165731.png" alt="Pasted image 20250403165731.png"></p>
 <p><a target="_blank" rel="noopener" href="https://lilianweng.github.io/posts/2021-07-11-diffusion-models/">What are Diffusion Models? | Lil&#39;Log</a></p>
-<p>![[Pasted image 20250405094553.png]]</p>
-<h5 id="Diffusion-Parameters"><a href="#Diffusion-Parameters" class="headerlink" title="Diffusion Parameters"></a>Diffusion Parameters</h5><p>![[Pasted image 20250405161801.png]]</p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250405094553.png" alt="Pasted image 20250405094553.png"></p>
+<h5 id="Diffusion-Parameters"><a href="#Diffusion-Parameters" class="headerlink" title="Diffusion Parameters"></a>Diffusion Parameters</h5><p><img src="D:/software/Git/images/Pasted%20image%2020250405161801.png" alt="Pasted image 20250405161801.png"></p>
 <h5 id="Acceleration-Strategies"><a href="#Acceleration-Strategies" class="headerlink" title="Acceleration Strategies"></a>Acceleration Strategies</h5><h5 id="Re-design-forward-Sampling"><a href="#Re-design-forward-Sampling" class="headerlink" title="Re-design forward Sampling"></a>Re-design forward Sampling</h5><ul>
 <li>Striding Sampling<ul>
 <li>在每个时间步长中跳过多个时间步进行采样，从而减少采样次数。</li>
@@ -1215,26 +1215,26 @@
 <li>通过引入一个新的参数$\alpha_t$来控制前向采样的过程。</li>
 <li>通过设计一个新的后验分布来进行采样。</li>
 <li>通过设计一个新的损失函数来进行训练。</li>
-<li>![[Pasted image 20250405163042.png]]</li>
+<li><img src="D:/software/Git/images/Pasted%20image%2020250405163042.png" alt="Pasted image 20250405163042.png"></li>
 </ul>
 </li>
 <li>Denosing Diffusion Models<ul>
-<li>![[Pasted image 20250405163350.png]]</li>
+<li><img src="D:/software/Git/images/Pasted%20image%2020250405163350.png" alt="Pasted image 20250405163350.png"></li>
 </ul>
 </li>
 <li>Latent Diffusion Models<ul>
-<li>![[Pasted image 20250405163425.png]]</li>
+<li><img src="D:/software/Git/images/Pasted%20image%2020250405163425.png" alt="Pasted image 20250405163425.png"></li>
 </ul>
 </li>
 </ul>
-<h5 id="Conditonal-Diffusion-Models"><a href="#Conditonal-Diffusion-Models" class="headerlink" title="Conditonal Diffusion Models"></a>Conditonal Diffusion Models</h5><p>![[Pasted image 20250405163914.png]]</p>
-<p>![[Pasted image 20250405163941.png]]</p>
-<p>![[Pasted image 20250405164110.png]]</p>
+<h5 id="Conditonal-Diffusion-Models"><a href="#Conditonal-Diffusion-Models" class="headerlink" title="Conditonal Diffusion Models"></a>Conditonal Diffusion Models</h5><p><img src="D:/software/Git/images/Pasted%20image%2020250405163914.png" alt="Pasted image 20250405163914.png"></p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250405163941.png" alt="Pasted image 20250405163941.png"></p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250405164110.png" alt="Pasted image 20250405164110.png"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-7/" data-id="cmc96uyn4000dmsva378w7rsf" data-title="Deep Learning Lecture-7" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-7/" data-id="cmc97i9rg000gd4va23f66ykq" data-title="Deep Learning Lecture-7" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1305,11 +1305,11 @@
           </li>
         
           <li>
-            <a href="/2025/06/21/Deep%20Learning%20Lecture-6/">Deep Learning Lecture-6</a>
+            <a href="/2025/06/21/Deep%20Learning%20Lecture-4/">Deep Learning Lecture-4</a>
           </li>
         
           <li>
-            <a href="/2025/06/21/Deep%20Learning%20Lecture-4/">Deep Learning Lecture-4</a>
+            <a href="/2025/06/21/Deep%20Learning%20Lecture-5/">Deep Learning Lecture-5</a>
           </li>
         
       </ul>

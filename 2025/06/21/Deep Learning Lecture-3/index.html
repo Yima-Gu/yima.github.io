@@ -13,11 +13,29 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="Convolutional Neural Networks卷积网络最早是用来处理图像的问题。目前较为成功的研究是物体识别问题，对于物体之间的关系推断依然是计算机视觉的前沿领域。 在生物的研究中，存在感受野receptive field的概念，这是指神经元对于输入的局部区域的敏感程度。在卷积网络中，我们也引入了这个概念。相邻的神经元处理的是相邻的图像区域，这样的设计使得网络能够捕捉到图像的空间结构">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="d:/software/Git/images/%7B71895E3A-0EFA-438D-8E6C-EDBD4A337F5A%7D.png">
+<meta property="og:image" content="d:/software/Git/images/%7B7AC9125F-FA2D-42F9-B0CF-085ABFFB668F%7D.png">
+<meta property="og:image" content="d:/software/Git/images/%7B7202EECA-CD25-4EE1-A5C9-02F0263C968C%7D.png">
+<meta property="og:image" content="d:/software/Git/images/%7BCFAAFBDA-A81C-4931-9C2C-CBD64F40E29C%7D.png">
+<meta property="og:image" content="d:/software/Git/images/%7B01688551-C69C-4B62-8660-637A51409678%7D.png">
+<meta property="og:image" content="d:/software/Git/images/%7B1197B7EA-3F5B-40C9-8ADF-861B8AACBDC2%7D.png">
+<meta property="og:image" content="d:/software/Git/images/%7B382F2347-B42F-46CB-83DB-F25DDE49A91E%7D.png">
+<meta property="og:image" content="d:/software/Git/images/%7B43BF44F4-D211-4165-AE84-257E702582A0%7D.png">
+<meta property="og:image" content="d:/software/Git/images/%7B6F8AFF72-4C3D-4FAD-8FC9-90F7FED6E8B2%7D.png">
+<meta property="og:image" content="d:/software/Git/images/%7B39D210C3-7C1B-4913-AC78-12E71A8FD13B%7D.png">
+<meta property="og:image" content="d:/software/Git/images/%7BE3B121C1-5782-4762-A983-042799DA4ED9%7D.png">
+<meta property="og:image" content="d:/software/Git/images/%7B6767A6D4-59B6-4B62-9FE9-427D009BB837%7D.png">
+<meta property="og:image" content="d:/software/Git/images/%7B8F67BE27-E8CA-4921-99B2-C57FFFAE5E7B%7D.png">
+<meta property="og:image" content="d:/software/Git/images/%7B681C5361-F2ED-427F-86C2-48C9EC68AADF%7D.png">
+<meta property="og:image" content="d:/software/Git/images/%7B5DE8620F-D5FB-4E82-96D7-0E03CCCCAF82%7D.png">
+<meta property="og:image" content="d:/software/Git/images/Pasted%20image%2020250316132626.png">
+<meta property="og:image" content="d:/software/Git/images/Pasted%20image%2020250316134751.png">
 <meta property="article:published_time" content="2025-06-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-23T14:24:44.579Z">
+<meta property="article:modified_time" content="2025-06-23T14:43:17.341Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="DeepLearning">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="d:/software/Git/images/%7B71895E3A-0EFA-438D-8E6C-EDBD4A337F5A%7D.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -121,7 +139,7 @@
 <h2 id="Convolutional-Neural-Networks"><a href="#Convolutional-Neural-Networks" class="headerlink" title="Convolutional Neural Networks"></a>Convolutional Neural Networks</h2><p>卷积网络最早是用来处理图像的问题。目前较为成功的研究是物体识别问题，对于物体之间的关系推断依然是计算机视觉的前沿领域。</p>
 <p>在生物的研究中，存在<strong>感受野</strong><em>receptive field</em>的概念，这是指神经元对于输入的局部区域的敏感程度。在卷积网络中，我们也引入了这个概念。相邻的神经元处理的是相邻的图像区域，这样的设计使得网络能够捕捉到图像的空间结构。在模拟人类的视觉系统中，重要的是<strong>提取不同程度的特征</strong>，这就是卷积网络的核心思想。</p>
 <p>在MLP中，由于对于原图像像素进行展开，会损失部分的空间信息。在处理视角、光照的变化时，MLP的效果会变差。</p>
-<p>![[{71895E3A-0EFA-438D-8E6C-EDBD4A337F5A}.png]]</p>
+<p><img src="D:/software/Git/images/%7B71895E3A-0EFA-438D-8E6C-EDBD4A337F5A%7D.png" alt="{71895E3A-0EFA-438D-8E6C-EDBD4A337F5A}.png"></p>
 <p>从左到右，逐步提取的是从较低到较高的层次特征。在不同的任务中使用不同的特征。在识别人物中，应该使用较高层次的特征。</p>
 <h5 id="Local-Connectivity"><a href="#Local-Connectivity" class="headerlink" title="Local Connectivity"></a>Local Connectivity</h5><p>每一层的神经元只连接到上一层的局部区域。具体的连接方式为：每一个神经元只关注上一层对应区域的部分神经元。</p>
 <h5 id="Parameter-Sharing"><a href="#Parameter-Sharing" class="headerlink" title="Parameter Sharing"></a>Parameter Sharing</h5><p>一个神经元对应的某组参数代表的是某种特征，我们认为提取的特征的在不同的位置是一样的。是一种<strong>平移不变性</strong>。</p>
@@ -130,24 +148,24 @@
 <h5 id="Notation"><a href="#Notation" class="headerlink" title="Notation"></a>Notation</h5><ul>
 <li>输入的图片一般为三层，分别为RGB。这个<em>Volume</em>是一个张量<em>Tensor</em>。</li>
 <li>卷积核的大小为$5 \times 5 \times 3$（举例），即3个通道，每个通道大小为$5 \times 5$。然后在整个图片上进行平移，计算卷积操作。（类似于卷积的定义）</li>
-<li>卷积的计算操作为：卷积核在图片上平移，计算对应位置的乘积和。<br>![[{7AC9125F-FA2D-42F9-B0CF-085ABFFB668F}.png]]<br>上面的公式是在移动到某个位置$(w,h)$的时候，计算对应位置的乘积和。然后将结果存储在一个新的矩阵中。</li>
+<li>卷积的计算操作为：卷积核在图片上平移，计算对应位置的乘积和。<br><img src="D:/software/Git/images/%7B7AC9125F-FA2D-42F9-B0CF-085ABFFB668F%7D.png" alt="{7AC9125F-FA2D-42F9-B0CF-085ABFFB668F}.png"><br>上面的公式是在移动到某个位置$(w,h)$的时候，计算对应位置的乘积和。然后将结果存储在一个新的矩阵中。</li>
 </ul>
 <p><em>在实际操作的过程中，并不要将卷积核在图片上“滑动”（这是一个串行算法），可以为每一个为每一个局域来分配一个神经元，这样的操作是并行的，可以加速计算。</em></p>
 <p>得到的是一个Feature Map，这个Feature Map是一个新的张量，使用6个卷积核得到的图片的特征图的大小为$28 \times 28 \times 6$。<em>如何计算的？参数量是多少？</em><br>使用的卷积核数量是一个超参数，可以调整。</p>
 <p>对于一个$w*h*c$的输入，使用$k*k*c*d$个卷积核，得到的输出的特征图的大小为$(w-k+1)*(h-k+1)*d$，参数量为$(k*k*c+1)*d$。但是CNN在实践过程中的显存占用是较大的，因为需要存储特征图。</p>
-<p>![[{7202EECA-CD25-4EE1-A5C9-02F0263C968C}.png]]</p>
+<p><img src="D:/software/Git/images/%7B7202EECA-CD25-4EE1-A5C9-02F0263C968C%7D.png" alt="{7202EECA-CD25-4EE1-A5C9-02F0263C968C}.png"></p>
 <h4 id="Dilated-Stride-Convolution"><a href="#Dilated-Stride-Convolution" class="headerlink" title="Dilated&amp; Stride Convolution"></a>Dilated&amp; Stride Convolution</h4><p>在卷积操作中，我们可以使用不同的步长来进行卷积操作，这样的操作会改变输出的大小。在Dilated Convolution中，我们可以使用不同的扩张率来进行卷积操作。扩张率为1的时候<em>1-dilated</em>是正常的卷积操作，扩张率为2的时候，卷积核的间隔为2 <em>2-dilated</em>。这样的操作可以<strong>增加卷积核的感受野</strong>，但是减少了输出的大小。</p>
 <p><em>Stride</em>是卷积核的步长，可以让输出的特征图迅速变小。<br>可能出现不匹配的情况，这样可以进行<em>Padding</em>是在边缘填充0，这样的操作可以保持输出的大小。</p>
 <h5 id="Activation-Functions"><a href="#Activation-Functions" class="headerlink" title="Activation Functions"></a>Activation Functions</h5><p>在卷积网络中，激活函数可以使用ReLU函数，这样的操作可以避免梯度消失的问题。有时候使用的是Leaky ReLU函数，这样的操作在某些模型中可以减少神经元死亡的问题。<br>$$<br>LeakyReLU(x) &#x3D; \begin{cases} x &amp; x&gt;0 \\ 0.01x &amp; x \leq 0 \end{cases}<br>$$</p>
-<p>![[{CFAAFBDA-A81C-4931-9C2C-CBD64F40E29C}.png]]</p>
+<p><img src="D:/software/Git/images/%7BCFAAFBDA-A81C-4931-9C2C-CBD64F40E29C%7D.png" alt="{CFAAFBDA-A81C-4931-9C2C-CBD64F40E29C}.png"></p>
 <h5 id="Pooling"><a href="#Pooling" class="headerlink" title="Pooling"></a>Pooling</h5><p>池化操作一般是用来减少空间尺寸，这样的操作可以减少参数量，减少过拟合的问题。</p>
 <ul>
 <li>Max Pooling：取局部区域的最大值</li>
-<li>Average Pooling：取局部区域的平均值<br>![[{01688551-C69C-4B62-8660-637A51409678}.png]]</li>
+<li>Average Pooling：取局部区域的平均值<br><img src="D:/software/Git/images/%7B01688551-C69C-4B62-8660-637A51409678%7D.png" alt="{01688551-C69C-4B62-8660-637A51409678}.png"></li>
 </ul>
 <p><strong>Spatial Pyramid Pooling</strong>：对于不同的通道进行池化操作，这样的操作可以增加特征的多样性。这是用来减少多尺度问题的。<br>在现实生活中，多尺度是一个基本的特征，例如在大气系统、气候系统中，有较大的气流和较小部分的湍流。</p>
 <h3 id="Back-Propagation"><a href="#Back-Propagation" class="headerlink" title="Back Propagation"></a>Back Propagation</h3><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Ilg3gGewQ5U">Backpropagation, step-by-step | DL3</a></p>
-<p>![[{1197B7EA-3F5B-40C9-8ADF-861B8AACBDC2}.png]]</p>
+<p><img src="D:/software/Git/images/%7B1197B7EA-3F5B-40C9-8ADF-861B8AACBDC2%7D.png" alt="{1197B7EA-3F5B-40C9-8ADF-861B8AACBDC2}.png"></p>
 <p>在卷积网络的前向传播中每一层的计算公式如下：<br>$$<br>z_d^{(l+1)} &#x3D; a^{(l)}\star \theta^{(l)}_d + b^{(l)}_d<br>$$</p>
 <p>在一个具体的例子中，可以计算一个$3 \times 3 \times 1$的图像在经过一个$2\times 2 \times 1$的卷积核得到的$2 \times 2 \times 1$的特征图的计算过程。</p>
 <ul>
@@ -168,7 +186,7 @@
 <p>常用的方法有：裁剪、旋转、翻转、缩放、平移、仿射变换、弹性变换、颜色变换等。<br>CNN识别主要使的是纹理的识别方法，希望将人类的对于形状识别的能力融入到CNN中。可以使用的数据集为<em>Augmentation by Stylization</em>，希望获得模型对于纹理的不变性。<br>CNN对上下文是敏感的，对于经常出现在一起的事物，CNN可以很好地进行识别，但是对于不常见的事物，CNN的效果会变差。一种极端的方式是将不经常出现的东西组合在一起。目前的深度网络一定程度上利用了<em>spurious correlation</em>，从而进行bench mark在数据集上过拟和。</p>
 <h4 id="Architecture-Revolution"><a href="#Architecture-Revolution" class="headerlink" title="Architecture Revolution"></a>Architecture Revolution</h4><h5 id="MAGA-Making-convolutional-networks-shift-invariant-again"><a href="#MAGA-Making-convolutional-networks-shift-invariant-again" class="headerlink" title="MAGA Making convolutional networks shift-invariant again"></a>MAGA Making convolutional networks shift-invariant again</h5><p>在CNN中，在平移过程中，网络很难获得平移不变性。在采用模糊之后的<em>pooling</em>可以获得一定程度上的平移不变性。</p>
 <h5 id="Capsule-Network"><a href="#Capsule-Network" class="headerlink" title="Capsule Network"></a>Capsule Network</h5><p>CNN的缺点还有：不能保持物体之间的相对关系。在分类任务中，一般情况下强调的是不变性，而在一些细粒度识别任务中，强调的是等变性。在Capsule Network中，引入了胶囊的概念，这样的操作可以保持物体之间的相对关系。</p>
-<h2 id="CNN-Architectures"><a href="#CNN-Architectures" class="headerlink" title="CNN Architectures"></a>CNN Architectures</h2><h3 id="AlexNet"><a href="#AlexNet" class="headerlink" title="AlexNet"></a>AlexNet</h3><p>![[{382F2347-B42F-46CB-83DB-F25DDE49A91E}.png]]</p>
+<h2 id="CNN-Architectures"><a href="#CNN-Architectures" class="headerlink" title="CNN Architectures"></a>CNN Architectures</h2><h3 id="AlexNet"><a href="#AlexNet" class="headerlink" title="AlexNet"></a>AlexNet</h3><p><img src="D:/software/Git/images/%7B382F2347-B42F-46CB-83DB-F25DDE49A91E%7D.png" alt="{382F2347-B42F-46CB-83DB-F25DDE49A91E}.png"></p>
 <ul>
 <li>一般会在输入层使用较大的卷积核，然后在后面的层使用较小的卷积核</li>
 <li>通道数随着网络逐渐增加然后减少</li>
@@ -192,14 +210,14 @@
 <li>全局池化可直接将特征图转换为通道维度的向量（如$1\times 1 \times1024$ $\rightarrow$  1024维向量），再接一个分类层，大幅减少参数。</li>
 </ul>
 </blockquote>
-<h4 id="GoogLeNet"><a href="#GoogLeNet" class="headerlink" title="GoogLeNet"></a>GoogLeNet</h4><p>![[{43BF44F4-D211-4165-AE84-257E702582A0}.png]]<br>这是一个较为深的网络，删去了全连接层，参数量是较小的。</p>
+<h4 id="GoogLeNet"><a href="#GoogLeNet" class="headerlink" title="GoogLeNet"></a>GoogLeNet</h4><p><img src="D:/software/Git/images/%7B43BF44F4-D211-4165-AE84-257E702582A0%7D.png" alt="{43BF44F4-D211-4165-AE84-257E702582A0}.png"><br>这是一个较为深的网络，删去了全连接层，参数量是较小的。</p>
 <ul>
 <li>引入Multi-passway，使用多路的卷积核来提取特征。采用了特征增广<em>Feature Augmentation</em>的方法。</li>
 <li>在特征图通道数目不一样的情况下，使用padding的方法。</li>
 </ul>
-<p>![[{6F8AFF72-4C3D-4FAD-8FC9-90F7FED6E8B2}.png]]</p>
-<p>![[{39D210C3-7C1B-4913-AC78-12E71A8FD13B}.png]]</p>
-<p>![[{E3B121C1-5782-4762-A983-042799DA4ED9}.png]]</p>
+<p><img src="D:/software/Git/images/%7B6F8AFF72-4C3D-4FAD-8FC9-90F7FED6E8B2%7D.png" alt="{6F8AFF72-4C3D-4FAD-8FC9-90F7FED6E8B2}.png"></p>
+<p><img src="D:/software/Git/images/%7B39D210C3-7C1B-4913-AC78-12E71A8FD13B%7D.png" alt="{39D210C3-7C1B-4913-AC78-12E71A8FD13B}.png"></p>
+<p><img src="D:/software/Git/images/%7BE3B121C1-5782-4762-A983-042799DA4ED9%7D.png" alt="{E3B121C1-5782-4762-A983-042799DA4ED9}.png"></p>
 <p>使用计算量越来越小的卷积核，使用计算量越来越小的卷积核，使用越来越多的层数，使用越来越多的通道数。</p>
 <h4 id="Highway-Network"><a href="#Highway-Network" class="headerlink" title="Highway Network"></a>Highway Network</h4><p>在平坦的网络通路中，可能有信息通路瓶颈问题。在Highway Network中，引入了门控机制，这样的操作可以使得信息的流动更加顺畅。<br>$$<br>y&#x3D; H(x,W_H)T(x,W_T) + x(1-T(x,W_T))<br>$$<br>其中$H(x,W_H)$是一个MLP，$T(x,W_T)$是一个门控函数，这样的操作可以使得信息的流动更加顺畅。</p>
 <ul>
@@ -223,16 +241,16 @@
 <li><strong>ResNet</strong>：使用恒等跳跃连接<em>Identity Skip Connection</em>，公式为 $y&#x3D;H(x)+x$，无门控机制。</li>
 <li><strong>Highway Network</strong>：通过门控动态调节跳跃连接的权重，更灵活地控制信息流。</li>
 </ul>
-<h4 id="ResNet"><a href="#ResNet" class="headerlink" title="ResNet"></a>ResNet</h4><p>![[{6767A6D4-59B6-4B62-9FE9-427D009BB837}.png]]</p>
+<h4 id="ResNet"><a href="#ResNet" class="headerlink" title="ResNet"></a>ResNet</h4><p><img src="D:/software/Git/images/%7B6767A6D4-59B6-4B62-9FE9-427D009BB837%7D.png" alt="{6767A6D4-59B6-4B62-9FE9-427D009BB837}.png"></p>
 <ul>
 <li>56层的模型比20层的模型效果更差，既然如此，先将20层的模型训练好，然后再增加36层的<em>identity</em>网络，之后再训练整个网络。发现这样的操作的效果反而更差。得出的结论是56层的网络更加难以训练，网络的拟和能力不足。<strong>平坦的网络很难拟和</strong></li>
 <li>残差是更加容易拟和的。</li>
 <li>继续将这些残差网络堆叠在一起，可以得到一个更深的网络。</li>
 <li>卷积、池化是算子<em>operator</em>，残差是一个块<em>block</em>，网络是一个层<em>layer</em></li>
 </ul>
-<p>![[{8F67BE27-E8CA-4921-99B2-C57FFFAE5E7B}.png]]</p>
-<p>![[{681C5361-F2ED-427F-86C2-48C9EC68AADF}.png]]</p>
-<p>![[{5DE8620F-D5FB-4E82-96D7-0E03CCCCAF82}.png]]<br>对于网络会有多个维度进行评价：</p>
+<p><img src="D:/software/Git/images/%7B8F67BE27-E8CA-4921-99B2-C57FFFAE5E7B%7D.png" alt="{8F67BE27-E8CA-4921-99B2-C57FFFAE5E7B}.png"></p>
+<p><img src="D:/software/Git/images/%7B681C5361-F2ED-427F-86C2-48C9EC68AADF%7D.png" alt="{681C5361-F2ED-427F-86C2-48C9EC68AADF}.png"></p>
+<p><img src="D:/software/Git/images/%7B5DE8620F-D5FB-4E82-96D7-0E03CCCCAF82%7D.png" alt="{5DE8620F-D5FB-4E82-96D7-0E03CCCCAF82}.png"><br>对于网络会有多个维度进行评价：</p>
 <ul>
 <li>准确率top-1、top-5准确率</li>
 <li>VGG网络参数量很大，但是由于是平坦的网络，所以有一定的计算整齐度。在网络有较多的分叉时，计算整齐度会变差。较为整齐的网络计算是较快的。</li>
@@ -253,9 +271,9 @@
 <li>令通道数等于分组数目<em>channelwise</em> or <em>depthwise</em></li>
 </ul>
 <p>上述两个算子是轻量化网络的基础。</p>
-<p>![[Pasted image 20250316132626.png]]</p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250316132626.png" alt="Pasted image 20250316132626.png"></p>
 <p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2201.03545">[2201.03545] A ConvNet for the 2020s</a></p>
-<p>![[Pasted image 20250316134751.png]]</p>
+<p><img src="D:/software/Git/images/Pasted%20image%2020250316134751.png" alt="Pasted image 20250316134751.png"></p>
 <p>宏观设计：<strong>减少空间尺寸的衰减有利于学习不同的特征</strong>。</p>
 <h2 id="Advanced-Modules"><a href="#Advanced-Modules" class="headerlink" title="Advanced Modules"></a>Advanced Modules</h2><h3 id="3D-Modeling"><a href="#3D-Modeling" class="headerlink" title="3D Modeling"></a>3D Modeling</h3><p>普通的二维卷积网络在处理视频时，会丢失时间信息。在3D卷积网络中，引入了时间维度，这样的操作可以保留时间信息。</p>
 <p>直接使用3D卷积可以进行直接的对应。</p>
@@ -268,7 +286,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-3/" data-id="cmc96uyn10003msva11k7ekzp" data-title="Deep Learning Lecture-3" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-3/" data-id="cmc97i9rc0003d4vaaqhx5ye8" data-title="Deep Learning Lecture-3" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -290,9 +308,9 @@
     </a>
   
   
-    <a href="/2025/06/21/Deep%20Learning%20Lecture-6/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2025/06/21/Deep%20Learning%20Lecture-4/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Deep Learning Lecture-6</div>
+      <div class="article-nav-title">Deep Learning Lecture-4</div>
     </a>
   
 </nav>
@@ -356,11 +374,11 @@
           </li>
         
           <li>
-            <a href="/2025/06/21/Deep%20Learning%20Lecture-6/">Deep Learning Lecture-6</a>
+            <a href="/2025/06/21/Deep%20Learning%20Lecture-4/">Deep Learning Lecture-4</a>
           </li>
         
           <li>
-            <a href="/2025/06/21/Deep%20Learning%20Lecture-4/">Deep Learning Lecture-4</a>
+            <a href="/2025/06/21/Deep%20Learning%20Lecture-5/">Deep Learning Lecture-5</a>
           </li>
         
       </ul>

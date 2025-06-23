@@ -13,11 +13,18 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="Brain and Neuron感知机Perceptron是神经元的一个相当简单的数学模型，包括：输入、权重、激活函数、输出。其实是在空间超平面上嵌入了一个非线性函数。$$\hat{y} &#x3D; g(\sum_{i&#x3D;1}^{n}  x_i \theta_i +\theta_0)$$感知机在神经网络中也叫单元unit，是神经网络的基本组成单元。但是这样的单元会比人的神经元简单很多。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="d:/software/Git/images/%7B5ABA24F6-F5A5-48C8-AE9F-1E8524E35979%7D.png">
+<meta property="og:image" content="d:/software/Git/images/%7B9A215F21-185B-4C55-B872-413D388E5321%7D.png">
+<meta property="og:image" content="d:/software/Git/images/%7BE178BAD1-DE9C-44E5-A665-D550AE3A9558%7D.png">
+<meta property="og:image" content="d:/software/Git/images/%7B139D48AB-F664-4CE8-AC05-97B772908A85%7D.png">
+<meta property="og:image" content="d:/software/Git/images/%7B79D51D58-D7B7-485E-9A0F-5F615FE27545%7D.png">
+<meta property="og:image" content="d:/software/Git/images/%7B862689B6-2775-4822-8FAC-B0450B360BA0%7D.png">
 <meta property="article:published_time" content="2025-06-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-23T14:17:05.125Z">
+<meta property="article:modified_time" content="2025-06-23T14:43:17.339Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="DeepLearning">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="d:/software/Git/images/%7B5ABA24F6-F5A5-48C8-AE9F-1E8524E35979%7D.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -119,15 +126,15 @@
       
         <hr>
 <h3 id="Brain-and-Neuron"><a href="#Brain-and-Neuron" class="headerlink" title="Brain and Neuron"></a>Brain and Neuron</h3><p>感知机<em>Perceptron</em>是神经元的一个相当简单的数学模型，包括：输入、权重、激活函数、输出。其实是在空间超平面上嵌入了一个非线性函数。<br>$$<br>\hat{y} &#x3D; g(\sum_{i&#x3D;1}^{n}  x_i \theta_i +\theta_0)<br>$$<br>感知机在神经网络中也叫单元<em>unit</em>，是神经网络的基本组成单元。但是这样的单元会比人的神经元简单很多。</p>
-<h4 id="PLA"><a href="#PLA" class="headerlink" title="PLA"></a>PLA</h4><p>在上述的激活函数中，最先使用的是符号函数，这个函数是不光滑的。可以使用下面的算法来进行训练：<br>![[{5ABA24F6-F5A5-48C8-AE9F-1E8524E35979}.png]]<br>在理论推导中，可以计算PLA的<strong>收敛率</strong>：（在线性可分的情况下）<br>$\gamma$是最优间隔<em>the best-case margin</em>，计算的是训练样本与超平面的距离之间的最小值。<br>$$<br>\exists v \in \mathbb{R}^d \quad \text{s.t.}\,\gamma \leq \frac{y_i(v\cdot x_i)}{||v||}<br>$$<br>$R$是数据集的半径，即样本数据向量模的最大值，$d$是数据集的维度。那么PLA的收敛率为： 最多经过$\frac{R^2}{\gamma^2}$次迭代就可以收敛。</p>
+<h4 id="PLA"><a href="#PLA" class="headerlink" title="PLA"></a>PLA</h4><p>在上述的激活函数中，最先使用的是符号函数，这个函数是不光滑的。可以使用下面的算法来进行训练：<br><img src="D:/software/Git/images/%7B5ABA24F6-F5A5-48C8-AE9F-1E8524E35979%7D.png" alt="{5ABA24F6-F5A5-48C8-AE9F-1E8524E35979}.png"><br>在理论推导中，可以计算PLA的<strong>收敛率</strong>：（在线性可分的情况下）<br>$\gamma$是最优间隔<em>the best-case margin</em>，计算的是训练样本与超平面的距离之间的最小值。<br>$$<br>\exists v \in \mathbb{R}^d \quad \text{s.t.}\,\gamma \leq \frac{y_i(v\cdot x_i)}{||v||}<br>$$<br>$R$是数据集的半径，即样本数据向量模的最大值，$d$是数据集的维度。那么PLA的收敛率为： 最多经过$\frac{R^2}{\gamma^2}$次迭代就可以收敛。</p>
 <ul>
 <li>$\gamma$越大，收敛越快</li>
 <li>$R$越大，收敛越慢</li>
 </ul>
 <h5 id="Expresiveness-of-Perceptron"><a href="#Expresiveness-of-Perceptron" class="headerlink" title="Expresiveness of Perceptron"></a>Expresiveness of Perceptron</h5><p>感知机是一个线性分类器，只能解决线性可分的问题。如果数据不是线性可分的，那么感知机就无法解决（例如异或问题，但其实异或不是基本的布尔运算，可以用与或非表达）。</p>
 <h4 id="Multi-layer-Perceptron"><a href="#Multi-layer-Perceptron" class="headerlink" title="Multi-layer Perceptron"></a>Multi-layer Perceptron</h4><p>多层感知机<em>Multi-layer Perceptron</em>是感知机的扩展，可以解决非线性问题。多层感知机的结构是：输入层、隐藏层、输出层（输入层并不算一层）。<br><em>感知机之间的链接方式相比人脑而言也是较为简单的。</em><br>在表达时，可以发现是<strong>稀疏的</strong>，也就是每一层并不是与前面的所有的感知机相连。多层感知机的表达能力较强，这时需要增加感知机的层数。</p>
-<h5 id="Comention"><a href="#Comention" class="headerlink" title="Comention"></a>Comention</h5><p>![[{9A215F21-185B-4C55-B872-413D388E5321}.png]]</p>
-<p>![[{E178BAD1-DE9C-44E5-A665-D550AE3A9558}.png]]</p>
+<h5 id="Comention"><a href="#Comention" class="headerlink" title="Comention"></a>Comention</h5><p><img src="D:/software/Git/images/%7B9A215F21-185B-4C55-B872-413D388E5321%7D.png" alt="{9A215F21-185B-4C55-B872-413D388E5321}.png"></p>
+<p><img src="D:/software/Git/images/%7BE178BAD1-DE9C-44E5-A665-D550AE3A9558%7D.png" alt="{E178BAD1-DE9C-44E5-A665-D550AE3A9558}.png"></p>
 <ul>
 <li>用上标表示层数，用下标表示感知机的编号</li>
 <li>$\theta_{ij}^{(l)}$表示第$l$层的第$i$个感知机的第$j$个输入的权重</li>
@@ -191,19 +198,19 @@
 <li>Hessian matrix</li>
 </ul>
 <p>$$<br>\left(\nabla_{y_j} \hat{\mathcal{L}}\right)^T \frac{\partial \hat{\mathcal{L}}}{\partial y_j \partial y_j}\left(\nabla_{y_j} \hat{\mathcal{L}}\right) \leq \frac{\gamma^2}{\sigma_j^2}\left(\left(\nabla_{y_j} \mathcal{L}\right)^T \frac{\partial \mathcal{L}}{\partial y_j \partial y_j}\left(\nabla_{y_j} \mathcal{L}\right)-\frac{\gamma}{m \sigma^2}\left(\nabla_{y_j} \mathcal{L}, \hat{y}_j\right)\left\|\nabla_{y_j} \hat{\mathcal{L}}\right\|^2\right)<br>$$</p>
-<h5 id="Group-Normalization"><a href="#Group-Normalization" class="headerlink" title="Group Normalization"></a>Group Normalization</h5><p>![[{139D48AB-F664-4CE8-AC05-97B772908A85}.png]]<br>在<em>Group Normalization</em>中，对于每一个通道的特征图进行归一化处理，这样可以减少计算的复杂度。是轻量化CNN的方法。在一定数据量较大的情况下可以达到和<em>Batch Normalization</em>差不多的结果。</p>
+<h5 id="Group-Normalization"><a href="#Group-Normalization" class="headerlink" title="Group Normalization"></a>Group Normalization</h5><p><img src="D:/software/Git/images/%7B139D48AB-F664-4CE8-AC05-97B772908A85%7D.png" alt="{139D48AB-F664-4CE8-AC05-97B772908A85}.png"><br>在<em>Group Normalization</em>中，对于每一个通道的特征图进行归一化处理，这样可以减少计算的复杂度。是轻量化CNN的方法。在一定数据量较大的情况下可以达到和<em>Batch Normalization</em>差不多的结果。</p>
 <h3 id="Generalization-and-Capacity"><a href="#Generalization-and-Capacity" class="headerlink" title="Generalization and Capacity"></a>Generalization and Capacity</h3><ul>
 <li>网络结构不同网络效果不同，如相同的层数下，全连接网络的参数量大但是和卷积网络的效果差不多。</li>
 <li>相同的网络结构，参数量不同，参数量多的网络效果更好。</li>
 </ul>
-<h4 id="Theorem-Arbitrarily-large-neural-networks-can-approximate-any-function"><a href="#Theorem-Arbitrarily-large-neural-networks-can-approximate-any-function" class="headerlink" title="Theorem (Arbitrarily large neural networks can approximate any function)"></a>Theorem (Arbitrarily large neural networks can approximate any function)</h4><p>理论可以表述为：对于任意的连续函数，存在一个足够大的神经网络可以近似这个函数。<br>![[{79D51D58-D7B7-485E-9A0F-5F615FE27545}.png]]<br>上面表示两层神经网络可以逼近任意的连续函数，要求这个函数$\sigma$不是多项式函数。</p>
-<p>![[{862689B6-2775-4822-8FAC-B0450B360BA0}.png]]<br>上面的定理表示神经网络的宽度也很重要，可以通过增加神经元的数量来逼近函数。</p>
+<h4 id="Theorem-Arbitrarily-large-neural-networks-can-approximate-any-function"><a href="#Theorem-Arbitrarily-large-neural-networks-can-approximate-any-function" class="headerlink" title="Theorem (Arbitrarily large neural networks can approximate any function)"></a>Theorem (Arbitrarily large neural networks can approximate any function)</h4><p>理论可以表述为：对于任意的连续函数，存在一个足够大的神经网络可以近似这个函数。<br><img src="D:/software/Git/images/%7B79D51D58-D7B7-485E-9A0F-5F615FE27545%7D.png" alt="{79D51D58-D7B7-485E-9A0F-5F615FE27545}.png"><br>上面表示两层神经网络可以逼近任意的连续函数，要求这个函数$\sigma$不是多项式函数。</p>
+<p><img src="D:/software/Git/images/%7B862689B6-2775-4822-8FAC-B0450B360BA0%7D.png" alt="{862689B6-2775-4822-8FAC-B0450B360BA0}.png"><br>上面的定理表示神经网络的宽度也很重要，可以通过增加神经元的数量来逼近函数。</p>
 <p> 在空间折叠的问题中，表明<strong>深度比宽度更加重要</strong>。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-2/" data-id="cmc96uymx0000msva30fo9r1l" data-title="Deep Learning Lecture-2" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-2/" data-id="cmc97i9r80000d4va29xbae30" data-title="Deep Learning Lecture-2" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -282,11 +289,11 @@
           </li>
         
           <li>
-            <a href="/2025/06/21/Deep%20Learning%20Lecture-6/">Deep Learning Lecture-6</a>
+            <a href="/2025/06/21/Deep%20Learning%20Lecture-4/">Deep Learning Lecture-4</a>
           </li>
         
           <li>
-            <a href="/2025/06/21/Deep%20Learning%20Lecture-4/">Deep Learning Lecture-4</a>
+            <a href="/2025/06/21/Deep%20Learning%20Lecture-5/">Deep Learning Lecture-5</a>
           </li>
         
       </ul>
