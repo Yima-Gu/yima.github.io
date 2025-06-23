@@ -6,15 +6,15 @@
   
   <title>Deep Learning Lecture-1 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="人工智能：模拟人类的智能机器学习：不显式编程来实现深度学习：使用神经网络 对于深度学习总是能找到一些amazing的例子，同时也有一些失败的例子。 深度学习是在数据中获取高度抽象的特征，主要使用神经网络。在深度学习中实现的功能类似于坐标系变换。对于同一个问题进行变换可以进行不同的处理。在机器学习过程中的规则系统仍然是很重要的。 深度学习的表示为计算图 Framework在学习算法中一定要指定函数">
+  <meta name="description" content="人工智能：模拟人类的智能 机器学习：不显式编程来实现 深度学习：使用神经网络 对于深度学习总是能找到一些amazing的例子，同时也有一些失败的例子。 深度学习是在数据中获取高度抽象的特征，主要使用神经网络。在深度学习中实现的功能类似于坐标系变换。对于同一个问题进行变换可以进行不同的处理。在机器学习过程中的规则系统仍然是很重要的。 深度学习的表示为计算图 Framework 在学习算法中一定要指">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Deep Learning Lecture-1">
 <meta property="og:url" content="http://example.com/2025/06/21/Deep%20Learning%20Lecture-1/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="人工智能：模拟人类的智能机器学习：不显式编程来实现深度学习：使用神经网络 对于深度学习总是能找到一些amazing的例子，同时也有一些失败的例子。 深度学习是在数据中获取高度抽象的特征，主要使用神经网络。在深度学习中实现的功能类似于坐标系变换。对于同一个问题进行变换可以进行不同的处理。在机器学习过程中的规则系统仍然是很重要的。 深度学习的表示为计算图 Framework在学习算法中一定要指定函数">
+<meta property="og:description" content="人工智能：模拟人类的智能 机器学习：不显式编程来实现 深度学习：使用神经网络 对于深度学习总是能找到一些amazing的例子，同时也有一些失败的例子。 深度学习是在数据中获取高度抽象的特征，主要使用神经网络。在深度学习中实现的功能类似于坐标系变换。对于同一个问题进行变换可以进行不同的处理。在机器学习过程中的规则系统仍然是很重要的。 深度学习的表示为计算图 Framework 在学习算法中一定要指">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-21T01:12:17.221Z">
+<meta property="article:modified_time" content="2025-06-22T09:29:15.223Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="DeepLearning">
 <meta name="twitter:card" content="summary">
@@ -97,35 +97,75 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <hr>
-<p><strong>人工智能</strong>：模拟人类的智能<br><strong>机器学习</strong>：不显式编程来实现<br><strong>深度学习</strong>：使用神经网络</p>
+<p><strong>人工智能</strong>：模拟人类的智能<br>
+<strong>机器学习</strong>：不显式编程来实现<br>
+<strong>深度学习</strong>：使用神经网络</p>
 <p>对于深度学习总是能找到一些amazing的例子，同时也有一些失败的例子。</p>
 <p>深度学习是在数据中<strong>获取高度抽象</strong>的特征，主要使用神经网络。在深度学习中实现的功能类似于坐标系变换。对于同一个问题进行变换可以进行不同的处理。在机器学习过程中的规则系统仍然是很重要的。</p>
 <p>深度学习的表示为计算图</p>
-<h3 id="Framework"><a href="#Framework" class="headerlink" title="Framework"></a>Framework</h3><p>在学习算法中一定要指定函数族，然后使用数据来拟合函数族。要找出<strong>最优的函数族</strong>。不同的机器学习模型的区别主要在于<strong>假设空间</strong>（候选函数族）的不同。</p>
+<h3 id="Framework">Framework</h3>
+<p>在学习算法中一定要指定函数族，然后使用数据来拟合函数族。要找出<strong>最优的函数族</strong>。不同的机器学习模型的区别主要在于<strong>假设空间</strong>（候选函数族）的不同。</p>
 <p>过拟和在指定函数族时已经确定。</p>
-<p>泛化误差公式：<br>$$<br>\varepsilon_{test} \leq \hat_{train} + \sqrt{\frac{complexity}{n}}<br>$$<br>要求：训练误差小，模型复杂度小，数据量大<br><strong>当且仅当需要的时候才增加模型复杂度</strong></p>
-<h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><p>$$<br>\arg \min O(D;\theta) &#x3D; \sum_{i&#x3D;1}^{N} L(y_i, f(x_i);\theta) + \Omega(\theta)<br>$$<br>上述公式要求：在训练样本上预测值与真实值的误差尽可能小。</p>
+<p>泛化误差公式：<br>
+$$<br>
+\varepsilon_{test} \leq \hat_{train} + \sqrt{\frac{complexity}{n}}<br>
+$$<br>
+要求：训练误差小，模型复杂度小，数据量大<br>
+<strong>当且仅当需要的时候才增加模型复杂度</strong></p>
+<h3 id="Model">Model</h3>
+<p>$$<br>
+\arg \min O(D;\theta) = \sum_{i=1}^{N} L(y_i, f(x_i);\theta) + \Omega(\theta)<br>
+$$<br>
+上述公式要求：在训练样本上预测值与真实值的误差尽可能小。</p>
 <p>对于分类问题而言，经常使用的是交叉熵损失函数（logistic）和hinge损失函数。</p>
 <p>$\Omega(\theta)$是惩罚项，希望模型尽量简单。在使得$\theta$尽量小的过程中，某些特征的权重会变为0，这样就可以实现特征选择。同时也可以减少模型的复杂性。</p>
 <p><strong>学习类似于统计中的参数估计</strong></p>
 <p>![[{65C91395-95B8-4EF2-8AF6-3F86705FD81B}.png]]</p>
 <p>梯度下降的方法。</p>
 <p>具体例子：线性回归</p>
-<p>$$<br>O(D;\theta) &#x3D; \sum_{i&#x3D;1}^{N} (y_i - \theta^T x_i)^2 + \lambda \theta^T \theta &#x3D; (Y - X\theta)^T (Y - X\theta) + \lambda \theta^T \theta<br>$$<br>上述公式是关于$\theta$的二次函数，可以通过求导得到最优解。[[matrixcookbook.pdf]]<br>$$<br>\frac{\partial O(D;\theta)}{\partial \theta} &#x3D; -2 X^T (Y - X\theta) + 2 \lambda \theta &#x3D; 0<br>$$<br>$$<br>\hat{\theta} &#x3D; (X^T X + \lambda I)^{-1} X^T Y<br>$$<br>但是上述算法的复杂性为$O(n^3)$，不适用于大数据集。在软件工程中，通常使用梯度下降法。</p>
+<p>$$<br>
+O(D;\theta) = \sum_{i=1}^{N} (y_i - \theta^T x_i)^2 + \lambda \theta^T \theta = (Y - X\theta)^T (Y - X\theta) + \lambda \theta^T \theta<br>
+$$<br>
+上述公式是关于$\theta$的二次函数，可以通过求导得到最优解。[[matrixcookbook.pdf]]<br>
+$$<br>
+\frac{\partial O(D;\theta)}{\partial \theta} = -2 X^T (Y - X\theta) + 2 \lambda \theta = 0<br>
+$$<br>
+$$<br>
+\hat{\theta} = (X^T X + \lambda I)^{-1} X^T Y<br>
+$$<br>
+但是上述算法的复杂性为$O(n^3)$，不适用于大数据集。在软件工程中，通常使用梯度下降法。</p>
 <p><strong>Logistic Regression</strong></p>
-<p>$$<br>O(D;\theta) &#x3D; \sum_{i&#x3D;1}^{n} \log(1 + \exp(-y_i \theta^T x_i)) + \lambda ||\theta||<em>{1} &#x3D; F(D;\theta) + \lambda ||\theta||</em>{1}<br>$$<br>这里使用的是近端梯度下降法 <em>proximal gradient descent</em>。其中的1-范数是各个分量的绝对值之和。<a target="_blank" rel="noopener" href="https://www.zhihu.com/tardis/zm/art/82622940?source_id=1005">机器学习 | 近端梯度下降法 (proximal gradient descent)</a><br>在一些不可导的情况下如hinge损失函数，可以使用次梯度。</p>
+<p>$$<br>
+O(D;\theta) = \sum_{i=1}^{n} \log(1 + \exp(-y_i \theta^T x_i)) + \lambda ||\theta||<em>{1} = F(D;\theta) + \lambda ||\theta||</em>{1}<br>
+$$<br>
+这里使用的是近端梯度下降法 <em>proximal gradient descent</em>。其中的1-范数是各个分量的绝对值之和。<a target="_blank" rel="noopener" href="https://www.zhihu.com/tardis/zm/art/82622940?source_id=1005">机器学习 | 近端梯度下降法 (proximal gradient descent)</a><br>
+在一些不可导的情况下如hinge损失函数，可以使用次梯度。</p>
 <p><strong>Softmax Regression</strong></p>
 <p>实现多分类问题，计算每个类别的概率即可，对于某个样本进行多次打分，取最高分对应的类别。</p>
-<p>Softmax Function:<br>[[Deep Learning Lecture-2#^b5bcbb]]<br>$$<br>P(y|x,\theta) &#x3D; \frac{\exp(\theta_y^T x)}{\sum_{r&#x3D;1}^{C} \exp(\theta_{r}^T x)}<br>$$<br>线性模型，用超平面对样本进行打分，然后使用softmax函数进行归一化。</p>
-<p>$$<br>O(D;\theta) &#x3D; -\sum_{i&#x3D;1}^{n} \log P(y_i|x_i;\theta) + \lambda ||\theta||_{1}<br>$$<br>上述式子其实是对数似然函数，最大化对数似然函数等价于最小化交叉熵损失函数。</p>
-<h4 id="Aproximation-and-Estimation"><a href="#Aproximation-and-Estimation" class="headerlink" title="Aproximation and Estimation"></a>Aproximation and Estimation</h4><p>假设空间只能表现一个有限的函数集合，有时候真值函数不一定在假设空间中。这时候假设空间中最好的函数与真值函数之间的差距称为<strong>近似误差</strong><em>Approximation Error</em>。学习得到的函数与空间中最好的函数的误差为<strong>估计误差</strong> <em>Estimation Error</em>。</p>
-<h3 id="Model-Selection"><a href="#Model-Selection" class="headerlink" title="Model Selection"></a>Model Selection</h3><p><em>All models are wrong but some are useful.</em></p>
-<p>CASH: Combined Algorithm Selection and Hyperparameter optimization<br>目标是：选择最好的模型和超参数<br>$$<br>A^<em>_{\lambda^</em>} &#x3D; \arg \min_{A \in \mathcal{A}} \min_{\lambda \in \Lambda^{(i)}} \mathcal{L}(A_{\lambda}^{(i)},D_{train},D_{valid})<br>$$</p>
+<p>Softmax Function:<br>
+[[Deep Learning Lecture-2#^b5bcbb]]<br>
+$$<br>
+P(y|x,\theta) = \frac{\exp(\theta_y^T x)}{\sum_{r=1}^{C} \exp(\theta_{r}^T x)}<br>
+$$<br>
+线性模型，用超平面对样本进行打分，然后使用softmax函数进行归一化。</p>
+<p>$$<br>
+O(D;\theta) = -\sum_{i=1}^{n} \log P(y_i|x_i;\theta) + \lambda ||\theta||_{1}<br>
+$$<br>
+上述式子其实是对数似然函数，最大化对数似然函数等价于最小化交叉熵损失函数。</p>
+<h4 id="Aproximation-and-Estimation">Aproximation and Estimation</h4>
+<p>假设空间只能表现一个有限的函数集合，有时候真值函数不一定在假设空间中。这时候假设空间中最好的函数与真值函数之间的差距称为<strong>近似误差</strong><em>Approximation Error</em>。学习得到的函数与空间中最好的函数的误差为<strong>估计误差</strong> <em>Estimation Error</em>。</p>
+<h3 id="Model-Selection">Model Selection</h3>
+<p><em>All models are wrong but some are useful.</em></p>
+<p>CASH: Combined Algorithm Selection and Hyperparameter optimization<br>
+目标是：选择最好的模型和超参数<br>
+$$<br>
+A^<em>_{\lambda^</em>} = \arg \min_{A \in \mathcal{A}} \min_{\lambda \in \Lambda^{(i)}} \mathcal{L}(A_{\lambda}^{(i)},D_{train},D_{valid})<br>
+$$</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-1/" data-id="cmc5knvcp0000fwvahd9hamzd" data-title="Deep Learning Lecture-1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-1/" data-id="cmc8gmxx80000wkva1dy409p2" data-title="Deep Learning Lecture-1" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -138,9 +178,9 @@
 <nav id="article-nav">
   
   
-    <a href="/2025/06/21/Deep%20Learning%20Lecture-2/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2025/06/21/Deep%20Learning%20Lecture-3/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Deep Learning Lecture-2</div>
+      <div class="article-nav-title">Deep Learning Lecture-3</div>
     </a>
   
 </nav>
@@ -196,10 +236,6 @@
           </li>
         
           <li>
-            <a href="/2025/06/21/Deep%20Learning%20Lecture-2/">Deep Learning Lecture-2</a>
-          </li>
-        
-          <li>
             <a href="/2025/06/21/Deep%20Learning%20Lecture-3/">Deep Learning Lecture-3</a>
           </li>
         
@@ -209,6 +245,10 @@
         
           <li>
             <a href="/2025/06/21/Deep%20Learning%20Lecture-6/">Deep Learning Lecture-6</a>
+          </li>
+        
+          <li>
+            <a href="/2025/06/21/Deep%20Learning%20Lecture-5/">Deep Learning Lecture-5</a>
           </li>
         
       </ul>
