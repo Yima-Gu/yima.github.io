@@ -33,9 +33,13 @@
 
 
 
+
 <script>
   MathJax = {
     tex: {
+      // vvvvv  这是新添加的关键一行 vvvvv
+      packages: {'[+]': ['ams']},
+      // ^^^^^  这是新添加的关键一行 ^^^^^
       inlineMath: [['$', '$'], ['\\(', '\\)']],
       displayMath: [['$$', '$$'], ['\\[', '\\]']],
       processEscapes: true,
@@ -46,6 +50,7 @@
     }
   };
 </script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <meta name="generator" content="Hexo 7.3.0"></head>
@@ -87,6 +92,193 @@
 
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Deep Learning Lecture-1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/06/21/Deep%20Learning%20Lecture-1/" class="article-date">
+  <time class="dt-published" datetime="2025-06-20T16:00:00.000Z" itemprop="datePublished">2025-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/06/21/Deep%20Learning%20Lecture-1/">Deep Learning Lecture-1</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<p><strong>人工智能</strong>：模拟人类的智能<br><strong>机器学习</strong>：不显式编程来实现<br><strong>深度学习</strong>：使用神经网络</p>
+<p>对于深度学习总是能找到一些amazing的例子，同时也有一些失败的例子。</p>
+<p>深度学习是在数据中<strong>获取高度抽象</strong>的特征，主要使用神经网络。在深度学习中实现的功能类似于坐标系变换。对于同一个问题进行变换可以进行不同的处理。在机器学习过程中的规则系统仍然是很重要的。</p>
+<p>深度学习的表示为计算图</p>
+<h3 id="Framework"><a href="#Framework" class="headerlink" title="Framework"></a>Framework</h3><p>在学习算法中一定要指定函数族，然后使用数据来拟合函数族。要找出<strong>最优的函数族</strong>。不同的机器学习模型的区别主要在于<strong>假设空间</strong>（候选函数族）的不同。</p>
+<p>过拟和在指定函数族时已经确定。</p>
+<p>泛化误差公式：<br>$$<br>\varepsilon_{test} \leq \hat_{train} + \sqrt{\frac{complexity}{n}}<br>$$<br>要求：训练误差小，模型复杂度小，数据量大<br><strong>当且仅当需要的时候才增加模型复杂度</strong></p>
+<h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><p>$$<br>\arg \min O(D;\theta) &#x3D; \sum_{i&#x3D;1}^{N} L(y_i, f(x_i);\theta) + \Omega(\theta)<br>$$<br>上述公式要求：在训练样本上预测值与真实值的误差尽可能小。</p>
+<p>对于分类问题而言，经常使用的是交叉熵损失函数（logistic）和hinge损失函数。</p>
+<p>$\Omega(\theta)$是惩罚项，希望模型尽量简单。在使得$\theta$尽量小的过程中，某些特征的权重会变为0，这样就可以实现特征选择。同时也可以减少模型的复杂性。</p>
+<p><strong>学习类似于统计中的参数估计</strong></p>
+<p>![[{65C91395-95B8-4EF2-8AF6-3F86705FD81B}.png]]</p>
+<p>梯度下降的方法。</p>
+<p>具体例子：线性回归</p>
+<p>$$<br>O(D;\theta) &#x3D; \sum_{i&#x3D;1}^{N} (y_i - \theta^T x_i)^2 + \lambda \theta^T \theta &#x3D; (Y - X\theta)^T (Y - X\theta) + \lambda \theta^T \theta<br>$$<br>上述公式是关于$\theta$的二次函数，可以通过求导得到最优解。[[matrixcookbook.pdf]]<br>$$<br>\frac{\partial O(D;\theta)}{\partial \theta} &#x3D; -2 X^T (Y - X\theta) + 2 \lambda \theta &#x3D; 0<br>$$<br>$$<br>\hat{\theta} &#x3D; (X^T X + \lambda I)^{-1} X^T Y<br>$$<br>但是上述算法的复杂性为$O(n^3)$，不适用于大数据集。在软件工程中，通常使用梯度下降法。</p>
+<p><strong>Logistic Regression</strong></p>
+<p>$$<br>O(D;\theta) &#x3D; \sum_{i&#x3D;1}^{n} \log(1 + \exp(-y_i \theta^T x_i)) + \lambda ||\theta||_{1} &#x3D; F(D;\theta) + \lambda ||\theta||_{1}<br>$$<br>这里使用的是近端梯度下降法 <em>proximal gradient descent</em>。其中的1-范数是各个分量的绝对值之和。<a target="_blank" rel="noopener" href="https://www.zhihu.com/tardis/zm/art/82622940?source_id=1005">机器学习 | 近端梯度下降法 (proximal gradient descent)</a><br>在一些不可导的情况下如hinge损失函数，可以使用次梯度。</p>
+<p><strong>Softmax Regression</strong></p>
+<p>实现多分类问题，计算每个类别的概率即可，对于某个样本进行多次打分，取最高分对应的类别。</p>
+<p>Softmax Function:<br>[[Deep Learning Lecture-2#^b5bcbb]]<br>$$<br>P(y|x,\theta) &#x3D; \frac{\exp(\theta_y^T x)}{\sum_{r&#x3D;1}^{C} \exp(\theta_{r}^T x)}<br>$$<br>线性模型，用超平面对样本进行打分，然后使用softmax函数进行归一化。</p>
+<p>$$<br>O(D;\theta) &#x3D; -\sum_{i&#x3D;1}^{n} \log P(y_i|x_i;\theta) + \lambda ||\theta||_{1}<br>$$<br>上述式子其实是对数似然函数，最大化对数似然函数等价于最小化交叉熵损失函数。</p>
+<h4 id="Aproximation-and-Estimation"><a href="#Aproximation-and-Estimation" class="headerlink" title="Aproximation and Estimation"></a>Aproximation and Estimation</h4><p>假设空间只能表现一个有限的函数集合，有时候真值函数不一定在假设空间中。这时候假设空间中最好的函数与真值函数之间的差距称为<strong>近似误差</strong><em>Approximation Error</em>。学习得到的函数与空间中最好的函数的误差为<strong>估计误差</strong> <em>Estimation Error</em>。</p>
+<h3 id="Model-Selection"><a href="#Model-Selection" class="headerlink" title="Model Selection"></a>Model Selection</h3><p><em>All models are wrong but some are useful.</em></p>
+<p>CASH: Combined Algorithm Selection and Hyperparameter optimization<br>目标是：选择最好的模型和超参数<br>$$<br>A^<em>_{\lambda^</em>} &#x3D; \arg \min_{A \in \mathcal{A}} \min_{\lambda \in \Lambda^{(i)}} \mathcal{L}(A_{\lambda}^{(i)},D_{train},D_{valid})<br>$$</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-1/" data-id="cmc916j120000nsvabyajf45a" data-title="Deep Learning Lecture-1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Deep Learning Lecture-2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/06/21/Deep%20Learning%20Lecture-2/" class="article-date">
+  <time class="dt-published" datetime="2025-06-20T16:00:00.000Z" itemprop="datePublished">2025-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/06/21/Deep%20Learning%20Lecture-2/">Deep Learning Lecture-2</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<h3 id="Brain-and-Neuron"><a href="#Brain-and-Neuron" class="headerlink" title="Brain and Neuron"></a>Brain and Neuron</h3><p>感知机<em>Perceptron</em>是神经元的一个相当简单的数学模型，包括：输入、权重、激活函数、输出。其实是在空间超平面上嵌入了一个非线性函数。<br>$$<br>\hat{y} &#x3D; g(\sum_{i&#x3D;1}^{n}  x_i \theta_i +\theta_0)<br>$$<br>感知机在神经网络中也叫单元<em>unit</em>，是神经网络的基本组成单元。但是这样的单元会比人的神经元简单很多。</p>
+<h4 id="PLA"><a href="#PLA" class="headerlink" title="PLA"></a>PLA</h4><p>在上述的激活函数中，最先使用的是符号函数，这个函数是不光滑的。可以使用下面的算法来进行训练：<br>![[{5ABA24F6-F5A5-48C8-AE9F-1E8524E35979}.png]]<br>在理论推导中，可以计算PLA的<strong>收敛率</strong>：（在线性可分的情况下）<br>$\gamma$是最优间隔<em>the best-case margin</em>，计算的是训练样本与超平面的距离之间的最小值。<br>$$<br>\exists v \in \mathbb{R}^d \quad \text{s.t.}\,\gamma \leq \frac{y_i(v\cdot x_i)}{||v||}<br>$$<br>$R$是数据集的半径，即样本数据向量模的最大值，$d$是数据集的维度。那么PLA的收敛率为： 最多经过$\frac{R^2}{\gamma^2}$次迭代就可以收敛。</p>
+<ul>
+<li>$\gamma$越大，收敛越快</li>
+<li>$R$越大，收敛越慢</li>
+</ul>
+<h5 id="Expresiveness-of-Perceptron"><a href="#Expresiveness-of-Perceptron" class="headerlink" title="Expresiveness of Perceptron"></a>Expresiveness of Perceptron</h5><p>感知机是一个线性分类器，只能解决线性可分的问题。如果数据不是线性可分的，那么感知机就无法解决（例如异或问题，但其实异或不是基本的布尔运算，可以用与或非表达）。</p>
+<h4 id="Multi-layer-Perceptron"><a href="#Multi-layer-Perceptron" class="headerlink" title="Multi-layer Perceptron"></a>Multi-layer Perceptron</h4><p>多层感知机<em>Multi-layer Perceptron</em>是感知机的扩展，可以解决非线性问题。多层感知机的结构是：输入层、隐藏层、输出层（输入层并不算一层）。<br><em>感知机之间的链接方式相比人脑而言也是较为简单的。</em><br>在表达时，可以发现是<strong>稀疏的</strong>，也就是每一层并不是与前面的所有的感知机相连。多层感知机的表达能力较强，这时需要增加感知机的层数。</p>
+<h5 id="Comention"><a href="#Comention" class="headerlink" title="Comention"></a>Comention</h5><p>![[{9A215F21-185B-4C55-B872-413D388E5321}.png]]</p>
+<p>![[{E178BAD1-DE9C-44E5-A665-D550AE3A9558}.png]]</p>
+<ul>
+<li>用上标表示层数，用下标表示感知机的编号</li>
+<li>$\theta_{ij}^{(l)}$表示第$l$层的第$i$个感知机的第$j$个输入的权重</li>
+<li>$b_j^{(l)}$表示第$l$层的第$j$个感知机的偏置</li>
+<li>$a_j^{(l)}$表示第$l$层的第$j$个感知机的输出（在激活之后的数值）</li>
+<li>$z_j^{(l)}$表示第$l$层的第$j$个感知机的输入（经过线性变换之后的数值）</li>
+<li>$J(\theta)$表示损失函数<em>Loss Function</em></li>
+</ul>
+<p>在上面的图中，边的个数就是参数的个数。</p>
+<h5 id="Activation-Function"><a href="#Activation-Function" class="headerlink" title="Activation Function"></a>Activation Function</h5><ul>
+<li><p><strong>Sigmoid函数</strong>：$g(z) &#x3D; \sigma(z)&#x3D; \frac{1}{1+e^{-z}}$<br>采用有界的函数，可以将输出限制在0-1之间，避免数值爆炸。但是在基于梯度的计算中，会出现梯度消失（梯度饱和），在两侧的范围内梯度会接近于0。</p>
+</li>
+<li><p><strong>ReLU函数</strong>：$g(z) &#x3D; max(0,z)$<br>ReLU函数是一个分段函数，可以避免<strong>梯度消失</strong>的问题。但是在训练时，会出现<strong>神经元死亡</strong>的问题，即神经元的输出一直为0。</p>
+</li>
+<li><p><strong>GeLu函数</strong>：$g(z) &#x3D; z \cdot \Phi(z) &#x3D; z \cdot \frac{1}{2} (1 + \text{erf}(\frac{z}{\sqrt{2}}))$<br>用Guass分布的累计函数对上述进行加权。$\Phi(z)$是标准正态分布的累计分布函数<em>CDF</em>。在一些较为复杂的模型中（GPT-3、Bert）都有使用。</p>
+</li>
+</ul>
+<p>在网络的输出层，使用的激活函数由问题决定。如果是回归问题，可以使用线性函数；在有界的输出情况下，可以使用Sigmoid函数；在多分类问题中，可以使用Softmax函数。</p>
+<ul>
+<li><strong>Softmax函数</strong>：$g(z)_i &#x3D; \frac{e^{z_i}}{\sum_{j&#x3D;1}^{k} e^{z_j}}$<br>Softmax函数是一个多分类的激活函数，可以将输出的值转化为概率值。分类问题是随机实验中的伯努利实验<em>Categorical Distribution</em>。<br>缺点为：“赢者通吃”，即最大的值会被放大，其他的值会被压缩，有<em>over confidence</em>的问题（即某个分类的概率过大）。同时有数值稳定性问题，即数值计算时可能会出现数值爆炸的问题。<br>改进为：<br>$$<br>g(z)_i &#x3D; \frac{e^{z_i - \max(z)}}{\sum_{j&#x3D;1}^{k} e^{z_j - \max(z)}}<br>$$<br>上述改进能解决数值稳定性问题，但是对于<em>over confidence</em>问题还是存在。 ^b5bcbb</li>
+</ul>
+<h5 id="Cost-Function"><a href="#Cost-Function" class="headerlink" title="Cost Function"></a>Cost Function</h5><p>任何一个衡量预测与实际值之间的差异的函数都可以称为损失函数。在这里使用的是交叉熵损失函数<em>Cross Entropy Loss</em>：<br>$$<br>J(y,\hat{y}) &#x3D; - \sum_{i&#x3D;1}^{n} y_i \log(\hat{y}_i)<br>$$<br>作代入得到：<br>$$<br>\min J(\theta)&#x3D; -\frac{1}{m} \sum_{i&#x3D;1}^{m} \sum_{j&#x3D;1}^{k} \mathbf{1}\{y^{(i)}&#x3D;j\} \log\frac{\exp{ z_j^{(n_l)}}}{\sum_{j&#39;&#x3D;1}^{k} \exp{ z_{j&#39;}^{(n_l)}}} \quad (*)<br>$$</p>
+<p><em>*上述公式中的m为样本数目，k为类别数目，$z_{j}^{(n_l)}$为最后一层的第j个感知机的输入。对于实际类别采用独热编码，即只有在对应类别取值为1。</em></p>
+<h5 id="Statistical-View-of-Softmax"><a href="#Statistical-View-of-Softmax" class="headerlink" title="Statistical View of Softmax"></a>Statistical View of Softmax</h5><p>考虑投掷m次骰子，其中第$i$个得到$j$的概率为$q_{ij}$。在<em>Softmax</em>中对于概率进行建模（用数据进行估计，对于分类估计的参数进行逼近）：<br>$$<br>q_{ij} &#x3D; P(y_i &#x3D; j\,| \mathbf{x_i} ; \mathbf{W} )<br>$$<br>在给定的结果$\{y_1,...,y_m\}$下，概率值（似然函数）为：<br>$$<br>\mathcal{L}(\mathbf{W};\mathcal{D})&#x3D;\prod_{i&#x3D;1}^{m} \prod_{j&#x3D;1}^{k} P(y_i&#x3D;j|q_{ij})^{\mathbf{1}\{y_i &#x3D; j\}} &#x3D; \prod_{i&#x3D;1}^{m} \prod_{j&#x3D;1}^{k}P(y_i &#x3D; j\,| \mathbf{x_i} ; \mathbf{W} ) ^{\mathbf{1}\{y_i &#x3D; j\}}<br>$$<br><em>$\mathbf{W}$是模型的参数，上面的式子是在这样的建模和数据下得到结果的可能性，也就是统计中的似然函数。这样的过程类似于统计中的参数估 计。</em></p>
+<p>做极大似然估计：<br>$$<br>\mathcal{L}(\mathbf{W};\mathcal{D}) &#x3D;\max_{w_1 \dots w_k} \prod_{i&#x3D;1}^{m} \prod_{j&#x3D;1}^{k} P(y_i &#x3D; j\,| \mathbf{x_i} ; \mathbf{W} ) ^{\mathbf{1}\{y_i &#x3D; j\}}<br>$$<br>取负对数：<br>$$<br>J(\mathbf{W}) &#x3D; \min_{w_1 \dots w_k}- \log \mathcal{L}(\mathbf{W};\mathcal{D}) &#x3D; - \sum_{i&#x3D;1}^{m} \sum_{j&#x3D;1}^{k} \mathbf{1}\{y_i &#x3D; j\} \log P(y_i &#x3D; j\,| \mathbf{x_i} ; \mathbf{W} )<br>$$<br>上述的式子就是交叉熵损失函数。上面的过程其实是在认为分类是$i.i.d.$的伯努利分布的极大似然估计。</p>
+<h3 id="Gradient-Descent"><a href="#Gradient-Descent" class="headerlink" title="Gradient Descent"></a>Gradient Descent</h3><p>对于不是直接依赖的导数的计算较为复杂，对于最后一层的导数计算较为简单（是直接依赖）。对于前面层的参数的导数在这里使用<strong>链式法则</strong>来进行计算。</p>
+<p>对于最后一层的参数的导数计算：<br>$$<br>\frac{\partial J(\theta ,b)}{\partial z_j^{(n_l)}} &#x3D; - (\mathbf{1}\{y^{(i)}&#x3D;j\} -P(y^{(i)}&#x3D;j|\mathbf{x}^{(i)};\theta,b)))<br>$$<br>可以发现梯度是真是的概率减去预测的概率。</p>
+<h4 id="Step-1-Forward-Propagation"><a href="#Step-1-Forward-Propagation" class="headerlink" title="Step 1: Forward Propagation"></a>Step 1: Forward Propagation</h4><p>输入样本计算得到的输出值，这个过程是一个前向传播的过程。</p>
+<h4 id="Step-2-Backward-Propagation"><a href="#Step-2-Backward-Propagation" class="headerlink" title="Step 2: Backward Propagation"></a>Step 2: Backward Propagation</h4><p>将损失函数带有的错误信息向前传播<br>$$<br>\frac{J(\theta)}{\theta_1}&#x3D; \frac{\partial J(\theta)}{\partial \hat{y}} \frac{\partial \hat{y}}{\partial z} \frac{\partial z}{\partial \theta_1}<br>$$<br>除了需要求解的导数的参数，其他的都是计算的中间值。BP是一个动态规划算法。</p>
+<h4 id="Computing-the-Residual"><a href="#Computing-the-Residual" class="headerlink" title="Computing the Residual"></a>Computing the Residual</h4><p>第$l$层的第$i$个结点的残差<em>Residual</em>的定义为：<br>$$<br>\delta_i^{(l)} &#x3D; \frac{\partial J(\theta)}{\partial z_i^{(l)}}<br>$$<br>对于最后一层的残差，计算较为简单：<br>$$<br>\delta_i^{(n_l)} &#x3D; \frac{\partial}{\partial z_i^{(n_l)} } J(\theta) &#x3D; \frac{\partial }{\partial \hat{y}_i}J(\theta) g&#39;(z_i^{(n_l)})<br>$$<br>利用链式法则对激活函数求导即可。<br>对于隐藏层的导数计算：<br>$$<br>\delta_i^{(l)} &#x3D; \frac{\partial J(\theta)}{\partial z_i^{(l)}} &#x3D; \sum_{j&#x3D;1}^{n_{l+1}} \frac{\partial J(\theta)}{\partial z_j^{(l+1)}} \frac{\partial z_j^{(l+1)}}{\partial z_i^{(l)}} &#x3D; \sum_{j&#x3D;1}^{n_{l+1}} \delta_j^{(l+1)} \theta_{ij}^{(l)} g&#39;(z_i^{(l)})<br>$$<br>$$<br>\delta_i^{(l)}&#x3D; \sum_{j&#x3D;1}^{n_{l+1}} \delta_j^{(l+1)} \theta_{ji}^{(l)} g&#39;(z_j^{(l)})<br>$$<br>上述公式实现了<strong>传递</strong>的过程。</p>
+<h4 id="Step-3-Update-Parameters"><a href="#Step-3-Update-Parameters" class="headerlink" title="Step 3: Update Parameters"></a>Step 3: Update Parameters</h4><p>对于参数更新的过程：<br>$$<br>\frac{\partial J(\theta)}{\partial \theta_{ij}^{(l)}} &#x3D; \frac{\partial J(\theta)}{\partial z_j^{(l+1)}} \frac{\partial z_j^{(l+1)}}{\partial \theta_{ij}^{(l)}} &#x3D; \delta_j^{(l+1)} a_i^{(l)}<br>$$<br>$$<br>\frac{\partial J(\theta)}{\partial b_j^{(l)}} &#x3D; \delta_j^{(l+1)}<br>$$</p>
+<h5 id="Automatic-Differentiation"><a href="#Automatic-Differentiation" class="headerlink" title="Automatic Differentiation"></a>Automatic Differentiation</h5><p>在实际的计算中，可以使用自动微分的方法来进行计算。自动微分是一种计算导数的方法，可以分为两种：</p>
+<ul>
+<li><strong>Symbolic Differentiation</strong>：通过符号的方式来计算导数，这种方法计算的精确度较高，但是计算的速度较慢。</li>
+<li><strong>Numerical Differentiation</strong>：通过数值的方式来计算导数，这种方法计算的速度较快，但是计算的精确度较低。</li>
+</ul>
+<p>在计算图中，将每一个计算层的反向传播的导数保存在软件包中，这样可以减少计算的时间。实际的应用中，对于计算图进行拓扑排序，然后进行反向传播的计算。</p>
+<h4 id="Optimization-in-Practice"><a href="#Optimization-in-Practice" class="headerlink" title="Optimization in Practice"></a>Optimization in Practice</h4><h5 id="Dropout"><a href="#Dropout" class="headerlink" title="Dropout"></a><strong>Dropout</strong></h5><p>在训练的过程中，随机的将一些神经元的权重置为0（丢弃），这样可以减少过拟合的问题。在操作的过程中，按照一定的概率$p$对神经元进行丢弃。在某一层未被丢弃的神经元的激活值值乘以$\frac{1}{1-p}$，这样可以保持期望值不变。</p>
+<h5 id="Weight-Initialization"><a href="#Weight-Initialization" class="headerlink" title="Weight Initialization"></a>Weight Initialization</h5><p>对于权重的初始化，一般使用Guass分布可以使用一些方法来进行初始化，例如：<br><strong>Xavier Initialization</strong> ( linear activations )：<br>$$<br>Var(W)&#x3D; \frac{1}{n_{in}}<br>$$<br>假设输入的数据$x_j$满足均值为0，方差为$\gamma$，$n_{in}$是这一个神经元对应的输入的神经元的个数。<br>在线性组合之后，可以得到：<br>$$<br>h_i&#x3D;\sum_{j&#x3D;1}^{n_{in}} w_{ij} x_j<br>$$<br>可以认为$w_{ij}$是独立同分布的并且均值为0方差为$\sigma^2$那么计算得到：<br>$$<br>\mathbb{E}[h_i]&#x3D;0 \quad \mathbb{E}[h_i^2] &#x3D; n_{in} \sigma^2 \gamma<br>$$<br>这样在经过一个层之后数据的方差会改变，为了保持方差不变，可以使用上述的初始化方法。</p>
+<p><strong>He Initialization</strong>：(ReLU activations)<br>$$<br>Var(W)&#x3D; \frac{2}{n_{in}}<br>$$<br>[[权重初始化.pdf]]<br>其中$n_{in}$是这一个神经元对应的输入的神经元的个数。</p>
+<h5 id="Baby-Sitting-Learning"><a href="#Baby-Sitting-Learning" class="headerlink" title="Baby Sitting Learning"></a>Baby Sitting Learning</h5><p>在训练的过程中，首先在较小的数据集上进行过拟和（在这个训练集上的损失函数接近0）</p>
+<p><strong>学习率</strong></p>
+<ul>
+<li>如果一个网络训练的过程中，损失函数不变或变大，那么可能是学习率过大，可以减小学习率。</li>
+<li>学习率较小，可能会导致训练的过程较慢，可以增大学习率。</li>
+</ul>
+<p><strong>数值爆炸</strong>：</p>
+<ul>
+<li>尽量使神经元不陷入饱和区，使用上述权重的初始化方法，可以很好缓解。</li>
+<li>使得输入经过一定的归一化处理，可以尽量避免数值爆炸的问题。</li>
+</ul>
+<p>验证误差曲线和训练误差曲线之间的差距较大，可能是过拟合的问题。可以进行早停。现在已经可以使验证误差趋近于渐近线。</p>
+<h5 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a>Batch Normalization</h5><p>对于输入的数据进行归一化处理，可以加快训练的速度，同时可以减少梯度消失的问题。在训练的过程中，对于每一个batch的数据进行归一化处理，可以使得数据的分布更加稳定。<br>$$<br>\hat{x} &#x3D; \frac{x - \mu}{\sigma}<br>$$<br>这是一个非参数化方法。可以加入可学习的参数：<br>$$<br>y &#x3D; \gamma \hat{x} + \beta<br>$$<br>其中$\mu$和$\sigma$是对于每一个mini-batch的均值和方差。</p>
+<p>在CNN中，对每一个batch中的n个$w \times h$的特征图进行归一化处理，可以使得数据的分布更加稳定。</p>
+<p>上述是在训练的过程中使用的，在测试过程中使用不了称为<strong>训练推理失配</strong><em>train inference mismatch</em>。可以使用EMA（指数滑动平均）的方法来进行替代。</p>
+<p>上述要求n大概是16，在比较大的模型中，可能显存不够。上述方法有一个替代的方法<em>Layer Normalization</em>，对于每一个样本进行归一化处理。</p>
+<p>在使用了<em>Batch Normalization</em>之后，仍然有协变量偏移<em>covariate shift</em>的问题。但是在使用<em>Batch Normalization</em>之后，<em>Lipchitz</em>系数变化更加平稳，海森矩阵也更加稳定。上述可以用数学严格证明。上述操作并不是简单的归一化，而是使得表示的函数族更加光滑，一个光滑的、凸的函数更容易优化。</p>
+<ul>
+<li>Lipchitz:<br>$$<br>\left\|\nabla_{y_j} \hat{\mathcal{L}}\right\|^2 \leq \frac{\gamma^2}{\sigma_j^2}\left(\left\|\nabla_{y_j}\right\|^2-\frac{1}{m}\left(1, \nabla_{y_j} \mathcal{L}\right)^2-\frac{1}{m}\left(\nabla_{y_j} \mathcal{L}, \hat{y}_j\right)^2\right)<br>$$</li>
+<li>Smoothness:<br>$$<br>\gamma&lt;\sigma \text { in experiments }<br>$$</li>
+<li>Hessian matrix</li>
+</ul>
+<p>$$<br>\left(\nabla_{y_j} \hat{\mathcal{L}}\right)^T \frac{\partial \hat{\mathcal{L}}}{\partial y_j \partial y_j}\left(\nabla_{y_j} \hat{\mathcal{L}}\right) \leq \frac{\gamma^2}{\sigma_j^2}\left(\left(\nabla_{y_j} \mathcal{L}\right)^T \frac{\partial \mathcal{L}}{\partial y_j \partial y_j}\left(\nabla_{y_j} \mathcal{L}\right)-\frac{\gamma}{m \sigma^2}\left(\nabla_{y_j} \mathcal{L}, \hat{y}_j\right)\left\|\nabla_{y_j} \hat{\mathcal{L}}\right\|^2\right)<br>$$</p>
+<h5 id="Group-Normalization"><a href="#Group-Normalization" class="headerlink" title="Group Normalization"></a>Group Normalization</h5><p>![[{139D48AB-F664-4CE8-AC05-97B772908A85}.png]]<br>在<em>Group Normalization</em>中，对于每一个通道的特征图进行归一化处理，这样可以减少计算的复杂度。是轻量化CNN的方法。在一定数据量较大的情况下可以达到和<em>Batch Normalization</em>差不多的结果。</p>
+<h3 id="Generalization-and-Capacity"><a href="#Generalization-and-Capacity" class="headerlink" title="Generalization and Capacity"></a>Generalization and Capacity</h3><ul>
+<li>网络结构不同网络效果不同，如相同的层数下，全连接网络的参数量大但是和卷积网络的效果差不多。</li>
+<li>相同的网络结构，参数量不同，参数量多的网络效果更好。</li>
+</ul>
+<h4 id="Theorem-Arbitrarily-large-neural-networks-can-approximate-any-function"><a href="#Theorem-Arbitrarily-large-neural-networks-can-approximate-any-function" class="headerlink" title="Theorem (Arbitrarily large neural networks can approximate any function)"></a>Theorem (Arbitrarily large neural networks can approximate any function)</h4><p>理论可以表述为：对于任意的连续函数，存在一个足够大的神经网络可以近似这个函数。<br>![[{79D51D58-D7B7-485E-9A0F-5F615FE27545}.png]]<br>上面表示两层神经网络可以逼近任意的连续函数，要求这个函数$\sigma$不是多项式函数。</p>
+<p>![[{862689B6-2775-4822-8FAC-B0450B360BA0}.png]]<br>上面的定理表示神经网络的宽度也很重要，可以通过增加神经元的数量来逼近函数。</p>
+<p> 在空间折叠的问题中，表明<strong>深度比宽度更加重要</strong>。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-2/" data-id="cmc916j140001nsvae4if8ni4" data-title="Deep Learning Lecture-2" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
   
     <article id="post-Deep Learning Lecture-3" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
@@ -262,230 +454,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-3/" data-id="cmc90ph0u0000p0va3m7tadak" data-title="Deep Learning Lecture-3" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Deep Learning Lecture-2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/06/21/Deep%20Learning%20Lecture-2/" class="article-date">
-  <time class="dt-published" datetime="2025-06-20T16:00:00.000Z" itemprop="datePublished">2025-06-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/06/21/Deep%20Learning%20Lecture-2/">Deep Learning Lecture-2</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <hr>
-<h3 id="Brain-and-Neuron"><a href="#Brain-and-Neuron" class="headerlink" title="Brain and Neuron"></a>Brain and Neuron</h3><p>感知机<em>Perceptron</em>是神经元的一个相当简单的数学模型，包括：输入、权重、激活函数、输出。其实是在空间超平面上嵌入了一个非线性函数。<br>$$<br>\hat{y} &#x3D; g(\sum_{i&#x3D;1}^{n}  x_i \theta_i +\theta_0)<br>$$<br>感知机在神经网络中也叫单元<em>unit</em>，是神经网络的基本组成单元。但是这样的单元会比人的神经元简单很多。</p>
-<h4 id="PLA"><a href="#PLA" class="headerlink" title="PLA"></a>PLA</h4><p>在上述的激活函数中，最先使用的是符号函数，这个函数是不光滑的。可以使用下面的算法来进行训练：<br>![[{5ABA24F6-F5A5-48C8-AE9F-1E8524E35979}.png]]<br>在理论推导中，可以计算PLA的<strong>收敛率</strong>：（在线性可分的情况下）<br>$\gamma$是最优间隔<em>the best-case margin</em>，计算的是训练样本与超平面的距离之间的最小值。<br>$$<br>\exists v \in \mathbb{R}^d \quad \text{s.t.}\,\gamma \leq \frac{y_i(v\cdot x_i)}{||v||}<br>$$<br>$R$是数据集的半径，即样本数据向量模的最大值，$d$是数据集的维度。那么PLA的收敛率为： 最多经过$\frac{R^2}{\gamma^2}$次迭代就可以收敛。</p>
-<ul>
-<li>$\gamma$越大，收敛越快</li>
-<li>$R$越大，收敛越慢</li>
-</ul>
-<h5 id="Expresiveness-of-Perceptron"><a href="#Expresiveness-of-Perceptron" class="headerlink" title="Expresiveness of Perceptron"></a>Expresiveness of Perceptron</h5><p>感知机是一个线性分类器，只能解决线性可分的问题。如果数据不是线性可分的，那么感知机就无法解决（例如异或问题，但其实异或不是基本的布尔运算，可以用与或非表达）。</p>
-<h4 id="Multi-layer-Perceptron"><a href="#Multi-layer-Perceptron" class="headerlink" title="Multi-layer Perceptron"></a>Multi-layer Perceptron</h4><p>多层感知机<em>Multi-layer Perceptron</em>是感知机的扩展，可以解决非线性问题。多层感知机的结构是：输入层、隐藏层、输出层（输入层并不算一层）。<br><em>感知机之间的链接方式相比人脑而言也是较为简单的。</em><br>在表达时，可以发现是<strong>稀疏的</strong>，也就是每一层并不是与前面的所有的感知机相连。多层感知机的表达能力较强，这时需要增加感知机的层数。</p>
-<h5 id="Comention"><a href="#Comention" class="headerlink" title="Comention"></a>Comention</h5><p>![[{9A215F21-185B-4C55-B872-413D388E5321}.png]]</p>
-<p>![[{E178BAD1-DE9C-44E5-A665-D550AE3A9558}.png]]</p>
-<ul>
-<li>用上标表示层数，用下标表示感知机的编号</li>
-<li>$\theta_{ij}^{(l)}$表示第$l$层的第$i$个感知机的第$j$个输入的权重</li>
-<li>$b_j^{(l)}$表示第$l$层的第$j$个感知机的偏置</li>
-<li>$a_j^{(l)}$表示第$l$层的第$j$个感知机的输出（在激活之后的数值）</li>
-<li>$z_j^{(l)}$表示第$l$层的第$j$个感知机的输入（经过线性变换之后的数值）</li>
-<li>$J(\theta)$表示损失函数<em>Loss Function</em></li>
-</ul>
-<p>在上面的图中，边的个数就是参数的个数。</p>
-<h5 id="Activation-Function"><a href="#Activation-Function" class="headerlink" title="Activation Function"></a>Activation Function</h5><ul>
-<li><p><strong>Sigmoid函数</strong>：$g(z) &#x3D; \sigma(z)&#x3D; \frac{1}{1+e^{-z}}$<br>采用有界的函数，可以将输出限制在0-1之间，避免数值爆炸。但是在基于梯度的计算中，会出现梯度消失（梯度饱和），在两侧的范围内梯度会接近于0。</p>
-</li>
-<li><p><strong>ReLU函数</strong>：$g(z) &#x3D; max(0,z)$<br>ReLU函数是一个分段函数，可以避免<strong>梯度消失</strong>的问题。但是在训练时，会出现<strong>神经元死亡</strong>的问题，即神经元的输出一直为0。</p>
-</li>
-<li><p><strong>GeLu函数</strong>：$g(z) &#x3D; z \cdot \Phi(z) &#x3D; z \cdot \frac{1}{2} (1 + \text{erf}(\frac{z}{\sqrt{2}}))$<br>用Guass分布的累计函数对上述进行加权。$\Phi(z)$是标准正态分布的累计分布函数<em>CDF</em>。在一些较为复杂的模型中（GPT-3、Bert）都有使用。</p>
-</li>
-</ul>
-<p>在网络的输出层，使用的激活函数由问题决定。如果是回归问题，可以使用线性函数；在有界的输出情况下，可以使用Sigmoid函数；在多分类问题中，可以使用Softmax函数。</p>
-<ul>
-<li><strong>Softmax函数</strong>：$g(z)_i &#x3D; \frac{e^{z_i}}{\sum_{j&#x3D;1}^{k} e^{z_j}}$<br>Softmax函数是一个多分类的激活函数，可以将输出的值转化为概率值。分类问题是随机实验中的伯努利实验<em>Categorical Distribution</em>。<br>缺点为：“赢者通吃”，即最大的值会被放大，其他的值会被压缩，有<em>over confidence</em>的问题（即某个分类的概率过大）。同时有数值稳定性问题，即数值计算时可能会出现数值爆炸的问题。<br>改进为：<br>$$<br>g(z)_i &#x3D; \frac{e^{z_i - \max(z)}}{\sum_{j&#x3D;1}^{k} e^{z_j - \max(z)}}<br>$$<br>上述改进能解决数值稳定性问题，但是对于<em>over confidence</em>问题还是存在。 ^b5bcbb</li>
-</ul>
-<h5 id="Cost-Function"><a href="#Cost-Function" class="headerlink" title="Cost Function"></a>Cost Function</h5><p>任何一个衡量预测与实际值之间的差异的函数都可以称为损失函数。在这里使用的是交叉熵损失函数<em>Cross Entropy Loss</em>：<br>$$<br>J(y,\hat{y}) &#x3D; - \sum_{i&#x3D;1}^{n} y_i \log(\hat{y}_i)<br>$$<br>作代入得到：<br>$$<br>\min J(\theta)&#x3D; -\frac{1}{m} \sum_{i&#x3D;1}^{m} \sum_{j&#x3D;1}^{k} \mathbf{1}\{y^{(i)}&#x3D;j\} \log\frac{\exp{ z_j^{(n_l)}}}{\sum_{j&#39;&#x3D;1}^{k} \exp{ z_{j&#39;}^{(n_l)}}} \quad (*)<br>$$</p>
-<p><em>*上述公式中的m为样本数目，k为类别数目，$z_{j}^{(n_l)}$为最后一层的第j个感知机的输入。对于实际类别采用独热编码，即只有在对应类别取值为1。</em></p>
-<h5 id="Statistical-View-of-Softmax"><a href="#Statistical-View-of-Softmax" class="headerlink" title="Statistical View of Softmax"></a>Statistical View of Softmax</h5><p>考虑投掷m次骰子，其中第$i$个得到$j$的概率为$q_{ij}$。在<em>Softmax</em>中对于概率进行建模（用数据进行估计，对于分类估计的参数进行逼近）：<br>$$<br>q_{ij} &#x3D; P(y_i &#x3D; j\,| \mathbf{x_i} ; \mathbf{W} )<br>$$<br>在给定的结果$\{y_1,...,y_m\}$下，概率值（似然函数）为：<br>$$<br>\mathcal{L}(\mathbf{W};\mathcal{D})&#x3D;\prod_{i&#x3D;1}^{m} \prod_{j&#x3D;1}^{k} P(y_i&#x3D;j|q_{ij})^{\mathbf{1}\{y_i &#x3D; j\}} &#x3D; \prod_{i&#x3D;1}^{m} \prod_{j&#x3D;1}^{k}P(y_i &#x3D; j\,| \mathbf{x_i} ; \mathbf{W} ) ^{\mathbf{1}\{y_i &#x3D; j\}}<br>$$<br><em>$\mathbf{W}$是模型的参数，上面的式子是在这样的建模和数据下得到结果的可能性，也就是统计中的似然函数。这样的过程类似于统计中的参数估 计。</em></p>
-<p>做极大似然估计：<br>$$<br>\mathcal{L}(\mathbf{W};\mathcal{D}) &#x3D;\max_{w_1 \dots w_k} \prod_{i&#x3D;1}^{m} \prod_{j&#x3D;1}^{k} P(y_i &#x3D; j\,| \mathbf{x_i} ; \mathbf{W} ) ^{\mathbf{1}\{y_i &#x3D; j\}}<br>$$<br>取负对数：<br>$$<br>J(\mathbf{W}) &#x3D; \min_{w_1 \dots w_k}- \log \mathcal{L}(\mathbf{W};\mathcal{D}) &#x3D; - \sum_{i&#x3D;1}^{m} \sum_{j&#x3D;1}^{k} \mathbf{1}\{y_i &#x3D; j\} \log P(y_i &#x3D; j\,| \mathbf{x_i} ; \mathbf{W} )<br>$$<br>上述的式子就是交叉熵损失函数。上面的过程其实是在认为分类是$i.i.d.$的伯努利分布的极大似然估计。</p>
-<h3 id="Gradient-Descent"><a href="#Gradient-Descent" class="headerlink" title="Gradient Descent"></a>Gradient Descent</h3><p>对于不是直接依赖的导数的计算较为复杂，对于最后一层的导数计算较为简单（是直接依赖）。对于前面层的参数的导数在这里使用<strong>链式法则</strong>来进行计算。</p>
-<p>对于最后一层的参数的导数计算：<br>$$<br>\frac{\partial J(\theta ,b)}{\partial z_j^{(n_l)}} &#x3D; - (\mathbf{1}\{y^{(i)}&#x3D;j\} -P(y^{(i)}&#x3D;j|\mathbf{x}^{(i)};\theta,b)))<br>$$<br>可以发现梯度是真是的概率减去预测的概率。</p>
-<h4 id="Step-1-Forward-Propagation"><a href="#Step-1-Forward-Propagation" class="headerlink" title="Step 1: Forward Propagation"></a>Step 1: Forward Propagation</h4><p>输入样本计算得到的输出值，这个过程是一个前向传播的过程。</p>
-<h4 id="Step-2-Backward-Propagation"><a href="#Step-2-Backward-Propagation" class="headerlink" title="Step 2: Backward Propagation"></a>Step 2: Backward Propagation</h4><p>将损失函数带有的错误信息向前传播<br>$$<br>\frac{J(\theta)}{\theta_1}&#x3D; \frac{\partial J(\theta)}{\partial \hat{y}} \frac{\partial \hat{y}}{\partial z} \frac{\partial z}{\partial \theta_1}<br>$$<br>除了需要求解的导数的参数，其他的都是计算的中间值。BP是一个动态规划算法。</p>
-<h4 id="Computing-the-Residual"><a href="#Computing-the-Residual" class="headerlink" title="Computing the Residual"></a>Computing the Residual</h4><p>第$l$层的第$i$个结点的残差<em>Residual</em>的定义为：<br>$$<br>\delta_i^{(l)} &#x3D; \frac{\partial J(\theta)}{\partial z_i^{(l)}}<br>$$<br>对于最后一层的残差，计算较为简单：<br>$$<br>\delta_i^{(n_l)} &#x3D; \frac{\partial}{\partial z_i^{(n_l)} } J(\theta) &#x3D; \frac{\partial }{\partial \hat{y}_i}J(\theta) g&#39;(z_i^{(n_l)})<br>$$<br>利用链式法则对激活函数求导即可。<br>对于隐藏层的导数计算：<br>$$<br>\delta_i^{(l)} &#x3D; \frac{\partial J(\theta)}{\partial z_i^{(l)}} &#x3D; \sum_{j&#x3D;1}^{n_{l+1}} \frac{\partial J(\theta)}{\partial z_j^{(l+1)}} \frac{\partial z_j^{(l+1)}}{\partial z_i^{(l)}} &#x3D; \sum_{j&#x3D;1}^{n_{l+1}} \delta_j^{(l+1)} \theta_{ij}^{(l)} g&#39;(z_i^{(l)})<br>$$<br>$$<br>\delta_i^{(l)}&#x3D; \sum_{j&#x3D;1}^{n_{l+1}} \delta_j^{(l+1)} \theta_{ji}^{(l)} g&#39;(z_j^{(l)})<br>$$<br>上述公式实现了<strong>传递</strong>的过程。</p>
-<h4 id="Step-3-Update-Parameters"><a href="#Step-3-Update-Parameters" class="headerlink" title="Step 3: Update Parameters"></a>Step 3: Update Parameters</h4><p>对于参数更新的过程：<br>$$<br>\frac{\partial J(\theta)}{\partial \theta_{ij}^{(l)}} &#x3D; \frac{\partial J(\theta)}{\partial z_j^{(l+1)}} \frac{\partial z_j^{(l+1)}}{\partial \theta_{ij}^{(l)}} &#x3D; \delta_j^{(l+1)} a_i^{(l)}<br>$$<br>$$<br>\frac{\partial J(\theta)}{\partial b_j^{(l)}} &#x3D; \delta_j^{(l+1)}<br>$$</p>
-<h5 id="Automatic-Differentiation"><a href="#Automatic-Differentiation" class="headerlink" title="Automatic Differentiation"></a>Automatic Differentiation</h5><p>在实际的计算中，可以使用自动微分的方法来进行计算。自动微分是一种计算导数的方法，可以分为两种：</p>
-<ul>
-<li><strong>Symbolic Differentiation</strong>：通过符号的方式来计算导数，这种方法计算的精确度较高，但是计算的速度较慢。</li>
-<li><strong>Numerical Differentiation</strong>：通过数值的方式来计算导数，这种方法计算的速度较快，但是计算的精确度较低。</li>
-</ul>
-<p>在计算图中，将每一个计算层的反向传播的导数保存在软件包中，这样可以减少计算的时间。实际的应用中，对于计算图进行拓扑排序，然后进行反向传播的计算。</p>
-<h4 id="Optimization-in-Practice"><a href="#Optimization-in-Practice" class="headerlink" title="Optimization in Practice"></a>Optimization in Practice</h4><h5 id="Dropout"><a href="#Dropout" class="headerlink" title="Dropout"></a><strong>Dropout</strong></h5><p>在训练的过程中，随机的将一些神经元的权重置为0（丢弃），这样可以减少过拟合的问题。在操作的过程中，按照一定的概率$p$对神经元进行丢弃。在某一层未被丢弃的神经元的激活值值乘以$\frac{1}{1-p}$，这样可以保持期望值不变。</p>
-<h5 id="Weight-Initialization"><a href="#Weight-Initialization" class="headerlink" title="Weight Initialization"></a>Weight Initialization</h5><p>对于权重的初始化，一般使用Guass分布可以使用一些方法来进行初始化，例如：<br><strong>Xavier Initialization</strong> ( linear activations )：<br>$$<br>Var(W)&#x3D; \frac{1}{n_{in}}<br>$$<br>假设输入的数据$x_j$满足均值为0，方差为$\gamma$，$n_{in}$是这一个神经元对应的输入的神经元的个数。<br>在线性组合之后，可以得到：<br>$$<br>h_i&#x3D;\sum_{j&#x3D;1}^{n_{in}} w_{ij} x_j<br>$$<br>可以认为$w_{ij}$是独立同分布的并且均值为0方差为$\sigma^2$那么计算得到：<br>$$<br>\mathbb{E}[h_i]&#x3D;0 \quad \mathbb{E}[h_i^2] &#x3D; n_{in} \sigma^2 \gamma<br>$$<br>这样在经过一个层之后数据的方差会改变，为了保持方差不变，可以使用上述的初始化方法。</p>
-<p><strong>He Initialization</strong>：(ReLU activations)<br>$$<br>Var(W)&#x3D; \frac{2}{n_{in}}<br>$$<br>[[权重初始化.pdf]]<br>其中$n_{in}$是这一个神经元对应的输入的神经元的个数。</p>
-<h5 id="Baby-Sitting-Learning"><a href="#Baby-Sitting-Learning" class="headerlink" title="Baby Sitting Learning"></a>Baby Sitting Learning</h5><p>在训练的过程中，首先在较小的数据集上进行过拟和（在这个训练集上的损失函数接近0）</p>
-<p><strong>学习率</strong></p>
-<ul>
-<li>如果一个网络训练的过程中，损失函数不变或变大，那么可能是学习率过大，可以减小学习率。</li>
-<li>学习率较小，可能会导致训练的过程较慢，可以增大学习率。</li>
-</ul>
-<p><strong>数值爆炸</strong>：</p>
-<ul>
-<li>尽量使神经元不陷入饱和区，使用上述权重的初始化方法，可以很好缓解。</li>
-<li>使得输入经过一定的归一化处理，可以尽量避免数值爆炸的问题。</li>
-</ul>
-<p>验证误差曲线和训练误差曲线之间的差距较大，可能是过拟合的问题。可以进行早停。现在已经可以使验证误差趋近于渐近线。</p>
-<h5 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a>Batch Normalization</h5><p>对于输入的数据进行归一化处理，可以加快训练的速度，同时可以减少梯度消失的问题。在训练的过程中，对于每一个batch的数据进行归一化处理，可以使得数据的分布更加稳定。<br>$$<br>\hat{x} &#x3D; \frac{x - \mu}{\sigma}<br>$$<br>这是一个非参数化方法。可以加入可学习的参数：<br>$$<br>y &#x3D; \gamma \hat{x} + \beta<br>$$<br>其中$\mu$和$\sigma$是对于每一个mini-batch的均值和方差。</p>
-<p>在CNN中，对每一个batch中的n个$w \times h$的特征图进行归一化处理，可以使得数据的分布更加稳定。</p>
-<p>上述是在训练的过程中使用的，在测试过程中使用不了称为<strong>训练推理失配</strong><em>train inference mismatch</em>。可以使用EMA（指数滑动平均）的方法来进行替代。</p>
-<p>上述要求n大概是16，在比较大的模型中，可能显存不够。上述方法有一个替代的方法<em>Layer Normalization</em>，对于每一个样本进行归一化处理。</p>
-<p>在使用了<em>Batch Normalization</em>之后，仍然有协变量偏移<em>covariate shift</em>的问题。但是在使用<em>Batch Normalization</em>之后，<em>Lipchitz</em>系数变化更加平稳，海森矩阵也更加稳定。上述可以用数学严格证明。上述操作并不是简单的归一化，而是使得表示的函数族更加光滑，一个光滑的、凸的函数更容易优化。</p>
-<ul>
-<li>Lipchitz:<br>$$<br>\left\|\nabla_{y_j} \hat{\mathcal{L}}\right\|^2 \leq \frac{\gamma^2}{\sigma_j^2}\left(\left\|\nabla_{y_j}\right\|^2-\frac{1}{m}\left(1, \nabla_{y_j} \mathcal{L}\right)^2-\frac{1}{m}\left(\nabla_{y_j} \mathcal{L}, \hat{y}_j\right)^2\right)<br>$$</li>
-<li>Smoothness:<br>$$<br>\gamma&lt;\sigma \text { in experiments }<br>$$</li>
-<li>Hessian matrix</li>
-</ul>
-<p>$$<br>\left(\nabla_{y_j} \hat{\mathcal{L}}\right)^T \frac{\partial \hat{\mathcal{L}}}{\partial y_j \partial y_j}\left(\nabla_{y_j} \hat{\mathcal{L}}\right) \leq \frac{\gamma^2}{\sigma_j^2}\left(\left(\nabla_{y_j} \mathcal{L}\right)^T \frac{\partial \mathcal{L}}{\partial y_j \partial y_j}\left(\nabla_{y_j} \mathcal{L}\right)-\frac{\gamma}{m \sigma^2}\left(\nabla_{y_j} \mathcal{L}, \hat{y}_j\right)\left\|\nabla_{y_j} \hat{\mathcal{L}}\right\|^2\right)<br>$$</p>
-<h5 id="Group-Normalization"><a href="#Group-Normalization" class="headerlink" title="Group Normalization"></a>Group Normalization</h5><p>![[{139D48AB-F664-4CE8-AC05-97B772908A85}.png]]<br>在<em>Group Normalization</em>中，对于每一个通道的特征图进行归一化处理，这样可以减少计算的复杂度。是轻量化CNN的方法。在一定数据量较大的情况下可以达到和<em>Batch Normalization</em>差不多的结果。</p>
-<h3 id="Generalization-and-Capacity"><a href="#Generalization-and-Capacity" class="headerlink" title="Generalization and Capacity"></a>Generalization and Capacity</h3><ul>
-<li>网络结构不同网络效果不同，如相同的层数下，全连接网络的参数量大但是和卷积网络的效果差不多。</li>
-<li>相同的网络结构，参数量不同，参数量多的网络效果更好。</li>
-</ul>
-<h4 id="Theorem-Arbitrarily-large-neural-networks-can-approximate-any-function"><a href="#Theorem-Arbitrarily-large-neural-networks-can-approximate-any-function" class="headerlink" title="Theorem (Arbitrarily large neural networks can approximate any function)"></a>Theorem (Arbitrarily large neural networks can approximate any function)</h4><p>理论可以表述为：对于任意的连续函数，存在一个足够大的神经网络可以近似这个函数。<br>![[{79D51D58-D7B7-485E-9A0F-5F615FE27545}.png]]<br>上面表示两层神经网络可以逼近任意的连续函数，要求这个函数$\sigma$不是多项式函数。</p>
-<p>![[{862689B6-2775-4822-8FAC-B0450B360BA0}.png]]<br>上面的定理表示神经网络的宽度也很重要，可以通过增加神经元的数量来逼近函数。</p>
-<p> 在空间折叠的问题中，表明<strong>深度比宽度更加重要</strong>。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-2/" data-id="cmc90ph0w0001p0va3x6s3qkr" data-title="Deep Learning Lecture-2" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Deep Learning Lecture-4" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/06/21/Deep%20Learning%20Lecture-4/" class="article-date">
-  <time class="dt-published" datetime="2025-06-20T16:00:00.000Z" itemprop="datePublished">2025-06-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/06/21/Deep%20Learning%20Lecture-4/">Deep Learning Lecture-4</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h2><p><strong>Objective Function</strong><br>$$<br>\arg \min \mathcal{O(D,\theta)}&#x3D;  \sum_{i&#x3D;1}^{N} L(y_i, f(x_i,\theta)) + \Omega(\theta)<br>$$<br>上述目标可以可视化为以$\theta$为横坐标、$\mathcal{O}$为纵坐标的函数图像，我们的目标是找到函数图像的最低点。这是一个<strong>非凸优化</strong>问题，是初值敏感的。“地形图”是否简单是网络训练是否容易的关键。</p>
-<h3 id="First-Order-Optimization"><a href="#First-Order-Optimization" class="headerlink" title="First-Order Optimization"></a>First-Order Optimization</h3><p>可以将$J(\theta)$展开为泰勒级数：<br>$$<br>J(\theta) &#x3D; J(\theta_0) + \nabla J(\theta_0)^T(\theta - \theta_0) + \frac{1}{2}(\theta - \theta_0)^T H(\theta - \theta_0)<br>$$<br>沿着梯度的方向进行更新：<br>$$<br>J(\theta - \eta g) &#x3D; J(\theta ) -  \eta g^Tg \leq J(\theta)<br>$$</p>
-<p><strong>梯度下降算法的问题在于</strong>：</p>
-<ul>
-<li>容易在鞍点处停滞</li>
-<li>对于较为简单的凸优化问题，学习率的选择不好都会有发散的问题，训练对于学习率是很敏感的</li>
-</ul>
-<p>对于学习率下降的算法，主流使用的是<em>Step Strategy</em>，即损失函数不下降了就减少学习率。</p>
-<h4 id="Warm-Restarts"><a href="#Warm-Restarts" class="headerlink" title="Warm Restarts"></a>Warm Restarts</h4><p>使用的策略为：<em>Cosine Annealing</em>:<br>$$<br>\eta_t &#x3D; \eta_{min}^i + \frac{1}{2}(\eta_{max}^i - \eta_{min}^i)(1 + \cos(\frac{T_{cur}}{T_{i}}\pi))<br>$$</p>
-<p>其中$T_{cur}$为当前的迭代次数，$T_{i}$为当前的周期数，$\eta_{min}^i$和$\eta_{max}^i$分别为第$i$个周期的最小和最大学习率。<br>学习率的衰减不能是线性的，是先快后慢的。</p>
-<h4 id="Convergence-Rate"><a href="#Convergence-Rate" class="headerlink" title="Convergence Rate"></a>Convergence Rate</h4><ul>
-<li>We assume that $J(\theta)$ is convex, differentiable and Lipchitz by constant $L$. And domain of $\theta$ is bounded by radius $R$. With gradient descent update:<br>$$<br>\theta^{t+1}&#x3D;\theta^t-\eta \nabla J\left(\theta^t\right)<br>$$</li>
-</ul>
-<p>$$<br>\begin{aligned}<br>&amp;J\left(\theta^t\right)-J\left(\theta^<em>\right)  &amp; \text { (Gap btw minimum value } \left.J\left(\theta^</em>\right)\right) \\</p>
-<p>\leq &amp; \nabla J\left(\theta^t\right)\left(\theta^t-\theta^*\right) &amp; \text { (Convexity) } \\</p>
-<p>&#x3D; &amp; \frac{1}{\eta}\left(\theta^t-\theta^{t+1}\right)^{\mathrm{T}}\left(\theta^t-\theta^*\right)  &amp; \text { (Definition of GD) } \\</p>
-<p>&#x3D;&amp; \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^<em>\right\|^2+\left\|\theta^{t+1}-\theta^t\right\|^2-\left\|\theta^{t+1}-\theta^</em>\right\|^2\right) &amp; \text { (Properties of Norm) } \\<br>&#x3D; &amp; \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^<em>\right\|^2-\left\|\theta^{t+1}-\theta^</em>\right\|^2\right)+\frac{\eta}{2}\left\|\nabla J\left(\theta^t\right)\right\|^2 &amp; \text { (Definition of GD) } \\</p>
-<p>\leq &amp;\frac{1}{2 \eta}\left(\left\|\theta^t-\theta^<em>\right\|^2-\left\|\theta^{t+1}-\theta^</em>\right\|^2\right)+\frac{\eta}{2} L^2 &amp;  \text { (Lipchitz Property) }<br>\end{aligned}<br>$$</p>
-<ul>
-<li>From previous computation, we get the following inequality for every step $t$ :</li>
-</ul>
-<p>$$<br>J\left(\theta^t\right)-J\left(\theta^<em>\right) \leq \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^</em>\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right)+\frac{\eta}{2} L^2<br>$$</p>
-<ul>
-<li>Recall $\max _{\theta, \theta^{\prime}}\left(\left\|\theta-\theta^{\prime}\right\|\right) \leq R$. Assume we update parameters for $T$ steps. We add all equations for all $t \in\{0,1, \ldots, T-1\}$ :</li>
-</ul>
-<p>$$<br>\begin{aligned}<br>&amp; \sum_t\left(J\left(\theta^t\right)-J\left(\theta^<em>\right)\right) \leq \frac{1}{2 \eta}\left(\left\|\theta^0-\theta_</em>^<em>\right\|^2-\left\|\theta^T-\theta^</em>\right\|^2\right)+\frac{\eta L^2 T}{2} \\<br>&amp; \frac{1}{T} \sum_t J\left(\theta^t\right)-J\left(\theta^<em>\right) \leq \frac{1}{2 \eta T}\left(R^2+0\right)+\frac{\eta L^2}{2} \\<br>&amp; \frac{1}{T} \sum_t J\left(\theta^t\right)-J\left(\theta^</em>\right) \leq \frac{R^2}{2 \eta T}+\frac{\eta L^2}{2}<br>\end{aligned}<br>$$</p>
-<ul>
-<li>let $\eta &#x3D; \frac{R}{L\sqrt{T}}$:<br>$$<br>\frac{1}{T} \sum_t J\left(\theta^t\right)-J\left(\theta^*\right) \leq \frac{L}{R} \sqrt{T}<br>$$</li>
-</ul>
-<h3 id="Second-Order-Optimization"><a href="#Second-Order-Optimization" class="headerlink" title="Second-Order Optimization"></a>Second-Order Optimization</h3><p>不仅要关注一次的梯度信息，还要关注二次的信息。二阶优化算法的核心是Hessian矩阵，可以分辨是不是鞍点。<br>函数的展开为：<br>$$<br>J(\theta) &#x3D; J(\theta_0) + \nabla J(\theta_0)^T(\theta - \theta_0) + \frac{1}{2}(\theta - \theta_0)^T H(\theta - \theta_0)<br>$$<br>能感知到“地形图”中的曲率。<br>对于海森矩阵可以进行特征值分解：<br>$$<br>H &#x3D; Q \Lambda Q^T \quad \text{and} \quad H^{-1} &#x3D; Q \Lambda^{-1} Q^T<br>$$<br>特征值中较大和较小的特征值如果相差较大，称为病态矩阵；如果从最大到最小的变化较为平缓，则较为光滑。<br>如果特征值全为正值，那么就是凸函数；如果有正有负，那么就是鞍点。<br>事实上，使用的梯度方法为局部的方法，下降是相对较慢的。</p>
-<h4 id="Newton-s-Method"><a href="#Newton-s-Method" class="headerlink" title="Newton&#39;s Method"></a>Newton&#39;s Method</h4><p>牛顿法的计算方法为：<br>$$<br>\hat{J}(\theta) &#x3D; J(\theta_0) + \nabla J(\theta_0)^T(\theta - \theta_0) + \frac{1}{2}(\theta - \theta_0)^T H(\theta - \theta_0)<br>$$<br>求导得到：<br>$$<br>\nabla_{\theta} \hat{J}(\theta) &#x3D; \nabla_{\theta} J(\theta_0) + H(\theta - \theta_0) &#x3D; 0<br>$$<br>求解得到：<br>$$<br>\theta^{t+1} &#x3D; \theta^{t} - H^{-1} \nabla_{theta} J(\theta^{t})<br>$$<br>牛顿法的优点在于收敛速度快，但是缺点在于计算复杂度高，需要计算海森矩阵的逆矩阵。计算复杂度为$O(d^3)$，其中$d$为参数的个数。<strong>在深度学习时代基本上不再使用</strong>。</p>
-<h4 id="Quasi-Newton-Method"><a href="#Quasi-Newton-Method" class="headerlink" title="Quasi-Newton Method"></a>Quasi-Newton Method</h4><p>对于海森矩阵的逆矩阵，我们可以使用拟牛顿法进行近似：<br>$$<br>H_{t+1}^{-1} &#x3D; H_t^{-1} + \frac{y_t y_t^T}{y_t^T s_t} - \frac{H_t^{-1}s_t s_t^T H_t^{-1}}{s_t^T H_t^{-1}s_t}<br>$$<br>其中$y_t &#x3D; \nabla J(\theta_{t+1}) - \nabla J(\theta_t)$，$s_t &#x3D; \theta_{t+1} - \theta_t$。<br><strong>在矩阵计算的时候要将较小的矩阵先乘，这样可以计算复杂度</strong></p>
-<h2 id="Optimization-in-Deep-Learning"><a href="#Optimization-in-Deep-Learning" class="headerlink" title="Optimization in Deep Learning"></a>Optimization in Deep Learning</h2><p>[[Deep Learning Lecture-2#Optimization in Practice]]</p>
-<p>是非凸优化问题，优化的目的在于找到一个较好的局部极值。比较好的局部极值是比较低的、比较平缓的局部极值，对于比较陡峭的局部极值泛化能力比较差（对测试数据的微小变化敏感）。</p>
-<p>好的局部极值有一些特性：</p>
-<ul>
-<li>值比较低</li>
-<li>是”盆地“，这样有利于模型的泛化</li>
-</ul>
-<h3 id="mini-batch"><a href="#mini-batch" class="headerlink" title="mini-batch"></a>mini-batch</h3><p><strong>mini-batch SGD</strong>：在每一轮遍历<em>epoch</em>后，对数据进行随机的打乱<em>Shuffle</em>，然后分成若干个batch，对每一个batch进行参数的更新。这样可以减少计算的时间，同时可以减少过拟合的问题。</p>
-<ul>
-<li>mini-batch的大小对于训练的影响，一般而言较大的mini-batch会有更好的收敛性，但是计算复杂度更高。</li>
-<li>由于不一样的小样本选择会引入一定的随机性，这样是有利于跳出局部极值的。</li>
-<li>由于mini-batch的选择是有随机性的，不同的batch的难度不一样，所以这时候出现Loss的规律性的震荡是很正常的。</li>
-<li>矩阵最大奇异值与最小奇异值的比值称为矩阵的条件数，条件数越大，矩阵越病态。对于病态矩阵，SGD的收敛速度会变慢。</li>
-</ul>
-<h3 id="Learning-Rate-Decay"><a href="#Learning-Rate-Decay" class="headerlink" title="Learning Rate Decay"></a>Learning Rate Decay</h3><p>初始学习率较大，随着迭代次数的增加，学习率逐渐减小。有相对应的衰减策略。<br><em>Exponential decay</em>:<br>$$<br>\eta_t &#x3D; \eta_0 \cdot e^{-\alpha t}<br>$$<br><em>Inverse decay</em>:<br>$$<br>\eta_t &#x3D; \frac{\eta_0}{1+\alpha t}<br>$$</p>
-<h3 id="SGD-Stochastic-Gradient-Descent"><a href="#SGD-Stochastic-Gradient-Descent" class="headerlink" title="SGD Stochastic Gradient Descent"></a>SGD Stochastic Gradient Descent</h3><h4 id="SGD-with-Momentum"><a href="#SGD-with-Momentum" class="headerlink" title="SGD with Momentum"></a>SGD with Momentum</h4><p><strong>SGD with Momentum</strong>:</p>
-<p>对于下面的更新公式：</p>
-<p>$$<br>\theta_{ij} &#x3D; \theta_{ij} - \eta \Delta<br>$$<br>在高维中，地形是相对而言较为崎岖的，这里的学习率一般是比较小的，否则容易发散。在接近于局部极值的时候。较大的学习率学习的是较为粗糙的特征，较小的学习率学习的是较为细致的特征。</p>
-<p>$$<br>\Delta &#x3D; \beta \Delta - \eta \frac{\partial J(\theta)}{\partial \theta_{ij}}<br>$$<br>$\beta$是动量参数，可以理解为之前的梯度的累积。</p>
-<p><strong>Nesterov Momentum:</strong><br>$$<br>\begin{aligned}<br>&amp;\tilde{\theta}^{t} &#x3D; \theta^{t} - \beta \Delta^{t-1} \\<br>&amp;\Delta^{t} &#x3D; \beta \Delta^{t-1} + (1-\beta)\nabla J^t (\tilde{\theta}^t)\\<br>&amp;\theta^{t+1} &#x3D; \theta^t - \eta \Delta^t\\<br>\end{aligned}<br>$$<br>在深度学习的实现中使用的一般是这种。走动量的方向可以减少震荡，同时可以加速收敛。当到达了比较好的局部极值时候又会在这个值的附近抖动。<br>超参数：$\beta$，一般而言$\beta$取0.9是比较好的，越大的值越容易进行震荡。<br>学习率0.01、0.003、0.001一般按照指数变化。</p>
-<p>是在每次更新完$\theta$之后（进行试探之后才进行计算）才进行梯度的计算，可以避免一些<em>overshoot</em>。核心的思想为多获取一些二次的信息。</p>
-<h3 id="Weight-Decay"><a href="#Weight-Decay" class="headerlink" title="Weight Decay"></a><em>Weight Decay</em></h3><p>加入正则项，对于参数的更新进行限制，控制假设空间的大小，可以防止过拟合。但是在深度学习中并不够。</p>
-<p><em>L1 regularization</em><br>$$<br>\Omega(\theta) &#x3D; \lambda \sum_{l&#x3D;1}^{L} \sum_{i&#x3D;1}^{n_l} \sum_{j&#x3D;1}^{n_{l+1}} |\theta_{ij}^{(l)}|<br>$$<br><em>L2 regularization</em><br>$$<br>\Omega(\theta) &#x3D; \lambda \sum_{l&#x3D;1}^{L} \sum_{i&#x3D;1}^{n_l} \sum_{j&#x3D;1}^{n_{l+1}} (\theta_{ij}^{(l)})^2<br>$$</p>
-<h3 id="Adaptive-Learning-Rate"><a href="#Adaptive-Learning-Rate" class="headerlink" title="Adaptive Learning Rate"></a>Adaptive Learning Rate</h3><p>直观理解为在不同的“地形”上需要使用的学习率（步长）是不一样的。对于不同的参数使用不同的学习率。<strong>Adagrad</strong>算法的核心思想为：<br>$$<br>\begin{aligned}<br>&amp;r^t &#x3D; r^{t-1} + \nabla J^t(\theta^t) \odot \nabla J^t(\theta^t)\\<br>&amp;h^t &#x3D; \frac{1}{\sqrt{r^t} + \delta} \\<br>&amp;\Delta^t &#x3D; h^t \odot \nabla J^t(\theta^t)\\<br>&amp;\theta^{t+1} &#x3D; \theta^t - \eta \Delta^t<br>\end{aligned}<br>$$<br><em>上述公式中的第二行为逐元素操作</em><br>其中$\odot$为对应元素相乘，$\delta$为一个很小的数，防止分母为0。这样可以保证在不同的地形上使用不同的学习率。<strong>本质上为探索&quot;地形图&quot;</strong>。但是Adagrad的问题在于随着迭代次数的增加，分母会变得越来越大，导致学习率会变得越来越小，最终会导致学习率为0，这样就不再更新了。</p>
-<p><strong>RMSprop</strong>算法的核心思想为：对Adagrad的分母进行指数滑动平均：<br>$$<br>\begin{aligned}<br>&amp;r^t &#x3D; \rho r^{t-1} + (1-\rho)\nabla J^t(\theta^t) \odot \nabla J^t(\theta^t)\\<br>&amp;h^t &#x3D; \frac{1}{\sqrt{r^t} + \delta} \\<br>&amp;\Delta^t &#x3D; h^t \odot \nabla J^t(\theta^t)\\<br>&amp;\theta^{t+1} &#x3D; \theta^t - \eta \Delta^t<br>\end{aligned}<br>$$</p>
-<p><strong>Adam</strong>算法的核心思想为：结合了SGD with Momentum和RMSprop：<br>$$<br>\begin{aligned}<br>&amp; r^t &#x3D; \rho r^{t-1} + (1-\rho)\nabla J^t(\theta^t) \odot \nabla J^t(\theta^t)\\<br>&amp; h^t &#x3D; \frac{1}{\sqrt{r^t} + \delta} \\<br>&amp; s^t &#x3D; \varepsilon s^{t-1} + (1-\epsilon)\nabla J^t(\theta^t)\\<br>&amp; \Delta^t &#x3D; h^t \odot s^t \\<br>&amp; \theta^{t+1} &#x3D; \theta^t - \eta \Delta^t<br>\end{aligned}<br>$$<br>实际使用的参数为$\rho&#x3D;0.9$，$\varepsilon &#x3D; 0.9$，$\rho &#x3D; 0.999$<br>对于学习率的下降，还是要使用对应的算法，对于实际使用的算法，还需要对$r$、$s$进行无偏修正。</p>
-<p>Nadam算法为Adam算法的变种，对于SGD with Momentum的更新进行了修正。</p>
-<p>调参一般而言是，对于一个模型找到对于其最好的优化器。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-4/" data-id="cmc90ph0x0003p0va35skhi8e" data-title="Deep Learning Lecture-4" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-3/" data-id="cmc916j160003nsvah6um3616" data-title="Deep Learning Lecture-3" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -652,7 +621,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-5/" data-id="cmc90ph0y0004p0va80bfbt96" data-title="Deep Learning Lecture-5" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-5/" data-id="cmc916j160004nsva34l9enf0" data-title="Deep Learning Lecture-5" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -867,7 +836,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-6/" data-id="cmc90ph0y0005p0vadg9egocp" data-title="Deep Learning Lecture-6" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-6/" data-id="cmc916j18000bnsva99xfggh0" data-title="Deep Learning Lecture-6" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1083,72 +1052,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-7/" data-id="cmc90ph0z0008p0vabrlw0c09" data-title="Deep Learning Lecture-7" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Deep Learning Lecture-1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/06/21/Deep%20Learning%20Lecture-1/" class="article-date">
-  <time class="dt-published" datetime="2025-06-20T16:00:00.000Z" itemprop="datePublished">2025-06-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/06/21/Deep%20Learning%20Lecture-1/">Deep Learning Lecture-1</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <hr>
-<p><strong>人工智能</strong>：模拟人类的智能<br><strong>机器学习</strong>：不显式编程来实现<br><strong>深度学习</strong>：使用神经网络</p>
-<p>对于深度学习总是能找到一些amazing的例子，同时也有一些失败的例子。</p>
-<p>深度学习是在数据中<strong>获取高度抽象</strong>的特征，主要使用神经网络。在深度学习中实现的功能类似于坐标系变换。对于同一个问题进行变换可以进行不同的处理。在机器学习过程中的规则系统仍然是很重要的。</p>
-<p>深度学习的表示为计算图</p>
-<h3 id="Framework"><a href="#Framework" class="headerlink" title="Framework"></a>Framework</h3><p>在学习算法中一定要指定函数族，然后使用数据来拟合函数族。要找出<strong>最优的函数族</strong>。不同的机器学习模型的区别主要在于<strong>假设空间</strong>（候选函数族）的不同。</p>
-<p>过拟和在指定函数族时已经确定。</p>
-<p>泛化误差公式：<br>$$<br>\varepsilon_{test} \leq \hat_{train} + \sqrt{\frac{complexity}{n}}<br>$$<br>要求：训练误差小，模型复杂度小，数据量大<br><strong>当且仅当需要的时候才增加模型复杂度</strong></p>
-<h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><p>$$<br>\arg \min O(D;\theta) &#x3D; \sum_{i&#x3D;1}^{N} L(y_i, f(x_i);\theta) + \Omega(\theta)<br>$$<br>上述公式要求：在训练样本上预测值与真实值的误差尽可能小。</p>
-<p>对于分类问题而言，经常使用的是交叉熵损失函数（logistic）和hinge损失函数。</p>
-<p>$\Omega(\theta)$是惩罚项，希望模型尽量简单。在使得$\theta$尽量小的过程中，某些特征的权重会变为0，这样就可以实现特征选择。同时也可以减少模型的复杂性。</p>
-<p><strong>学习类似于统计中的参数估计</strong></p>
-<p>![[{65C91395-95B8-4EF2-8AF6-3F86705FD81B}.png]]</p>
-<p>梯度下降的方法。</p>
-<p>具体例子：线性回归</p>
-<p>$$<br>O(D;\theta) &#x3D; \sum_{i&#x3D;1}^{N} (y_i - \theta^T x_i)^2 + \lambda \theta^T \theta &#x3D; (Y - X\theta)^T (Y - X\theta) + \lambda \theta^T \theta<br>$$<br>上述公式是关于$\theta$的二次函数，可以通过求导得到最优解。[[matrixcookbook.pdf]]<br>$$<br>\frac{\partial O(D;\theta)}{\partial \theta} &#x3D; -2 X^T (Y - X\theta) + 2 \lambda \theta &#x3D; 0<br>$$<br>$$<br>\hat{\theta} &#x3D; (X^T X + \lambda I)^{-1} X^T Y<br>$$<br>但是上述算法的复杂性为$O(n^3)$，不适用于大数据集。在软件工程中，通常使用梯度下降法。</p>
-<p><strong>Logistic Regression</strong></p>
-<p>$$<br>O(D;\theta) &#x3D; \sum_{i&#x3D;1}^{n} \log(1 + \exp(-y_i \theta^T x_i)) + \lambda ||\theta||_{1} &#x3D; F(D;\theta) + \lambda ||\theta||_{1}<br>$$<br>这里使用的是近端梯度下降法 <em>proximal gradient descent</em>。其中的1-范数是各个分量的绝对值之和。<a target="_blank" rel="noopener" href="https://www.zhihu.com/tardis/zm/art/82622940?source_id=1005">机器学习 | 近端梯度下降法 (proximal gradient descent)</a><br>在一些不可导的情况下如hinge损失函数，可以使用次梯度。</p>
-<p><strong>Softmax Regression</strong></p>
-<p>实现多分类问题，计算每个类别的概率即可，对于某个样本进行多次打分，取最高分对应的类别。</p>
-<p>Softmax Function:<br>[[Deep Learning Lecture-2#^b5bcbb]]<br>$$<br>P(y|x,\theta) &#x3D; \frac{\exp(\theta_y^T x)}{\sum_{r&#x3D;1}^{C} \exp(\theta_{r}^T x)}<br>$$<br>线性模型，用超平面对样本进行打分，然后使用softmax函数进行归一化。</p>
-<p>$$<br>O(D;\theta) &#x3D; -\sum_{i&#x3D;1}^{n} \log P(y_i|x_i;\theta) + \lambda ||\theta||_{1}<br>$$<br>上述式子其实是对数似然函数，最大化对数似然函数等价于最小化交叉熵损失函数。</p>
-<h4 id="Aproximation-and-Estimation"><a href="#Aproximation-and-Estimation" class="headerlink" title="Aproximation and Estimation"></a>Aproximation and Estimation</h4><p>假设空间只能表现一个有限的函数集合，有时候真值函数不一定在假设空间中。这时候假设空间中最好的函数与真值函数之间的差距称为<strong>近似误差</strong><em>Approximation Error</em>。学习得到的函数与空间中最好的函数的误差为<strong>估计误差</strong> <em>Estimation Error</em>。</p>
-<h3 id="Model-Selection"><a href="#Model-Selection" class="headerlink" title="Model Selection"></a>Model Selection</h3><p><em>All models are wrong but some are useful.</em></p>
-<p>CASH: Combined Algorithm Selection and Hyperparameter optimization<br>目标是：选择最好的模型和超参数<br>$$<br>A^<em>_{\lambda^</em>} &#x3D; \arg \min_{A \in \mathcal{A}} \min_{\lambda \in \Lambda^{(i)}} \mathcal{L}(A_{\lambda}^{(i)},D_{train},D_{valid})<br>$$</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-1/" data-id="cmc90ph10000ap0va4cj73fi7" data-title="Deep Learning Lecture-1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-7/" data-id="cmc916j18000cnsva9tuy5pi6" data-title="Deep Learning Lecture-7" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1236,7 +1140,108 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-8/" data-id="cmc90ph10000dp0vaa93ge7oj" data-title="Deep Learning Lecture-8" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-8/" data-id="cmc916j19000ensva9rky9gnr" data-title="Deep Learning Lecture-8" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Deep Learning Lecture-4" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/06/21/Deep%20Learning%20Lecture-4/" class="article-date">
+  <time class="dt-published" datetime="2025-06-20T16:00:00.000Z" itemprop="datePublished">2025-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/06/21/Deep%20Learning%20Lecture-4/">Deep Learning Lecture-4</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h2><p><strong>Objective Function</strong><br>$$<br>\arg \min \mathcal{O(D,\theta)}&#x3D;  \sum_{i&#x3D;1}^{N} L(y_i, f(x_i,\theta)) + \Omega(\theta)<br>$$<br>上述目标可以可视化为以$\theta$为横坐标、$\mathcal{O}$为纵坐标的函数图像，我们的目标是找到函数图像的最低点。这是一个<strong>非凸优化</strong>问题，是初值敏感的。“地形图”是否简单是网络训练是否容易的关键。</p>
+<h3 id="First-Order-Optimization"><a href="#First-Order-Optimization" class="headerlink" title="First-Order Optimization"></a>First-Order Optimization</h3><p>可以将$J(\theta)$展开为泰勒级数：<br>$$<br>J(\theta) &#x3D; J(\theta_0) + \nabla J(\theta_0)^T(\theta - \theta_0) + \frac{1}{2}(\theta - \theta_0)^T H(\theta - \theta_0)<br>$$<br>沿着梯度的方向进行更新：<br>$$<br>J(\theta - \eta g) &#x3D; J(\theta ) -  \eta g^Tg \leq J(\theta)<br>$$</p>
+<p><strong>梯度下降算法的问题在于</strong>：</p>
+<ul>
+<li>容易在鞍点处停滞</li>
+<li>对于较为简单的凸优化问题，学习率的选择不好都会有发散的问题，训练对于学习率是很敏感的</li>
+</ul>
+<p>对于学习率下降的算法，主流使用的是<em>Step Strategy</em>，即损失函数不下降了就减少学习率。</p>
+<h4 id="Warm-Restarts"><a href="#Warm-Restarts" class="headerlink" title="Warm Restarts"></a>Warm Restarts</h4><p>使用的策略为：<em>Cosine Annealing</em>:<br>$$<br>\eta_t &#x3D; \eta_{min}^i + \frac{1}{2}(\eta_{max}^i - \eta_{min}^i)(1 + \cos(\frac{T_{cur}}{T_{i}}\pi))<br>$$</p>
+<p>其中$T_{cur}$为当前的迭代次数，$T_{i}$为当前的周期数，$\eta_{min}^i$和$\eta_{max}^i$分别为第$i$个周期的最小和最大学习率。<br>学习率的衰减不能是线性的，是先快后慢的。</p>
+<h4 id="Convergence-Rate"><a href="#Convergence-Rate" class="headerlink" title="Convergence Rate"></a>Convergence Rate</h4><ul>
+<li>We assume that $J(\theta)$ is convex, differentiable and Lipchitz by constant $L$. And domain of $\theta$ is bounded by radius $R$. With gradient descent update:<br>$$<br>\theta^{t+1}&#x3D;\theta^t-\eta \nabla J\left(\theta^t\right)<br>$$</li>
+</ul>
+<p>$$<br>\begin{aligned}<br>&amp;J\left(\theta^t\right)-J\left(\theta^<em>\right)  &amp; \text { (Gap btw minimum value } \left.J\left(\theta^</em>\right)\right) \\</p>
+<p>\leq &amp; \nabla J\left(\theta^t\right)\left(\theta^t-\theta^*\right) &amp; \text { (Convexity) } \\</p>
+<p>&#x3D; &amp; \frac{1}{\eta}\left(\theta^t-\theta^{t+1}\right)^{\mathrm{T}}\left(\theta^t-\theta^*\right)  &amp; \text { (Definition of GD) } \\</p>
+<p>&#x3D;&amp; \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^<em>\right\|^2+\left\|\theta^{t+1}-\theta^t\right\|^2-\left\|\theta^{t+1}-\theta^</em>\right\|^2\right) &amp; \text { (Properties of Norm) } \\<br>&#x3D; &amp; \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^<em>\right\|^2-\left\|\theta^{t+1}-\theta^</em>\right\|^2\right)+\frac{\eta}{2}\left\|\nabla J\left(\theta^t\right)\right\|^2 &amp; \text { (Definition of GD) } \\</p>
+<p>\leq &amp;\frac{1}{2 \eta}\left(\left\|\theta^t-\theta^<em>\right\|^2-\left\|\theta^{t+1}-\theta^</em>\right\|^2\right)+\frac{\eta}{2} L^2 &amp;  \text { (Lipchitz Property) }<br>\end{aligned}<br>$$</p>
+<ul>
+<li>From previous computation, we get the following inequality for every step $t$ :</li>
+</ul>
+<p>$$<br>J\left(\theta^t\right)-J\left(\theta^<em>\right) \leq \frac{1}{2 \eta}\left(\left\|\theta^t-\theta^</em>\right\|^2-\left\|\theta^{t+1}-\theta^*\right\|^2\right)+\frac{\eta}{2} L^2<br>$$</p>
+<ul>
+<li>Recall $\max _{\theta, \theta^{\prime}}\left(\left\|\theta-\theta^{\prime}\right\|\right) \leq R$. Assume we update parameters for $T$ steps. We add all equations for all $t \in\{0,1, \ldots, T-1\}$ :</li>
+</ul>
+<p>$$<br>\begin{aligned}<br>&amp; \sum_t\left(J\left(\theta^t\right)-J\left(\theta^<em>\right)\right) \leq \frac{1}{2 \eta}\left(\left\|\theta^0-\theta_</em>^<em>\right\|^2-\left\|\theta^T-\theta^</em>\right\|^2\right)+\frac{\eta L^2 T}{2} \\<br>&amp; \frac{1}{T} \sum_t J\left(\theta^t\right)-J\left(\theta^<em>\right) \leq \frac{1}{2 \eta T}\left(R^2+0\right)+\frac{\eta L^2}{2} \\<br>&amp; \frac{1}{T} \sum_t J\left(\theta^t\right)-J\left(\theta^</em>\right) \leq \frac{R^2}{2 \eta T}+\frac{\eta L^2}{2}<br>\end{aligned}<br>$$</p>
+<ul>
+<li>let $\eta &#x3D; \frac{R}{L\sqrt{T}}$:<br>$$<br>\frac{1}{T} \sum_t J\left(\theta^t\right)-J\left(\theta^*\right) \leq \frac{L}{R} \sqrt{T}<br>$$</li>
+</ul>
+<h3 id="Second-Order-Optimization"><a href="#Second-Order-Optimization" class="headerlink" title="Second-Order Optimization"></a>Second-Order Optimization</h3><p>不仅要关注一次的梯度信息，还要关注二次的信息。二阶优化算法的核心是Hessian矩阵，可以分辨是不是鞍点。<br>函数的展开为：<br>$$<br>J(\theta) &#x3D; J(\theta_0) + \nabla J(\theta_0)^T(\theta - \theta_0) + \frac{1}{2}(\theta - \theta_0)^T H(\theta - \theta_0)<br>$$<br>能感知到“地形图”中的曲率。<br>对于海森矩阵可以进行特征值分解：<br>$$<br>H &#x3D; Q \Lambda Q^T \quad \text{and} \quad H^{-1} &#x3D; Q \Lambda^{-1} Q^T<br>$$<br>特征值中较大和较小的特征值如果相差较大，称为病态矩阵；如果从最大到最小的变化较为平缓，则较为光滑。<br>如果特征值全为正值，那么就是凸函数；如果有正有负，那么就是鞍点。<br>事实上，使用的梯度方法为局部的方法，下降是相对较慢的。</p>
+<h4 id="Newton-s-Method"><a href="#Newton-s-Method" class="headerlink" title="Newton&#39;s Method"></a>Newton&#39;s Method</h4><p>牛顿法的计算方法为：<br>$$<br>\hat{J}(\theta) &#x3D; J(\theta_0) + \nabla J(\theta_0)^T(\theta - \theta_0) + \frac{1}{2}(\theta - \theta_0)^T H(\theta - \theta_0)<br>$$<br>求导得到：<br>$$<br>\nabla_{\theta} \hat{J}(\theta) &#x3D; \nabla_{\theta} J(\theta_0) + H(\theta - \theta_0) &#x3D; 0<br>$$<br>求解得到：<br>$$<br>\theta^{t+1} &#x3D; \theta^{t} - H^{-1} \nabla_{theta} J(\theta^{t})<br>$$<br>牛顿法的优点在于收敛速度快，但是缺点在于计算复杂度高，需要计算海森矩阵的逆矩阵。计算复杂度为$O(d^3)$，其中$d$为参数的个数。<strong>在深度学习时代基本上不再使用</strong>。</p>
+<h4 id="Quasi-Newton-Method"><a href="#Quasi-Newton-Method" class="headerlink" title="Quasi-Newton Method"></a>Quasi-Newton Method</h4><p>对于海森矩阵的逆矩阵，我们可以使用拟牛顿法进行近似：<br>$$<br>H_{t+1}^{-1} &#x3D; H_t^{-1} + \frac{y_t y_t^T}{y_t^T s_t} - \frac{H_t^{-1}s_t s_t^T H_t^{-1}}{s_t^T H_t^{-1}s_t}<br>$$<br>其中$y_t &#x3D; \nabla J(\theta_{t+1}) - \nabla J(\theta_t)$，$s_t &#x3D; \theta_{t+1} - \theta_t$。<br><strong>在矩阵计算的时候要将较小的矩阵先乘，这样可以计算复杂度</strong></p>
+<h2 id="Optimization-in-Deep-Learning"><a href="#Optimization-in-Deep-Learning" class="headerlink" title="Optimization in Deep Learning"></a>Optimization in Deep Learning</h2><p>[[Deep Learning Lecture-2#Optimization in Practice]]</p>
+<p>是非凸优化问题，优化的目的在于找到一个较好的局部极值。比较好的局部极值是比较低的、比较平缓的局部极值，对于比较陡峭的局部极值泛化能力比较差（对测试数据的微小变化敏感）。</p>
+<p>好的局部极值有一些特性：</p>
+<ul>
+<li>值比较低</li>
+<li>是”盆地“，这样有利于模型的泛化</li>
+</ul>
+<h3 id="mini-batch"><a href="#mini-batch" class="headerlink" title="mini-batch"></a>mini-batch</h3><p><strong>mini-batch SGD</strong>：在每一轮遍历<em>epoch</em>后，对数据进行随机的打乱<em>Shuffle</em>，然后分成若干个batch，对每一个batch进行参数的更新。这样可以减少计算的时间，同时可以减少过拟合的问题。</p>
+<ul>
+<li>mini-batch的大小对于训练的影响，一般而言较大的mini-batch会有更好的收敛性，但是计算复杂度更高。</li>
+<li>由于不一样的小样本选择会引入一定的随机性，这样是有利于跳出局部极值的。</li>
+<li>由于mini-batch的选择是有随机性的，不同的batch的难度不一样，所以这时候出现Loss的规律性的震荡是很正常的。</li>
+<li>矩阵最大奇异值与最小奇异值的比值称为矩阵的条件数，条件数越大，矩阵越病态。对于病态矩阵，SGD的收敛速度会变慢。</li>
+</ul>
+<h3 id="Learning-Rate-Decay"><a href="#Learning-Rate-Decay" class="headerlink" title="Learning Rate Decay"></a>Learning Rate Decay</h3><p>初始学习率较大，随着迭代次数的增加，学习率逐渐减小。有相对应的衰减策略。<br><em>Exponential decay</em>:<br>$$<br>\eta_t &#x3D; \eta_0 \cdot e^{-\alpha t}<br>$$<br><em>Inverse decay</em>:<br>$$<br>\eta_t &#x3D; \frac{\eta_0}{1+\alpha t}<br>$$</p>
+<h3 id="SGD-Stochastic-Gradient-Descent"><a href="#SGD-Stochastic-Gradient-Descent" class="headerlink" title="SGD Stochastic Gradient Descent"></a>SGD Stochastic Gradient Descent</h3><h4 id="SGD-with-Momentum"><a href="#SGD-with-Momentum" class="headerlink" title="SGD with Momentum"></a>SGD with Momentum</h4><p><strong>SGD with Momentum</strong>:</p>
+<p>对于下面的更新公式：</p>
+<p>$$<br>\theta_{ij} &#x3D; \theta_{ij} - \eta \Delta<br>$$<br>在高维中，地形是相对而言较为崎岖的，这里的学习率一般是比较小的，否则容易发散。在接近于局部极值的时候。较大的学习率学习的是较为粗糙的特征，较小的学习率学习的是较为细致的特征。</p>
+<p>$$<br>\Delta &#x3D; \beta \Delta - \eta \frac{\partial J(\theta)}{\partial \theta_{ij}}<br>$$<br>$\beta$是动量参数，可以理解为之前的梯度的累积。</p>
+<p><strong>Nesterov Momentum:</strong><br>$$<br>\begin{aligned}<br>&amp;\tilde{\theta}^{t} &#x3D; \theta^{t} - \beta \Delta^{t-1} \\<br>&amp;\Delta^{t} &#x3D; \beta \Delta^{t-1} + (1-\beta)\nabla J^t (\tilde{\theta}^t)\\<br>&amp;\theta^{t+1} &#x3D; \theta^t - \eta \Delta^t\\<br>\end{aligned}<br>$$<br>在深度学习的实现中使用的一般是这种。走动量的方向可以减少震荡，同时可以加速收敛。当到达了比较好的局部极值时候又会在这个值的附近抖动。<br>超参数：$\beta$，一般而言$\beta$取0.9是比较好的，越大的值越容易进行震荡。<br>学习率0.01、0.003、0.001一般按照指数变化。</p>
+<p>是在每次更新完$\theta$之后（进行试探之后才进行计算）才进行梯度的计算，可以避免一些<em>overshoot</em>。核心的思想为多获取一些二次的信息。</p>
+<h3 id="Weight-Decay"><a href="#Weight-Decay" class="headerlink" title="Weight Decay"></a><em>Weight Decay</em></h3><p>加入正则项，对于参数的更新进行限制，控制假设空间的大小，可以防止过拟合。但是在深度学习中并不够。</p>
+<p><em>L1 regularization</em><br>$$<br>\Omega(\theta) &#x3D; \lambda \sum_{l&#x3D;1}^{L} \sum_{i&#x3D;1}^{n_l} \sum_{j&#x3D;1}^{n_{l+1}} |\theta_{ij}^{(l)}|<br>$$<br><em>L2 regularization</em><br>$$<br>\Omega(\theta) &#x3D; \lambda \sum_{l&#x3D;1}^{L} \sum_{i&#x3D;1}^{n_l} \sum_{j&#x3D;1}^{n_{l+1}} (\theta_{ij}^{(l)})^2<br>$$</p>
+<h3 id="Adaptive-Learning-Rate"><a href="#Adaptive-Learning-Rate" class="headerlink" title="Adaptive Learning Rate"></a>Adaptive Learning Rate</h3><p>直观理解为在不同的“地形”上需要使用的学习率（步长）是不一样的。对于不同的参数使用不同的学习率。<strong>Adagrad</strong>算法的核心思想为：<br>$$<br>\begin{aligned}<br>&amp;r^t &#x3D; r^{t-1} + \nabla J^t(\theta^t) \odot \nabla J^t(\theta^t)\\<br>&amp;h^t &#x3D; \frac{1}{\sqrt{r^t} + \delta} \\<br>&amp;\Delta^t &#x3D; h^t \odot \nabla J^t(\theta^t)\\<br>&amp;\theta^{t+1} &#x3D; \theta^t - \eta \Delta^t<br>\end{aligned}<br>$$<br><em>上述公式中的第二行为逐元素操作</em><br>其中$\odot$为对应元素相乘，$\delta$为一个很小的数，防止分母为0。这样可以保证在不同的地形上使用不同的学习率。<strong>本质上为探索&quot;地形图&quot;</strong>。但是Adagrad的问题在于随着迭代次数的增加，分母会变得越来越大，导致学习率会变得越来越小，最终会导致学习率为0，这样就不再更新了。</p>
+<p><strong>RMSprop</strong>算法的核心思想为：对Adagrad的分母进行指数滑动平均：<br>$$<br>\begin{aligned}<br>&amp;r^t &#x3D; \rho r^{t-1} + (1-\rho)\nabla J^t(\theta^t) \odot \nabla J^t(\theta^t)\\<br>&amp;h^t &#x3D; \frac{1}{\sqrt{r^t} + \delta} \\<br>&amp;\Delta^t &#x3D; h^t \odot \nabla J^t(\theta^t)\\<br>&amp;\theta^{t+1} &#x3D; \theta^t - \eta \Delta^t<br>\end{aligned}<br>$$</p>
+<p><strong>Adam</strong>算法的核心思想为：结合了SGD with Momentum和RMSprop：<br>$$<br>\begin{aligned}<br>&amp; r^t &#x3D; \rho r^{t-1} + (1-\rho)\nabla J^t(\theta^t) \odot \nabla J^t(\theta^t)\\<br>&amp; h^t &#x3D; \frac{1}{\sqrt{r^t} + \delta} \\<br>&amp; s^t &#x3D; \varepsilon s^{t-1} + (1-\epsilon)\nabla J^t(\theta^t)\\<br>&amp; \Delta^t &#x3D; h^t \odot s^t \\<br>&amp; \theta^{t+1} &#x3D; \theta^t - \eta \Delta^t<br>\end{aligned}<br>$$<br>实际使用的参数为$\rho&#x3D;0.9$，$\varepsilon &#x3D; 0.9$，$\rho &#x3D; 0.999$<br>对于学习率的下降，还是要使用对应的算法，对于实际使用的算法，还需要对$r$、$s$进行无偏修正。</p>
+<p>Nadam算法为Adam算法的变种，对于SGD with Momentum的更新进行了修正。</p>
+<p>调参一般而言是，对于一个模型找到对于其最好的优化器。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-4/" data-id="cmc916j19000gnsvaf7yb80t9" data-title="Deep Learning Lecture-4" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1295,7 +1300,7 @@
       <ul>
         
           <li>
-            <a href="/2025/06/21/Deep%20Learning%20Lecture-3/">Deep Learning Lecture-3</a>
+            <a href="/2025/06/21/Deep%20Learning%20Lecture-1/">Deep Learning Lecture-1</a>
           </li>
         
           <li>
@@ -1303,7 +1308,7 @@
           </li>
         
           <li>
-            <a href="/2025/06/21/Deep%20Learning%20Lecture-4/">Deep Learning Lecture-4</a>
+            <a href="/2025/06/21/Deep%20Learning%20Lecture-3/">Deep Learning Lecture-3</a>
           </li>
         
           <li>
