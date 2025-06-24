@@ -13,33 +13,33 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="TransformersTransformers: Attention is All You Need[[Deep Learning Lecture-5#Attention]] 再次理解Attention的概念：类似于”查字典“的操作，对于Query $q$, Key $k$和Value $v$，计算相关性，也就是重要性，对于输出序列中的第$i$个输出有价值的信息：$$w_{ij} &#x3D;">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="d:/software/Git/images/Pasted%20image%2020250323133751.png">
-<meta property="og:image" content="d:/software/Git/images/Pasted%20image%2020250323141917.png">
-<meta property="og:image" content="d:/software/Git/images/Pasted%20image%2020250323145847.png">
-<meta property="og:image" content="d:/software/Git/images/Pasted%20image%2020250323151056.png">
-<meta property="og:image" content="d:/software/Git/images/Pasted%20image%2020250323161530.png">
-<meta property="og:image" content="d:/software/Git/images/Pasted%20image%2020250323163151.png">
-<meta property="og:image" content="d:/software/Git/images/Pasted%20image%2020250323185530.png">
-<meta property="og:image" content="d:/software/Git/images/Pasted%20image%2020250323185720.png">
-<meta property="og:image" content="d:/software/Git/images/Pasted%20image%2020250323190623.png">
-<meta property="og:image" content="d:/software/Git/images/Pasted%20image%2020250323190856.png">
-<meta property="og:image" content="d:/software/Git/images/Pasted%20image%2020250323191632.png">
-<meta property="og:image" content="d:/software/Git/images/Pasted%20image%2020250323191637.png">
-<meta property="og:image" content="d:/software/Git/images/Pasted%20image%2020250324190821.png">
-<meta property="og:image" content="d:/software/Git/images/Pasted%20image%2020250324193704.png">
-<meta property="og:image" content="d:/software/Git/images/Pasted%20image%2020250324194137.png">
-<meta property="og:image" content="d:/software/Git/images/Pasted%20image%2020250324195035.png">
-<meta property="og:image" content="d:/software/Git/images/Pasted%20image%2020250324203227.png">
-<meta property="og:image" content="d:/software/Git/images/Pasted%20image%2020250324203639.png">
-<meta property="og:image" content="d:/software/Git/images/Pasted%20image%2020250324205304.png">
-<meta property="og:image" content="d:/software/Git/images/Pasted%20image%2020250324205845.png">
-<meta property="og:image" content="d:/software/Git/images/Pasted%20image%2020250324205921.png">
+<meta property="og:image" content="http://example.com/images/Pasted%20image%2020250323133751.png">
+<meta property="og:image" content="http://example.com/images/Pasted%20image%2020250323141917.png">
+<meta property="og:image" content="http://example.com/images/Pasted%20image%2020250323145847.png">
+<meta property="og:image" content="http://example.com/images/Pasted%20image%2020250323151056.png">
+<meta property="og:image" content="http://example.com/images/Pasted%20image%2020250323161530.png">
+<meta property="og:image" content="http://example.com/images/Pasted%20image%2020250323163151.png">
+<meta property="og:image" content="http://example.com/images/Pasted%20image%2020250323185530.png">
+<meta property="og:image" content="http://example.com/images/Pasted%20image%2020250323185720.png">
+<meta property="og:image" content="http://example.com/images/Pasted%20image%2020250323190623.png">
+<meta property="og:image" content="http://example.com/images/Pasted%20image%2020250323190856.png">
+<meta property="og:image" content="http://example.com/images/Pasted%20image%2020250323191632.png">
+<meta property="og:image" content="http://example.com/images/Pasted%20image%2020250323191637.png">
+<meta property="og:image" content="http://example.com/images/Pasted%20image%2020250324190821.png">
+<meta property="og:image" content="http://example.com/images/Pasted%20image%2020250324193704.png">
+<meta property="og:image" content="http://example.com/images/Pasted%20image%2020250324194137.png">
+<meta property="og:image" content="http://example.com/images/Pasted%20image%2020250324195035.png">
+<meta property="og:image" content="http://example.com/images/Pasted%20image%2020250324203227.png">
+<meta property="og:image" content="http://example.com/images/Pasted%20image%2020250324203639.png">
+<meta property="og:image" content="http://example.com/images/Pasted%20image%2020250324205304.png">
+<meta property="og:image" content="http://example.com/images/Pasted%20image%2020250324205845.png">
+<meta property="og:image" content="http://example.com/images/Pasted%20image%2020250324205921.png">
 <meta property="article:published_time" content="2025-06-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-24T07:24:00.283Z">
+<meta property="article:modified_time" content="2025-06-24T07:28:03.964Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="DeepLearning">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="d:/software/Git/images/Pasted%20image%2020250323133751.png">
+<meta name="twitter:image" content="http://example.com/images/Pasted%20image%2020250323133751.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -149,10 +149,10 @@
 <li>循环网络的计算是串行的，不能有效加速</li>
 </ul>
 <h4 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self-Attention"></a>Self-Attention</h4><p>计算的是同一条序列中的不同位置之间的相关性，也就是自注意力。对于输入序列中的第$i$个位置，计算与其他位置的相关性，然后对于所有的位置进行加权求和：<br>规定Query $Q &#x3D; [q_1 \dots q_n]$，Key $K &#x3D; [k_1 \dots k_n]$，Value $V &#x3D; [v_1 \dots v_k]$，则：</p>
-<p><img src="D:/software/Git/images/Pasted%20image%2020250323133751.png" alt="Pasted image 20250323133751.png"></p>
+<p><img src="/images/Pasted%20image%2020250323133751.png" alt="Pasted image 20250323133751.png"></p>
 <h4 id="Scaled-Dot-Product-Attention"><a href="#Scaled-Dot-Product-Attention" class="headerlink" title="Scaled Dot-Product Attention"></a>Scaled Dot-Product Attention</h4><p>我们认为使用一个网络来计算相关性太复杂了，当两个向量是相同维度的时候可以直接计算内积。在这里，在计算先引入参数，使得其维度是一样的，从而可以计算内积：</p>
 <p><em>Scaled Dot-Product</em> :<br>$$<br>a(q,k) &#x3D; \frac{q^T k}{\sqrt{d_k}}<br>$$<br>使得变换前后的方差是一样的，这样可以使得梯度更加稳定，否则可能进入激活函数的饱和区。<br>$$<br>Attention(Q,K,V) &#x3D; \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V<br>$$<br>上面的式子将得到的$n \times n$的矩阵进行softmax操作，在归一化的过程中，<strong>是某一个query在所有的key上的注意力分配一定是$\mathbf{1}$</strong>。后面是对于Value的加权求和。<strong>在上面的公式中，$Q$、$K$和$V$中的向量都是行向量，进行softmax操作时也是在同一行上操作</strong>。</p>
-<p><img src="D:/software/Git/images/Pasted%20image%2020250323141917.png" alt="Pasted image 20250323141917.png"></p>
+<p><img src="/images/Pasted%20image%2020250323141917.png" alt="Pasted image 20250323141917.png"></p>
 <p>对于同一组输入，经过不同的线性变换得到的不同的Query、Key和Value，在样本数量为$m$的情况下，可以进行计算：</p>
 <p>$$<br>\begin{aligned}<br>&amp;W^Q \in \mathbb{R}^{d_k \times d_{\text{input}}}, \\<br>&amp;W^K \in \mathbb{R}^{d_k \times d_{\text{input}}}, \\<br>&amp;W^V \in \mathbb{R}^{d_v \times d_{\text{input}}} \\<br>&amp;Q &#x3D; X W^Q \in \mathbb{R}^{m \times d_k}, \\<br>&amp;K &#x3D; X W^K \in \mathbb{R}^{m \times d_k}, \\<br>&amp;V &#x3D; X W^V \in \mathbb{R}^{m \times d_v}. \\<br>&amp;QK^T \in \mathbb{R}^{m \times m}, \\<br>&amp;\text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right) \in \mathbb{R}^{m \times m}, \\<br>&amp;\text{Attention}(Q, K, V) &#x3D; \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V \in \mathbb{R}^{m \times d_v}.<br>\end{aligned}<br>$$</p>
 <p> <strong>维度总结表</strong></p>
@@ -197,7 +197,7 @@
 </tbody></table>
 <h4 id="Multi-Head-Attention"><a href="#Multi-Head-Attention" class="headerlink" title="Multi-Head Attention"></a>Multi-Head Attention</h4><p>注意到上面的注意力的表达能力是相当有限的，在language model同一个词和其他不同的词之间可能有很多种不同的关系，仅仅用一种简单的关系来表示是不够的。所以我们引入多头注意力，希望能在不同的侧面上进行表达。<br>$$<br>\text{MultiHead}(Q,K,V) &#x3D; \text{Concat}(\text{head}_1, \dots, \text{head}_h)W^O<br>$$<br>其中：<br>$$<br>\text{head}_i &#x3D; \text{Attention}(QW_i^Q, KW_i^K, VW_i^V)<br>$$<br>其中$W_i^Q, W_i^K, W_i^V$是不同的线性变换，$W^O$是最后的线性变换，最后进行的维度的规约操作。<br>与CNN相比，CNN的不同的通道之间与上一层的每一个通道之间都是有连接的；但是在这里，不同的头之间是没有连接的，这样可以使得不同的头可以关注不同的信息。</p>
 <p>不同的头之间是可以并行计算的，这样可以加速计算；但是缺点是内存占用会很大。</p>
-<h4 id="Position-wise-Feed-Forward-Networks"><a href="#Position-wise-Feed-Forward-Networks" class="headerlink" title="Position-wise Feed-Forward Networks"></a>Position-wise Feed-Forward Networks</h4><p><img src="D:/software/Git/images/Pasted%20image%2020250323145847.png" alt="Pasted image 20250323145847.png"><br>在标准 Transformer Block 中，注意力层之后会接一个前馈神经网络（FFN），其结构如下：</p>
+<h4 id="Position-wise-Feed-Forward-Networks"><a href="#Position-wise-Feed-Forward-Networks" class="headerlink" title="Position-wise Feed-Forward Networks"></a>Position-wise Feed-Forward Networks</h4><p><img src="/images/Pasted%20image%2020250323145847.png" alt="Pasted image 20250323145847.png"><br>在标准 Transformer Block 中，注意力层之后会接一个前馈神经网络（FFN），其结构如下：</p>
 <ol>
 <li><p>输入张量形状：<br>$$<br>X \in \mathbb{R}^{B \times L \times H \times D}<br>$$</p>
 <ul>
@@ -232,7 +232,7 @@
 </blockquote>
 <h4 id="Residual-Connection"><a href="#Residual-Connection" class="headerlink" title="Residual Connection"></a>Residual Connection</h4><p>在上面的操作中，这些操作都是有排列不变性。<br>残差是一个标准的操作，这样可以让网络更好地记录位置编码。</p>
 <h4 id="Layer-Normalization"><a href="#Layer-Normalization" class="headerlink" title="Layer Normalization"></a>Layer Normalization</h4><p>目的是使得每一层经过Attention和Feed-Forward之后的输出的分布是一样的，这样可以使得梯度更加稳定。<br>[[Deep Learning Lecture-5#Layer Normalization]]</p>
-<p><img src="D:/software/Git/images/Pasted%20image%2020250323151056.png" alt="Pasted image 20250323151056.png"></p>
+<p><img src="/images/Pasted%20image%2020250323151056.png" alt="Pasted image 20250323151056.png"></p>
 <h4 id="Value-Embedding"><a href="#Value-Embedding" class="headerlink" title="Value Embedding"></a>Value Embedding</h4><ul>
 <li><p><strong>目的</strong>：将原始输入特征（如温度、流量、股价等数值）从低维（通常是 1 或几个通道）映射到高维向量空间，使模型能在更大维度下学习更丰富的特征表示。</p>
 </li>
@@ -269,13 +269,13 @@
 <li>很多的头是冗余的</li>
 </ul>
 <p>训练阶段要使用多个头，发现有些头的权重较低，可以在推理阶段去掉这些头。</p>
-<h4 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h4><h5 id="Autoregressive"><a href="#Autoregressive" class="headerlink" title="Autoregressive"></a>Autoregressive</h5><p><img src="D:/software/Git/images/Pasted%20image%2020250323161530.png" alt="Pasted image 20250323161530.png"></p>
+<h4 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h4><h5 id="Autoregressive"><a href="#Autoregressive" class="headerlink" title="Autoregressive"></a>Autoregressive</h5><p><img src="/images/Pasted%20image%2020250323161530.png" alt="Pasted image 20250323161530.png"></p>
 <p>预测阶段一定要使用滚动预测，这是一个自回归的状态，但是这是一个串行的操作，会比较慢。但是在训练阶段这样是不能接受的，我希望训练的不同阶段可以并行计算，但是这里要求在一开始输入所有的序列，所以这里需要<strong>遮挡</strong>。<br>在算Attention的时候，对于当前的位置，只能看到之前的位置，不能看到之后的位置。</p>
-<p><img src="D:/software/Git/images/Pasted%20image%2020250323163151.png" alt="Pasted image 20250323163151.png"></p>
+<p><img src="/images/Pasted%20image%2020250323163151.png" alt="Pasted image 20250323163151.png"></p>
 <p>在编码器上是不能用的，因为防止解码器在训练时利用未来的目标序列信息（即“作弊”），确保模型逐步生成的能力与推理阶段一致。训练过程中仍然需要真实标签作为目标输出，但掩码限制了模型在生成当前词时对未来的访问。</p>
 <h4 id="Encoder-Decoder-Attention"><a href="#Encoder-Decoder-Attention" class="headerlink" title="Encoder-Decoder Attention"></a>Encoder-Decoder Attention</h4><p>计算的是解码器的输出和编码器的输出之间的相关性，这里的Query是解码器的输出，Key和Value是编码器的输出。</p>
-<p><img src="D:/software/Git/images/Pasted%20image%2020250323185530.png" alt="Pasted image 20250323185530.png"></p>
-<p><img src="D:/software/Git/images/Pasted%20image%2020250323185720.png" alt="Pasted image 20250323185720.png"></p>
+<p><img src="/images/Pasted%20image%2020250323185530.png" alt="Pasted image 20250323185530.png"></p>
+<p><img src="/images/Pasted%20image%2020250323185720.png" alt="Pasted image 20250323185720.png"></p>
 <p>注意这里是将编码器的输出输入到解码器中的每一层的Encoder-Decoder Attention中。这里是神经网络中的<strong>特征重用</strong>思想，并且解码器中的网络是直筒式的，所以这些特征是可以重用的。</p>
 <h4 id="RNN-vs-Transformer"><a href="#RNN-vs-Transformer" class="headerlink" title="RNN vs. Transformer"></a>RNN vs. Transformer</h4><ul>
 <li>RNN是串行的，Transformer是并行的</li>
@@ -283,41 +283,41 @@
 <li>对于长序列，Transformer更适合</li>
 <li>对于较小的数据量，Transformers参数量较大，表现可能不如RNN</li>
 </ul>
-<p><img src="D:/software/Git/images/Pasted%20image%2020250323190623.png" alt="Pasted image 20250323190623.png"></p>
-<p><img src="D:/software/Git/images/Pasted%20image%2020250323190856.png" alt="Pasted image 20250323190856.png"></p>
+<p><img src="/images/Pasted%20image%2020250323190623.png" alt="Pasted image 20250323190623.png"></p>
+<p><img src="/images/Pasted%20image%2020250323190856.png" alt="Pasted image 20250323190856.png"></p>
 <h3 id="X-formers-Variance-with-Improvements"><a href="#X-formers-Variance-with-Improvements" class="headerlink" title="X-formers Variance with Improvements"></a>X-formers Variance with Improvements</h3><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2106.04554">[2106.04554] A Survey of Transformers</a></p>
-<p><img src="D:/software/Git/images/Pasted%20image%2020250323191632.png" alt="Pasted image 20250323191632.png"></p>
-<p><img src="D:/software/Git/images/Pasted%20image%2020250323191637.png" alt="Pasted image 20250323191637.png"></p>
+<p><img src="/images/Pasted%20image%2020250323191632.png" alt="Pasted image 20250323191632.png"></p>
+<p><img src="/images/Pasted%20image%2020250323191637.png" alt="Pasted image 20250323191637.png"></p>
 <h4 id="Lineariezd-Attention"><a href="#Lineariezd-Attention" class="headerlink" title="Lineariezd Attention"></a>Lineariezd Attention</h4><h4 id="Flow-Attention"><a href="#Flow-Attention" class="headerlink" title="Flow Attention"></a>Flow Attention</h4><h3 id="GPT-Generative-Pre-trained-Transformer"><a href="#GPT-Generative-Pre-trained-Transformer" class="headerlink" title="GPT: Generative Pre-trained Transformer"></a>GPT: Generative Pre-trained Transformer</h3><h4 id="Transfer-Learning"><a href="#Transfer-Learning" class="headerlink" title="Transfer Learning"></a>Transfer Learning</h4><p>先将一个模型预训练好，然后在特定的任务上进行微调。一般而言，预训练的过程是无监督的，优点是可以使用大规模数据。</p>
-<h4 id="Pre-Training"><a href="#Pre-Training" class="headerlink" title="Pre-Training"></a>Pre-Training</h4><p><img src="D:/software/Git/images/Pasted%20image%2020250324190821.png" alt="Pasted image 20250324190821.png"></p>
+<h4 id="Pre-Training"><a href="#Pre-Training" class="headerlink" title="Pre-Training"></a>Pre-Training</h4><p><img src="/images/Pasted%20image%2020250324190821.png" alt="Pasted image 20250324190821.png"></p>
 <ul>
 <li>直接使用的是Transformers中的block，但是这里使用12层</li>
 <li>只使用decoder没有encoder，因为这不是一个机器翻译的任务</li>
 <li>在计算损失函数的过程中，使用的似然函数是最大似然估计，在实际中使用一个参数化的网络来近似需要的概率。</li>
 </ul>
-<h4 id="Supervised-Fine-Tuning"><a href="#Supervised-Fine-Tuning" class="headerlink" title="Supervised Fine-Tuning"></a>Supervised Fine-Tuning</h4><p>对于不同的任务，需要更换模型的输出头，并且还要使用新的损失函数。关注上下文建模。<br><img src="D:/software/Git/images/Pasted%20image%2020250324193704.png" alt="Pasted image 20250324193704.png"></p>
+<h4 id="Supervised-Fine-Tuning"><a href="#Supervised-Fine-Tuning" class="headerlink" title="Supervised Fine-Tuning"></a>Supervised Fine-Tuning</h4><p>对于不同的任务，需要更换模型的输出头，并且还要使用新的损失函数。关注上下文建模。<br><img src="/images/Pasted%20image%2020250324193704.png" alt="Pasted image 20250324193704.png"></p>
 <p>最后是使用无监督训练的损失函数和有监督训练的损失函数的加权和，这是一个<strong>多任务学习</strong>。当微调的数据比较少的时候，可以使用无监督训练的损失函数的权重较大。</p>
-<p>对于不同的下游任务，要进行任务适配<em>Task Specific Adaptation</em>。对于不同的下游任务，可以使用不同的头。<br><img src="D:/software/Git/images/Pasted%20image%2020250324194137.png" alt="Pasted image 20250324194137.png"></p>
+<p>对于不同的下游任务，要进行任务适配<em>Task Specific Adaptation</em>。对于不同的下游任务，可以使用不同的头。<br><img src="/images/Pasted%20image%2020250324194137.png" alt="Pasted image 20250324194137.png"></p>
 <h4 id="GPT-2-GPT-3"><a href="#GPT-2-GPT-3" class="headerlink" title="GPT-2 &amp; GPT-3"></a>GPT-2 &amp; GPT-3</h4><p>Zero-shot learning：在没有看到训练数据的情况下，直接在测试集上进行预测。通过在预训练阶段使用大规模的数据，可以使得模型具有更好的泛化能力，这样可以提高在一些常见问题上的表现。</p>
-<h3 id="BERT-Bidirectional-Encoder-Representations-from-Transformers"><a href="#BERT-Bidirectional-Encoder-Representations-from-Transformers" class="headerlink" title="BERT: Bidirectional Encoder Representations from Transformers"></a>BERT: Bidirectional Encoder Representations from Transformers</h3><p>与GPT不同的是，BERT是双向的，可以看到上下文的信息。<br><img src="D:/software/Git/images/Pasted%20image%2020250324195035.png" alt="Pasted image 20250324195035.png"></p>
+<h3 id="BERT-Bidirectional-Encoder-Representations-from-Transformers"><a href="#BERT-Bidirectional-Encoder-Representations-from-Transformers" class="headerlink" title="BERT: Bidirectional Encoder Representations from Transformers"></a>BERT: Bidirectional Encoder Representations from Transformers</h3><p>与GPT不同的是，BERT是双向的，可以看到上下文的信息。<br><img src="/images/Pasted%20image%2020250324195035.png" alt="Pasted image 20250324195035.png"></p>
 <p>BERT在encoder阶段就使用了mask，这样可以使得模型在训练的时候不会看到未来的信息。在训练的过程中随机地mask掉一些词，然后预测这些词。如果遮挡的词太少，那么模型得到的训练不够， 如果遮挡的词太多，那么得到的上下文就很少。<br>在训练的过程中就使用了102种语言。<br>特征工程：使用了更多的特征，引入了更多的embedding<br>是多个任务的联合训练，这样可以使得模型更加通用。</p>
 <h4 id="RoBERTa-A-Robustly-Optimized-BERT-Pretraining-Approach"><a href="#RoBERTa-A-Robustly-Optimized-BERT-Pretraining-Approach" class="headerlink" title="RoBERTa: A Robustly Optimized BERT Pretraining Approach"></a>RoBERTa: A Robustly Optimized BERT Pretraining Approach</h4><p>经过充分的调参和更长的训练时间，使得模型的表现更好。<br>证明了BERT中的下句预测是没有用的，因为在RoBERTa中去掉了这个任务。<br>mask的pattern可以动态调整</p>
-<h4 id="ALBERT-A-Lite-BERT-for-Self-supervised-Learning-of-Language-Representations"><a href="#ALBERT-A-Lite-BERT-for-Self-supervised-Learning-of-Language-Representations" class="headerlink" title="ALBERT: A Lite BERT for Self-supervised Learning of Language Representations"></a>ALBERT: A Lite BERT for Self-supervised Learning of Language Representations</h4><p>低秩分解，减少参数量<br><img src="D:/software/Git/images/Pasted%20image%2020250324203227.png" alt="Pasted image 20250324203227.png"></p>
+<h4 id="ALBERT-A-Lite-BERT-for-Self-supervised-Learning-of-Language-Representations"><a href="#ALBERT-A-Lite-BERT-for-Self-supervised-Learning-of-Language-Representations" class="headerlink" title="ALBERT: A Lite BERT for Self-supervised Learning of Language Representations"></a>ALBERT: A Lite BERT for Self-supervised Learning of Language Representations</h4><p>低秩分解，减少参数量<br><img src="/images/Pasted%20image%2020250324203227.png" alt="Pasted image 20250324203227.png"></p>
 <p>跨层参数共享：可以让模型更加稳定</p>
 <h4 id="T5-Text-to-Text-Transfer-Transformer"><a href="#T5-Text-to-Text-Transfer-Transformer" class="headerlink" title="T5: Text-to-Text Transfer Transformer"></a>T5: Text-to-Text Transfer Transformer</h4><p>迁移是泛化的高级形式：可以将多种文本任务统一为文本到文本的形式，这样可以使得模型更加通用。</p>
-<p>架构层面的创新：<br><img src="D:/software/Git/images/Pasted%20image%2020250324203639.png" alt="Pasted image 20250324203639.png"></p>
+<p>架构层面的创新：<br><img src="/images/Pasted%20image%2020250324203639.png" alt="Pasted image 20250324203639.png"></p>
 <p>这里使用的是prefix-LM，这样可以使得模型更加通用。</p>
 <h3 id="Vision-Transformer"><a href="#Vision-Transformer" class="headerlink" title="Vision Transformer"></a>Vision Transformer</h3><h4 id="ViT"><a href="#ViT" class="headerlink" title="ViT"></a>ViT</h4><p>将一个图像变成一个patch<br>增加一个Position Embedding，于是得到各个patch的特征的加权平均。<br> 主要的贡献是将图像转换为序列，从而可以使用transformers来进行建模。在这个之前，普遍的观点是transformers只能用于文本数据，而CNN用于图像数据。</p>
-<h4 id="Swim-Transformer"><a href="#Swim-Transformer" class="headerlink" title="Swim Transformer"></a>Swim Transformer</h4><p>将CNN中的一些归纳偏好引入，可以使用局部的注意力，但是在一定程度上能捕捉全局的信息，通过Shifted Window Mechanism来实现。<br>层次化特征：<br><img src="D:/software/Git/images/Pasted%20image%2020250324205304.png" alt="Pasted image 20250324205304.png"></p>
+<h4 id="Swim-Transformer"><a href="#Swim-Transformer" class="headerlink" title="Swim Transformer"></a>Swim Transformer</h4><p>将CNN中的一些归纳偏好引入，可以使用局部的注意力，但是在一定程度上能捕捉全局的信息，通过Shifted Window Mechanism来实现。<br>层次化特征：<br><img src="/images/Pasted%20image%2020250324205304.png" alt="Pasted image 20250324205304.png"></p>
 <p>密集预测任务对于层次化特征需求更高，于是这个模型的表现是更好地。</p>
-<h4 id="DETR"><a href="#DETR" class="headerlink" title="DETR"></a>DETR</h4><p><img src="D:/software/Git/images/Pasted%20image%2020250324205845.png" alt="Pasted image 20250324205845.png"></p>
-<p><img src="D:/software/Git/images/Pasted%20image%2020250324205921.png" alt="Pasted image 20250324205921.png"></p>
+<h4 id="DETR"><a href="#DETR" class="headerlink" title="DETR"></a>DETR</h4><p><img src="/images/Pasted%20image%2020250324205845.png" alt="Pasted image 20250324205845.png"></p>
+<p><img src="/images/Pasted%20image%2020250324205921.png" alt="Pasted image 20250324205921.png"></p>
 <h3 id="Fundation-Models"><a href="#Fundation-Models" class="headerlink" title="Fundation Models"></a>Fundation Models</h3><p> $$<br> e^{\alpha+ \beta i } &#x3D; e^{\alpha} e^{\beta i} &#x3D; e^{\alpha}(\cos \beta + i \sin \beta)<br> $$</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-6/" data-id="cmca7973s00080ovag3uua7jk" data-title="Deep Learning Lecture-6" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/21/Deep%20Learning%20Lecture-6/" data-id="cmca7ef51000aggvab5gc32ui" data-title="Deep Learning Lecture-6" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -329,19 +329,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2025/06/21/Deep%20Learning%20Lecture-5/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2025/06/21/Deep%20Learning%20Lecture-4/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          Deep Learning Lecture-5
+          Deep Learning Lecture-4
         
       </div>
     </a>
   
   
-    <a href="/2025/06/21/Deep%20Learning%20Lecture-7/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2025/06/21/Deep%20Learning%20Lecture-8/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Deep Learning Lecture-7</div>
+      <div class="article-nav-title">Deep Learning Lecture-8</div>
     </a>
   
 </nav>
@@ -405,11 +405,11 @@
           </li>
         
           <li>
-            <a href="/2025/06/21/Deep%20Learning%20Lecture-4/">Deep Learning Lecture-4</a>
+            <a href="/2025/06/21/Deep%20Learning%20Lecture-5/">Deep Learning Lecture-5</a>
           </li>
         
           <li>
-            <a href="/2025/06/21/Deep%20Learning%20Lecture-5/">Deep Learning Lecture-5</a>
+            <a href="/2025/06/21/Deep%20Learning%20Lecture-7/">Deep Learning Lecture-7</a>
           </li>
         
       </ul>
