@@ -19,25 +19,18 @@
   <meta name="author" content="Yima Gu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Brain and Neuron 感知机Perceptron是神经元的一个相当简单的数学模型，包括：输入、权重、激活函数、输出。其实是在空间超平面上嵌入了一个非线性函数。 $$ \\hat{y} &#x3D; g(\\sum\_{i&#x3D;1}^{n}  x\_i \\theta\_i +\\theta\_0) $$ 感知机在神经网络中也叫单元unit，是神经网络的基本组成单元。但是这样的单元会比人的神">
+    <meta name="description" content="Brain and Neuron 感知机Perceptron是神经元的一个相当简单的数学模型，包括：输入、权重、激活函数、输出。其实是在空间超平面上嵌入了一个非线性函数。 $$ \hat{y} &#x3D; g(\sum_{i&#x3D;1}^{n}  x_i \theta_i +\theta_0) $$ 感知机在神经网络中也叫单元unit，是神经网络的基本组成单元。但是这样的单元会比人的神经元简单很多。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Deep Learning Lecture-2">
 <meta property="og:url" content="https://yima-gu.github.io/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-2/index.html">
 <meta property="og:site_name" content="Yima Gu\&#39;s Blog">
-<meta property="og:description" content="Brain and Neuron 感知机Perceptron是神经元的一个相当简单的数学模型，包括：输入、权重、激活函数、输出。其实是在空间超平面上嵌入了一个非线性函数。 $$ \\hat{y} &#x3D; g(\\sum\_{i&#x3D;1}^{n}  x\_i \\theta\_i +\\theta\_0) $$ 感知机在神经网络中也叫单元unit，是神经网络的基本组成单元。但是这样的单元会比人的神">
+<meta property="og:description" content="Brain and Neuron 感知机Perceptron是神经元的一个相当简单的数学模型，包括：输入、权重、激活函数、输出。其实是在空间超平面上嵌入了一个非线性函数。 $$ \hat{y} &#x3D; g(\sum_{i&#x3D;1}^{n}  x_i \theta_i +\theta_0) $$ 感知机在神经网络中也叫单元unit，是神经网络的基本组成单元。但是这样的单元会比人的神经元简单很多。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://yima-gu.github.io/images/%7B5ABA24F6-F5A5-48C8-AE9F-1E8524E35979%7D.png">
-<meta property="og:image" content="https://yima-gu.github.io/images/%7B9A215F21-185B-4C55-B872-413D388E5321%7D.png">
-<meta property="og:image" content="https://yima-gu.github.io/images/%7BE178BAD1-DE9C-44E5-A665-D550AE3A9558%7D.png">
-<meta property="og:image" content="https://yima-gu.github.io/images/%7B139D48AB-F664-4CE8-AC05-97B772908A85%7D.png">
-<meta property="og:image" content="https://yima-gu.github.io/images/%7B79D51D58-D7B7-485E-9A0F-5F615FE27545%7D.png">
-<meta property="og:image" content="https://yima-gu.github.io/images/%7B862689B6-2775-4822-8FAC-B0450B360BA0%7D.png">
 <meta property="article:published_time" content="2025-06-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-03T08:49:54.513Z">
+<meta property="article:modified_time" content="2025-07-03T08:46:37.158Z">
 <meta property="article:author" content="Yima Gu">
 <meta property="article:tag" content="DeepLearning">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://yima-gu.github.io/images/%7B5ABA24F6-F5A5-48C8-AE9F-1E8524E35979%7D.png">
   
   
   
@@ -230,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.5k 字
+          3.4k 字
         
       </span>
     
@@ -241,7 +234,7 @@
         
         
         
-          30 分钟
+          29 分钟
         
       </span>
     
@@ -286,25 +279,24 @@
                 <h3 id="brain-and-neuron">Brain and Neuron</h3>
 <p>感知机<em>Perceptron</em>是神经元的一个相当简单的数学模型，包括：输入、权重、激活函数、输出。其实是在空间超平面上嵌入了一个非线性函数。
 <span class="math display">$$
-\\hat{y} = g(\\sum\_{i=1}^{n}  x\_i \\theta\_i +\\theta\_0)
+\hat{y} = g(\sum_{i=1}^{n}  x_i \theta_i +\theta_0)
 $$</span>
 感知机在神经网络中也叫单元<em>unit</em>，是神经网络的基本组成单元。但是这样的单元会比人的神经元简单很多。
 #### PLA
 在上述的激活函数中，最先使用的是符号函数，这个函数是不光滑的。可以使用下面的算法来进行训练：
-<img src="/images/%7B5ABA24F6-F5A5-48C8-AE9F-1E8524E35979%7D.png" srcset="/img/loading.gif" lazyload
-alt="{5ABA24F6-F5A5-48C8-AE9F-1E8524E35979}.png" />
+![[{5ABA24F6-F5A5-48C8-AE9F-1E8524E35979}.png]]
 在理论推导中，可以计算PLA的<strong>收敛率</strong>：（在线性可分的情况下）
-<span class="math inline">$\\gamma$</span>是最优间隔<em>the best-case
+<span class="math inline"><em>γ</em></span>是最优间隔<em>the best-case
 margin</em>，计算的是训练样本与超平面的距离之间的最小值。 <span
 class="math display">$$
-\\exists v \\in \\mathbb{R}^d \\quad \\text{s.t.}\\,\\gamma \\leq
-\\frac{y\_i(v\\cdot x\_i)}{||v||}
+\exists v \in \mathbb{R}^d \quad \text{s.t.}\,\gamma \leq
+\frac{y_i(v\cdot x_i)}{||v||}
 $$</span> <span
 class="math inline"><em>R</em></span>是数据集的半径，即样本数据向量模的最大值，<span
 class="math inline"><em>d</em></span>是数据集的维度。那么PLA的收敛率为：
 最多经过<span
-class="math inline">$\\frac{R^2}{\\gamma^2}$</span>次迭代就可以收敛。 -
-<span class="math inline">$\\gamma$</span>越大，收敛越快 - <span
+class="math inline">$\frac{R^2}{\gamma^2}$</span>次迭代就可以收敛。 -
+<span class="math inline"><em>γ</em></span>越大，收敛越快 - <span
 class="math inline"><em>R</em></span>越大，收敛越慢</p>
 <h5 id="expresiveness-of-perceptron">Expresiveness of Perceptron</h5>
 <p>感知机是一个线性分类器，只能解决线性可分的问题。如果数据不是线性可分的，那么感知机就无法解决（例如异或问题，但其实异或不是基本的布尔运算，可以用与或非表达）。</p>
@@ -314,152 +306,138 @@ Perceptron</em>是感知机的扩展，可以解决非线性问题。多层感�
 <em>感知机之间的链接方式相比人脑而言也是较为简单的。</em>
 在表达时，可以发现是<strong>稀疏的</strong>，也就是每一层并不是与前面的所有的感知机相连。多层感知机的表达能力较强，这时需要增加感知机的层数。</p>
 <h5 id="comention">Comention</h5>
-<figure>
-<img src="/images/%7B9A215F21-185B-4C55-B872-413D388E5321%7D.png" srcset="/img/loading.gif" lazyload
-alt="{9A215F21-185B-4C55-B872-413D388E5321}.png" />
-<figcaption
-aria-hidden="true">{9A215F21-185B-4C55-B872-413D388E5321}.png</figcaption>
-</figure>
-<figure>
-<img src="/images/%7BE178BAD1-DE9C-44E5-A665-D550AE3A9558%7D.png" srcset="/img/loading.gif" lazyload
-alt="{E178BAD1-DE9C-44E5-A665-D550AE3A9558}.png" />
-<figcaption
-aria-hidden="true">{E178BAD1-DE9C-44E5-A665-D550AE3A9558}.png</figcaption>
-</figure>
+<p>![[{9A215F21-185B-4C55-B872-413D388E5321}.png]]</p>
+<p>![[{E178BAD1-DE9C-44E5-A665-D550AE3A9558}.png]]</p>
 <ul>
 <li>用上标表示层数，用下标表示感知机的编号</li>
-<li><span class="math inline">$\\theta\_{ij}^{(l)}$</span>表示第<span
+<li><span
+class="math inline"><em>θ</em><sub><em>i</em><em>j</em></sub><sup>(<em>l</em>)</sup></span>表示第<span
 class="math inline"><em>l</em></span>层的第<span
 class="math inline"><em>i</em></span>个感知机的第<span
 class="math inline"><em>j</em></span>个输入的权重</li>
 <li><span
-class="math inline"><em>b</em>_<em>j</em><sup>(<em>l</em>)</sup></span>表示第<span
+class="math inline"><em>b</em><sub><em>j</em></sub><sup>(<em>l</em>)</sup></span>表示第<span
 class="math inline"><em>l</em></span>层的第<span
 class="math inline"><em>j</em></span>个感知机的偏置</li>
 <li><span
-class="math inline"><em>a</em>_<em>j</em><sup>(<em>l</em>)</sup></span>表示第<span
+class="math inline"><em>a</em><sub><em>j</em></sub><sup>(<em>l</em>)</sup></span>表示第<span
 class="math inline"><em>l</em></span>层的第<span
 class="math inline"><em>j</em></span>个感知机的输出（在激活之后的数值）</li>
 <li><span
-class="math inline"><em>z</em>_<em>j</em><sup>(<em>l</em>)</sup></span>表示第<span
+class="math inline"><em>z</em><sub><em>j</em></sub><sup>(<em>l</em>)</sup></span>表示第<span
 class="math inline"><em>l</em></span>层的第<span
 class="math inline"><em>j</em></span>个感知机的输入（经过线性变换之后的数值）</li>
-<li><span class="math inline">$J(\\theta)$</span>表示损失函数<em>Loss
+<li><span
+class="math inline"><em>J</em>(<em>θ</em>)</span>表示损失函数<em>Loss
 Function</em></li>
 </ul>
 <p>在上面的图中，边的个数就是参数的个数。</p>
 <h5 id="activation-function">Activation Function</h5>
 <ul>
 <li><p><strong>Sigmoid函数</strong>：<span class="math inline">$g(z) =
-\\sigma(z)= \\frac{1}{1+e^{-z}}$</span>
+\sigma(z)= \frac{1}{1+e^{-z}}$</span>
 采用有界的函数，可以将输出限制在0-1之间，避免数值爆炸。但是在基于梯度的计算中，会出现梯度消失（梯度饱和），在两侧的范围内梯度会接近于0。</p></li>
 <li><p><strong>ReLU函数</strong>：<span
 class="math inline"><em>g</em>(<em>z</em>) = <em>m</em><em>a</em><em>x</em>(0, <em>z</em>)</span>
 ReLU函数是一个分段函数，可以避免<strong>梯度消失</strong>的问题。但是在训练时，会出现<strong>神经元死亡</strong>的问题，即神经元的输出一直为0。</p></li>
 <li><p><strong>GeLu函数</strong>：<span class="math inline">$g(z) = z
-\\cdot \\Phi(z) = z \\cdot \\frac{1}{2} (1 +
-\\text{erf}(\\frac{z}{\\sqrt{2}}))$</span>
+\cdot \Phi(z) = z \cdot \frac{1}{2} (1 +
+\text{erf}(\frac{z}{\sqrt{2}}))$</span>
 用Guass分布的累计函数对上述进行加权。<span
-class="math inline">$\\Phi(z)$</span>是标准正态分布的累计分布函数<em>CDF</em>。在一些较为复杂的模型中（GPT-3、Bert）都有使用。</p></li>
+class="math inline"><em>Φ</em>(<em>z</em>)</span>是标准正态分布的累计分布函数<em>CDF</em>。在一些较为复杂的模型中（GPT-3、Bert）都有使用。</p></li>
 </ul>
 <p>在网络的输出层，使用的激活函数由问题决定。如果是回归问题，可以使用线性函数；在有界的输出情况下，可以使用Sigmoid函数；在多分类问题中，可以使用Softmax函数。</p>
 <ul>
-<li><strong>Softmax函数</strong>：<span class="math inline">$g(z)\_i =
-\\frac{e^{z\_i}}{\\sum\_{j=1}^{k} e^{z\_j}}$</span>
+<li><strong>Softmax函数</strong>：<span class="math inline">$g(z)_i =
+\frac{e^{z_i}}{\sum_{j=1}^{k} e^{z_j}}$</span>
 Softmax函数是一个多分类的激活函数，可以将输出的值转化为概率值。分类问题是随机实验中的伯努利实验<em>Categorical
 Distribution</em>。
 缺点为：“赢者通吃”，即最大的值会被放大，其他的值会被压缩，有<em>over
 confidence</em>的问题（即某个分类的概率过大）。同时有数值稳定性问题，即数值计算时可能会出现数值爆炸的问题。
 改进为： <span class="math display">$$
-g(z)\_i = \\frac{e^{z\_i - \\max(z)}}{\\sum\_{j=1}^{k} e^{z\_j -
-\\max(z)}}
+g(z)_i = \frac{e^{z_i - \max(z)}}{\sum_{j=1}^{k} e^{z_j - \max(z)}}
 $$</span> 上述改进能解决数值稳定性问题，但是对于<em>over
 confidence</em>问题还是存在。 ^b5bcbb</li>
 </ul>
 <h5 id="cost-function">Cost Function</h5>
 <p>任何一个衡量预测与实际值之间的差异的函数都可以称为损失函数。在这里使用的是交叉熵损失函数<em>Cross
 Entropy Loss</em>： <span class="math display">$$
-J(y,\\hat{y}) = - \\sum\_{i=1}^{n} y\_i \\log(\\hat{y}\_i)
+J(y,\hat{y}) = - \sum_{i=1}^{n} y_i \log(\hat{y}_i)
 $$</span> 作代入得到： <span class="math display">$$
-\\min J(\\theta)= -\\frac{1}{m} \\sum\_{i=1}^{m} \\sum\_{j=1}^{k}
-\\mathbf{1}\\{y^{(i)}=j\\} \\log\\frac{\\exp{
-z\_j^{(n\_l)}}}{\\sum\_{j'=1}^{k} \\exp{ z\_{j'}^{(n\_l)}}} \\quad (\*)
+\min J(\theta)= -\frac{1}{m} \sum_{i=1}^{m} \sum_{j=1}^{k}
+\mathbf{1}\{y^{(i)}=j\} \log\frac{\exp{ z_j^{(n_l)}}}{\sum_{j'=1}^{k}
+\exp{ z_{j'}^{(n_l)}}} \quad (*)
 $$</span></p>
 <p><em>*上述公式中的m为样本数目，k为类别数目，<span
-class="math inline"><em>z</em>_<em>j</em><sup>(<em>n</em>_<em>l</em>)</sup></span>为最后一层的第j个感知机的输入。对于实际类别采用独热编码，即只有在对应类别取值为1。</em></p>
+class="math inline"><em>z</em><sub><em>j</em></sub><sup>(<em>n</em><sub><em>l</em></sub>)</sup></span>为最后一层的第j个感知机的输入。对于实际类别采用独热编码，即只有在对应类别取值为1。</em></p>
 <h5 id="statistical-view-of-softmax">Statistical View of Softmax</h5>
 <p>考虑投掷m次骰子，其中第<span
 class="math inline"><em>i</em></span>个得到<span
 class="math inline"><em>j</em></span>的概率为<span
-class="math inline"><em>q</em>_<em>i</em><em>j</em></span>。在<em>Softmax</em>中对于概率进行建模（用数据进行估计，对于分类估计的参数进行逼近）：
+class="math inline"><em>q</em><sub><em>i</em><em>j</em></sub></span>。在<em>Softmax</em>中对于概率进行建模（用数据进行估计，对于分类估计的参数进行逼近）：
+<span
+class="math display"><em>q</em><sub><em>i</em><em>j</em></sub> = <em>P</em>(<em>y</em><sub><em>i</em></sub> = <em>j</em> |<strong>x</strong><sub><strong>i</strong></sub>; <strong>W</strong>)</span>
+在给定的结果<span
+class="math inline">{<em>y</em><sub>1</sub>, ..., <em>y</em><sub><em>m</em></sub>}</span>下，概率值（似然函数）为：
 <span class="math display">$$
-q\_{ij} = P(y\_i = j\\,| \\mathbf{x\_i} ; \\mathbf{W} )
-$$</span> 在给定的结果<span
-class="math inline">$\\{y\_1,...,y\_m\\}$</span>下，概率值（似然函数）为：
-<span class="math display">$$
-\\mathcal{L}(\\mathbf{W};\\mathcal{D})=\\prod\_{i=1}^{m}
-\\prod\_{j=1}^{k} P(y\_i=j|q\_{ij})^{\\mathbf{1}\\{y\_i = j\\}} =
-\\prod\_{i=1}^{m} \\prod\_{j=1}^{k}P(y\_i = j\\,| \\mathbf{x\_i} ;
-\\mathbf{W} ) ^{\\mathbf{1}\\{y\_i = j\\}}
+\mathcal{L}(\mathbf{W};\mathcal{D})=\prod_{i=1}^{m} \prod_{j=1}^{k}
+P(y_i=j|q_{ij})^{\mathbf{1}\{y_i = j\}} = \prod_{i=1}^{m}
+\prod_{j=1}^{k}P(y_i = j\,| \mathbf{x_i} ; \mathbf{W} )
+^{\mathbf{1}\{y_i = j\}}
 $$</span> <em><span
-class="math inline">$\\mathbf{W}$</span>是模型的参数，上面的式子是在这样的建模和数据下得到结果的可能性，也就是统计中的似然函数。这样的过程类似于统计中的参数估
+class="math inline"><strong>W</strong></span>是模型的参数，上面的式子是在这样的建模和数据下得到结果的可能性，也就是统计中的似然函数。这样的过程类似于统计中的参数估
 计。</em></p>
 <p>做极大似然估计： <span class="math display">$$
-\\mathcal{L}(\\mathbf{W};\\mathcal{D}) =\\max\_{w\_1 \\dots w\_k}
-\\prod\_{i=1}^{m} \\prod\_{j=1}^{k} P(y\_i = j\\,| \\mathbf{x\_i} ;
-\\mathbf{W} ) ^{\\mathbf{1}\\{y\_i = j\\}}
+\mathcal{L}(\mathbf{W};\mathcal{D}) =\max_{w_1 \dots w_k}
+\prod_{i=1}^{m} \prod_{j=1}^{k} P(y_i = j\,| \mathbf{x_i} ; \mathbf{W} )
+^{\mathbf{1}\{y_i = j\}}
 $$</span> 取负对数： <span class="math display">$$
-J(\\mathbf{W}) = \\min\_{w\_1 \\dots w\_k}- \\log
-\\mathcal{L}(\\mathbf{W};\\mathcal{D}) = - \\sum\_{i=1}^{m}
-\\sum\_{j=1}^{k} \\mathbf{1}\\{y\_i = j\\} \\log P(y\_i = j\\,|
-\\mathbf{x\_i} ; \\mathbf{W} )
+J(\mathbf{W}) = \min_{w_1 \dots w_k}- \log
+\mathcal{L}(\mathbf{W};\mathcal{D}) = - \sum_{i=1}^{m} \sum_{j=1}^{k}
+\mathbf{1}\{y_i = j\} \log P(y_i = j\,| \mathbf{x_i} ; \mathbf{W} )
 $$</span>
 上述的式子就是交叉熵损失函数。上面的过程其实是在认为分类是<span
 class="math inline"><em>i</em>.<em>i</em>.<em>d</em>.</span>的伯努利分布的极大似然估计。</p>
 <h3 id="gradient-descent">Gradient Descent</h3>
 <p>对于不是直接依赖的导数的计算较为复杂，对于最后一层的导数计算较为简单（是直接依赖）。对于前面层的参数的导数在这里使用<strong>链式法则</strong>来进行计算。</p>
 <p>对于最后一层的参数的导数计算： <span class="math display">$$
-\\frac{\\partial J(\\theta ,b)}{\\partial z\_j^{(n\_l)}} = -
-(\\mathbf{1}\\{y^{(i)}=j\\} -P(y^{(i)}=j|\\mathbf{x}^{(i)};\\theta,b)))
+\frac{\partial J(\theta ,b)}{\partial z_j^{(n_l)}} = -
+(\mathbf{1}\{y^{(i)}=j\} -P(y^{(i)}=j|\mathbf{x}^{(i)};\theta,b)))
 $$</span> 可以发现梯度是真是的概率减去预测的概率。</p>
 <h4 id="step-1-forward-propagation">Step 1: Forward Propagation</h4>
 <p>输入样本计算得到的输出值，这个过程是一个前向传播的过程。</p>
 <h4 id="step-2-backward-propagation">Step 2: Backward Propagation</h4>
 <p>将损失函数带有的错误信息向前传播 <span class="math display">$$
-\\frac{J(\\theta)}{\\theta\_1}= \\frac{\\partial J(\\theta)}{\\partial
-\\hat{y}} \\frac{\\partial \\hat{y}}{\\partial z} \\frac{\\partial
-z}{\\partial \\theta\_1}
+\frac{J(\theta)}{\theta_1}= \frac{\partial J(\theta)}{\partial \hat{y}}
+\frac{\partial \hat{y}}{\partial z} \frac{\partial z}{\partial \theta_1}
 $$</span>
 除了需要求解的导数的参数，其他的都是计算的中间值。BP是一个动态规划算法。</p>
 <h4 id="computing-the-residual">Computing the Residual</h4>
 <p>第<span class="math inline"><em>l</em></span>层的第<span
 class="math inline"><em>i</em></span>个结点的残差<em>Residual</em>的定义为：
 <span class="math display">$$
-\\delta\_i^{(l)} = \\frac{\\partial J(\\theta)}{\\partial z\_i^{(l)}}
+\delta_i^{(l)} = \frac{\partial J(\theta)}{\partial z_i^{(l)}}
 $$</span> 对于最后一层的残差，计算较为简单： <span
 class="math display">$$
-\\delta\_i^{(n\_l)} = \\frac{\\partial}{\\partial z\_i^{(n\_l)} }
-J(\\theta) = \\frac{\\partial }{\\partial \\hat{y}\_i}J(\\theta)
-g'(z\_i^{(n\_l)})
+\delta_i^{(n_l)} = \frac{\partial}{\partial z_i^{(n_l)} } J(\theta) =
+\frac{\partial }{\partial \hat{y}_i}J(\theta) g'(z_i^{(n_l)})
 $$</span> 利用链式法则对激活函数求导即可。 对于隐藏层的导数计算： <span
 class="math display">$$
-\\delta\_i^{(l)} = \\frac{\\partial J(\\theta)}{\\partial z\_i^{(l)}} =
-\\sum\_{j=1}^{n\_{l+1}} \\frac{\\partial J(\\theta)}{\\partial
-z\_j^{(l+1)}} \\frac{\\partial z\_j^{(l+1)}}{\\partial z\_i^{(l)}} =
-\\sum\_{j=1}^{n\_{l+1}} \\delta\_j^{(l+1)} \\theta\_{ij}^{(l)}
-g'(z\_i^{(l)})
+\delta_i^{(l)} = \frac{\partial J(\theta)}{\partial z_i^{(l)}} =
+\sum_{j=1}^{n_{l+1}} \frac{\partial J(\theta)}{\partial z_j^{(l+1)}}
+\frac{\partial z_j^{(l+1)}}{\partial z_i^{(l)}} = \sum_{j=1}^{n_{l+1}}
+\delta_j^{(l+1)} \theta_{ij}^{(l)} g'(z_i^{(l)})
 $$</span> <span class="math display">$$
-\\delta\_i^{(l)}= \\sum\_{j=1}^{n\_{l+1}} \\delta\_j^{(l+1)}
-\\theta\_{ji}^{(l)} g'(z\_j^{(l)})
+\delta_i^{(l)}= \sum_{j=1}^{n_{l+1}} \delta_j^{(l+1)} \theta_{ji}^{(l)}
+g'(z_j^{(l)})
 $$</span> 上述公式实现了<strong>传递</strong>的过程。</p>
 <h4 id="step-3-update-parameters">Step 3: Update Parameters</h4>
 <p>对于参数更新的过程： <span class="math display">$$
-\\frac{\\partial J(\\theta)}{\\partial \\theta\_{ij}^{(l)}} =
-\\frac{\\partial J(\\theta)}{\\partial z\_j^{(l+1)}} \\frac{\\partial
-z\_j^{(l+1)}}{\\partial \\theta\_{ij}^{(l)}} = \\delta\_j^{(l+1)}
-a\_i^{(l)}
+\frac{\partial J(\theta)}{\partial \theta_{ij}^{(l)}} = \frac{\partial
+J(\theta)}{\partial z_j^{(l+1)}} \frac{\partial z_j^{(l+1)}}{\partial
+\theta_{ij}^{(l)}} = \delta_j^{(l+1)} a_i^{(l)}
 $$</span> <span class="math display">$$
-\\frac{\\partial J(\\theta)}{\\partial b\_j^{(l)}} = \\delta\_j^{(l+1)}
+\frac{\partial J(\theta)}{\partial b_j^{(l)}} = \delta_j^{(l+1)}
 $$</span> ##### Automatic Differentiation
 在实际的计算中，可以使用自动微分的方法来进行计算。自动微分是一种计算导数的方法，可以分为两种：
 - <strong>Symbolic
@@ -471,31 +449,28 @@ Differentiation</strong>：通过数值的方式来计算导数，这种方法�
 <h5 id="dropout"><strong>Dropout</strong></h5>
 <p>在训练的过程中，随机的将一些神经元的权重置为0（丢弃），这样可以减少过拟合的问题。在操作的过程中，按照一定的概率<span
 class="math inline"><em>p</em></span>对神经元进行丢弃。在某一层未被丢弃的神经元的激活值值乘以<span
-class="math inline">$\\frac{1}{1-p}$</span>，这样可以保持期望值不变。</p>
+class="math inline">$\frac{1}{1-p}$</span>，这样可以保持期望值不变。</p>
 <h5 id="weight-initialization">Weight Initialization</h5>
 <p>对于权重的初始化，一般使用Guass分布可以使用一些方法来进行初始化，例如：
 <strong>Xavier Initialization</strong> ( linear activations )： <span
 class="math display">$$
-Var(W)= \\frac{1}{n\_{in}}
+Var(W)= \frac{1}{n_{in}}
 $$</span> 假设输入的数据<span
-class="math inline"><em>x</em>_<em>j</em></span>满足均值为0，方差为<span
-class="math inline">$\\gamma$</span>，<span
-class="math inline"><em>n</em>_<em>i</em><em>n</em></span>是这一个神经元对应的输入的神经元的个数。
+class="math inline"><em>x</em><sub><em>j</em></sub></span>满足均值为0，方差为<span
+class="math inline"><em>γ</em></span>，<span
+class="math inline"><em>n</em><sub><em>i</em><em>n</em></sub></span>是这一个神经元对应的输入的神经元的个数。
 在线性组合之后，可以得到： <span class="math display">$$
-h\_i=\\sum\_{j=1}^{n\_{in}} w\_{ij} x\_j
+h_i=\sum_{j=1}^{n_{in}} w_{ij} x_j
 $$</span> 可以认为<span
-class="math inline"><em>w</em>_<em>i</em><em>j</em></span>是独立同分布的并且均值为0方差为<span
-class="math inline">$\\sigma^2$</span>那么计算得到： <span
-class="math display">$$
-\\mathbb{E}\[h\_i\]=0 \\quad \\mathbb{E}\[h\_i^2\] = n\_{in} \\sigma^2
-\\gamma
-$$</span>
+class="math inline"><em>w</em><sub><em>i</em><em>j</em></sub></span>是独立同分布的并且均值为0方差为<span
+class="math inline"><em>σ</em><sup>2</sup></span>那么计算得到： <span
+class="math display">𝔼[<em>h</em><sub><em>i</em></sub>] = 0  𝔼[<em>h</em><sub><em>i</em></sub><sup>2</sup>] = <em>n</em><sub><em>i</em><em>n</em></sub><em>σ</em><sup>2</sup><em>γ</em></span>
 这样在经过一个层之后数据的方差会改变，为了保持方差不变，可以使用上述的初始化方法。</p>
 <p><strong>He Initialization</strong>：(ReLU activations) <span
 class="math display">$$
-Var(W)= \\frac{2}{n\_{in}}
+Var(W)= \frac{2}{n_{in}}
 $$</span> [[权重初始化.pdf]] 其中<span
-class="math inline"><em>n</em>_<em>i</em><em>n</em></span>是这一个神经元对应的输入的神经元的个数。</p>
+class="math inline"><em>n</em><sub><em>i</em><em>n</em></sub></span>是这一个神经元对应的输入的神经元的个数。</p>
 <h5 id="baby-sitting-learning">Baby Sitting Learning</h5>
 <p>在训练的过程中，首先在较小的数据集上进行过拟和（在这个训练集上的损失函数接近0）</p>
 <p><strong>学习率</strong> -
@@ -508,14 +483,13 @@ class="math inline"><em>n</em>_<em>i</em><em>n</em></span>是这一个神经元�
 <h5 id="batch-normalization">Batch Normalization</h5>
 <p>对于输入的数据进行归一化处理，可以加快训练的速度，同时可以减少梯度消失的问题。在训练的过程中，对于每一个batch的数据进行归一化处理，可以使得数据的分布更加稳定。
 <span class="math display">$$
-\\hat{x} = \\frac{x - \\mu}{\\sigma}
+\hat{x} = \frac{x - \mu}{\sigma}
 $$</span> 这是一个非参数化方法。可以加入可学习的参数： <span
-class="math display">$$
-y = \\gamma \\hat{x} + \\beta
-$$</span> 其中<span class="math inline">$\\mu$</span>和<span
-class="math inline">$\\sigma$</span>是对于每一个mini-batch的均值和方差。</p>
-<p>在CNN中，对每一个batch中的n个<span class="math inline">$w \\times
-h$</span>的特征图进行归一化处理，可以使得数据的分布更加稳定。</p>
+class="math display"><em>y</em> = <em>γ</em><em>x̂</em> + <em>β</em></span>
+其中<span class="math inline"><em>μ</em></span>和<span
+class="math inline"><em>σ</em></span>是对于每一个mini-batch的均值和方差。</p>
+<p>在CNN中，对每一个batch中的n个<span
+class="math inline"><em>w</em> × <em>h</em></span>的特征图进行归一化处理，可以使得数据的分布更加稳定。</p>
 <p>上述是在训练的过程中使用的，在测试过程中使用不了称为<strong>训练推理失配</strong><em>train
 inference
 mismatch</em>。可以使用EMA（指数滑动平均）的方法来进行替代。</p>
@@ -526,28 +500,25 @@ Normalization</em>之后，仍然有协变量偏移<em>covariate
 shift</em>的问题。但是在使用<em>Batch
 Normalization</em>之后，<em>Lipchitz</em>系数变化更加平稳，海森矩阵也更加稳定。上述可以用数学严格证明。上述操作并不是简单的归一化，而是使得表示的函数族更加光滑，一个光滑的、凸的函数更容易优化。
 - Lipchitz: <span class="math display">$$
-\\left\\|\\nabla\_{y\_j} \\hat{\\mathcal{L}}\\right\\|^2 \\leq
-\\frac{\\gamma^2}{\\sigma\_j^2}\\left(\\left\\|\\nabla\_{y\_j}\\right\\|^2-\\frac{1}{m}\\left(1,
-\\nabla\_{y\_j}
-\\mathcal{L}\\right)^2-\\frac{1}{m}\\left(\\nabla\_{y\_j} \\mathcal{L},
-\\hat{y}\_j\\right)^2\\right)
-$$</span> - Smoothness: <span class="math display">$$
-\\gamma&lt;\\sigma \\text { in experiments }
-$$</span> - Hessian matrix</p>
+\left\|\nabla_{y_j} \hat{\mathcal{L}}\right\|^2 \leq
+\frac{\gamma^2}{\sigma_j^2}\left(\left\|\nabla_{y_j}\right\|^2-\frac{1}{m}\left(1,
+\nabla_{y_j} \mathcal{L}\right)^2-\frac{1}{m}\left(\nabla_{y_j}
+\mathcal{L}, \hat{y}_j\right)^2\right)
+$$</span> - Smoothness: <span
+class="math display"><em>γ</em> &lt; <em>σ</em> in experiments </span> -
+Hessian matrix</p>
 <p><span class="math display">$$
-\\left(\\nabla\_{y\_j} \\hat{\\mathcal{L}}\\right)^T \\frac{\\partial
-\\hat{\\mathcal{L}}}{\\partial y\_j \\partial
-y\_j}\\left(\\nabla\_{y\_j} \\hat{\\mathcal{L}}\\right) \\leq
-\\frac{\\gamma^2}{\\sigma\_j^2}\\left(\\left(\\nabla\_{y\_j}
-\\mathcal{L}\\right)^T \\frac{\\partial \\mathcal{L}}{\\partial y\_j
-\\partial y\_j}\\left(\\nabla\_{y\_j}
-\\mathcal{L}\\right)-\\frac{\\gamma}{m \\sigma^2}\\left(\\nabla\_{y\_j}
-\\mathcal{L}, \\hat{y}\_j\\right)\\left\\|\\nabla\_{y\_j}
-\\hat{\\mathcal{L}}\\right\\|^2\\right)
+\left(\nabla_{y_j} \hat{\mathcal{L}}\right)^T \frac{\partial
+\hat{\mathcal{L}}}{\partial y_j \partial y_j}\left(\nabla_{y_j}
+\hat{\mathcal{L}}\right) \leq
+\frac{\gamma^2}{\sigma_j^2}\left(\left(\nabla_{y_j} \mathcal{L}\right)^T
+\frac{\partial \mathcal{L}}{\partial y_j \partial y_j}\left(\nabla_{y_j}
+\mathcal{L}\right)-\frac{\gamma}{m \sigma^2}\left(\nabla_{y_j}
+\mathcal{L}, \hat{y}_j\right)\left\|\nabla_{y_j}
+\hat{\mathcal{L}}\right\|^2\right)
 $$</span></p>
 <h5 id="group-normalization">Group Normalization</h5>
-<p><img src="/images/%7B139D48AB-F664-4CE8-AC05-97B772908A85%7D.png" srcset="/img/loading.gif" lazyload
-alt="{139D48AB-F664-4CE8-AC05-97B772908A85}.png" /> 在<em>Group
+<p>![[{139D48AB-F664-4CE8-AC05-97B772908A85}.png]] 在<em>Group
 Normalization</em>中，对于每一个通道的特征图进行归一化处理，这样可以减少计算的复杂度。是轻量化CNN的方法。在一定数据量较大的情况下可以达到和<em>Batch
 Normalization</em>差不多的结果。</p>
 <h3 id="generalization-and-capacity">Generalization and Capacity</h3>
@@ -559,12 +530,10 @@ Normalization</em>差不多的结果。</p>
 id="theorem-arbitrarily-large-neural-networks-can-approximate-any-function">Theorem
 (Arbitrarily large neural networks can approximate any function)</h4>
 <p>理论可以表述为：对于任意的连续函数，存在一个足够大的神经网络可以近似这个函数。
-<img src="/images/%7B79D51D58-D7B7-485E-9A0F-5F615FE27545%7D.png" srcset="/img/loading.gif" lazyload
-alt="{79D51D58-D7B7-485E-9A0F-5F615FE27545}.png" />
+![[{79D51D58-D7B7-485E-9A0F-5F615FE27545}.png]]
 上面表示两层神经网络可以逼近任意的连续函数，要求这个函数<span
-class="math inline">$\\sigma$</span>不是多项式函数。</p>
-<p><img src="/images/%7B862689B6-2775-4822-8FAC-B0450B360BA0%7D.png" srcset="/img/loading.gif" lazyload
-alt="{862689B6-2775-4822-8FAC-B0450B360BA0}.png" />
+class="math inline"><em>σ</em></span>不是多项式函数。</p>
+<p>![[{862689B6-2775-4822-8FAC-B0450B360BA0}.png]]
 上面的定理表示神经网络的宽度也很重要，可以通过增加神经元的数量来逼近函数。</p>
 <p>在空间折叠的问题中，表明<strong>深度比宽度更加重要</strong>。</p>
 
@@ -636,9 +605,9 @@ alt="{862689B6-2775-4822-8FAC-B0450B360BA0}.png" />
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-1/" title="Deep Learning Lecture-1">
+                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-3/" title="Deep Learning Lecture-3">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Deep Learning Lecture-1</span>
+                        <span class="hidden-mobile">Deep Learning Lecture-3</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -646,8 +615,8 @@ alt="{862689B6-2775-4822-8FAC-B0450B360BA0}.png" />
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-3/" title="Deep Learning Lecture-3">
-                        <span class="hidden-mobile">Deep Learning Lecture-3</span>
+                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-4/" title="Deep Learning Lecture-4">
+                        <span class="hidden-mobile">Deep Learning Lecture-4</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
