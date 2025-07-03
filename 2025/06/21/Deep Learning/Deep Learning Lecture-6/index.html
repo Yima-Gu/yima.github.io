@@ -19,12 +19,12 @@
   <meta name="author" content="Yima Gu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Transformers Transformers: Attention is All You Need [[Deep Learning Lecture-5#Attention]] 再次理解Attention的概念：类似于”查字典“的操作，对于Query q, Key k和Value v，计算相关性，也就是重要性，对于输出序列中的第i个输出有价值的信息： w_ij &#x3D; a(q_i, k_j">
+    <meta name="description" content="Transformers Transformers: Attention is All You Need [[Deep Learning Lecture-5#Attention]] 再次理解Attention的概念：类似于”查字典“的操作，对于Query q, Key k和Value v，计算相关性，也就是重要性，对于输出序列中的第i个输出有价值的信息： wij &#x3D; a(qi, kj)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Deep Learning Lecture-6">
 <meta property="og:url" content="https://yima-gu.github.io/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-6/index.html">
 <meta property="og:site_name" content="Yima Gu\&#39;s Blog">
-<meta property="og:description" content="Transformers Transformers: Attention is All You Need [[Deep Learning Lecture-5#Attention]] 再次理解Attention的概念：类似于”查字典“的操作，对于Query q, Key k和Value v，计算相关性，也就是重要性，对于输出序列中的第i个输出有价值的信息： w_ij &#x3D; a(q_i, k_j">
+<meta property="og:description" content="Transformers Transformers: Attention is All You Need [[Deep Learning Lecture-5#Attention]] 再次理解Attention的概念：类似于”查字典“的操作，对于Query q, Key k和Value v，计算相关性，也就是重要性，对于输出序列中的第i个输出有价值的信息： wij &#x3D; a(qi, kj)">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://yima-gu.github.io/images/Pasted%20image%2020250323133751.png">
 <meta property="og:image" content="https://yima-gu.github.io/images/Pasted%20image%2020250323141917.png">
@@ -43,7 +43,7 @@
 <meta property="og:image" content="https://yima-gu.github.io/images/Pasted%20image%2020250324205845.png">
 <meta property="og:image" content="https://yima-gu.github.io/images/Pasted%20image%2020250324205921.png">
 <meta property="article:published_time" content="2025-06-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-03T09:09:25.529Z">
+<meta property="article:modified_time" content="2025-07-03T09:17:14.602Z">
 <meta property="article:author" content="Yima Gu">
 <meta property="article:tag" content="DeepLearning">
 <meta name="twitter:card" content="summary_large_image">
@@ -240,7 +240,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.7k 字
+          3.5k 字
         
       </span>
     
@@ -251,7 +251,7 @@
         
         
         
-          32 分钟
+          30 分钟
         
       </span>
     
@@ -302,27 +302,29 @@ class="math inline"><em>q</em></span>, Key <span
 class="math inline"><em>k</em></span>和Value <span
 class="math inline"><em>v</em></span>，计算相关性，也就是重要性，对于输出序列中的第<span
 class="math inline"><em>i</em></span>个输出有价值的信息： <span
-class="math display"><em>w</em>_<em>i</em><em>j</em> = <em>a</em>(<em>q</em>_<em>i</em>, <em>k</em>_<em>j</em>)</span>
+class="math display"><em>w</em><sub><em>i</em><em>j</em></sub> = <em>a</em>(<em>q</em><sub><em>i</em></sub>, <em>k</em><sub><em>j</em></sub>)</span>
 其中<span
 class="math inline"><em>a</em></span>是一个函数，可以是内积、<em>Additive
 Attention</em>等。对于输出序列中的第<span
 class="math inline"><em>i</em></span>个输出，计算当前的输出的<span
-class="math inline"><em>q</em>_<em>i</em></span>，计算与输入序列中的<span
-class="math inline"><em>k</em>_<em>j</em></span>的相关性，然后对于<span
-class="math inline"><em>v</em>_<em>j</em></span>进行加权求和（这是一种寻址操作），得到的<span
-class="math inline"><em>c</em>_<em>i</em></span>是查字典所得到的信息：
+class="math inline"><em>q</em><sub><em>i</em></sub></span>，计算与输入序列中的<span
+class="math inline"><em>k</em><sub><em>j</em></sub></span>的相关性，然后对于<span
+class="math inline"><em>v</em><sub><em>j</em></sub></span>进行加权求和（这是一种寻址操作），得到的<span
+class="math inline"><em>c</em><sub><em>i</em></sub></span>是查字典所得到的信息：
 <span class="math display">$$
-c\_i = \\sum\_{j=1}^T w\_{ij}v\_j
+c_i = \sum_{j=1}^T w_{ij}v_j
 $$</span> <strong>希望找到一种更好的计算方法</strong>。</p>
 <p>在[[Deep Learning Lecture-5#RNN with Attention]]中问题在于： -
 太复杂的模型 - 某种意义上使用的Attention已经足够使用，不再需要循环网络 -
 循环网络的计算是串行的，不能有效加速 #### Self-Attention</p>
 <p>计算的是同一条序列中的不同位置之间的相关性，也就是自注意力。对于输入序列中的第<span
 class="math inline"><em>i</em></span>个位置，计算与其他位置的相关性，然后对于所有的位置进行加权求和：
-规定Query <span class="math inline">$Q = \[q\_1 \\dots
-q\_n\]$</span>，Key <span class="math inline">$K = \[k\_1 \\dots
-k\_n\]$</span>，Value <span class="math inline">$V = \[v\_1 \\dots
-v\_k\]$</span>，则：</p>
+规定Query <span
+class="math inline"><em>Q</em> = [<em>q</em><sub>1</sub>…<em>q</em><sub><em>n</em></sub>]</span>，Key
+<span
+class="math inline"><em>K</em> = [<em>k</em><sub>1</sub>…<em>k</em><sub><em>n</em></sub>]</span>，Value
+<span
+class="math inline"><em>V</em> = [<em>v</em><sub>1</sub>…<em>v</em><sub><em>k</em></sub>]</span>，则：</p>
 <figure>
 <img src="/images/Pasted%20image%2020250323133751.png" srcset="/img/loading.gif" lazyload
 alt="Pasted image 20250323133751.png" />
@@ -332,15 +334,14 @@ alt="Pasted image 20250323133751.png" />
 <h4 id="scaled-dot-product-attention">Scaled Dot-Product Attention</h4>
 <p>我们认为使用一个网络来计算相关性太复杂了，当两个向量是相同维度的时候可以直接计算内积。在这里，在计算先引入参数，使得其维度是一样的，从而可以计算内积：</p>
 <p><em>Scaled Dot-Product</em> : <span class="math display">$$
-a(q,k) = \\frac{q^T k}{\\sqrt{d\_k}}
+a(q,k) = \frac{q^T k}{\sqrt{d_k}}
 $$</span>
 使得变换前后的方差是一样的，这样可以使得梯度更加稳定，否则可能进入激活函数的饱和区。
 <span class="math display">$$
-Attention(Q,K,V) =
-\\text{softmax}\\left(\\frac{QK^T}{\\sqrt{d\_k}}\\right)V
-$$</span> 上面的式子将得到的<span class="math inline">$n \\times
-n$</span>的矩阵进行softmax操作，在归一化的过程中，<strong>是某一个query在所有的key上的注意力分配一定是<span
-class="math inline">$\\mathbf{1}$</span></strong>。后面是对于Value的加权求和。<strong>在上面的公式中，<span
+Attention(Q,K,V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+$$</span> 上面的式子将得到的<span
+class="math inline"><em>n</em> × <em>n</em></span>的矩阵进行softmax操作，在归一化的过程中，<strong>是某一个query在所有的key上的注意力分配一定是<span
+class="math inline"><strong>1</strong></span></strong>。后面是对于Value的加权求和。<strong>在上面的公式中，<span
 class="math inline"><em>Q</em></span>、<span
 class="math inline"><em>K</em></span>和<span
 class="math inline"><em>V</em></span>中的向量都是行向量，进行softmax操作时也是在同一行上操作</strong>。</p>
@@ -352,22 +353,8 @@ alt="Pasted image 20250323141917.png" />
 </figure>
 <p>对于同一组输入，经过不同的线性变换得到的不同的Query、Key和Value，在样本数量为<span
 class="math inline"><em>m</em></span>的情况下，可以进行计算：</p>
-<p><span class="math display">$$
-\\begin{aligned}
-&amp;W^Q \\in \\mathbb{R}^{d\_k \\times d\_{\\text{input}}}, \\\\
-&amp;W^K \\in \\mathbb{R}^{d\_k \\times d\_{\\text{input}}}, \\\\
-&amp;W^V \\in \\mathbb{R}^{d\_v \\times d\_{\\text{input}}} \\\\
-&amp;Q = X W^Q \\in \\mathbb{R}^{m \\times d\_k}, \\\\
-&amp;K = X W^K \\in \\mathbb{R}^{m \\times d\_k}, \\\\
-&amp;V = X W^V \\in \\mathbb{R}^{m \\times d\_v}. \\\\
-&amp;QK^T \\in \\mathbb{R}^{m \\times m}, \\\\
-&amp;\\text{softmax}\\left(\\frac{QK^T}{\\sqrt{d\_k}}\\right) \\in
-\\mathbb{R}^{m \\times m}, \\\\
-&amp;\\text{Attention}(Q, K, V) =
-\\text{softmax}\\left(\\frac{QK^T}{\\sqrt{d\_k}}\\right)V \\in
-\\mathbb{R}^{m \\times d\_v}.
-\\end{aligned}
-$$</span></p>
+$$
+<p>$$</p>
 <p><strong>维度总结表</strong></p>
 <table>
 
@@ -381,54 +368,58 @@ $$</span></p>
 <tbody>
 <tr>
 <td>输入矩阵 <span class="math inline"><em>X</em></span></td>
-<td><span class="math inline">$m \\times d\_{\\text{input}}$</span></td>
+<td><span
+class="math inline"><em>m</em> × <em>d</em><sub>input</sub></span></td>
 <td>包含 <span class="math inline"><em>m</em></span>
 个样本，每个样本维度为 <span
-class="math inline">$d\_{\\text{input}}$</span></td>
+class="math inline"><em>d</em><sub>input</sub></span></td>
 </tr>
 <tr>
 <td>查询矩阵 <span class="math inline"><em>Q</em></span></td>
-<td><span class="math inline">$m \\times d\_k$</span></td>
+<td><span
+class="math inline"><em>m</em> × <em>d</em><sub><em>k</em></sub></span></td>
 <td>每个样本的查询向量维度为 <span
-class="math inline"><em>d</em>_<em>k</em></span></td>
+class="math inline"><em>d</em><sub><em>k</em></sub></span></td>
 </tr>
 <tr>
 <td>键矩阵 <span class="math inline"><em>K</em></span></td>
-<td><span class="math inline">$m \\times d\_k$</span></td>
+<td><span
+class="math inline"><em>m</em> × <em>d</em><sub><em>k</em></sub></span></td>
 <td>每个样本的键向量维度为 <span
-class="math inline"><em>d</em>_<em>k</em></span></td>
+class="math inline"><em>d</em><sub><em>k</em></sub></span></td>
 </tr>
 <tr>
 <td>值矩阵 <span class="math inline"><em>V</em></span></td>
-<td><span class="math inline">$m \\times d\_v$</span></td>
+<td><span
+class="math inline"><em>m</em> × <em>d</em><sub><em>v</em></sub></span></td>
 <td>每个样本的值向量维度为 <span
-class="math inline"><em>d</em>_<em>v</em></span></td>
+class="math inline"><em>d</em><sub><em>v</em></sub></span></td>
 </tr>
 <tr>
 <td>注意力得分矩阵 <span
 class="math inline"><em>Q</em><em>K</em><sup><em>T</em></sup></span></td>
-<td><span class="math inline">$m \\times m$</span></td>
+<td><span class="math inline"><em>m</em> × <em>m</em></span></td>
 <td>样本间的注意力强度矩阵</td>
 </tr>
 <tr>
 <td>最终输出 <span
-class="math inline">$\\text{Attention}(Q,K,V)$</span></td>
-<td><span class="math inline">$m \\times d\_v$</span></td>
+class="math inline">Attention(<em>Q</em>, <em>K</em>, <em>V</em>)</span></td>
+<td><span
+class="math inline"><em>m</em> × <em>d</em><sub><em>v</em></sub></span></td>
 <td>聚合所有样本的加权值信息，输出维度为 <span
-class="math inline"><em>d</em>_<em>v</em></span></td>
+class="math inline"><em>d</em><sub><em>v</em></sub></span></td>
 </tr>
 </tbody>
 </table>
 <h4 id="multi-head-attention">Multi-Head Attention</h4>
 <p>注意到上面的注意力的表达能力是相当有限的，在language
 model同一个词和其他不同的词之间可能有很多种不同的关系，仅仅用一种简单的关系来表示是不够的。所以我们引入多头注意力，希望能在不同的侧面上进行表达。
-<span class="math display">$$
-\\text{MultiHead}(Q,K,V) = \\text{Concat}(\\text{head}\_1, \\dots,
-\\text{head}\_h)W^O
-$$</span> 其中： <span class="math display">$$
-\\text{head}\_i = \\text{Attention}(QW\_i^Q, KW\_i^K, VW\_i^V)
-$$</span> 其中<span
-class="math inline"><em>W</em>_<em>i</em><sup><em>Q</em></sup>, <em>W</em>_<em>i</em><sup><em>K</em></sup>, <em>W</em>_<em>i</em><sup><em>V</em></sup></span>是不同的线性变换，<span
+<span
+class="math display">MultiHead(<em>Q</em>, <em>K</em>, <em>V</em>) = Concat(head<sub>1</sub>, …, head<sub><em>h</em></sub>)<em>W</em><sup><em>O</em></sup></span>
+其中： <span
+class="math display">head<sub><em>i</em></sub> = Attention(<em>Q</em><em>W</em><sub><em>i</em></sub><sup><em>Q</em></sup>, <em>K</em><em>W</em><sub><em>i</em></sub><sup><em>K</em></sup>, <em>V</em><em>W</em><sub><em>i</em></sub><sup><em>V</em></sup>)</span>
+其中<span
+class="math inline"><em>W</em><sub><em>i</em></sub><sup><em>Q</em></sup>, <em>W</em><sub><em>i</em></sub><sup><em>K</em></sup>, <em>W</em><sub><em>i</em></sub><sup><em>V</em></sup></span>是不同的线性变换，<span
 class="math inline"><em>W</em><sup><em>O</em></sup></span>是最后的线性变换，最后进行的维度的规约操作。
 与CNN相比，CNN的不同的通道之间与上一层的每一个通道之间都是有连接的；但是在这里，不同的头之间是没有连接的，这样可以使得不同的头可以关注不同的信息。</p>
 <p>不同的头之间是可以并行计算的，这样可以加速计算；但是缺点是内存占用会很大。</p>
@@ -439,9 +430,8 @@ alt="Pasted image 20250323145847.png" /> 在标准 Transformer Block
 中，注意力层之后会接一个前馈神经网络（FFN），其结构如下：</p>
 <ol type="1">
 <li><p>输入张量形状：<br />
-<span class="math display">$$
-X \\in \\mathbb{R}^{B \\times L \\times H \\times D}
-$$</span></p>
+<span
+class="math display"><em>X</em> ∈ ℝ<sup><em>B</em> × <em>L</em> × <em>H</em> × <em>D</em></sup></span></p>
 <ul>
 <li><span class="math inline"><em>B</em></span>：Batch size<br />
 </li>
@@ -452,41 +442,35 @@ $$</span></p>
 <li><span class="math inline"><em>D</em></span>：每个头的维度</li>
 </ul></li>
 <li><p>将多头输出合并：<br />
-<span class="math display">$$
-X' = \\mathrm{reshape}(X,\\, (B,\\,L,\\,H\\cdot D)) \\in \\mathbb{R}^{B
-\\times L \\times (H\\!D)}
-$$</span></p></li>
+<span
+class="math display"><em>X</em><sup>′</sup> = reshape(<em>X</em>, (<em>B</em>, <em>L</em>, <em>H</em> ⋅ <em>D</em>)) ∈ ℝ<sup><em>B</em> × <em>L</em> × (<em>H</em> <em>D</em>)</sup></span></p></li>
 <li><p>两层“卷积”全连接结构<br />
 这里所谓“卷积”，实际上等价于在最后一维上对每个位置独立地做 1×1 卷积（与
 RNN 中在不同时间步共享参数的思想一致），并在卷积核后加入非线性
 ReLU。<br />
 <span class="math display">$$
-\\begin{aligned}
-Z\_1 &amp;= \\mathrm{ReLU}\\bigl(X' W\_1 + b\_1\\bigr),\\quad
-W\_1\\in\\mathbb{R}^{(H\\!D)\\times d\_{ff}},\\;
-b\_1\\in\\mathbb{R}^{d\_{ff}}\\\\
-Z\_2 &amp;= Z\_1 W\_2 + b\_2,\\quad
-W\_2\\in\\mathbb{R}^{d\_{ff}\\times(H\\!D)},\\;
-b\_2\\in\\mathbb{R}^{(H\\!D)}
-\\end{aligned}
+\begin{aligned}
+Z_1 &amp;= \mathrm{ReLU}\bigl(X' W_1 + b_1\bigr),\quad
+W_1\in\mathbb{R}^{(H\!D)\times d_{ff}},\; b_1\in\mathbb{R}^{d_{ff}}\\
+Z_2 &amp;= Z_1 W_2 + b_2,\quad W_2\in\mathbb{R}^{d_{ff}\times(H\!D)},\;
+b_2\in\mathbb{R}^{(H\!D)}
+\end{aligned}
 $$</span></p>
 <ul>
 <li>第一层升维到中间维度 <span
-class="math inline"><em>d</em>_<em>f</em><em>f</em></span>（例如 <span
-class="math inline">2048</span>）<br />
+class="math inline"><em>d</em><sub><em>f</em><em>f</em></sub></span>（例如
+<span class="math inline">2048</span>）<br />
 </li>
-<li>第二层降维回原始维度 <span class="math inline">$H\\!D$</span>（例如
-<span class="math inline">512</span>）</li>
+<li>第二层降维回原始维度 <span
+class="math inline"><em>H</em> <em>D</em></span>（例如 <span
+class="math inline">512</span>）</li>
 </ul></li>
 <li><p>加残差 &amp; LayerNorm<br />
-<span class="math display">$$
-Y = \\mathrm{LayerNorm}\\bigl(X' + Z\_2\\bigr)\\in\\mathbb{R}^{B\\times
-L\\times(H\\!D)}
-$$</span></p></li>
+<span
+class="math display"><em>Y</em> = LayerNorm(<em>X</em><sup>′</sup> + <em>Z</em><sub>2</sub>) ∈ ℝ<sup><em>B</em> × <em>L</em> × (<em>H</em> <em>D</em>)</sup></span></p></li>
 <li><p>（可选）reshape 回多头排列：<br />
-<span class="math display">$$
-Y' = \\mathrm{reshape}(Y,\\, (B,\\,L,\\,H,\\,D))
-$$</span></p></li>
+<span
+class="math display"><em>Y</em><sup>′</sup> = reshape(<em>Y</em>, (<em>B</em>, <em>L</em>, <em>H</em>, <em>D</em>))</span></p></li>
 </ol>
 <ul>
 <li><strong>线性限制</strong>：除去 Attention 中的
@@ -531,15 +515,13 @@ alt="Pasted image 20250323151056.png" />
 卷积（<code>TokenEmbedding</code>）把每个时间步的原始向量映成长度为
 <code>d_model</code> 的向量。</p></li>
 <li><p><strong>实现方式</strong>：通过一个线性映射或 <span
-class="math inline">$1 \\times 1$</span> 卷积完，对于有<span
-class="math inline"><em>c</em>_<em>i</em><em>n</em></span>个特征维度的输入，使用卷积核的大小是<span
-class="math inline">$\[d\_{model},c\_{in},1\]$</span></p></li>
+class="math inline">1 × 1</span> 卷积完，对于有<span
+class="math inline"><em>c</em><sub><em>i</em><em>n</em></sub></span>个特征维度的输入，使用卷积核的大小是<span
+class="math inline">[<em>d</em><sub><em>m</em><em>o</em><em>d</em><em>e</em><em>l</em></sub>, <em>c</em><sub><em>i</em><em>n</em></sub>, 1]</span></p></li>
 <li><p><strong>输入维度</strong>：<span
-class="math inline">$(\\text{batch\_size}, \\text{seq\_len},
-c\_{in})$</span></p></li>
+class="math inline">(batch_size, seq_len, <em>c</em><sub><em>i</em><em>n</em></sub>)</span></p></li>
 <li><p><strong>输出维度</strong>：<span
-class="math inline">$(\\text{batch\_size}, \\text{seq\_len},
-d\_{model})$</span></p></li>
+class="math inline">(batch_size, seq_len, <em>d</em><sub><em>m</em><em>o</em><em>d</em><em>e</em><em>l</em></sub>)</span></p></li>
 </ul>
 <h4 id="positional-encoding-position-embedding">Positional Encoding
 /Position Embedding</h4>
@@ -555,15 +537,14 @@ embedding</em>，这是一个矩阵，效果类似于一个查找表。查找操
 应该生成一个有界的值，位置数随着序列长度的增加而增加</p>
 <p>Google的实现是使用的正弦和余弦函数的组合： <span
 class="math display">$$
-e\_i(2j) = \\sin\\left(\\frac{i}{10000^{2j/d\_{\\text{model}}}}\\right)
+e_i(2j) = \sin\left(\frac{i}{10000^{2j/d_{\text{model}}}}\right)
 $$</span> <span class="math display">$$
-e\_i(2j+1) =
-\\cos\\left(\\frac{i}{10000^{2j/d\_{\\text{model}}}}\\right)
+e_i(2j+1) = \cos\left(\frac{i}{10000^{2j/d_{\text{model}}}}\right)
 $$</span> 上述公式中的<span
 class="math inline"><em>i</em></span>指的句子中的第<span
 class="math inline"><em>i</em></span>个位置，<span
 class="math inline"><em>j</em></span>指的是位置编码的维度，<span
-class="math inline">$d\_{\\text{model}}$</span>是位置编码的维度。这样的编码是满足上面的归纳偏好的。</p>
+class="math inline"><em>d</em><sub>model</sub></span>是位置编码的维度。这样的编码是满足上面的归纳偏好的。</p>
 <h4 id="temporal-embedding">Temporal Embedding</h4>
 <ul>
 <li><strong>目的</strong>：针对时间序列中特有的“时间属性”——小时、星期几、月份、季节等——进行编码，让模型学到周期性（如日周期、周周期、年周期）和节假日效应等信息。</li>
@@ -727,10 +708,8 @@ alt="Pasted image 20250324205921.png" />
 20250324205921.png</figcaption>
 </figure>
 <h3 id="fundation-models">Fundation Models</h3>
-<p><span class="math display">$$
-e^{\\alpha+ \\beta i } = e^{\\alpha} e^{\\beta i} = e^{\\alpha}(\\cos
-\\beta + i \\sin \\beta)
-$$</span></p>
+<p><span
+class="math display"><em>e</em><sup><em>α</em> + <em>β</em><em>i</em></sup> = <em>e</em><sup><em>α</em></sup><em>e</em><sup><em>β</em><em>i</em></sup> = <em>e</em><sup><em>α</em></sup>(cos <em>β</em> + <em>i</em>sin <em>β</em>)</span></p>
 
                 
               </div>
@@ -800,9 +779,9 @@ $$</span></p>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-5/" title="Deep Learning Lecture-5">
+                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-7/" title="Deep Learning Lecture-7">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Deep Learning Lecture-5</span>
+                        <span class="hidden-mobile">Deep Learning Lecture-7</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -810,8 +789,8 @@ $$</span></p>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-7/" title="Deep Learning Lecture-7">
-                        <span class="hidden-mobile">Deep Learning Lecture-7</span>
+                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-5/" title="Deep Learning Lecture-5">
+                        <span class="hidden-mobile">Deep Learning Lecture-5</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

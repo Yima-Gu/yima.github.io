@@ -19,12 +19,12 @@
   <meta name="author" content="Yima Gu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Generative Model 数据分布是生成模型的核心。生成模型的目标是学习数据的分布，然后生成新的数据。目标是学习数据的分布，然后生成新的数据。 对生成模型的评价是通过生成的数据的质量来评价的，生成的数据越接近真实数据，生成模型的质量越好。 $$ \\theta^\* &#x3D; \\arg\\max\_{\\theta} \\mathbb{E}\_{x \\sim p\_{data}}">
+    <meta name="description" content="Generative Model 数据分布是生成模型的核心。生成模型的目标是学习数据的分布，然后生成新的数据。目标是学习数据的分布，然后生成新的数据。 对生成模型的评价是通过生成的数据的质量来评价的，生成的数据越接近真实数据，生成模型的质量越好。 θ* &#x3D; arg maxθ𝔼x ∼ pdatalog pmodel(x|θ)    Pasted image 202503300944">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Deep Learning Lecture-7">
 <meta property="og:url" content="https://yima-gu.github.io/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-7/index.html">
 <meta property="og:site_name" content="Yima Gu\&#39;s Blog">
-<meta property="og:description" content="Generative Model 数据分布是生成模型的核心。生成模型的目标是学习数据的分布，然后生成新的数据。目标是学习数据的分布，然后生成新的数据。 对生成模型的评价是通过生成的数据的质量来评价的，生成的数据越接近真实数据，生成模型的质量越好。 $$ \\theta^\* &#x3D; \\arg\\max\_{\\theta} \\mathbb{E}\_{x \\sim p\_{data}}">
+<meta property="og:description" content="Generative Model 数据分布是生成模型的核心。生成模型的目标是学习数据的分布，然后生成新的数据。目标是学习数据的分布，然后生成新的数据。 对生成模型的评价是通过生成的数据的质量来评价的，生成的数据越接近真实数据，生成模型的质量越好。 θ* &#x3D; arg maxθ𝔼x ∼ pdatalog pmodel(x|θ)    Pasted image 202503300944">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://yima-gu.github.io/images/Pasted%20image%2020250330094251.png">
 <meta property="og:image" content="https://yima-gu.github.io/images/Pasted%20image%2020250330094404.png">
@@ -50,7 +50,7 @@
 <meta property="og:image" content="https://yima-gu.github.io/images/Pasted%20image%2020250405163941.png">
 <meta property="og:image" content="https://yima-gu.github.io/images/Pasted%20image%2020250405164110.png">
 <meta property="article:published_time" content="2025-06-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-03T09:09:25.532Z">
+<meta property="article:modified_time" content="2025-07-03T09:17:14.619Z">
 <meta property="article:author" content="Yima Gu">
 <meta property="article:tag" content="DeepLearning">
 <meta name="twitter:card" content="summary_large_image">
@@ -247,7 +247,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.8k 字
+          3.6k 字
         
       </span>
     
@@ -258,7 +258,7 @@
         
         
         
-          32 分钟
+          30 分钟
         
       </span>
     
@@ -303,10 +303,9 @@
                 <h2 id="generative-model">Generative Model</h2>
 <p>数据分布是生成模型的核心。生成模型的目标是学习数据的分布，然后生成新的数据。目标是<strong>学习数据的分布</strong>，然后生成新的数据。
 对生成模型的评价是通过生成的数据的质量来评价的，生成的数据越接近真实数据，生成模型的质量越好。
-<span class="math display">$$
-\\theta^\* = \\arg\\max\_{\\theta} \\mathbb{E}\_{x \\sim p\_{data}}
-\\log p\_{model}(x|\\theta)
-$$</span> <img src="/images/Pasted%20image%2020250330094251.png" srcset="/img/loading.gif" lazyload
+<span
+class="math display"><em>θ</em><sup>*</sup> = arg max<sub><em>θ</em></sub>𝔼<sub><em>x</em> ∼ <em>p</em><sub><em>d</em><em>a</em><em>t</em><em>a</em></sub></sub>log <em>p</em><sub><em>m</em><em>o</em><em>d</em><em>e</em><em>l</em></sub>(<em>x</em>|<em>θ</em>)</span>
+<img src="/images/Pasted%20image%2020250330094251.png" srcset="/img/loading.gif" lazyload
 alt="Pasted image 20250330094251.png" /></p>
 <figure>
 <img src="/images/Pasted%20image%2020250330094404.png" srcset="/img/loading.gif" lazyload
@@ -319,29 +318,30 @@ Network</h3>
 <p>对抗机器学习的思想是通过两个网络之间的对抗来学习。生成器和判别器之间的对抗是GAN的核心思想。
 使用的博弈问题的思想，使用的是最小化最大的思想。</p>
 <p>GAN的思想为：生成器和判别器之间的对抗，生成器生成数据，判别器判断数据的真实性。</p>
-<p>目标函数为： <span class="math display">$$
-\\min\_G \\max\_D V(D,G) = \\mathbb{E}\_{x \\sim p\_{data}(x)}\[\\log
-D(x)\] + \\mathbb{E}\_{z \\sim p\_z(z)}\[\\log(1-D(G(z)))\]
-$$</span> - 当生成器固定时，判别器的目标是最大化判别器的准确率：<span
-class="math inline">$\\max\_D V(D,G)$</span> -
-当判别器固定时，生成器的目标是最小化判别器的准确率：<span
-class="math inline">$\\min\_G V(D,G)$</span></p>
+<p>目标函数为： <span
+class="math display">min<sub><em>G</em></sub>max<sub><em>D</em></sub><em>V</em>(<em>D</em>, <em>G</em>) = 𝔼<sub><em>x</em> ∼ <em>p</em><sub><em>d</em><em>a</em><em>t</em><em>a</em></sub>(<em>x</em>)</sub>[log <em>D</em>(<em>x</em>)] + 𝔼<sub><em>z</em> ∼ <em>p</em><sub><em>z</em></sub>(<em>z</em>)</sub>[log (1 − <em>D</em>(<em>G</em>(<em>z</em>)))]</span>
+- 当生成器固定时，判别器的目标是最大化判别器的准确率：<span
+class="math inline">max<sub><em>D</em></sub><em>V</em>(<em>D</em>, <em>G</em>)</span>
+- 当判别器固定时，生成器的目标是最小化判别器的准确率：<span
+class="math inline">min<sub><em>G</em></sub><em>V</em>(<em>D</em>, <em>G</em>)</span></p>
 <p>生成器 <span class="math inline"><em>G</em></span> 的实质是将噪声分布
 <span
-class="math inline"><em>p</em>_<em>z</em>(<em>z</em>)</span>（如高斯分布）映射到数据分布
+class="math inline"><em>p</em><sub><em>z</em></sub>(<em>z</em>)</span>（如高斯分布）映射到数据分布
 <span
-class="math inline"><em>p</em>_<em>g</em>(<em>x</em>)</span>。根据概率密度变换定理，若
+class="math inline"><em>p</em><sub><em>g</em></sub>(<em>x</em>)</span>。根据概率密度变换定理，若
 <span class="math inline"><em>G</em></span>
 是可逆且光滑的函数，则生成数据的分布为：</p>
 <p><span class="math display">$$
-p\_g(x) = p\_z(z) \\cdot \\left| \\det \\left( \\frac{\\partial
-G^{-1}(x)}{\\partial x} \\right) \\right|
+p_g(x) = p_z(z) \cdot \left| \det \left( \frac{\partial
+G^{-1}(x)}{\partial x} \right) \right|
 $$</span></p>
 <p>尽管深度神经网络通常不可逆，但通过足够复杂的函数逼近（如多层非线性变换），生成器可以隐式地学习到从
-<span class="math inline"><em>p</em>_<em>z</em>(<em>z</em>)</span> 到
-<span class="math inline"><em>p</em>_<em>g</em>(<em>x</em>)</span>
+<span
+class="math inline"><em>p</em><sub><em>z</em></sub>(<em>z</em>)</span>
+到 <span
+class="math inline"><em>p</em><sub><em>g</em></sub>(<em>x</em>)</span>
 的映射，覆盖真实分布 <span
-class="math inline"><em>p</em>_<em>d</em><em>a</em><em>t</em><em>a</em>(<em>x</em>)</span>。</p>
+class="math inline"><em>p</em><sub><em>d</em><em>a</em><em>t</em><em>a</em></sub>(<em>x</em>)</span>。</p>
 <p><strong>关键点</strong>：<br />
 - 噪声输入的随机性确保了生成数据分布的多样性。<br />
 -
@@ -376,10 +376,8 @@ alt="Pasted image 20250330102359.png" />
 -
 <strong>类别明确性</strong>：单个生成样本应明确属于某个类别（对应分类概率尖锐）。<br />
 - <strong>多样性</strong>：生成样本应覆盖多个类别（类别分布均匀）。</p>
-<p><span class="math display">$$
-\\text{IS} = \\exp\\left(\\mathbb{E}\_{x \\sim p\_g} \\left\[
-\\text{KL}\\left(p(y|x) \\parallel p(y)\\right) \\right\]\\right)
-$$</span></p>
+<p><span
+class="math display">IS = exp (𝔼<sub><em>x</em> ∼ <em>p</em><sub><em>g</em></sub></sub>[KL(<em>p</em>(<em>y</em>|<em>x</em>) ∥ <em>p</em>(<em>y</em>))])</span></p>
 <ul>
 <li>Class Probability Distribution: <span
 class="math inline"><em>p</em>(<em>y</em>|<em>x</em>)</span>，生成样本
@@ -390,8 +388,8 @@ class="math inline"><em>p</em>(<em>y</em>)</span>，度量的是生成的数据�
 </ul>
 <h5 id="kl-divergence">KL Divergence</h5>
 <p>使用KL散度来度量两个分布的相似性： <span class="math display">$$
-KL(p||q) =\\mathbb{E}\_X \\left(  \\log \\frac{p(x)}{q(x)}
-\\right)=\\sum\_{x \\in \\mathcal{X}} p(x) \\log \\frac{p(x)}{q(x)}
+KL(p||q) =\mathbb{E}_X \left(  \log \frac{p(x)}{q(x)} \right)=\sum_{x
+\in \mathcal{X}} p(x) \log \frac{p(x)}{q(x)}
 $$</span> 需要上面的值尽可能偏大</p>
 <ul>
 <li><strong>KL散度的意义</strong>：
@@ -399,12 +397,12 @@ $$</span> 需要上面的值尽可能偏大</p>
 <li><strong><span
 class="math inline"><em>p</em>(<em>y</em>|<em>x</em>)</span>
 尖锐</strong> → 分类概率集中（如某类概率接近 1），此时 <span
-class="math inline">$\\text{KL}(p(y|x) \\parallel p(y))$</span>
+class="math inline">KL(<em>p</em>(<em>y</em>|<em>x</em>) ∥ <em>p</em>(<em>y</em>))</span>
 值大。<br />
 </li>
 <li><strong><span class="math inline"><em>p</em>(<em>y</em>)</span>
 均匀</strong> → 生成样本覆盖所有类别，<span
-class="math inline">$\\text{KL}$</span> 值的期望更大。<br />
+class="math inline">KL</span> 值的期望更大。<br />
 </li>
 </ul></li>
 <li><strong>取指数的作用</strong>：将对数空间的值转换为正数，放大差异便于比较。</li>
@@ -413,60 +411,56 @@ class="math inline">$\\text{KL}$</span> 值的期望更大。<br />
 Distance</h4>
 <p>将生成的数据输入一个网络来提取特征，用得到的特征来拟和两个高斯分布，然后计算两个高斯分布的<em>Frechet
 Inception Distance</em>。这是有显式表达式的。</p>
-<p><span class="math display">$$
-\\text{FID} = \\|\\mu\_r - \\mu\_g\\|^2 + \\text{Tr}\\left(\\Sigma\_r +
-\\Sigma\_g - 2(\\Sigma\_r \\Sigma\_g)^{1/2}\\right)
-$$</span> - <strong><span class="math inline">$\\mu\_r,
-\\mu\_g$</span></strong>：真实数据和生成数据特征的均值向量。<br />
-- <strong><span class="math inline">$\\Sigma\_r,
-\\Sigma\_g$</span></strong>：真实数据和生成数据特征的协方差矩阵。<br />
+<p><span
+class="math display">FID = ∥<em>μ</em><sub><em>r</em></sub> − <em>μ</em><sub><em>g</em></sub>∥<sup>2</sup> + Tr(<em>Σ</em><sub><em>r</em></sub> + <em>Σ</em><sub><em>g</em></sub> − 2(<em>Σ</em><sub><em>r</em></sub><em>Σ</em><sub><em>g</em></sub>)<sup>1/2</sup>)</span>
 - <strong><span
-class="math inline">$\\text{Tr}(\\cdot)$</span></strong>：矩阵的迹（对角线元素之和）。</p>
+class="math inline"><em>μ</em><sub><em>r</em></sub>, <em>μ</em><sub><em>g</em></sub></span></strong>：真实数据和生成数据特征的均值向量。<br />
+- <strong><span
+class="math inline"><em>Σ</em><sub><em>r</em></sub>, <em>Σ</em><sub><em>g</em></sub></span></strong>：真实数据和生成数据特征的协方差矩阵。<br />
+- <strong><span
+class="math inline">Tr(⋅)</span></strong>：矩阵的迹（对角线元素之和）。</p>
 <h4 id="mode-collapse">Mode Collapse</h4>
 <p>指生成的数据的多样性不够，类别分布是单一的，这是GAN的一个问题。</p>
-<p>原始GAN使用JS散度（<span class="math inline">$JSD(p\_{data}
-\\parallel p\_g)$</span>）衡量分布距离，存在： -
-<strong>梯度消失</strong>：当 <span
-class="math inline"><em>p</em>_<em>g</em></span> 和 <span
-class="math inline"><em>p</em>_<em>d</em><em>a</em><em>t</em><em>a</em></span>
-无重叠时，<span class="math inline">$JSD = \\log 2$</span>，梯度为零。 -
-<strong>模式坍塌</strong>：生成器倾向于生成少数样本。</p>
+<p>原始GAN使用JS散度（<span
+class="math inline"><em>J</em><em>S</em><em>D</em>(<em>p</em><sub><em>d</em><em>a</em><em>t</em><em>a</em></sub> ∥ <em>p</em><sub><em>g</em></sub>)</span>）衡量分布距离，存在：
+- <strong>梯度消失</strong>：当 <span
+class="math inline"><em>p</em><sub><em>g</em></sub></span> 和 <span
+class="math inline"><em>p</em><sub><em>d</em><em>a</em><em>t</em><em>a</em></sub></span>
+无重叠时，<span
+class="math inline"><em>J</em><em>S</em><em>D</em> = log 2</span>，梯度为零。
+- <strong>模式坍塌</strong>：生成器倾向于生成少数样本。</p>
 <h5 id="wasserstein-distance">Wasserstein Distance</h5>
 <p><a
 target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%B2%83%E7%91%9F%E6%96%AF%E5%9D%A6%E5%BA%A6%E9%87%8F">沃瑟斯坦度量
 - 维基百科，自由的百科全书</a></p>
 <p>有可能统计距离是不是一个好的距离度量。Wasserstein距离是一个好的距离度量，用推土机距离来度量两个分布的距离。</p>
-<p><span class="math display">$$ c(x,y) \\mapsto \[0, \\infty),
-$$</span> 表示从点<span
-class="math inline"><em>x</em></span>运输质量到点<span
+<p><span
+class="math display"><em>c</em>(<em>x</em>, <em>y</em>) ↦ [0, ∞),</span>
+表示从点<span class="math inline"><em>x</em></span>运输质量到点<span
 class="math inline"><em>y</em></span>的代价。一个从<span
-class="math inline">$\\mu$</span>到<span
-class="math inline">$\\nu$</span>的运输方案可以用函数<span
-class="math inline">$\\gamma(x,y)$</span>来描述，该函数表明从<span
+class="math inline"><em>μ</em></span>到<span
+class="math inline"><em>ν</em></span>的运输方案可以用函数<span
+class="math inline"><em>γ</em>(<em>x</em>, <em>y</em>)</span>来描述，该函数表明从<span
 class="math inline"><em>x</em></span>移动到<span
 class="math inline"><em>y</em></span>的质量。一个运输方案<span
-class="math inline">$\\gamma(x,y)$</span>必须满足以下性质： <span
-class="math display">$$
-\\begin{aligned}
-\\int \\gamma(x,y) \\, \\mathrm{d}y = \\mu(x), \\\\
-\\int \\gamma(x,y) \\, \\mathrm{d}x = \\nu(y),
-\\end{aligned}
+class="math inline"><em>γ</em>(<em>x</em>, <em>y</em>)</span>必须满足以下性质：
+<span class="math display">$$
+\begin{aligned}
+\int \gamma(x,y) \, \mathrm{d}y = \mu(x), \\
+\int \gamma(x,y) \, \mathrm{d}x = \nu(y),
+\end{aligned}
 $$</span></p>
 <p>前者表示从某一点<span
 class="math inline"><em>x</em></span>移到其他所有点的土堆总质量必须等于最初该点<span
 class="math inline"><em>x</em></span>上的土堆质量，后者则表示从所有点移到某一点<span
 class="math inline"><em>y</em></span>的土堆总质量必须等于最终该点<span
 class="math inline"><em>y</em></span>上的土堆质量。 <span
-class="math display">$$
-\\iint c(x,y) \\gamma(x,y) \\, \\mathrm{d}x \\, \\mathrm{d}y = \\int
-c(x,y) \\, \\mathrm{d}\\gamma(x,y).
-$$</span></p>
+class="math display">∬<em>c</em>(<em>x</em>, <em>y</em>)<em>γ</em>(<em>x</em>, <em>y</em>) d<em>x</em> d<em>y</em> = ∫<em>c</em>(<em>x</em>, <em>y</em>) d<em>γ</em>(<em>x</em>, <em>y</em>).</span></p>
 <p>方案<span
-class="math inline">$\\gamma$</span>并不是唯一的，所有可能的运输方案中代价最低的方案即为最优运输方案。最优运输方案的代价为：</p>
-<p><span class="math display">$$
-C = \\inf\_{\\gamma \\in \\Gamma(\\mu,\\nu)} \\int c(x,y) \\,
-\\mathrm{d}\\gamma(x,y).
-$$</span> ##### Wasserstein GAN</p>
+class="math inline"><em>γ</em></span>并不是唯一的，所有可能的运输方案中代价最低的方案即为最优运输方案。最优运输方案的代价为：</p>
+<p><span
+class="math display"><em>C</em> = inf<sub><em>γ</em> ∈ <em>Γ</em>(<em>μ</em>, <em>ν</em>)</sub>∫<em>c</em>(<em>x</em>, <em>y</em>) d<em>γ</em>(<em>x</em>, <em>y</em>).</span>
+##### Wasserstein GAN</p>
 <figure>
 <img src="/images/Pasted%20image%2020250330141642.png" srcset="/img/loading.gif" lazyload
 alt="Pasted image 20250330141642.png" />
@@ -539,8 +533,8 @@ class="math inline"><em>C</em><em>y</em><em>c</em></span>保证生成的图像�
 <h4 id="adaptive-instance-normalization">Adaptive Instance
 Normalization</h4>
 <p><span class="math display">$$
-AdaIN(u ,v) = \\sigma(v) \\left(\\frac{u - \\mu(u)}{\\sigma(u)}\\right)
-+ \\mu(v)
+AdaIN(u ,v) = \sigma(v) \left(\frac{u - \mu(u)}{\sigma(u)}\right) +
+\mu(v)
 $$</span>
 本质上为重新着色的操作，将一个图像的风格转移到另一个图像上。</p>
 <h4 id="stylegan">StyleGAN</h4>
@@ -577,29 +571,30 @@ class="math inline"><em>p</em>(<em>x</em>)</span>，生成与训练数据类似�
 - <strong>生成新数据</strong>：例如生成图像、文本或音频。 -
 <strong>学习潜在表示</strong>：将高维数据映射到低维潜在空间，同时保持数据的语义特征。
 - <strong>概率建模</strong>：显式定义数据的生成过程<span
-class="math inline">$p\_{\\theta} (x|z)$</span>，并引入潜在变量<span
+class="math inline"><em>p</em><sub><em>θ</em></sub>(<em>x</em>|<em>z</em>)</span>，并引入潜在变量<span
 class="math inline"><em>z</em></span>表示数据的隐含因素</p>
 <p>在VAE中，我们引入一个潜在变量 <span
 class="math inline"><em>z</em></span>，假设数据 <span
 class="math inline"><em>x</em></span> 是由某个先验分布 <span
-class="math inline">$p\_\\theta(z)$</span> 生成，然后通过条件分布 <span
-class="math inline">$p\_\\theta(x|z)$</span> 生成可观测数据 <span
-class="math inline"><em>x</em></span>。 <span class="math display">$$
-p\_\\theta (x) = \\int p\_\\theta(x|z) p\_\\theta(z) \\, \\mathrm{d}z
-$$</span> <span
+class="math inline"><em>p</em><sub><em>θ</em></sub>(<em>z</em>)</span>
+生成，然后通过条件分布 <span
+class="math inline"><em>p</em><sub><em>θ</em></sub>(<em>x</em>|<em>z</em>)</span>
+生成可观测数据 <span class="math inline"><em>x</em></span>。 <span
+class="math display"><em>p</em><sub><em>θ</em></sub>(<em>x</em>) = ∫<em>p</em><sub><em>θ</em></sub>(<em>x</em>|<em>z</em>)<em>p</em><sub><em>θ</em></sub>(<em>z</em>) d<em>z</em></span>
+<span
 class="math inline"><em>z</em></span>的分布是一个高斯分布，对于<span
 class="math inline"><em>z</em></span>采样得到的实例，通过一个网络生成<span
 class="math inline"><em>x</em></span>。困难在于上面的反常积分，这是一个高维积分，不可行。可以使用<em>蒙特卡洛</em>。</p>
 <p>对于后验分布： <span class="math display">$$
-p\_\\theta(z|x) = \\frac{p\_\\theta(x|z) p\_\\theta(z)}{p\_\\theta(x)}
+p_\theta(z|x) = \frac{p_\theta(x|z) p_\theta(z)}{p_\theta(x)}
 $$</span>
 在积分中是经常使用的，但是计算是NP-hard的，因此引入<strong>变分推断</strong>，通过优化下界（ELBO）间接逼近。直接求后验往往是不可行的。因此，我们用<strong>变分推断</strong>的方式，去学习一个近似后验分布<span
-class="math inline">$q\_{\\phi}(z∣x)$</span>，并用它来逼近真正的后验分布<span
-class="math inline">$p\_{\\theta}(z∣x)$</span>，从而得到一个变分下界。</p>
+class="math inline"><em>q</em><sub><em>ϕ</em></sub>(<em>z</em> ∣ <em>x</em>)</span>，并用它来逼近真正的后验分布<span
+class="math inline"><em>p</em><sub><em>θ</em></sub>(<em>z</em> ∣ <em>x</em>)</span>，从而得到一个变分下界。</p>
 <p>变分的意思为变量的替换，在概率中为分布率的替换。
 对于这个问题，可以使用一个神经网络来实现，对于这种显式的分布，需要假设分布率，可以指定为高斯分布，用网络来学习均值和协方差，作为<em>Encoder
 Network</em>。 对于条件分布<span
-class="math inline">$p\_\\theta(x|z)$</span>，也可以假定为高斯分布，这样可以计算均值和协方差，作为<em>Decoder
+class="math inline"><em>p</em><sub><em>θ</em></sub>(<em>x</em>|<em>z</em>)</span>，也可以假定为高斯分布，这样可以计算均值和协方差，作为<em>Decoder
 Network</em>。</p>
 <figure>
 <img src="/images/Pasted%20image%2020250330161028.png" srcset="/img/loading.gif" lazyload
@@ -609,9 +604,9 @@ alt="Pasted image 20250330161028.png" />
 </figure>
 <p>但是VAE是<em>Intractable</em>的，这个问题是NP-hard的。对于上面的条件概率，是比较困难的。所以采用一个近似的方法来进行求解。比如假设服从一个高斯分布，之后计算这个分布的均值和协方差矩阵。</p>
 <h4 id="elbo-evidence-lower-bound">ELBO: Evidence Lower Bound</h4>
-<p>训练的目的是使得<span class="math inline">$\\log p\_\\theta
-(x\_i)$</span>尽可能大，但是很难计算，这里引入“参考系”，也就是引入一个近似的分布<span
-class="math inline">$q\_\\phi(z|x\_i)$</span>。</p>
+<p>训练的目的是使得<span
+class="math inline">log <em>p</em><sub><em>θ</em></sub>(<em>x</em><sub><em>i</em></sub>)</span>尽可能大，但是很难计算，这里引入“参考系”，也就是引入一个近似的分布<span
+class="math inline"><em>q</em><sub><em>ϕ</em></sub>(<em>z</em>|<em>x</em><sub><em>i</em></sub>)</span>。</p>
 <figure>
 <img src="/images/Pasted%20image%2020250330164549.png" srcset="/img/loading.gif" lazyload
 alt="Pasted image 20250330164549.png" />
@@ -619,10 +614,7 @@ alt="Pasted image 20250330164549.png" />
 20250330164549.png</figcaption>
 </figure>
 <p>这里是将最大化似然的过程简化为最大化ELBO的过程。 <span
-class="math display">$$
-\\log p\_\\theta (x\_i) = \\mathbb{E}\_{q\_\\phi(z|x\_i)} \\left\[ \\log
-p\_\\theta(x\_i|z) \\right\] - KL (q\_\\phi(z|x\_i) || p\_\\theta(z))
-$$</span></p>
+class="math display">log <em>p</em><sub><em>θ</em></sub>(<em>x</em><sub><em>i</em></sub>) = 𝔼<sub><em>q</em><sub><em>ϕ</em></sub>(<em>z</em>|<em>x</em><sub><em>i</em></sub>)</sub>[log <em>p</em><sub><em>θ</em></sub>(<em>x</em><sub><em>i</em></sub>|<em>z</em>)] − <em>K</em><em>L</em>(<em>q</em><sub><em>ϕ</em></sub>(<em>z</em>|<em>x</em><sub><em>i</em></sub>)||<em>p</em><sub><em>θ</em></sub>(<em>z</em>))</span></p>
 <h4 id="reparameterization-trick">Reparameterization Trick</h4>
 <figure>
 <img src="/images/Pasted%20image%2020250403144444.png" srcset="/img/loading.gif" lazyload
@@ -632,16 +624,15 @@ alt="Pasted image 20250403144444.png" />
 </figure>
 <p>在VAE的训练过程中，通常需要从潜在变量的分布中采样。直接从分布中采样可能导致梯度无法传播到编码器网络，因此引入了重参数化技巧。
 这是的采样变量是<span
-class="math inline">$\\epsilon$</span>，这样的话采样的过程就在计算图的旁路上，这样就可以进行梯度的传播。
+class="math inline"><em>ϵ</em></span>，这样的话采样的过程就在计算图的旁路上，这样就可以进行梯度的传播。
 #### VAE Inference</p>
 <p>在训练的时候是从<span
 class="math inline"><em>x</em></span>中采样得到的，然后由后验分布<span
-class="math inline">$q\_\\phi(z|x)$</span>来进行采样。而在推理过程中，是从潜在变量<span
+class="math inline"><em>q</em><sub><em>ϕ</em></sub>(<em>z</em>|<em>x</em>)</span>来进行采样。而在推理过程中，是从潜在变量<span
 class="math inline"><em>z</em></span>中采样得到的，然后由条件分布<span
-class="math inline">$p\_\\theta(x|z)$</span>来进行进行推理。
+class="math inline"><em>p</em><sub><em>θ</em></sub>(<em>x</em>|<em>z</em>)</span>来进行进行推理。
 上述过程的合理性在于目标函数ELBO中的第二项：<span
-class="math inline">$KL (q\_\\phi(z|x\_i) ||
-p\_\\theta(z))$</span>在训练中被最小化了。</p>
+class="math inline"><em>K</em><em>L</em>(<em>q</em><sub><em>ϕ</em></sub>(<em>z</em>|<em>x</em><sub><em>i</em></sub>)||<em>p</em><sub><em>θ</em></sub>(<em>z</em>))</span>在训练中被最小化了。</p>
 <figure>
 <img src="/images/Pasted%20image%2020250403152841.png" srcset="/img/loading.gif" lazyload
 alt="Pasted image 20250403152841.png" />
@@ -657,46 +648,43 @@ Probabilistic Models</h4>
 <p>Diffusion模型是通过对数据进行逐步添加噪声来训练模型的。通过对数据进行逐步添加噪声，然后再通过一个网络来进行去噪声的操作。这样可以生成新的数据。</p>
 <p>Markovian Process: 逐步添加噪声的过程，通常是一个高斯分布的过程。
 <span class="math display">$$
-q(x\_t | x\_{t-1}) = \\mathcal{N}(x\_t; \\sqrt{1-\\beta\_t}  x\_{t-1},
-\\beta\_t I)
+q(x_t | x_{t-1}) = \mathcal{N}(x_t; \sqrt{1-\beta_t}  x_{t-1}, \beta_t
+I)
 $$</span> 联合分布： <span class="math display">$$
-q(x\_{1:T} | x\_0) = \\prod\_{t=1}^{T} q(x\_t | x\_{t-1})
+q(x_{1:T} | x_0) = \prod_{t=1}^{T} q(x_t | x_{t-1})
 $$</span></p>
 <p>重参数化表达： <span class="math display">$$
-x\_t = \\sqrt{1-\\beta\_t} x\_{t-1} + \\sqrt{\\beta\_t} \\epsilon \\quad
-\\epsilon \\sim \\mathcal{N}(0, I)
+x_t = \sqrt{1-\beta_t} x_{t-1} + \sqrt{\beta_t} \epsilon \quad \epsilon
+\sim \mathcal{N}(0, I)
 $$</span></p>
 <h5 id="diffusion-kernel">Diffusion Kernel</h5>
 <p><span class="math display">$$
-\\begin{aligned}
-x\_t &amp; = \\sqrt{1-\\beta\_t} x\_{t-1} + \\sqrt{\\beta\_t} \\epsilon
-\\\\
-&amp;= \\sqrt{\\alpha\_t} x\_{t-1} + \\sqrt{1-\\alpha\_t} \\epsilon \\\\
-&amp;= \\sqrt{\\alpha\_t \\alpha\_{t-1}} x\_{t-2} + \\sqrt{1-\\alpha\_t}
-\\epsilon + \\sqrt{\\alpha\_t} \\sqrt{1-\\alpha\_{t-1}} \\epsilon' \\\\
-&amp; = \\sqrt{\\alpha\_t \\alpha\_{t-1}} x\_{t-2} + \\sqrt{1
--  \\alpha\_t \\alpha\_{t-1}} \\epsilon \\\\
-&amp; \\dots \\\\
-&amp; = \\sqrt{\\overline{\\alpha\_t}} x\_0 + \\sqrt{1 -
-\\overline{\\alpha\_t}} \\epsilon
-\\end{aligned}
-$$</span> - 其中 <span class="math inline">$\\overline{\\alpha\_t} =
-\\prod\_{s=1}^{t} \\alpha\_s$</span></p>
+\begin{aligned}
+x_t &amp; = \sqrt{1-\beta_t} x_{t-1} + \sqrt{\beta_t} \epsilon \\
+&amp;= \sqrt{\alpha_t} x_{t-1} + \sqrt{1-\alpha_t} \epsilon \\
+&amp;= \sqrt{\alpha_t \alpha_{t-1}} x_{t-2} + \sqrt{1-\alpha_t} \epsilon
++ \sqrt{\alpha_t} \sqrt{1-\alpha_{t-1}} \epsilon' \\
+&amp; = \sqrt{\alpha_t \alpha_{t-1}} x_{t-2} + \sqrt{1 -  \alpha_t
+\alpha_{t-1}} \epsilon \\
+&amp; \dots \\
+&amp; = \sqrt{\overline{\alpha_t}} x_0 + \sqrt{1 - \overline{\alpha_t}}
+\epsilon
+\end{aligned}
+$$</span> - 其中 <span class="math inline">$\overline{\alpha_t} =
+\prod_{s=1}^{t} \alpha_s$</span></p>
 <h5 id="generation-by-denoising">Generation by Denoising</h5>
 <ul>
 <li>首先对于<span
-class="math inline"><em>x</em>_<em>T</em></span>进行采样，得到一个高斯分布的样本。</li>
+class="math inline"><em>x</em><sub><em>T</em></sub></span>进行采样，得到一个高斯分布的样本。</li>
 <li>然后利用后验分布得到<span
-class="math inline"><em>x</em>_<em>t</em> − 1</span>，使用Bayes公式：
-<span class="math inline">$x\_{t-1} \\sim q(x\_{t-1}|x\_t) \\propto
-q(x\_{t-1}) q(x\_t |x\_{t-1})$</span></li>
+class="math inline"><em>x</em><sub><em>t</em> − 1</sub></span>，使用Bayes公式：
+<span
+class="math inline"><em>x</em><sub><em>t</em> − 1</sub> ∼ <em>q</em>(<em>x</em><sub><em>t</em> − 1</sub>|<em>x</em><sub><em>t</em></sub>) ∝ <em>q</em>(<em>x</em><sub><em>t</em> − 1</sub>)<em>q</em>(<em>x</em><sub><em>t</em></sub>|<em>x</em><sub><em>t</em> − 1</sub>)</span></li>
 </ul>
-<p>采用一个变分方法来实现： <span class="math display">$$
-p\_{\\theta}(x\_{t-1}|x\_t) = \\mathcal{N} \\left(x\_{t-1};
-\\mu\_{\\theta}(x\_t, t), \\sigma\_t^2 \\mathbf{I} \\right)
-$$</span> <span class="math display">$$
-p\_\\theta(x\_{0:T}) = p\_\\theta (x\_T)\\prod\_{t=1}^{T}
-p\_\\theta(x\_{t-1}|x\_t)
+<p>采用一个变分方法来实现： <span
+class="math display"><em>p</em><sub><em>θ</em></sub>(<em>x</em><sub><em>t</em> − 1</sub>|<em>x</em><sub><em>t</em></sub>) = 𝒩(<em>x</em><sub><em>t</em> − 1</sub>; <em>μ</em><sub><em>θ</em></sub>(<em>x</em><sub><em>t</em></sub>, <em>t</em>), <em>σ</em><sub><em>t</em></sub><sup>2</sup><strong>I</strong>)</span>
+<span class="math display">$$
+p_\theta(x_{0:T}) = p_\theta (x_T)\prod_{t=1}^{T} p_\theta(x_{t-1}|x_t)
 $$</span></p>
 <p>上述过程可以使用一个网络来实现对于均值和方差的输出。</p>
 <figure>
@@ -739,7 +727,7 @@ alt="Pasted image 20250405161801.png" />
 <ul>
 <li>通过设计一个新的前向采样过程来加速采样。</li>
 <li>通过引入一个新的参数<span
-class="math inline">$\\alpha\_t$</span>来控制前向采样的过程。</li>
+class="math inline"><em>α</em><sub><em>t</em></sub></span>来控制前向采样的过程。</li>
 <li>通过设计一个新的后验分布来进行采样。</li>
 <li>通过设计一个新的损失函数来进行训练。</li>
 <li><figure>
@@ -856,9 +844,9 @@ alt="Pasted image 20250405164110.png" />
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-6/" title="Deep Learning Lecture-6">
+                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-4/" title="Deep Learning Lecture-4">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Deep Learning Lecture-6</span>
+                        <span class="hidden-mobile">Deep Learning Lecture-4</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -866,8 +854,8 @@ alt="Pasted image 20250405164110.png" />
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-8/" title="Deep Learning Lecture-8">
-                        <span class="hidden-mobile">Deep Learning Lecture-8</span>
+                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-6/" title="Deep Learning Lecture-6">
+                        <span class="hidden-mobile">Deep Learning Lecture-6</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

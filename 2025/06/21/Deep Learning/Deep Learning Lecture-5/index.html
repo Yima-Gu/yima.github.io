@@ -46,7 +46,7 @@
 <meta property="og:image" content="https://yima-gu.github.io/images/Pasted%20image%2020250323090740.png">
 <meta property="og:image" content="https://yima-gu.github.io/images/Pasted%20image%2020250323092327.png">
 <meta property="article:published_time" content="2025-06-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-03T09:09:25.527Z">
+<meta property="article:modified_time" content="2025-07-03T09:17:14.587Z">
 <meta property="article:author" content="Yima Gu">
 <meta property="article:tag" content="DeepLearning">
 <meta name="twitter:card" content="summary_large_image">
@@ -243,7 +243,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4k 字
+          3.9k 字
         
       </span>
     
@@ -254,7 +254,7 @@
         
         
         
-          34 分钟
+          33 分钟
         
       </span>
     
@@ -304,20 +304,19 @@
 <p><strong>Local
 Dependency</strong>：对于一个序列中的每一个元素，它的预测是依赖于它的前面的元素的。这种依赖关系是<strong>局部的</strong>。</p>
 <p><span class="math display">$$
-P(x\_1,x\_2,\\dots,x\_T) = \\prod\_{t=1}^{T}
-P(x\_t|x\_1,\\dots,x\_{t-1}) =
-\\prod\_{t=1}^{T} g(s\_{t-2},x\_{t-1})
+P(x_1,x_2,\dots,x_T) = \prod_{t=1}^{T} P(x_t|x_1,\dots,x_{t-1}) =
+\prod_{t=1}^{T} g(s_{t-2},x_{t-1})
 $$</span></p>
 <p>如果引入马尔科夫性，那么损失的信息太多了。因此我们引入一个隐藏状态<span
-class="math inline"><em>s</em>_<em>t</em></span>，<span
-class="math inline"><em>s</em>_<em>t</em></span>的信息是前面的元素的信息的一个编码。
+class="math inline"><em>s</em><sub><em>t</em></sub></span>，<span
+class="math inline"><em>s</em><sub><em>t</em></sub></span>的信息是前面的元素的信息的一个编码。
 假设第<span
 class="math inline"><em>t</em></span>时间的元素的信息都被编码到了<span
-class="math inline"><em>s</em>_<em>t</em> − 2</span>和<span
-class="math inline"><em>x</em>_<em>t</em> − 1</span>中，<span
-class="math inline"><em>s</em>_<em>t</em> − 2</span>是一个向量，<span
+class="math inline"><em>s</em><sub><em>t</em> − 2</sub></span>和<span
+class="math inline"><em>x</em><sub><em>t</em> − 1</sub></span>中，<span
+class="math inline"><em>s</em><sub><em>t</em> − 2</sub></span>是一个向量，<span
 class="math inline"><em>g</em></span>是一个函数，<span
-class="math inline"><em>s</em>_<em>t</em> − 2</span>是一个隐藏状态。我们认为时间上也存在一个感受野。这个思考过程和人也是类似的，在处理序列问题时，也保存早些时候的一些信息。</p>
+class="math inline"><em>s</em><sub><em>t</em> − 2</sub></span>是一个隐藏状态。我们认为时间上也存在一个感受野。这个思考过程和人也是类似的，在处理序列问题时，也保存早些时候的一些信息。</p>
 <p>另外也有时间上的<strong>平稳性假设</strong>，这个假设是人工智能能预测未来的理论基础。本质是时间上的独立同分布假设。</p>
 <h4 id="parametric-sharing">Parametric Sharing</h4>
 <p>不同时刻使用的参数是一样的，这样可以大大降低参数量。这样的模型是<strong>循环神经网络</strong>。</p>
@@ -339,29 +338,29 @@ alt="Pasted image 20250321083321.png" />
 </figure>
 <p>循环神经网络中最重要的内容是中间的隐藏层，构建学习到的时间程度上的特征。在每个时刻输入的都是向量，称为<em>token
 embedding</em>。 上述模型在纵向方向上，从<span
-class="math inline"><em>x</em>_<em>t</em></span>到<span
-class="math inline"><em>y</em>_<em>t</em></span>就是一个前馈网络<em>feedforward
+class="math inline"><em>x</em><sub><em>t</em></sub></span>到<span
+class="math inline"><em>y</em><sub><em>t</em></sub></span>就是一个前馈网络<em>feedforward
 network</em>（包括MLP和CNN）。在横向方向上，从<span
-class="math inline"><em>s</em>_<em>t</em> − 1</span>到<span
-class="math inline"><em>s</em>_<em>t</em></span>就是一个循环网络<em>recurrent
+class="math inline"><em>s</em><sub><em>t</em> − 1</sub></span>到<span
+class="math inline"><em>s</em><sub><em>t</em></sub></span>就是一个循环网络<em>recurrent
 network</em>。 #### Recurrent Layer <span
-class="math inline"><em>h</em>_<em>t</em></span>用来编码<span
+class="math inline"><em>h</em><sub><em>t</em></sub></span>用来编码<span
 class="math inline"><em>t</em></span>时刻之前的所有信息。对于这样的层，接受的输入是<span
-class="math inline"><em>x</em>_<em>t</em></span>和<span
-class="math inline"><em>h</em>_<em>t</em> − 1</span>，输出是<span
-class="math inline"><em>h</em>_<em>t</em></span>。<span
-class="math inline"><em>h</em>_<em>t</em></span>的计算公式如下： <span
-class="math display"><em>h</em>_<em>t</em> = <em>f</em>_<em>W</em>(<em>h</em>_<em>t</em> − 1, <em>x</em>_<em>t</em>)</span>
-<span class="math display">$$
-h\_t = \\tanh (Wh\_{t-1} + Ux\_t)
-$$</span>
+class="math inline"><em>x</em><sub><em>t</em></sub></span>和<span
+class="math inline"><em>h</em><sub><em>t</em> − 1</sub></span>，输出是<span
+class="math inline"><em>h</em><sub><em>t</em></sub></span>。<span
+class="math inline"><em>h</em><sub><em>t</em></sub></span>的计算公式如下：
+<span
+class="math display"><em>h</em><sub><em>t</em></sub> = <em>f</em><sub><em>W</em></sub>(<em>h</em><sub><em>t</em> − 1</sub>, <em>x</em><sub><em>t</em></sub>)</span>
+<span
+class="math display"><em>h</em><sub><em>t</em></sub> = tanh (<em>W</em><em>h</em><sub><em>t</em> − 1</sub> + <em>U</em><em>x</em><sub><em>t</em></sub>)</span>
 长期以来使用的是双曲正切作为激活函数，但是使用ReLu可能有更好的梯度性质。
 <span
-class="math display"><em>y</em>_<em>t</em> = <em>V</em><em>h</em>_<em>t</em></span>
+class="math display"><em>y</em><sub><em>t</em></sub> = <em>V</em><em>h</em><sub><em>t</em></sub></span>
 可以认为<span
-class="math inline"><em>h</em>_<em>t</em></span>包含了之前的所有信息，所以使用<span
-class="math inline"><em>h</em>_<em>t</em></span>来预测<span
-class="math inline"><em>y</em>_<em>t</em></span>。<strong>通过引入状态变量来使得递推公式在形式上是二阶依赖。</strong></p>
+class="math inline"><em>h</em><sub><em>t</em></sub></span>包含了之前的所有信息，所以使用<span
+class="math inline"><em>h</em><sub><em>t</em></sub></span>来预测<span
+class="math inline"><em>y</em><sub><em>t</em></sub></span>。<strong>通过引入状态变量来使得递推公式在形式上是二阶依赖。</strong></p>
 <h4 id="bidirectionaldeep-rnn">Bidirectional&amp;Deep RNN</h4>
 <figure>
 <img src="/images/Pasted%20image%2020250321091923.png" srcset="/img/loading.gif" lazyload
@@ -377,16 +376,16 @@ alt="Pasted image 20250321091936.png" />
 </figure>
 <p>这里纵向方向上的前馈网络中的训练难点在前面的MLP与CNN中是一样的，梯度消失和梯度爆炸。
 上面的图中的<span
-class="math inline"><em>y</em>_<em>t</em>, <em>c</em></span>是真是标签的独热编码，<span
+class="math inline"><em>y</em><sub><em>t</em>, <em>c</em></sub></span>是真是标签的独热编码，<span
 class="math inline"><em>C</em></span>是此表中的元素个数。</p>
 <p>在横向方向上，梯度消失是很严重的。因为<span
-class="math inline"><em>h</em>_<em>t</em></span>包含了<span
-class="math inline"><em>h</em>_<em>t</em> − 1</span>的信息，所以梯度会在时间上指数级的衰减。解决这个问题的方法是<strong>LSTM</strong>和<strong>GRU</strong>。</p>
+class="math inline"><em>h</em><sub><em>t</em></sub></span>包含了<span
+class="math inline"><em>h</em><sub><em>t</em> − 1</sub></span>的信息，所以梯度会在时间上指数级的衰减。解决这个问题的方法是<strong>LSTM</strong>和<strong>GRU</strong>。</p>
 <h4 id="rnn-for-lm">RNN for LM</h4>
 <ul>
 <li>理论上，可以表达没有边界的时间上的依赖，由于将状态变量编码为<span
-class="math inline"><em>h</em>_<em>t</em></span>，<span
-class="math inline"><em>h</em>_<em>t</em></span>包含了之前的所有信息。</li>
+class="math inline"><em>h</em><sub><em>t</em></sub></span>，<span
+class="math inline"><em>h</em><sub><em>t</em></sub></span>包含了之前的所有信息。</li>
 <li>将序列编码到一个向量中，这个向量包含了整个序列的信息。</li>
 <li>参数在时间上是共享的</li>
 <li>但是在实际上，很难建模时间上的长时间依赖。对于较早的信息，后面的权重会很小。</li>
@@ -415,13 +414,13 @@ alt="Pasted image 20250321110238.png" />
 20250321110238.png</figcaption>
 </figure>
 <p><em>为什么上述序列中的参数<span
-class="math inline"><em>W</em>_1</span>和<span
-class="math inline"><em>W</em>_2</span>是不一样的？</em></p>
+class="math inline"><em>W</em><sub>1</sub></span>和<span
+class="math inline"><em>W</em><sub>2</sub></span>是不一样的？</em></p>
 <p>首先将输入变量<span
-class="math inline">$\\{x\_t\\}$</span>编码到状态变量<span
-class="math inline">$\\{h\_t\\}$</span>中，然后再将状态变量<span
-class="math inline">$\\{h\_t\\}$</span>解码到输出变量<span
-class="math inline">$\\{y\_t\\}$</span>中。编码器是没有loss
+class="math inline">{<em>x</em><sub><em>t</em></sub>}</span>编码到状态变量<span
+class="math inline">{<em>h</em><sub><em>t</em></sub>}</span>中，然后再将状态变量<span
+class="math inline">{<em>h</em><sub><em>t</em></sub>}</span>解码到输出变量<span
+class="math inline">{<em>y</em><sub><em>t</em></sub>}</span>中。编码器是没有loss
 function的，因为输入和输出是异构的。解码器接受的输入是编码器的输出，解码器的输出是一个概率分布。解码器的loss
 function是交叉熵损失函数。</p>
 <p><strong>机器翻译任务中的挑战</strong>： - 输入和输出是异构的 -
@@ -449,17 +448,16 @@ alt="Pasted image 20250321133148.png" />
 20250321133148.png</figcaption>
 </figure>
 <p><span class="math display">$$
-\\frac{\\partial L}{\\partial U}  = \\sum\_{t=0}^T \\frac{\\partial
-L\_{t}}{\\partial U} = \\sum\_{t=0}^{T} \\sum\_{s=0}^t \\frac{\\partial
-L\_{t}}{\\partial y\_t} \\frac{\\partial y\_t}{\\partial
-h\_t}  \\frac{\\partial h\_t}{\\partial h\_s}\\frac{\\partial
-h\_s}{\\partial U}
+\frac{\partial L}{\partial U}  = \sum_{t=0}^T \frac{\partial
+L_{t}}{\partial U} = \sum_{t=0}^{T} \sum_{s=0}^t \frac{\partial
+L_{t}}{\partial y_t} \frac{\partial y_t}{\partial h_t}  \frac{\partial
+h_t}{\partial h_s}\frac{\partial h_s}{\partial U}
 $$</span>
 前一个求和的意义是对于损失函数的各个部分求和，后面的求和式是对于<span
-class="math inline"><em>h</em>_<em>t</em></span>的前面的每一个可能的链求和。
+class="math inline"><em>h</em><sub><em>t</em></sub></span>的前面的每一个可能的链求和。
 其中： <span class="math display">$$
-\\frac{\\partial h\_t}{\\partial h\_s} = \\prod\_{i=s+1}^t
-\\frac{\\partial h\_i}{\\partial h\_{i-1}}
+\frac{\partial h_t}{\partial h_s} = \prod_{i=s+1}^t \frac{\partial
+h_i}{\partial h_{i-1}}
 $$</span>
 这个式子是一个矩阵乘法，是一个矩阵的连乘。这个矩阵是一个雅可比矩阵。</p>
 <figure>
@@ -470,16 +468,16 @@ alt="Pasted image 20250321135457.png" />
 </figure>
 <p>用<em>Cauchy-Schwarz</em>不等式可以证明： <span
 class="math display">$$
-\\| \\frac{\\partial h\_t}{\\partial h\_{t-1}} \\| \\leq \\| W^T \\|
-\\|diag (f'(h\_{t-1}))\\| \\leq \\sigma\_{max} \\gamma
+\| \frac{\partial h_t}{\partial h_{t-1}} \| \leq \| W^T \| \|diag
+(f'(h_{t-1}))\| \leq \sigma_{max} \gamma
 $$</span> 这里<span
-class="math inline">$\\sigma\_{max}$</span>是矩阵<span
+class="math inline"><em>σ</em><sub><em>m</em><em>a</em><em>x</em></sub></span>是矩阵<span
 class="math inline"><em>W</em></span>的最大奇异值，<span
-class="math inline">$\\gamma$</span>是激活函数的导数的最大值。 于是：
+class="math inline"><em>γ</em></span>是激活函数的导数的最大值。 于是：
 <span class="math display">$$
-\\| \\frac{\\partial h\_t}{\\partial h\_{s}} \\| =  \\prod\_{i=s+1}^t
-\\| \\frac{\\partial h\_i}{\\partial h\_{i-1}} \\| \\leq (\\sigma\_{max}
-\\gamma)^{t-s}
+\| \frac{\partial h_t}{\partial h_{s}} \| =  \prod_{i=s+1}^t \|
+\frac{\partial h_i}{\partial h_{i-1}} \| \leq (\sigma_{max}
+\gamma)^{t-s}
 $$</span>
 这个式子说明了梯度消失的问题，梯度消失是指梯度在时间上的指数级衰减。或者梯度爆炸的问题，梯度爆炸是指梯度在时间上的指数级增长。</p>
 <h4 id="truncated-bptt">Truncated BPTT</h4>
@@ -501,17 +499,17 @@ alt="Pasted image 20250321140454.png" />
 src="/images/Pasted%20image%2020250321141243.png" srcset="/img/loading.gif" lazyload
 alt="Pasted image 20250321141243.png" /> <span
 class="math inline"><em>t</em></span>时刻的状态变量<span
-class="math inline"><em>h</em>_<em>t</em></span>储存的是<span
+class="math inline"><em>h</em><sub><em>t</em></sub></span>储存的是<span
 class="math inline"><em>t</em></span>时刻的信息，<span
-class="math inline"><em>c</em>_<em>t</em></span>是<span
+class="math inline"><em>c</em><sub><em>t</em></sub></span>是<span
 class="math inline"><em>t</em></span>时刻的记忆变量，<span
-class="math inline"><em>h</em>_<em>t</em> − 1</span>和<span
-class="math inline"><em>x</em>_<em>t</em></span>是<span
+class="math inline"><em>h</em><sub><em>t</em> − 1</sub></span>和<span
+class="math inline"><em>x</em><sub><em>t</em></sub></span>是<span
 class="math inline"><em>t</em></span>时刻的输入，<span
-class="math inline"><em>f</em>_<em>t</em></span>是遗忘门，<span
-class="math inline"><em>i</em>_<em>t</em></span>是输入门，<span
-class="math inline"><em>o</em>_<em>t</em></span>是输出门，<span
-class="math inline"><em>g</em>_<em>t</em></span>是更新门。</li>
+class="math inline"><em>f</em><sub><em>t</em></sub></span>是遗忘门，<span
+class="math inline"><em>i</em><sub><em>t</em></sub></span>是输入门，<span
+class="math inline"><em>o</em><sub><em>t</em></sub></span>是输出门，<span
+class="math inline"><em>g</em><sub><em>t</em></sub></span>是更新门。</li>
 </ul>
 <p><img src="/images/Pasted%20image%2020250321141234.png" srcset="/img/loading.gif" lazyload
 alt="Pasted image 20250321141234.png" />
@@ -539,13 +537,13 @@ class="math inline"><em>C</em></span>个通道上进行归一化操作。
 最后得到的结果是：将所有的向量放在以原点为球心的单位球面上。</p>
 <h4 id="weight-normalization">Weight Normalization</h4>
 <p>对于每层的参数<span
-class="math inline">$\\mathbf{w}$</span>进行重参数化： <span
+class="math inline"><strong>w</strong></span>进行重参数化： <span
 class="math display">$$
-\\mathbf{w} = \\frac{g}{\\|v\\|}v
+\mathbf{w} = \frac{g}{\|v\|}v
 $$</span> <img src="/images/Pasted%20image%2020250322204925.png" srcset="/img/loading.gif" lazyload
 alt="Pasted image 20250322204925.png" /></p>
 <p>对右边的式子<span
-class="math inline">$\\frac{v}{\\|v\\|}$</span>进行优化是更为容易的，重参数化的意思是，在训练和测试的时候使用不同的参数表达形式，这样是更加容易优化的。</p>
+class="math inline">$\frac{v}{\|v\|}$</span>进行优化是更为容易的，重参数化的意思是，在训练和测试的时候使用不同的参数表达形式，这样是更加容易优化的。</p>
 <h4 id="training-inference-shift">Training-Inference Shift</h4>
 <p>滚动预测：在训练的时候，使用真实的标签进行预测；在测试的时候，使用的是推理得到的值进行预测。这是一个自回归任务。</p>
 <h5 id="curriculum-learning">Curriculum Learning</h5>
@@ -587,31 +585,31 @@ alt="Pasted image 20250323084415.png" />
 20250323084415.png</figcaption>
 </figure>
 <p>注意力的分配是符合概率分布的，所以可以使用上面计算得到的相关性<span
-class="math inline"><em>e</em>_<em>i</em><em>j</em></span>使用softmax函数进行归一化。这样得到的分布就是注意力的分布：
+class="math inline"><em>e</em><sub><em>i</em><em>j</em></sub></span>使用softmax函数进行归一化。这样得到的分布就是注意力的分布：
 <span class="math display">$$
-\\alpha\_{ij} = \\frac{\\exp(e\_{ij})}{\\sum\_{k=1}^{T\_x}
-\\exp(e\_{ik})}
+\alpha_{ij} = \frac{\exp(e_{ij})}{\sum_{k=1}^{T_x} \exp(e_{ik})}
 $$</span> 上述计算式表达的含义是，在状态<span
 class="math inline"><em>i</em></span>的时刻分配在<span
 class="math inline"><em>j</em></span>上的注意力（对于<span
 class="math inline"><em>j</em></span>的求和为1）。继续计算<span
-class="math inline"><em>c</em>_<em>i</em></span>： <span
+class="math inline"><em>c</em><sub><em>i</em></sub></span>： <span
 class="math display">$$
-c\_i = \\sum\_{j=1}^{T\_x} \\alpha\_{ij} x\_j
+c_i = \sum_{j=1}^{T_x} \alpha_{ij} x_j
 $$</span> 这里<span
-class="math inline"><em>c</em>_<em>i</em></span>是对于状态<span
+class="math inline"><em>c</em><sub><em>i</em></sub></span>是对于状态<span
 class="math inline"><em>i</em></span>的时刻的注意力向量，是对于<span
 class="math inline"><em>x</em></span>的加权和。 <span
-class="math display"><em>s</em>_<em>i</em> = <em>f</em>(<em>s</em>_<em>i</em> − 1, <em>y</em>_<em>i</em> − 1, <em>c</em>_<em>i</em>)</span>
+class="math display"><em>s</em><sub><em>i</em></sub> = <em>f</em>(<em>s</em><sub><em>i</em> − 1</sub>, <em>y</em><sub><em>i</em> − 1</sub>, <em>c</em><sub><em>i</em></sub>)</span>
 这里<span
-class="math inline"><em>s</em>_<em>i</em></span>是状态变量，<span
-class="math inline"><em>y</em>_<em>i</em> − 1</span>是前一个时刻的输出，<span
-class="math inline"><em>c</em>_<em>i</em></span>是当前时刻的注意力向量。这里的函数<span
+class="math inline"><em>s</em><sub><em>i</em></sub></span>是状态变量，<span
+class="math inline"><em>y</em><sub><em>i</em> − 1</sub></span>是前一个时刻的输出，<span
+class="math inline"><em>c</em><sub><em>i</em></sub></span>是当前时刻的注意力向量。这里的函数<span
 class="math inline"><em>f</em></span>是一个GRU or
 LSTM。这个模型是一个<strong>Seq2Seq</strong>模型。</p>
 <blockquote>
-<p>这里的<span class="math inline"><em>c</em>_<em>i</em></span>和<span
-class="math inline"><em>s</em>_<em>i</em></span>的区别是什么，为什么和LSTM有关</p>
+<p>这里的<span
+class="math inline"><em>c</em><sub><em>i</em></sub></span>和<span
+class="math inline"><em>s</em><sub><em>i</em></sub></span>的区别是什么，为什么和LSTM有关</p>
 </blockquote>
 <p><img src="/images/Pasted%20image%2020250323084332.png" srcset="/img/loading.gif" lazyload
 alt="Pasted image 20250323084332.png" /> <img
@@ -626,11 +624,11 @@ Attention引入relevance的思想，能大大减小参数量</p>
 <p>先建模词注意力然后再建模句子注意力。</p>
 <h4 id="global-attention">Global Attention</h4>
 <p><span class="math display">$$
-\\text{score} = \\begin{cases}
-h\_t^T \\overline{h\_s} \\\\
-h\_t^T W\_a \\overline{h\_s} \\\\
-v\_a^T \\tanh(W\_a\[h\_t;\\overline{h\_s}\])
-\\end{cases}
+\text{score} = \begin{cases}
+h_t^T \overline{h_s} \\
+h_t^T W_a \overline{h_s} \\
+v_a^T \tanh(W_a[h_t;\overline{h_s}])
+\end{cases}
 $$</span> 发现上面三种计算方式的效率是差不多的。</p>
 <figure>
 <img src="/images/Pasted%20image%2020250323090740.png" srcset="/img/loading.gif" lazyload
@@ -736,9 +734,9 @@ Memory，是一个外部的存储器，这样的存储是比较稳定的。</p>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-3/" title="Deep Learning Lecture-3">
+                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-6/" title="Deep Learning Lecture-6">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Deep Learning Lecture-3</span>
+                        <span class="hidden-mobile">Deep Learning Lecture-6</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -746,8 +744,8 @@ Memory，是一个外部的存储器，这样的存储是比较稳定的。</p>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-6/" title="Deep Learning Lecture-6">
-                        <span class="hidden-mobile">Deep Learning Lecture-6</span>
+                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-8/" title="Deep Learning Lecture-8">
+                        <span class="hidden-mobile">Deep Learning Lecture-8</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
