@@ -26,11 +26,27 @@
 <meta property="og:site_name" content="Yima Gu\&#39;s Blog">
 <meta property="og:description" content="Convolutional Neural Networks 卷积网络最早是用来处理图像的问题。目前较为成功的研究是物体识别问题，对于物体之间的关系推断依然是计算机视觉的前沿领域。 在生物的研究中，存在感受野receptive field的概念，这是指神经元对于输入的局部区域的敏感程度。在卷积网络中，我们也引入了这个概念。相邻的神经元处理的是相邻的图像区域，这样的设计使得网络能够捕捉到图像的">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yima-gu.github.io/images/%7B71895E3A-0EFA-438D-8E6C-EDBD4A337F5A%7D.png">
+<meta property="og:image" content="https://yima-gu.github.io/images/%7B7202EECA-CD25-4EE1-A5C9-02F0263C968C%7D.png">
+<meta property="og:image" content="https://yima-gu.github.io/images/%7BCFAAFBDA-A81C-4931-9C2C-CBD64F40E29C%7D.png">
+<meta property="og:image" content="https://yima-gu.github.io/images/%7B1197B7EA-3F5B-40C9-8ADF-861B8AACBDC2%7D.png">
+<meta property="og:image" content="https://yima-gu.github.io/images/%7B382F2347-B42F-46CB-83DB-F25DDE49A91E%7D.png">
+<meta property="og:image" content="https://yima-gu.github.io/images/%7B43BF44F4-D211-4165-AE84-257E702582A0%7D.png">
+<meta property="og:image" content="https://yima-gu.github.io/images/%7B6F8AFF72-4C3D-4FAD-8FC9-90F7FED6E8B2%7D.png">
+<meta property="og:image" content="https://yima-gu.github.io/images/%7B39D210C3-7C1B-4913-AC78-12E71A8FD13B%7D.png">
+<meta property="og:image" content="https://yima-gu.github.io/images/%7BE3B121C1-5782-4762-A983-042799DA4ED9%7D.png">
+<meta property="og:image" content="https://yima-gu.github.io/images/%7B6767A6D4-59B6-4B62-9FE9-427D009BB837%7D.png">
+<meta property="og:image" content="https://yima-gu.github.io/images/%7B8F67BE27-E8CA-4921-99B2-C57FFFAE5E7B%7D.png">
+<meta property="og:image" content="https://yima-gu.github.io/images/%7B681C5361-F2ED-427F-86C2-48C9EC68AADF%7D.png">
+<meta property="og:image" content="https://yima-gu.github.io/images/%7B5DE8620F-D5FB-4E82-96D7-0E03CCCCAF82%7D.png">
+<meta property="og:image" content="https://yima-gu.github.io/images/Pasted%20image%2020250316132626.png">
+<meta property="og:image" content="https://yima-gu.github.io/images/Pasted%20image%2020250316134751.png">
 <meta property="article:published_time" content="2025-06-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-03T08:46:42.348Z">
+<meta property="article:modified_time" content="2025-07-03T09:09:25.521Z">
 <meta property="article:author" content="Yima Gu">
 <meta property="article:tag" content="DeepLearning">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://yima-gu.github.io/images/%7B71895E3A-0EFA-438D-8E6C-EDBD4A337F5A%7D.png">
   
   
   
@@ -223,7 +239,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5k 字
+          5.2k 字
         
       </span>
     
@@ -234,7 +250,7 @@
         
         
         
-          42 分钟
+          44 分钟
         
       </span>
     
@@ -282,7 +298,12 @@ Networks</h2>
 <p>在生物的研究中，存在<strong>感受野</strong><em>receptive
 field</em>的概念，这是指神经元对于输入的局部区域的敏感程度。在卷积网络中，我们也引入了这个概念。相邻的神经元处理的是相邻的图像区域，这样的设计使得网络能够捕捉到图像的空间结构。在模拟人类的视觉系统中，重要的是<strong>提取不同程度的特征</strong>，这就是卷积网络的核心思想。</p>
 <p>在MLP中，由于对于原图像像素进行展开，会损失部分的空间信息。在处理视角、光照的变化时，MLP的效果会变差。</p>
-<p>![[{71895E3A-0EFA-438D-8E6C-EDBD4A337F5A}.png]]</p>
+<figure>
+<img src="/images/%7B71895E3A-0EFA-438D-8E6C-EDBD4A337F5A%7D.png" srcset="/img/loading.gif" lazyload
+alt="{71895E3A-0EFA-438D-8E6C-EDBD4A337F5A}.png" />
+<figcaption
+aria-hidden="true">{71895E3A-0EFA-438D-8E6C-EDBD4A337F5A}.png</figcaption>
+</figure>
 <p>从左到右，逐步提取的是从较低到较高的层次特征。在不同的任务中使用不同的特征。在识别人物中，应该使用较高层次的特征。</p>
 <h5 id="local-connectivity">Local Connectivity</h5>
 <p>每一层的神经元只连接到上一层的局部区域。具体的连接方式为：每一个神经元只关注上一层对应区域的部分神经元。</p>
@@ -291,43 +312,47 @@ field</em>的概念，这是指神经元对于输入的局部区域的敏感程�
 <h4 id="convolution">Convolution</h4>
 <p><span class="math inline"><em>f</em></span>是输入的图像，<span
 class="math inline"><em>g</em></span>是卷积核，卷积操作定义为：
-<em>Continuous function</em> : <span
-class="math display">(<em>f</em> * <em>g</em>)(<em>t</em>) = ∫<sub>−∞</sub><sup>∞</sup><em>f</em>(<em>τ</em>)<em>g</em>(<em>t</em> − <em>τ</em>)<em>d</em><em>τ</em></span>
-<em>Discrete function</em> : <span class="math display">$$
-(f*g)[n] = \sum_{m=-\infty}^{\infty} f[m]g[n-m]
+<em>Continuous function</em> : <span class="math display">$$
+(f\*g)(t) = \\int\_{-\\infty}^{\\infty} f(\\tau)g(t-\\tau)d\\tau
+$$</span> <em>Discrete function</em> : <span class="math display">$$
+(f\*g)\[n\] = \\sum\_{m=-\\infty}^{\\infty} f\[m\]g\[n-m\]
 $$</span> 上述操作的目的为对于输入函数</p>
 <h5 id="cross-correlation">Cross Correlation</h5>
 <p>互相关用来分析两个信号的相似性，定义为： <em>Continous function</em>
 : <span class="math display">$$
-(f\star g)(t) = \int_{-\infty}^{\infty} \overline
-{f(\tau)}g(t+\tau)d\tau
+(f\\star g)(t) = \\int\_{-\\infty}^{\\infty} \\overline
+{f(\\tau)}g(t+\\tau)d\\tau
 $$</span> <em>Discrete function</em> : <span class="math display">$$
-(f\star g)[n] = \sum_{m=-\infty}^{\infty} \overline {f[m]}g[n+m]
+(f\\star g)\[n\] = \\sum\_{m=-\\infty}^{\\infty} \\overline
+{f\[m\]}g\[n+m\]
 $$</span> 对于卷积和互相关的关系为： <span class="math display">$$
-[f(t) \star g(t)] (t) = [\overline{f(-t)} * g(t)](t)
+\[f(t) \\star g(t)\] (t) = \[\\overline{f(-t)} \* g(t)\](t)
 $$</span> 事实上，在卷积网络中使用的是互相关操作。</p>
 <h5 id="notation">Notation</h5>
 <ul>
 <li>输入的图片一般为三层，分别为RGB。这个<em>Volume</em>是一个张量<em>Tensor</em>。</li>
-<li>卷积核的大小为<span
-class="math inline">5 × 5 × 3</span>（举例），即3个通道，每个通道大小为<span
-class="math inline">5 × 5</span>。然后在整个图片上进行平移，计算卷积操作。（类似于卷积的定义）</li>
-<li>卷积的计算操作为：卷积核在图片上平移，计算对应位置的乘积和。
-![[{7AC9125F-FA2D-42F9-B0CF-085ABFFB668F}.png]]
+<li>卷积核的大小为<span class="math inline">$5 \\times 5 \\times
+3$</span>（举例），即3个通道，每个通道大小为<span class="math inline">$5
+\\times
+5$</span>。然后在整个图片上进行平移，计算卷积操作。（类似于卷积的定义）</li>
+<li>卷积的计算操作为：卷积核在图片上平移，计算对应位置的乘积和。 <img
+src="/images/%7B7AC9125F-FA2D-42F9-B0CF-085ABFFB668F%7D.png" srcset="/img/loading.gif" lazyload
+alt="{7AC9125F-FA2D-42F9-B0CF-085ABFFB668F}.png" />
 上面的公式是在移动到某个位置<span
 class="math inline">(<em>w</em>, <em>h</em>)</span>的时候，计算对应位置的乘积和。然后将结果存储在一个新的矩阵中。</li>
 </ul>
 <p><em>在实际操作的过程中，并不要将卷积核在图片上“滑动”（这是一个串行算法），可以为每一个为每一个局域来分配一个神经元，这样的操作是并行的，可以加速计算。</em></p>
 <p>得到的是一个Feature Map，这个Feature
 Map是一个新的张量，使用6个卷积核得到的图片的特征图的大小为<span
-class="math inline">28 × 28 × 6</span>。<em>如何计算的？参数量是多少？</em>
+class="math inline">$28 \\times 28 \\times
+6$</span>。<em>如何计算的？参数量是多少？</em>
 使用的卷积核数量是一个超参数，可以调整。</p>
-<p>对于一个<span
-class="math inline"><em>w</em> * <em>h</em> * <em>c</em></span>的输入，使用<span
-class="math inline"><em>k</em> * <em>k</em> * <em>c</em> * <em>d</em></span>个卷积核，得到的输出的特征图的大小为<span
-class="math inline">(<em>w</em> − <em>k</em> + 1) * (<em>h</em> − <em>k</em> + 1) * <em>d</em></span>，参数量为<span
-class="math inline">(<em>k</em> * <em>k</em> * <em>c</em> + 1) * <em>d</em></span>。但是CNN在实践过程中的显存占用是较大的，因为需要存储特征图。</p>
-<p>![[{7202EECA-CD25-4EE1-A5C9-02F0263C968C}.png]] #### Dilated&amp;
+<p>对于一个<span class="math inline">$w\*h\*c$</span>的输入，使用<span
+class="math inline">$k\*k\*c\*d$</span>个卷积核，得到的输出的特征图的大小为<span
+class="math inline">$(w-k+1)\*(h-k+1)\*d$</span>，参数量为<span
+class="math inline">$(k\*k\*c+1)\*d$</span>。但是CNN在实践过程中的显存占用是较大的，因为需要存储特征图。</p>
+<p><img src="/images/%7B7202EECA-CD25-4EE1-A5C9-02F0263C968C%7D.png" srcset="/img/loading.gif" lazyload
+alt="{7202EECA-CD25-4EE1-A5C9-02F0263C968C}.png" /> #### Dilated&amp;
 Stride Convolution</p>
 <p>在卷积操作中，我们可以使用不同的步长来进行卷积操作，这样的操作会改变输出的大小。在Dilated
 Convolution中，我们可以使用不同的扩张率来进行卷积操作。扩张率为1的时候<em>1-dilated</em>是正常的卷积操作，扩张率为2的时候，卷积核的间隔为2
@@ -338,16 +363,22 @@ Convolution中，我们可以使用不同的扩张率来进行卷积操作。扩
 <p>在卷积网络中，激活函数可以使用ReLU函数，这样的操作可以避免梯度消失的问题。有时候使用的是Leaky
 ReLU函数，这样的操作在某些模型中可以减少神经元死亡的问题。 <span
 class="math display">$$
-LeakyReLU(x) = \begin{cases} x &amp; x&gt;0 \\ 0.01x &amp; x \leq 0
-\end{cases}
+LeakyReLU(x) = \\begin{cases} x &amp; x&gt;0 \\\\ 0.01x &amp; x \\leq 0
+\\end{cases}
 $$</span></p>
-<p>![[{CFAAFBDA-A81C-4931-9C2C-CBD64F40E29C}.png]]</p>
+<figure>
+<img src="/images/%7BCFAAFBDA-A81C-4931-9C2C-CBD64F40E29C%7D.png" srcset="/img/loading.gif" lazyload
+alt="{CFAAFBDA-A81C-4931-9C2C-CBD64F40E29C}.png" />
+<figcaption
+aria-hidden="true">{CFAAFBDA-A81C-4931-9C2C-CBD64F40E29C}.png</figcaption>
+</figure>
 <h5 id="pooling">Pooling</h5>
 <p>池化操作一般是用来减少空间尺寸，这样的操作可以减少参数量，减少过拟合的问题。</p>
 <ul>
 <li>Max Pooling：取局部区域的最大值</li>
-<li>Average Pooling：取局部区域的平均值
-![[{01688551-C69C-4B62-8660-637A51409678}.png]]</li>
+<li>Average Pooling：取局部区域的平均值 <img
+src="/images/%7B01688551-C69C-4B62-8660-637A51409678%7D.png" srcset="/img/loading.gif" lazyload
+alt="{01688551-C69C-4B62-8660-637A51409678}.png" /></li>
 </ul>
 <p><strong>Spatial Pyramid
 Pooling</strong>：对于不同的通道进行池化操作，这样的操作可以增加特征的多样性。这是用来减少多尺度问题的。
@@ -356,99 +387,127 @@ Pooling</strong>：对于不同的通道进行池化操作，这样的操作可�
 <p><a
 target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Ilg3gGewQ5U">Backpropagation,
 step-by-step | DL3</a></p>
-<p>![[{1197B7EA-3F5B-40C9-8ADF-861B8AACBDC2}.png]]</p>
+<figure>
+<img src="/images/%7B1197B7EA-3F5B-40C9-8ADF-861B8AACBDC2%7D.png" srcset="/img/loading.gif" lazyload
+alt="{1197B7EA-3F5B-40C9-8ADF-861B8AACBDC2}.png" />
+<figcaption
+aria-hidden="true">{1197B7EA-3F5B-40C9-8ADF-861B8AACBDC2}.png</figcaption>
+</figure>
 <p>在卷积网络的前向传播中每一层的计算公式如下： <span
-class="math display"><em>z</em><sub><em>d</em></sub><sup>(<em>l</em> + 1)</sup> = <em>a</em><sup>(<em>l</em>)</sup> ⋆ <em>θ</em><sub><em>d</em></sub><sup>(<em>l</em>)</sup> + <em>b</em><sub><em>d</em></sub><sup>(<em>l</em>)</sup></span></p>
-<p>在一个具体的例子中，可以计算一个<span
-class="math inline">3 × 3 × 1</span>的图像在经过一个<span
-class="math inline">2 × 2 × 1</span>的卷积核得到的<span
-class="math inline">2 × 2 × 1</span>的特征图的计算过程。</p>
+class="math display">$$
+z\_d^{(l+1)} = a^{(l)}\\star \\theta^{(l)}\_d + b^{(l)}\_d
+$$</span></p>
+<p>在一个具体的例子中，可以计算一个<span class="math inline">$3 \\times
+3 \\times 1$</span>的图像在经过一个<span class="math inline">$2\\times 2
+\\times 1$</span>的卷积核得到的<span class="math inline">$2 \\times 2
+\\times 1$</span>的特征图的计算过程。</p>
 <ul>
 <li>Consider single input channel <span
 class="math inline"><em>c</em> = 1</span> : <span
 class="math display">$$
-\left[\begin{array}{ll}
-z_{11}^{(l+1)} &amp; z_{12}^{(l+1)} \\
-z_{21}^{(l+1)} &amp; z_{22}^{(l+1)}
-\end{array}\right]=\left[\begin{array}{lll}
-a_{11}^{(l)} &amp; a_{12}^{(l)} &amp; a_{13}^{(l)} \\
-a_{21}^{(l)} &amp; a_{22}^{(l)} &amp; a_{23}^{(l)} \\
-a_{31}^{(l)} &amp; a_{32}^{(l)} &amp; a_{33}^{(l)}
-\end{array}\right] \star\left[\begin{array}{ll}
-\theta_{11}^{(l)} &amp; \theta_{12}^{(l)} \\
-\theta_{21}^{(l)} &amp; \theta_{22}^{(l)}
-\end{array}\right]
+\\left\[\\begin{array}{ll}
+z\_{11}^{(l+1)} &amp; z\_{12}^{(l+1)} \\\\
+z\_{21}^{(l+1)} &amp; z\_{22}^{(l+1)}
+\\end{array}\\right\]=\\left\[\\begin{array}{lll}
+a\_{11}^{(l)} &amp; a\_{12}^{(l)} &amp; a\_{13}^{(l)} \\\\
+a\_{21}^{(l)} &amp; a\_{22}^{(l)} &amp; a\_{23}^{(l)} \\\\
+a\_{31}^{(l)} &amp; a\_{32}^{(l)} &amp; a\_{33}^{(l)}
+\\end{array}\\right\] \\star\\left\[\\begin{array}{ll}
+\\theta\_{11}^{(l)} &amp; \\theta\_{12}^{(l)} \\\\
+\\theta\_{21}^{(l)} &amp; \\theta\_{22}^{(l)}
+\\end{array}\\right\]
 $$</span></li>
 <li>Expand above to be clearer: <span class="math display">$$
-\left\{\begin{array}{l}
-z_{11}^{(l+1)}=a_{11}^{(l)} \theta_{11}^{(l)}+a_{12}^{(l)}
-\theta_{12}^{(l)}+a_{21}^{(l)} \theta_{21}^{(l)}+a_{22}^{(l)}
-\theta_{22}^{(l)} \\
-z_{12}^{(l+1)}=a_{12}^{(l)} \theta_{11}^{(l)}+a_{13}^{(l)}
-\theta_{12}^{(l)}+a_{22}^{(l)} \theta_{21}^{(l)}+a_{23}^{(l)}
-\theta_{22}^{(l)} \\
-z_{21}^{(l+1)}=a_{21}^{(l)} \theta_{11}^{(l)}+a_{22}^{(l)}
-\theta_{12}^{(l)}+a_{31}^{(l)} \theta_{21}^{(l)}+a_{32}^{(l)}
-\theta_{22}^{(l)} \\
-z_{22}^{(l+1)}=a_{22}^{(l)} \theta_{11}^{(l)}+a_{23}^{(l)}
-\theta_{12}^{(l)}+a_{32}^{(l)} \theta_{21}^{(l)}+a_{33}^{(l)}
-\theta_{22}^{(l)}
-\end{array}\right.
+\\left\\{\\begin{array}{l}
+z\_{11}^{(l+1)}=a\_{11}^{(l)} \\theta\_{11}^{(l)}+a\_{12}^{(l)}
+\\theta\_{12}^{(l)}+a\_{21}^{(l)} \\theta\_{21}^{(l)}+a\_{22}^{(l)}
+\\theta\_{22}^{(l)} \\\\
+z\_{12}^{(l+1)}=a\_{12}^{(l)} \\theta\_{11}^{(l)}+a\_{13}^{(l)}
+\\theta\_{12}^{(l)}+a\_{22}^{(l)} \\theta\_{21}^{(l)}+a\_{23}^{(l)}
+\\theta\_{22}^{(l)} \\\\
+z\_{21}^{(l+1)}=a\_{21}^{(l)} \\theta\_{11}^{(l)}+a\_{22}^{(l)}
+\\theta\_{12}^{(l)}+a\_{31}^{(l)} \\theta\_{21}^{(l)}+a\_{32}^{(l)}
+\\theta\_{22}^{(l)} \\\\
+z\_{22}^{(l+1)}=a\_{22}^{(l)} \\theta\_{11}^{(l)}+a\_{23}^{(l)}
+\\theta\_{12}^{(l)}+a\_{32}^{(l)} \\theta\_{21}^{(l)}+a\_{33}^{(l)}
+\\theta\_{22}^{(l)}
+\\end{array}\\right.
 $$</span></li>
 </ul>
-对于上述的例子计算残差网络的过程为： $$
-<p>$$</p>
+<p>对于上述的例子计算残差网络的过程为： <span class="math display">$$
+\\begin{aligned}
+\\delta\_{ij}^{(l)} &amp; = \\frac{\\partial J(\\theta,b)}{\\partial
+z\_{ij}^{(l)}}  =  \\frac{\\partial J(\\theta,b)}{\\partial
+a\_{ij}^{(l)}} \\frac{\\partial a\_{ij}^{(l)}}{\\partial
+z^{(l)}\_{ij}}\\\\
+&amp;= \\sum\_{z\_{pq}^{(l+1)} \\in  Pa(a\_{ij}^{(l)})} \\frac{\\partial
+J(\\theta,b)}{\\partial z\_{pq}^{(l+1)}} \\frac{\\partial
+z\_{pq}^{(l+1)}}{\\partial a\_{ij}^{(l)}} \\frac{\\partial
+a\_{ij}^{(l)}}{\\partial z^{(l)}\_{ij}} \\\\
+&amp;= \\sum\_{z\_{pq}^{(l+1)} \\in Pa(a\_{ij}^{(l)}) }
+\\delta\_{pq}^{(l+1)} \\frac{\\partial z\_{pq}^{(l+1)}}{\\partial
+a\_{ij}^{(l)}} g'(z\_{ij}^{(l)})
+\\end{aligned}
+$$</span></p>
 <p>与全连接层的计算公式的不同在于，CNN是一个局部的计算过程，即每一个神经元的输出值并不会对后一层的所有神经元产生影响。</p>
 <p>对于上述计算得到的残差，可以写成一个矩阵： <span
 class="math display">$$
-\delta^{(l)} = \left[\begin{array}{lll}
-\delta_{11}^{(l)} &amp; \cdots &amp; \delta_{1n}^{(l)} \\
-\vdots &amp; \ddots &amp; \vdots \\
-\delta_{m1}^{(l)} &amp; \cdots &amp; \delta_{mn}^{(l)}
-\end{array}\right]
+\\delta^{(l)} = \\left\[\\begin{array}{lll}
+\\delta\_{11}^{(l)} &amp; \\cdots &amp; \\delta\_{1n}^{(l)} \\\\
+\\vdots &amp; \\ddots &amp; \\vdots \\\\
+\\delta\_{m1}^{(l)} &amp; \\cdots &amp; \\delta\_{mn}^{(l)}
+\\end{array}\\right\]
 $$</span> 在上面的例子中，我们可以计算得到： <span
 class="math display">$$
-\left[\begin{array}{lll}
-\delta_{11}^{(l)} &amp; \delta_{12}^{(l)} &amp; \delta_{13}^{(l)} \\
-\delta_{21}^{(l)} &amp; \delta_{22}^{(l)} &amp; \delta_{23}^{(l)} \\
-\delta_{31}^{(l)} &amp; \delta_{32}^{(l)} &amp; \delta_{33}^{(l)}
-\end{array}\right]=\left[\begin{array}{cccc}
-0 &amp; 0 &amp; 0 &amp; 0 \\
-0 &amp; \delta_{11}^{(l+1)} &amp; \delta_{12}^{(l+1)} &amp; 0 \\
-0 &amp; \delta_{21}^{(l+1)} &amp; \delta_{22}^{(l+1)} &amp; 0 \\
+\\left\[\\begin{array}{lll}
+\\delta\_{11}^{(l)} &amp; \\delta\_{12}^{(l)} &amp; \\delta\_{13}^{(l)}
+\\\\
+\\delta\_{21}^{(l)} &amp; \\delta\_{22}^{(l)} &amp; \\delta\_{23}^{(l)}
+\\\\
+\\delta\_{31}^{(l)} &amp; \\delta\_{32}^{(l)} &amp; \\delta\_{33}^{(l)}
+\\end{array}\\right\]=\\left\[\\begin{array}{cccc}
+0 &amp; 0 &amp; 0 &amp; 0 \\\\
+0 &amp; \\delta\_{11}^{(l+1)} &amp; \\delta\_{12}^{(l+1)} &amp; 0 \\\\
+0 &amp; \\delta\_{21}^{(l+1)} &amp; \\delta\_{22}^{(l+1)} &amp; 0 \\\\
 0 &amp; 0 &amp; 0 &amp; 0
-\end{array}\right] \star\left[\begin{array}{cc}
-\theta_{22}^{(l)} &amp; \theta_{21}^{(l)} \\
-\theta_{12}^{(l)} &amp; \theta_{11}^{(l)}
-\end{array}\right] \odot g^{\prime}\left(z^{(l)}\right)
-$$</span> 比较紧凑地写出： <span
-class="math display"><em>δ</em><sup>(<em>l</em>)</sup> = <em>δ</em><sup>(<em>l</em> + 1)</sup> ⋆ <em>r</em><em>o</em><em>t</em>180(<em>θ</em><sup>(<em>l</em>)</sup>) ⊙ <em>g</em><sup>′</sup>(<em>z</em><sup>(<em>l</em>)</sup>)</span>
-其中<span
+\\end{array}\\right\] \\star\\left\[\\begin{array}{cc}
+\\theta\_{22}^{(l)} &amp; \\theta\_{21}^{(l)} \\\\
+\\theta\_{12}^{(l)} &amp; \\theta\_{11}^{(l)}
+\\end{array}\\right\] \\odot g^{\\prime}\\left(z^{(l)}\\right)
+$$</span> 比较紧凑地写出： <span class="math display">$$
+\\delta^{(l)} = \\delta^{(l+1)} \\star rot180(\\theta^{(l)}) \\odot
+g^{\\prime}(z^{(l)})
+$$</span> 其中<span
 class="math inline"><em>r</em><em>o</em><em>t</em>180</span>是对卷积核进行旋转180度的操作。
-<span class="math inline">⊙</span>对应的是两个矩阵的逐个元素乘</p>
+<span
+class="math inline">$\\odot$</span>对应的是两个矩阵的逐个元素乘</p>
 <p>在有多张特征图的情况下（输出有<span
 class="math inline"><em>d</em></span>个通道），输入的图像有<span
 class="math inline"><em>c</em></span>通道，我们可以将上述的计算过程进行扩展，得到：
-<span
-class="math display"><em>δ</em><sup>(<em>l</em>)</sup> = ∑<sub><em>d</em></sub><em>δ</em><sub><em>d</em></sub><sup>(<em>l</em> + 1)</sup> ⋆ <em>r</em><em>o</em><em>t</em>180(<em>θ</em><sup>(<em>l</em>)</sup>) ⊙ <em>g</em><sup>′</sup>(<em>z</em><sup>(<em>l</em>)</sup>)</span>
-在计算目标函数对于参数的导数的过程中，我们可以得到： <span
+<span class="math display">$$
+\\delta^{(l)} = \\sum\_{d} \\delta^{(l+1)}\_d \\star
+rot180(\\theta^{(l)}) \\odot g^{\\prime}(z^{(l)})
+$$</span> 在计算目标函数对于参数的导数的过程中，我们可以得到： <span
 class="math display">$$
-\frac{\partial J(\theta,b)}{\partial \theta_d^{(l)}} = \frac{\partial
-J(\theta,b)}{\partial z_d^{(l+1)}} \frac{\partial z_d^{(l+1)}}{\partial
-\theta_d^{(l)}}
-= \delta_d^{(l+1)} \star a^{(l)}_d
+\\frac{\\partial J(\\theta,b)}{\\partial \\theta\_d^{(l)}} =
+\\frac{\\partial J(\\theta,b)}{\\partial z\_d^{(l+1)}} \\frac{\\partial
+z\_d^{(l+1)}}{\\partial \\theta\_d^{(l)}}
+= \\delta\_d^{(l+1)} \\star a^{(l)}\_d
 $$</span> 可以更加详细地计算： <span class="math display">$$
-\begin{aligned}
-\frac{\partial J(\theta,b)}{\partial \theta_{i,j,k,d}^{(l)}} &amp;=
-\sum_{m,n} \frac{\partial J(\theta,b)}{\partial z_{m,n}^{(l+1)}}
-\frac{\partial z_{m,n}^{(l+1)}}{\partial \theta_{i,j,k,d}^{(l)}} \\
-&amp;= \sum_{m,n} \delta_{m,n}^{(l+1)} a_{m+i-1,n+j-1,k}^{(l)} \\
-&amp;= \delta_d^{(l+1)} \star a^{(l)}_d
-\end{aligned}
+\\begin{aligned}
+\\frac{\\partial J(\\theta,b)}{\\partial \\theta\_{i,j,k,d}^{(l)}}
+&amp;=
+\\sum\_{m,n} \\frac{\\partial J(\\theta,b)}{\\partial z\_{m,n}^{(l+1)}}
+\\frac{\\partial z\_{m,n}^{(l+1)}}{\\partial \\theta\_{i,j,k,d}^{(l)}}
+\\\\
+&amp;= \\sum\_{m,n} \\delta\_{m,n}^{(l+1)} a\_{m+i-1,n+j-1,k}^{(l)} \\\\
+&amp;= \\delta\_d^{(l+1)} \\star a^{(l)}\_d
+\\end{aligned}
 $$</span> 对于偏置项的计算过程为 <span class="math display">$$
-\frac{\partial J(\theta,b) }{\partial b_d^{(l)}} = \sum_{m,n}
-\frac{\partial J(\theta,b)}{\partial z_{m,n}^{(l+1)}} \frac{\partial
-z_{m,n}^{(l+1)}}{\partial b_d^{(l)}} = \sum_{m,n} \delta_{m,n}^{(l+1)}
+\\frac{\\partial J(\\theta,b) }{\\partial b\_d^{(l)}} = \\sum\_{m,n}
+\\frac{\\partial J(\\theta,b)}{\\partial z\_{m,n}^{(l+1)}}
+\\frac{\\partial z\_{m,n}^{(l+1)}}{\\partial b\_d^{(l)}} = \\sum\_{m,n}
+\\delta\_{m,n}^{(l+1)}
 $$</span></p>
 <p>从而可以使用<strong>动量的梯度</strong>下降的方法来进行参数的更新。</p>
 <h3 id="invariance-and-equivariance">Invariance and Equivariance</h3>
@@ -475,7 +534,12 @@ Making convolutional networks shift-invariant again</h5>
 Network中，引入了胶囊的概念，这样的操作可以保持物体之间的相对关系。</p>
 <h2 id="cnn-architectures">CNN Architectures</h2>
 <h3 id="alexnet">AlexNet</h3>
-<p>![[{382F2347-B42F-46CB-83DB-F25DDE49A91E}.png]]</p>
+<figure>
+<img src="/images/%7B382F2347-B42F-46CB-83DB-F25DDE49A91E%7D.png" srcset="/img/loading.gif" lazyload
+alt="{382F2347-B42F-46CB-83DB-F25DDE49A91E}.png" />
+<figcaption
+aria-hidden="true">{382F2347-B42F-46CB-83DB-F25DDE49A91E}.png</figcaption>
+</figure>
 <ul>
 <li>一般会在输入层使用较大的卷积核，然后在后面的层使用较小的卷积核</li>
 <li>通道数随着网络逐渐增加然后减少</li>
@@ -491,54 +555,73 @@ Network中，引入了胶囊的概念，这样的操作可以保持物体之间�
 在中间层数使用了更多的通道数。</p>
 <h3 id="vggnet">VGGNet</h3>
 <p>用更小的卷积核来代替较大的卷积核，这样的操作可以减少参数量，增加网络的深度。在VGGNet中，使用了3个<span
-class="math inline">3 × 3</span>的卷积核来代替一个<span
-class="math inline">7 × 7</span>的卷积核。这样的操作可以增加网络的深度，减少参数量。<strong>一个较大的感受野可以通过多个较小的感受野来代替</strong>。但是现在又发现事实上没有这么好的效果，所以现在又开始使用较大的卷积核。</p>
+class="math inline">$3 \\times 3$</span>的卷积核来代替一个<span
+class="math inline">$7 \\times
+7$</span>的卷积核。这样的操作可以增加网络的深度，减少参数量。<strong>一个较大的感受野可以通过多个较小的感受野来代替</strong>。但是现在又发现事实上没有这么好的效果，所以现在又开始使用较大的卷积核。</p>
 <p>采用了预训练的方法。在训练的过程中，首先在较小的数据集上进行过拟和（在这个训练集上的损失函数接近0），然后在较大的数据集上进行训练。</p>
 <p>在早期的网络中，池化层的使用是较多的，现在已经很少使用。 ### NIN
 Network in Network</p>
 <p>在使用全连接层时，会有较多的参数，基于这样的思路提出<span
-class="math inline">1 × 1</span>卷积这个操作。这样的操作只改变通道数，不改变空间尺寸，通常在不希望改变空间尺寸而增大通道数的时候可以使用。</p>
+class="math inline">$1\\times
+1$</span>卷积这个操作。这样的操作只改变通道数，不改变空间尺寸，通常在不希望改变空间尺寸而增大通道数的时候可以使用。</p>
 <p>在使用卷积增加步长、使用<em>pooling</em>层时候，会导致信息的丢失。在NIN中希望获得一个尺寸小但是通道数多的特征图。在NIN中使用了<span
-class="math inline">1 × 1</span>的卷积核来增加通道数，这样可以使用空间全局池化。例如一个<span
-class="math inline">256 × 6 × 6</span>的特征图，使用<span
-class="math inline">6 × 6</span>的全局池化，可以得到一个<span
-class="math inline">256 × 1 × 1</span>的特征图。</p>
+class="math inline">$1\\times
+1$</span>的卷积核来增加通道数，这样可以使用空间全局池化。例如一个<span
+class="math inline">$256\\times 6 \\times 6$</span>的特征图，使用<span
+class="math inline">$6\\times 6$</span>的全局池化，可以得到一个<span
+class="math inline">$256\\times 1 \\times 1$</span>的特征图。</p>
 <blockquote>
 <p>[!NOTE] -
 传统CNN末尾通常使用全连接层（FC）进行分类，但全连接层参数量大，易过拟合。
 - 全局池化可直接将特征图转换为通道维度的向量（如<span
-class="math inline">1 × 1 × 1024</span> <span
-class="math inline">→</span>
+class="math inline">$1\\times 1 \\times1024$</span> <span
+class="math inline">$\\rightarrow$</span>
 1024维向量），再接一个分类层，大幅减少参数。</p>
 </blockquote>
 <h4 id="googlenet">GoogLeNet</h4>
-<p>![[{43BF44F4-D211-4165-AE84-257E702582A0}.png]]
+<p><img src="/images/%7B43BF44F4-D211-4165-AE84-257E702582A0%7D.png" srcset="/img/loading.gif" lazyload
+alt="{43BF44F4-D211-4165-AE84-257E702582A0}.png" />
 这是一个较为深的网络，删去了全连接层，参数量是较小的。 -
 引入Multi-passway，使用多路的卷积核来提取特征。采用了特征增广<em>Feature
 Augmentation</em>的方法。 -
 在特征图通道数目不一样的情况下，使用padding的方法。</p>
-<p>![[{6F8AFF72-4C3D-4FAD-8FC9-90F7FED6E8B2}.png]]</p>
-<p>![[{39D210C3-7C1B-4913-AC78-12E71A8FD13B}.png]]</p>
-<p>![[{E3B121C1-5782-4762-A983-042799DA4ED9}.png]]</p>
+<figure>
+<img src="/images/%7B6F8AFF72-4C3D-4FAD-8FC9-90F7FED6E8B2%7D.png" srcset="/img/loading.gif" lazyload
+alt="{6F8AFF72-4C3D-4FAD-8FC9-90F7FED6E8B2}.png" />
+<figcaption
+aria-hidden="true">{6F8AFF72-4C3D-4FAD-8FC9-90F7FED6E8B2}.png</figcaption>
+</figure>
+<figure>
+<img src="/images/%7B39D210C3-7C1B-4913-AC78-12E71A8FD13B%7D.png" srcset="/img/loading.gif" lazyload
+alt="{39D210C3-7C1B-4913-AC78-12E71A8FD13B}.png" />
+<figcaption
+aria-hidden="true">{39D210C3-7C1B-4913-AC78-12E71A8FD13B}.png</figcaption>
+</figure>
+<figure>
+<img src="/images/%7BE3B121C1-5782-4762-A983-042799DA4ED9%7D.png" srcset="/img/loading.gif" lazyload
+alt="{E3B121C1-5782-4762-A983-042799DA4ED9}.png" />
+<figcaption
+aria-hidden="true">{E3B121C1-5782-4762-A983-042799DA4ED9}.png</figcaption>
+</figure>
 <p>使用计算量越来越小的卷积核，使用计算量越来越小的卷积核，使用越来越多的层数，使用越来越多的通道数。</p>
 <h4 id="highway-network">Highway Network</h4>
 <p>在平坦的网络通路中，可能有信息通路瓶颈问题。在Highway
 Network中，引入了门控机制，这样的操作可以使得信息的流动更加顺畅。 <span
-class="math display"><em>y</em> = <em>H</em>(<em>x</em>, <em>W</em><sub><em>H</em></sub>)<em>T</em>(<em>x</em>, <em>W</em><sub><em>T</em></sub>) + <em>x</em>(1 − <em>T</em>(<em>x</em>, <em>W</em><sub><em>T</em></sub>))</span>
+class="math display"><em>y</em> = <em>H</em>(<em>x</em>, <em>W</em>_<em>H</em>)<em>T</em>(<em>x</em>, <em>W</em>_<em>T</em>) + <em>x</em>(1 − <em>T</em>(<em>x</em>, <em>W</em>_<em>T</em>))</span>
 其中<span
-class="math inline"><em>H</em>(<em>x</em>, <em>W</em><sub><em>H</em></sub>)</span>是一个MLP，<span
-class="math inline"><em>T</em>(<em>x</em>, <em>W</em><sub><em>T</em></sub>)</span>是一个门控函数，这样的操作可以使得信息的流动更加顺畅。</p>
+class="math inline"><em>H</em>(<em>x</em>, <em>W</em>_<em>H</em>)</span>是一个MLP，<span
+class="math inline"><em>T</em>(<em>x</em>, <em>W</em>_<em>T</em>)</span>是一个门控函数，这样的操作可以使得信息的流动更加顺畅。</p>
 <ul>
 <li><p><span class="math inline"><em>x</em></span>: 输入向量。</p></li>
 <li><p><span
-class="math inline"><em>H</em>(<em>x</em>, <em>W</em><sub><em>H</em></sub>)</span>:
+class="math inline"><em>H</em>(<em>x</em>, <em>W</em>_<em>H</em>)</span>:
 非线性变换（如全连接层或卷积层）。</p></li>
 <li><p><span
-class="math inline"><em>T</em>(<em>x</em>, <em>W</em><sub><em>T</em></sub>)</span>:
+class="math inline"><em>T</em>(<em>x</em>, <em>W</em>_<em>T</em>)</span>:
 Transform
 Gate（变换门），控制非线性变换的权重，通常用Sigmoid激活（输出值在0到1之间）。</p></li>
 <li><p><span
-class="math inline"><em>C</em>(<em>x</em>, <em>W</em><sub><em>C</em></sub>)</span>:
+class="math inline"><em>C</em>(<em>x</em>, <em>W</em>_<em>C</em>)</span>:
 Carry Gate（携带门），控制原始输入 x 的权重。通常设定为 <span
 class="math inline"><em>C</em> = 1 − <em>T</em></span>，以减少参数量。</p></li>
 <li><p>当 <span
@@ -549,9 +632,9 @@ class="math inline"><em>y</em> ≈ <em>x</em></span>，即当前层几乎不
 class="math inline"><em>y</em> ≈ <em>H</em>(<em>x</em>)</span>，即信息完全经过当前层的非线性变换。</p></li>
 <li><p>通过这种方式，网络可以自适应地选择浅层或深层的特征。</p></li>
 </ul>
-<p><span
-class="math display"><em>T</em>(<em>x</em>, <em>W</em><sub><em>T</em></sub>) = <em>σ</em>(<em>W</em><sub><em>T</em></sub><sup><em>T</em></sup><em>x</em> + <em>b</em><sub><em>T</em></sub>)</span>
-动机是在网络中<strong>提高信息的流动性</strong></p>
+<p><span class="math display">$$
+T(x,W\_T) = \\sigma(W\_T^T x + b\_T)
+$$</span> 动机是在网络中<strong>提高信息的流动性</strong></p>
 <ul>
 <li><strong>ResNet</strong>：使用恒等跳跃连接<em>Identity Skip
 Connection</em>，公式为 <span
@@ -560,20 +643,36 @@ class="math inline"><em>y</em> = <em>H</em>(<em>x</em>) + <em>x</em></sp
 Network</strong>：通过门控动态调节跳跃连接的权重，更灵活地控制信息流。
 #### ResNet</li>
 </ul>
-<p>![[{6767A6D4-59B6-4B62-9FE9-427D009BB837}.png]]</p>
+<figure>
+<img src="/images/%7B6767A6D4-59B6-4B62-9FE9-427D009BB837%7D.png" srcset="/img/loading.gif" lazyload
+alt="{6767A6D4-59B6-4B62-9FE9-427D009BB837}.png" />
+<figcaption
+aria-hidden="true">{6767A6D4-59B6-4B62-9FE9-427D009BB837}.png</figcaption>
+</figure>
 <ul>
 <li>56层的模型比20层的模型效果更差，既然如此，先将20层的模型训练好，然后再增加36层的<em>identity</em>网络，之后再训练整个网络。发现这样的操作的效果反而更差。得出的结论是56层的网络更加难以训练，网络的拟和能力不足。<strong>平坦的网络很难拟和</strong></li>
 <li>残差是更加容易拟和的。</li>
 <li>继续将这些残差网络堆叠在一起，可以得到一个更深的网络。</li>
 <li>卷积、池化是算子<em>operator</em>，残差是一个块<em>block</em>，网络是一个层<em>layer</em></li>
 </ul>
-<p>![[{8F67BE27-E8CA-4921-99B2-C57FFFAE5E7B}.png]]</p>
-<p>![[{681C5361-F2ED-427F-86C2-48C9EC68AADF}.png]]</p>
-<p>![[{5DE8620F-D5FB-4E82-96D7-0E03CCCCAF82}.png]]
+<figure>
+<img src="/images/%7B8F67BE27-E8CA-4921-99B2-C57FFFAE5E7B%7D.png" srcset="/img/loading.gif" lazyload
+alt="{8F67BE27-E8CA-4921-99B2-C57FFFAE5E7B}.png" />
+<figcaption
+aria-hidden="true">{8F67BE27-E8CA-4921-99B2-C57FFFAE5E7B}.png</figcaption>
+</figure>
+<figure>
+<img src="/images/%7B681C5361-F2ED-427F-86C2-48C9EC68AADF%7D.png" srcset="/img/loading.gif" lazyload
+alt="{681C5361-F2ED-427F-86C2-48C9EC68AADF}.png" />
+<figcaption
+aria-hidden="true">{681C5361-F2ED-427F-86C2-48C9EC68AADF}.png</figcaption>
+</figure>
+<p><img src="/images/%7B5DE8620F-D5FB-4E82-96D7-0E03CCCCAF82%7D.png" srcset="/img/loading.gif" lazyload
+alt="{5DE8620F-D5FB-4E82-96D7-0E03CCCCAF82}.png" />
 对于网络会有多个维度进行评价： - 准确率top-1、top-5准确率 -
 VGG网络参数量很大，但是由于是平坦的网络，所以有一定的计算整齐度。在网络有较多的分叉时，计算整齐度会变差。较为整齐的网络计算是较快的。
-- 目前的显卡对于<span
-class="math inline">3 × 3</span>的卷积核是有硬件加速的</p>
+- 目前的显卡对于<span class="math inline">$3 \\times
+3$</span>的卷积核是有硬件加速的</p>
 <h3 id="landscape-visualization">LandScape Visualization</h3>
 <p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1712.09913">[1712.09913] Visualizing
 the Loss Landscape of Neural Nets</a></p>
@@ -598,15 +697,25 @@ Convolution中，将输入通道分为几个组，然后对于每一个组使用
 <h4 id="depthwise-separable-convolution">Depthwise Separable
 Convolution</h4>
 <ul>
-<li>引入了<span
-class="math inline">1 × 1</span>卷积核<em>pointwise</em>，这样的操作可以减少参数量</li>
+<li>引入了<span class="math inline">$1 \\times
+1$</span>卷积核<em>pointwise</em>，这样的操作可以减少参数量</li>
 <li>令通道数等于分组数目<em>channelwise</em> or <em>depthwise</em></li>
 </ul>
 <p>上述两个算子是轻量化网络的基础。</p>
-<p>![[Pasted image 20250316132626.png]]</p>
+<figure>
+<img src="/images/Pasted%20image%2020250316132626.png" srcset="/img/loading.gif" lazyload
+alt="Pasted image 20250316132626.png" />
+<figcaption aria-hidden="true">Pasted image
+20250316132626.png</figcaption>
+</figure>
 <p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2201.03545">[2201.03545] A ConvNet for
 the 2020s</a></p>
-<p>![[Pasted image 20250316134751.png]]</p>
+<figure>
+<img src="/images/Pasted%20image%2020250316134751.png" srcset="/img/loading.gif" lazyload
+alt="Pasted image 20250316134751.png" />
+<figcaption aria-hidden="true">Pasted image
+20250316134751.png</figcaption>
+</figure>
 <p>宏观设计：<strong>减少空间尺寸的衰减有利于学习不同的特征</strong>。</p>
 <h2 id="advanced-modules">Advanced Modules</h2>
 <h3 id="d-modeling">3D Modeling</h3>
@@ -617,13 +726,14 @@ the 2020s</a></p>
 Transformer
 Network中，引入了形变的概念，类似于视觉中进行防抖的操作。</p>
 <p>在CNN中引入偏置的概念，在对应的特征图上进行坐标的偏置操作 <span
-class="math display"><em>y</em>(<em>p</em><sub>0</sub>) = ∑<sub><em>p</em><sub><em>i</em></sub> ∈ <em>Ω</em></sub><em>w</em><sub><em>i</em></sub><em>x</em>(<em>p</em><sub><em>i</em></sub> + <em>p</em><sub>0</sub> + <em>Δ</em><em>p</em><sub>0</sub>)</span>
-#### Attention</p>
+class="math display">$$
+y(p\_0) = \\sum\_{p\_i \\in \\Omega} w\_i x(p\_i+p\_0+\\Delta p\_0)
+$$</span> #### Attention</p>
 <p>要建模大范围的特征范围，就是high-level的特征，但是在使用CNN的过程中，有效感受野并没有那么大。</p>
 <p><span class="math display">$$
-y_i = \frac{1}{\mathcal{C}(x)}\sum_{\forall j} f(x_i,x_j)g(x_j)
+y\_i = \\frac{1}{\\mathcal{C}(x)}\\sum\_{\\forall j} f(x\_i,x\_j)g(x\_j)
 $$</span> 对于注意力函数<span
-class="math inline"><em>f</em>(<em>x</em><sub><em>i</em></sub>, <em>x</em><sub><em>j</em></sub>)</span>可以计算为两个参数的内积。上述操作实际上是一种全局建模，可以在CNN的最后几步使用。</p>
+class="math inline"><em>f</em>(<em>x</em>_<em>i</em>, <em>x</em>_<em>j</em>)</span>可以计算为两个参数的内积。上述操作实际上是一种全局建模，可以在CNN的最后几步使用。</p>
 <h4 id="cam">CAM</h4>
 <p>作为一种可解释性的工作，CAM可以将CNN的输出映射到输入图像上，这样的操作可以直观地看到CNN的输出。计算不同部分的权重，可以得到不同部分的重要性。</p>
 
@@ -695,9 +805,9 @@ class="math inline"><em>f</em>(<em>x</em><sub><em>i</em></sub>, <em>x</em><sub
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-1/" title="Deep Learning Lecture-1">
+                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-4/" title="Deep Learning Lecture-4">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Deep Learning Lecture-1</span>
+                        <span class="hidden-mobile">Deep Learning Lecture-4</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -705,8 +815,8 @@ class="math inline"><em>f</em>(<em>x</em><sub><em>i</em></sub>, <em>x</em><sub
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-2/" title="Deep Learning Lecture-2">
-                        <span class="hidden-mobile">Deep Learning Lecture-2</span>
+                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-5/" title="Deep Learning Lecture-5">
+                        <span class="hidden-mobile">Deep Learning Lecture-5</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

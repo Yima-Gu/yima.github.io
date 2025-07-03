@@ -26,11 +26,13 @@
 <meta property="og:site_name" content="Yima Gu\&#39;s Blog">
 <meta property="og:description" content="人工智能：模拟人类的智能 机器学习：不显式编程来实现 深度学习：使用神经网络 对于深度学习总是能找到一些amazing的例子，同时也有一些失败的例子。 深度学习是在数据中获取高度抽象的特征，主要使用神经网络。在深度学习中实现的功能类似于坐标系变换。对于同一个问题进行变换可以进行不同的处理。在机器学习过程中的规则系统仍然是很重要的。 深度学习的表示为计算图 Framework 在学习算">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yima-gu.github.io/images/%7B65C91395-95B8-4EF2-8AF6-3F86705FD81B%7D.png">
 <meta property="article:published_time" content="2025-06-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-03T08:46:31.785Z">
+<meta property="article:modified_time" content="2025-07-03T09:09:25.515Z">
 <meta property="article:author" content="Yima Gu">
 <meta property="article:tag" content="DeepLearning">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://yima-gu.github.io/images/%7B65C91395-95B8-4EF2-8AF6-3F86705FD81B%7D.png">
   
   
   
@@ -223,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          899 字
+          939 字
         
       </span>
     
@@ -286,39 +288,45 @@
 <p>在学习算法中一定要指定函数族，然后使用数据来拟合函数族。要找出<strong>最优的函数族</strong>。不同的机器学习模型的区别主要在于<strong>假设空间</strong>（候选函数族）的不同。</p>
 <p>过拟和在指定函数族时已经确定。</p>
 <p>泛化误差公式： <span class="math display">$$
-\varepsilon_{test} \leq \hat{\varepsilon}_{train} +
-\sqrt{\frac{complexity}{n}}
+\\varepsilon\_{test} \\leq \\hat{\\varepsilon}\_{train} +
+\\sqrt{\\frac{complexity}{n}}
 $$</span> 要求：训练误差小，模型复杂度小，数据量大
 <strong>当且仅当需要的时候才增加模型复杂度</strong></p>
 <h3 id="model">Model</h3>
 <p><span class="math display">$$
-\arg \min O(D;\theta) = \sum_{i=1}^{N} L(y_i, f(x_i);\theta) +
-\Omega(\theta)
+\\arg \\min O(D;\\theta) = \\sum\_{i=1}^{N} L(y\_i, f(x\_i);\\theta) +
+\\Omega(\\theta)
 $$</span> 上述公式要求：在训练样本上预测值与真实值的误差尽可能小。</p>
 <p>对于分类问题而言，经常使用的是交叉熵损失函数（logistic）和hinge损失函数。</p>
 <p><span
-class="math inline"><em>Ω</em>(<em>θ</em>)</span>是惩罚项，希望模型尽量简单。在使得<span
-class="math inline"><em>θ</em></span>尽量小的过程中，某些特征的权重会变为0，这样就可以实现特征选择。同时也可以减少模型的复杂性。</p>
+class="math inline">$\\Omega(\\theta)$</span>是惩罚项，希望模型尽量简单。在使得<span
+class="math inline">$\\theta$</span>尽量小的过程中，某些特征的权重会变为0，这样就可以实现特征选择。同时也可以减少模型的复杂性。</p>
 <p><strong>学习类似于统计中的参数估计</strong></p>
-<p>![[{65C91395-95B8-4EF2-8AF6-3F86705FD81B}.png]]</p>
+<figure>
+<img src="/images/%7B65C91395-95B8-4EF2-8AF6-3F86705FD81B%7D.png" srcset="/img/loading.gif" lazyload
+alt="{65C91395-95B8-4EF2-8AF6-3F86705FD81B}.png" />
+<figcaption
+aria-hidden="true">{65C91395-95B8-4EF2-8AF6-3F86705FD81B}.png</figcaption>
+</figure>
 <p>梯度下降的方法。</p>
 <p>具体例子：线性回归</p>
 <p><span class="math display">$$
-O(D;\theta) = \sum_{i=1}^{N} (y_i - \theta^T x_i)^2 + \lambda \theta^T
-\theta = (Y - X\theta)^T (Y - X\theta) + \lambda \theta^T \theta
+O(D;\\theta) = \\sum\_{i=1}^{N} (y\_i - \\theta^T x\_i)^2 + \\lambda
+\\theta^T \\theta = (Y - X\\theta)^T (Y - X\\theta) + \\lambda \\theta^T
+\\theta
 $$</span> 上述公式是关于<span
-class="math inline"><em>θ</em></span>的二次函数，可以通过求导得到最优解。[[matrixcookbook.pdf]]
+class="math inline">$\\theta$</span>的二次函数，可以通过求导得到最优解。[[matrixcookbook.pdf]]
 <span class="math display">$$
-\frac{\partial O(D;\theta)}{\partial \theta} = -2 X^T (Y - X\theta) + 2
-\lambda \theta = 0
-$$</span> <span
-class="math display"><em>θ̂</em> = (<em>X</em><sup><em>T</em></sup><em>X</em> + <em>λ</em><em>I</em>)<sup>−1</sup><em>X</em><sup><em>T</em></sup><em>Y</em></span>
-但是上述算法的复杂性为<span
+\\frac{\\partial O(D;\\theta)}{\\partial \\theta} = -2 X^T (Y -
+X\\theta) + 2 \\lambda \\theta = 0
+$$</span> <span class="math display">$$
+\\hat{\\theta} = (X^T X + \\lambda I)^{-1} X^T Y
+$$</span> 但是上述算法的复杂性为<span
 class="math inline"><em>O</em>(<em>n</em><sup>3</sup>)</span>，不适用于大数据集。在软件工程中，通常使用梯度下降法。</p>
 <p><strong>Logistic Regression</strong></p>
 <p><span class="math display">$$
-O(D;\theta) = \sum_{i=1}^{n} \log(1 + \exp(-y_i \theta^T x_i)) + \lambda
-||\theta||_{1} = F(D;\theta) + \lambda ||\theta||_{1}
+O(D;\\theta) = \\sum\_{i=1}^{n} \\log(1 + \\exp(-y\_i \\theta^T x\_i)) +
+\\lambda ||\\theta||\_{1} = F(D;\\theta) + \\lambda ||\\theta||\_{1}
 $$</span> 这里使用的是近端梯度下降法 <em>proximal gradient
 descent</em>。其中的1-范数是各个分量的绝对值之和。<a
 target="_blank" rel="noopener" href="https://www.zhihu.com/tardis/zm/art/82622940?source_id=1005">机器学习
@@ -328,13 +336,13 @@ target="_blank" rel="noopener" href="https://www.zhihu.com/tardis/zm/art/8262294
 <p>实现多分类问题，计算每个类别的概率即可，对于某个样本进行多次打分，取最高分对应的类别。</p>
 <p>Softmax Function: [[Deep Learning Lecture-2#^b5bcbb]] <span
 class="math display">$$
-P(y|x,\theta) = \frac{\exp(\theta_y^T x)}{\sum_{r=1}^{C}
-\exp(\theta_{r}^T x)}
+P(y|x,\\theta) = \\frac{\\exp(\\theta\_y^T x)}{\\sum\_{r=1}^{C}
+\\exp(\\theta\_{r}^T x)}
 $$</span>
 线性模型，用超平面对样本进行打分，然后使用softmax函数进行归一化。</p>
 <p><span class="math display">$$
-O(D;\theta) = -\sum_{i=1}^{n} \log P(y_i|x_i;\theta) + \lambda
-||\theta||_{1}
+O(D;\\theta) = -\\sum\_{i=1}^{n} \\log P(y\_i|x\_i;\\theta) + \\lambda
+||\\theta||\_{1}
 $$</span>
 上述式子其实是对数似然函数，最大化对数似然函数等价于最小化交叉熵损失函数。</p>
 <h4 id="aproximation-and-estimation">Aproximation and Estimation</h4>
@@ -344,8 +352,11 @@ Error</em>。学习得到的函数与空间中最好的函数的误差为<strong
 <h3 id="model-selection">Model Selection</h3>
 <p><em>All models are wrong but some are useful.</em></p>
 <p>CASH: Combined Algorithm Selection and Hyperparameter optimization
-目标是：选择最好的模型和超参数 <span
-class="math display"><em>A</em><sub><em>λ</em><sup>*</sup></sub><sup>*</sup> = arg min<sub><em>A</em> ∈ 𝒜</sub>min<sub><em>λ</em> ∈ <em>Λ</em><sup>(<em>i</em>)</sup></sub>ℒ(<em>A</em><sub><em>λ</em></sub><sup>(<em>i</em>)</sup>, <em>D</em><sub><em>t</em><em>r</em><em>a</em><em>i</em><em>n</em></sub>, <em>D</em><sub><em>v</em><em>a</em><em>l</em><em>i</em><em>d</em></sub>)</span></p>
+目标是：选择最好的模型和超参数 <span class="math display">$$
+A^\*\_{\\lambda^\*} = \\arg \\min\_{A \\in \\mathcal{A}}
+\\min\_{\\lambda \\in \\Lambda^{(i)}}
+\\mathcal{L}(A\_{\\lambda}^{(i)},D\_{train},D\_{valid})
+$$</span></p>
 
                 
               </div>
@@ -425,8 +436,8 @@ class="math display"><em>A</em><sub><em>λ</em><sup>*</sup></sub><sup>*</sup> 
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-3/" title="Deep Learning Lecture-3">
-                        <span class="hidden-mobile">Deep Learning Lecture-3</span>
+                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-2/" title="Deep Learning Lecture-2">
+                        <span class="hidden-mobile">Deep Learning Lecture-2</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
