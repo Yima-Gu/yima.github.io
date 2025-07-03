@@ -636,9 +636,9 @@ alt="{862689B6-2775-4822-8FAC-B0450B360BA0}.png" />
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-3/" title="Deep Learning Lecture-3">
+                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-1/" title="Deep Learning Lecture-1">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Deep Learning Lecture-3</span>
+                        <span class="hidden-mobile">Deep Learning Lecture-1</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -646,8 +646,8 @@ alt="{862689B6-2775-4822-8FAC-B0450B360BA0}.png" />
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-4/" title="Deep Learning Lecture-4">
-                        <span class="hidden-mobile">Deep Learning Lecture-4</span>
+                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-3/" title="Deep Learning Lecture-3">
+                        <span class="hidden-mobile">Deep Learning Lecture-3</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -704,6 +704,12 @@ alt="{862689B6-2775-4822-8FAC-B0450B360BA0}.png" />
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -896,6 +902,49 @@ alt="{862689B6-2775-4822-8FAC-B0450B360BA0}.png" />
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

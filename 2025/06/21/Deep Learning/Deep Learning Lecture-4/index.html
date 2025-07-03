@@ -588,9 +588,9 @@ Momentum的更新进行了修正。</p>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-2/" title="Deep Learning Lecture-2">
+                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-3/" title="Deep Learning Lecture-3">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Deep Learning Lecture-2</span>
+                        <span class="hidden-mobile">Deep Learning Lecture-3</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -598,8 +598,8 @@ Momentum的更新进行了修正。</p>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-6/" title="Deep Learning Lecture-6">
-                        <span class="hidden-mobile">Deep Learning Lecture-6</span>
+                      <a href="/2025/06/21/Deep%20Learning/Deep%20Learning%20Lecture-5/" title="Deep Learning Lecture-5">
+                        <span class="hidden-mobile">Deep Learning Lecture-5</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -656,6 +656,12 @@ Momentum的更新进行了修正。</p>
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -848,6 +854,49 @@ Momentum的更新进行了修正。</p>
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 
